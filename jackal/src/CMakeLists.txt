@@ -16,6 +16,13 @@ find_package(Vulkan)
 if (NOT vulkan_FOUND)
 endif()
 
+if (NOT OPENAL_FOUND)
+  message(WARNING "OpenAL not found!")
+endif()
 
 include (cmake/setup.cmake)
+
+
+if (JACKAL_TESTS)
+endif()
 

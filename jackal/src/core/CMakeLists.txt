@@ -123,6 +123,7 @@ set(CORE_LOGGING
 # Memory dir.
 set(MEMORY_PUBLIC_DIR   ${CORE_MEMORY_DIR}/public)
 set(MEMORY_PRIVATE_DIR  ${CORE_MEMORY_DIR}/private)
+set(MEMORY_ALLOCATORS_DIR ${MEMORY_PRIVATE_DIR}/allocators)
 
 set(CORE_MEMORY
   ${MEMORY_PUBLIC_DIR}/allocator.hpp  
@@ -130,6 +131,10 @@ set(CORE_MEMORY
   ${MEMORY_PUBLIC_DIR}/sptr.hpp
   ${MEMORY_PUBLIC_DIR}/stack_alloc.hpp
   ${MEMORY_PRIVATE_DIR}/memory_pool.cpp
+  ${MEMORY_PRIVATE_DIR}/mem_leak_detection.hpp
+  ${MEMORY_PRIVATE_DIR}/mem_leak_detection.cpp
+  ${MEMORY_PRIVATE_DIR}/memory_alloc.hpp
+  ${MEMORY_PRIVATE_DIR}/memory_alloc.cpp
 )
 
 
