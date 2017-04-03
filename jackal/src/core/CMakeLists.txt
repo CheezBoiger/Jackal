@@ -28,6 +28,8 @@ set(CORE_MATH
   ${CORE_MATH_DIR}/quaternion.hpp
   ${CORE_MATH_DIR}/ray.hpp
   ${CORE_MATH_DIR}/vector.hpp
+  ${CORE_MATH_DIR}/matrix_math.hpp
+  ${CORE_MATH_DIR}/vector_math.hpp
 )
 
 # Platform Work.

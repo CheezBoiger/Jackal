@@ -5,7 +5,7 @@
 
 #include "../platform/public/jtypes.hpp"
 #include "../platform/public/platform.hpp"
-#include <cmath>
+#include "common.hpp"
 
 
 namespace jkl {
@@ -18,6 +18,8 @@ template<typename T> struct Vector2;
 // 4-component vector type object.
 // handles most of the work in terms of w compoenents or a components.
 // This can be useful for colors, or matrices.
+// use 3-component vectors when dealing with graphics programming!
+// Do not use this vector4 object, as the w component matters!
 template<typename T>
 struct Vector4 {
   Vector4( 
@@ -29,13 +31,13 @@ struct Vector4 {
     { }
 
   Vector4(
-    const Vector3 &v, 
+    const Vector3<T> &v, 
     T w = static_cast<T>(1)
   ) : x(v.x), y(v.y), z(v.z), w(w)
     { }
 
   Vector4(
-    const Vector2 &v, 
+    const Vector2<T> &v, 
     T z = static_cast<T>(0), 
     T w = static_cast<T>(1)
   ) : x(v.x), y(v.y), z(z), w(w)
@@ -120,7 +122,7 @@ struct Vector4 {
 
   // Returns the length of this vector.
   T Length() {
-    return std::sqrt((x * x) + (y * y) + (z * z) + (w * w)); 
+    return Sqrt((x * x) + (y * y) + (z * z) + (w * w)); 
   }
 
   union {
@@ -146,12 +148,12 @@ struct Vector3 {
   { }
 
   // Performs perspective divide.
-  Vector3(const Vector4 &v)
+  Vector3(const Vector4<T> &v)
     : x(v.x / v.w), y(v.y / v.w), z(v.z / v.w)
     { }
 
   Vector3(
-    const Vector2 &v, 
+    const Vector2<T> &v, 
     T z = static_cast<T>(0)
   ) : x(v.x), y(v.y), z(z)
     { }
@@ -177,6 +179,14 @@ struct Vector3 {
       x * v.x,
       y * v.y,
       z * v.z
+    );
+  }
+
+  Vector3 operator*(const T scale) {
+    return Vector3(
+      x * scale,
+      y * scale,
+      z * scale
     );
   }
 
@@ -228,7 +238,7 @@ struct Vector3 {
   }
 
   T Length() {
-    return std::sqrt((x * x) + (y * y) + (z * z));
+    return Sqrt((x * x) + (y * y) + (z * z));
   }
   union {
     struct { T x, y, z; };
@@ -314,7 +324,7 @@ struct Vector2 {
   }
 
   T Length() {
-    return std::sqrt((x * x) + (y * y));
+    return Sqrt((x * x) + (y * y));
   }
 
   union {
@@ -323,4 +333,9 @@ struct Vector2 {
     struct { T s, t; };
   };
 };
+
+
+typedef Vector3<real32> Vec3;
+typedef Vector2<real32> Vec2;
+typedef Vector4<real32> Vec4;
 } // jkl
