@@ -11,8 +11,8 @@
 namespace jkl {
 
 
-template<typename T> class Vector3;
-template<typename T> class Vector2;
+template<typename T> struct Vector3;
+template<typename T> struct Vector2;
 
 
 // 4-component vector type object.
@@ -113,7 +113,7 @@ struct Vector4 {
     return (x != v.x || y != v.y || z != v.z || w != v.w);  
   }
 
-  bool operator==(const Vetor4 &v) {
+  bool operator==(const Vector4 &v) {
     return (x == v.x && y == v.y && z == v.z && w == v.w);
   }
 

@@ -39,10 +39,10 @@ public:
   }
 
   Matrix4x4(
-    const Vector4 &r1,
-    const Vector4 &r2,
-    const Vector4 &r3,
-    const Vector4 &r4
+    const Vector4<T> &r1,
+    const Vector4<T> &r2,
+    const Vector4<T> &r3,
+    const Vector4<T> &r4
   ) {
     data[0][0] = r1.x; data[0][1] = r1.y; data[0][2] = r1.z; data[0][3] = r1.w;
     data[1][0] = r2.x; data[1][1] = r2.y; data[1][2] = r2.z; data[1][3] = r2.w;
@@ -50,7 +50,7 @@ public:
     data[3][0] = r4.x; data[3][1] = r4.y; data[3][2] = r4.z; data[3][3] = r4.w;
   } 
 
-  Matrix4x4(const Matrix3x3 &m) {
+  Matrix4x4(const Matrix3x3<T> &m) {
     data[0][0] = m[0][0];           data[0][1] = m[0][1];           data[0][2] = m[0][2];           data[0][3] = static_cast<T>(0);
     data[1][0] = m[1][0];           data[1][1] = m[1][1];           data[1][2] = m[1][2];           data[1][3] = static_cast<T>(0);
     data[2][0] = m[2][0];           data[2][1] = m[2][1];           data[2][2] = m[2][2];           data[2][3] = static_cast<T>(0);
@@ -75,6 +75,7 @@ public:
     );
   }
 
+  // typical matrix multiplication. M1 x M2.
   Matrix4x4 operator*(const Matrix4x4 &m) {
     return Matrix4x4(
       data[0][0] * m.data[0][0] + data[0][1] * m.data[1][0] + data[0][2] * m.data[2][0] + data[0][3] * m.data[3][0],
@@ -99,17 +100,50 @@ public:
     );
   }
 
+  // Retrieve the raw data array of the matrix. This is mainly used for the rendering engine.
   T *Raw() {
     return data;
   }
 
-  T operator[](const uint32 row) {
+  // Quick access to a value in the matrix.
+  T *operator[](const uint32 row) {
     return data[row];
   }
 
+  // Finds the determinant of this 4x4 matrix.
+  // Not very high quality, and can be sped up with a little parallel processing, but none the less,
+  // any attempted speedup will only increase performance by a fraction of an inch, so no need to speed 
+  // up these math calls.
+  T Determinant() {
+    return  data[0][0] * (  data[1][1] * (data[2][2] * data[3][3] - data[2][3] * data[3][2]) -
+                            data[1][2] * (data[2][1] * data[3][3] - data[2][3] * data[3][1]) +
+                            data[1][3] * (data[2][1] * data[3][2] - data[2][2] * data[3][1])  
+                        ) - 
+            data[0][1] * (  data[1][0] * (data[2][2] * data[3][3] - data[2][3] * data[3][2]) -
+                            data[1][2] * (data[2][0] * data[3][3] - data[2][3] * data[3][0]) +
+                            data[1][3] * (data[2][0] * data[3][2] - data[2][2] * data[3][0])  
+                        ) +
+            data[0][2] * (  data[1][0] * (data[2][1] * data[3][3] - data[2][3] * data[3][1]) -
+                            data[1][1] * (data[2][0] * data[3][3] - data[2][3] * data[3][0]) +
+                            data[1][3] * (data[2][0] * data[3][1] - data[2][1] * data[3][0])  
+                        ) - 
+            data[0][3] * (  data[1][0] * (data[2][1] * data[3][2] - data[2][2] * data[3][1]) -
+                            data[1][1] * (data[2][0] * data[3][2] - data[2][2] * data[3][0]) +
+                            data[1][2] * (data[2][0] * data[3][1] - data[2][1] * data[3][0])  );
+  } 
 
 private:
   // Data of the 4x4 matrix.
   T data[4][4];
+};
+
+
+template<typename T>
+class Matrix3x3 {
+};
+
+
+template<typename T>
+class Matrix2x2 {
 };
 } // jkl

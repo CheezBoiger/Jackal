@@ -22,7 +22,3 @@ endif()
 
 include (cmake/setup.cmake)
 
-
-if (JACKAL_TESTS)
-endif()
-
