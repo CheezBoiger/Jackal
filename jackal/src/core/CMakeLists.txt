@@ -20,7 +20,6 @@ set(CORE_LOGGING_DIR   logging)
 # Math Directories.
 set(MATH_INTERNAL_DIR       ${CORE_MATH_DIR}/internal)
 set(MATH_BOUNDING_DIR       ${CORE_MATH_DIR}/bounding)
-set(MATH_GEOMETRY_DIR       ${CORE_MATH_DIR}/geometry)
 
 set(CORE_MATH
   ${CORE_MATH_DIR}/common.hpp
@@ -30,6 +29,13 @@ set(CORE_MATH
   ${CORE_MATH_DIR}/vector.hpp
   ${CORE_MATH_DIR}/matrix_math.hpp
   ${CORE_MATH_DIR}/vector_math.hpp
+  ${MATH_INTERNAL_DIR}/matrix.inl
+  ${MATH_INTERNAL_DIR}/matrix_math.inl
+  ${MATH_INTERNAL_DIR}/vector.inl
+  ${MATH_INTERNAL_DIR}/vector_math.inl
+  ${MATH_BOUNDING_DIR}/bound_box.hpp
+  ${MATH_BOUNDING_DIR}/bound_cylinder.hpp
+  ${MATH_BOUNDING_DIR}/bound_sphere.hpp
 )
 
 # Platform Work.

@@ -58,7 +58,14 @@ public:
     data[3][0] = static_cast<T>(0); data[3][1] = static_cast<T>(0); data[3][2] = static_cast<T>(0); data[3][3] = static_cast<T>(1);
   }
 
-  Matrix4x4 operator+(const Matrix4x4 &m) {
+  Matrix4x4(const Matrix4x4 &m) {
+    data[0][0] = m.data[0][0]; data[0][1] = m.data[0][1]; data[0][2] = m.data[0][2]; data[0][3] = m.data[0][3];
+    data[1][0] = m.data[1][0]; data[1][1] = m.data[1][1]; data[1][2] = m.data[1][2]; data[1][3] = m.data[1][3];
+    data[2][0] = m.data[2][0]; data[2][1] = m.data[2][1]; data[2][2] = m.data[2][2]; data[2][3] = m.data[2][3];
+    data[3][0] = m.data[3][0]; data[3][1] = m.data[3][1]; data[3][2] = m.data[3][2]; data[3][3] = m.data[3][3];
+  }
+
+  Matrix4x4 operator+(const Matrix4x4 &m) const {
     return Matrix4x4(
       data[0][0] + m.data[0][0], data[0][1] + m.data[0][1], data[0][2] + m.data[0][2], data[0][3] + m.data[0][3],
       data[1][0] + m.data[1][0], data[1][1] + m.data[1][1], data[1][2] + m.data[1][2], data[1][3] + m.data[1][3],
@@ -67,7 +74,7 @@ public:
     );
   }
 
-  Matrix4x4 operator-(const Matrix4x4 &m) {
+  Matrix4x4 operator-(const Matrix4x4 &m) const {
     return Matrix4x4(
       data[0][0] - m.data[0][0], data[0][1] - m.data[0][1], data[0][2] - m.data[0][2], data[0][3] - m.data[0][3],
       data[1][0] - m.data[1][0], data[1][1] - m.data[1][1], data[1][2] - m.data[1][2], data[1][3] - m.data[1][3],
@@ -77,7 +84,7 @@ public:
   }
 
   // typical matrix multiplication. M1 x M2.
-  Matrix4x4 operator*(const Matrix4x4 &m) {
+  Matrix4x4 operator*(const Matrix4x4 &m) const {
     return Matrix4x4(
       data[0][0] * m.data[0][0] + data[0][1] * m.data[1][0] + data[0][2] * m.data[2][0] + data[0][3] * m.data[3][0],
       data[0][0] * m.data[0][1] + data[0][1] * m.data[1][1] + data[0][2] * m.data[2][1] + data[0][3] * m.data[3][1],
@@ -101,7 +108,7 @@ public:
     );
   }
 
-  Matrix4x4 operator*(const T scale) {
+  Matrix4x4 operator*(const T scale) const {
     return Matrix4x4(
       data[0][0] * scale, data[0][1] * scale, data[0][2] * scale, data[0][3] * scale,
       data[1][0] * scale, data[1][1] * scale, data[1][2] * scale, data[1][3] * scale,
@@ -124,7 +131,7 @@ public:
   // Not very high quality, and can be sped up with a little parallel processing, but none the less,
   // any attempted speedup will only increase performance by a fraction of an inch, so no need to speed 
   // up these math calls.
-  T Determinant() {
+  T Determinant() const {
     return  data[0][0] * (  data[1][1] * (data[2][2] * data[3][3] - data[2][3] * data[3][2]) -
                             data[1][2] * (data[2][1] * data[3][3] - data[2][3] * data[3][1]) +
                             data[1][3] * (data[2][1] * data[3][2] - data[2][2] * data[3][1])  
@@ -144,7 +151,7 @@ public:
 
 
   // Get the transpose of the matrix. This will create a new matrix.
-  Matrix4x4 Transpose() {
+  Matrix4x4 Transpose() const {
     return Matrix4x4(
       data[0][0], data[1][0], data[2][0], data[3][0],
       data[0][1], data[1][1], data[2][1], data[3][1],
@@ -156,7 +163,7 @@ public:
   
   // Obtain the inverse of this matrix.
   // TODO(): Implement inverse!
-  Matrix4x4 Inverse() {
+  Matrix4x4 Inverse() const {
     static_assert(0, "Not implemented yet!");
     // Not implemented yet.
     return Matrix4x4();
@@ -165,7 +172,7 @@ public:
   // TODO(): Implement Adjoint!
   // Retrieves the adjoint matrix from this matrix. The adjoint is the transpose of this
   // matrix's cofactor matrix.
-  Matrix4x4 Adjoint() {
+  Matrix4x4 Adjoint() const {
     static_assert(0, "Not implemented yet!");
     return Matrix4x4();
   }
@@ -173,15 +180,30 @@ public:
   // Checks if this matrix does not contain a finite number.
   // If a number is NaN, within this matrix, true will be returned. Otherwise, false will
   // return after traversing the entire matrix.
-  bool ContainsNaN() {
+  bool ContainsNaN() const {
     for (uint32 i = 0; i < 4; ++i) {
       for (uint32 j = 0; j < 4; ++j) {
-        if (IsNan(data[i][j])) {
+        if (IsNaN(data[i][j])) {
           return true;
         }
       }
     }
     return false;
+  }
+
+  bool operator==(const Matrix4x4 &m) const {
+    for (uint32 i = 0; i < 4; ++i) {
+      for (uint32 j = 0; j < 4; ++j) {
+        if (data[i][j] != m.data[i][j]) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  bool operator!=(const Matrix4x4 &m) const {
+    return !(*this == m);
   }
 
 private:
@@ -228,6 +250,21 @@ public:
       data[1][0] - m.data[1][0], data[1][1] - m.data[1][1], data[1][2] - m.data[1][2],
       data[2][0] - m.data[2][0], data[2][1] - m.data[2][1], data[2][2] - m.data[2][2]
     );
+  }
+
+  bool operator==(const Matrix3x3 &m) {
+    for (uint32 i = 0; i < 3; ++i) {
+      for (uint32 j = 0; j < 3; ++j) {
+        if (data[i][j] != m.data[i][j]) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  bool operator!=(const Matrix3x3 &m) {
+    return !(*this == m);
   }
 
 private:

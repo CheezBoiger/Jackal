@@ -4,6 +4,8 @@
 #include "matrix_test.hpp"
 #include "math/matrix.hpp"
 #include "math/vector.hpp"
+#include "math/vector_math.hpp"
+#include "math/common.hpp"
 #include <iostream>
 #include <iomanip>
 
@@ -34,8 +36,14 @@ void MatrixTest::Test()
     std::cout << "\n";
   }
   std::cout << "Determinant of A is: " << A.Determinant() << "\n";
-  Vec4 vec;
+  Vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
+  Vec3 a(1.0f, 0.0f, 0.0f);
+  Vec3 b(0.0f, 1.0f, 0.0f);
   std::printf("Vector values: x=%f y=%f z=%f w=%f\n", vec.r, vec.g, vec.b, vec.a);
+  Vec3 c = Lerp(a, b, 0.5f);
+  bool yup = A == B;
+  std::printf("Vector operation: x=%f y=%f z=%f\n", c.x, c.y, c.z);
+  std::printf("a < c: %d", yup);
   std::cin.ignore();
 }
 } // test

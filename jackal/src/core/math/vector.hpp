@@ -43,7 +43,7 @@ struct Vector4 {
   ) : x(v.x), y(v.y), z(z), w(w)
     { }
 
-  Vector4 operator+(const Vector4 &v) {
+  Vector4 operator+(const Vector4 &v) const {
     return Vector4(
       x + v.x,
       y + v.y,
@@ -52,7 +52,7 @@ struct Vector4 {
     );
   }
 
-  Vector4 operator-(const Vector4 &v) {
+  Vector4 operator-(const Vector4 &v) const {
     return Vector4(
       x - v.x,
       y - v.y,
@@ -61,7 +61,7 @@ struct Vector4 {
     );
   }
   
-  Vector4 operator*(const Vector4 &v) {
+  Vector4 operator*(const Vector4 &v) const {
     return Vector4(
       x * v.x,
       y * v.y,
@@ -70,7 +70,16 @@ struct Vector4 {
     );
   }
 
-  Vector4 operator/(const Vector4 &v) {
+  Vector4 operator*(const T scale) const {
+    return Vector4(
+      x * scale,
+      y * scale,
+      z * scale,
+      w * scale
+    );
+  } 
+
+  Vector4 operator/(const Vector4 &v) const {
     static_assert<>(v.x != 0 || v.y != 0 || v.z != 0 || v.w != 0, "Divide by zero!"); 
     return Vector4(
       x / v.x,
@@ -80,7 +89,7 @@ struct Vector4 {
     );
   }
 
-  Vector4 operator-() {
+  Vector4 operator-() const {
     return Vector4(
       -x,
       -y,
@@ -89,39 +98,39 @@ struct Vector4 {
     );
   }
 
-  Vector4 operator!() {
+  Vector4 operator!() const {
     return -(*this);
   }
 
   // Comparison by length.
-  bool operator<(const Vector4 &v) {
+  bool operator<(const Vector4 &v) const {
     return Length() < v.Length();
   }
 
-  bool operator>(const Vector4 &v) {
+  bool operator>(const Vector4 &v) const {
     return Length() > v.Length();
   }
 
-  bool operator<=(const Vector4 &v) {
+  bool operator<=(const Vector4 &v) const {
     return Length() <= v.Length();
   }
 
-  bool operator>=(const Vector4 &v) {
+  bool operator>=(const Vector4 &v) const {
     return Length() >= v.Length();
   }
 
   // Comparison by actual values in the vector.
-  bool operator!=(const Vector4 &v) {
+  bool operator!=(const Vector4 &v) const {
     return (x != v.x || y != v.y || z != v.z || w != v.w);  
   }
 
-  bool operator==(const Vector4 &v) {
+  bool operator==(const Vector4 &v) const {
     return (x == v.x && y == v.y && z == v.z && w == v.w);
   }
 
 
   // Returns the length of this vector.
-  T Length() {
+  T Length() const {
     return Sqrt((x * x) + (y * y) + (z * z) + (w * w)); 
   }
 
@@ -158,7 +167,7 @@ struct Vector3 {
   ) : x(v.x), y(v.y), z(z)
     { }
 
-  Vector3 operator+(const Vector3 &v) {
+  Vector3 operator+(const Vector3 &v) const {
     return Vector3(
       x + v.x,
       y + v.y,
@@ -166,7 +175,7 @@ struct Vector3 {
     );
   }
 
-  Vector3 operator-(const Vector3 &v) {
+  Vector3 operator-(const Vector3 &v) const {
     return Vector3(
       x - v.x,
       y - v.y,
@@ -174,7 +183,7 @@ struct Vector3 {
     );
   }
   
-  Vector3 operator*(const Vector3 &v) {
+  Vector3 operator*(const Vector3 &v) const {
     return Vector3(
       x * v.x,
       y * v.y,
@@ -182,7 +191,7 @@ struct Vector3 {
     );
   }
 
-  Vector3 operator*(const T scale) {
+  Vector3 operator*(const T scale) const {
     return Vector3(
       x * scale,
       y * scale,
@@ -190,7 +199,7 @@ struct Vector3 {
     );
   }
 
-  Vector3 operator/(const Vector3 &v) {
+  Vector3 operator/(const Vector3 &v) const {
     static_assert(v.x != 0 || v.y != 0 || v.z != 0, "Divide by zero!");
     return Vector3(
       x / v.x,
@@ -199,7 +208,7 @@ struct Vector3 {
     );
   }
 
-  Vector3 operator-() {
+  Vector3 operator-() const {
     return Vector3(
       -x,
       -y,
@@ -212,32 +221,32 @@ struct Vector3 {
   }
 
   // comparisons by length.
-  bool operator<(const Vector3 &v) {
+  bool operator<(const Vector3 &v) const {
     return Length() < v.Length();
   }
 
-  bool operator<=(const Vector3 &v) {
+  bool operator<=(const Vector3 &v) const {
     return Length() <= v.Length();
   }
 
-  bool operator>(const Vector3 &v) {
+  bool operator>(const Vector3 &v) const {
     return Length() > v.Length();
   }
 
-  bool operator>=(const Vector3 &v) {
+  bool operator>=(const Vector3 &v) const {
     return Length() >= v.Length();
   }
 
   // comparison by actual components.
-  bool operator!=(const Vector3 &v) {
+  bool operator!=(const Vector3 &v) const {
     return (x != v.x || y != v.y || z != v.z);
   }
 
-  bool operator==(const Vector3 &v) {
+  bool operator==(const Vector3 &v) const {
     return (x == v.x && y == v.y && z == v.z);
   }
 
-  T Length() {
+  T Length() const {
     return Sqrt((x * x) + (y * y) + (z * z));
   }
   union {
@@ -257,28 +266,35 @@ struct Vector2 {
   ) : x(x), y(y)
     { }
 
-  Vector2 operator+(const Vector2 &v) {
+  Vector2 operator+(const Vector2 &v) const {
     return Vector2(
       x + v.x,
       y + v.y
     );
   }
 
-  Vector2 operator-(const Vector2 &v) {
+  Vector2 operator-(const Vector2 &v) const {
     return Vector2(
       x - v.x,
       y - v.y
     );
   }
 
-  Vector2 operator*(const Vector2 &v) {
+  Vector2 operator*(const Vector2 &v) const {
     return Vector2(
       x * v.x,  
       y * v.y
     );
   }
 
-  Vector2 operator/(const Vector2 &v) {
+  Vector2 operator*(const T scale) const {
+    return Vector2(
+      x * scale,
+      y * scale
+    );
+  }
+
+  Vector2 operator/(const Vector2 &v) const {
     static_assert(v.x != 0 || v.y != 0, "Divide by zero!")
     return Vector2(
       x / v.x,
@@ -286,44 +302,44 @@ struct Vector2 {
     );  
   }
 
-  Vector2 operator-() {
+  Vector2 operator-() const {
     return Vector2(
       -x,
       -y
     );
   }
 
-  Vector2 operator!() {
+  Vector2 operator!() const {
     return -(*this);
   }
 
   // comparisons by length.
-  bool operator<(const Vector2 &v) {
+  bool operator<(const Vector2 &v) const {
     return Length() < v.Length();
   }
 
-  bool operator<=(const Vector2 &v) {
+  bool operator<=(const Vector2 &v) const {
     return Length() <= v.Length();
   }
 
-  bool operator>(const Vector2 &v) {
+  bool operator>(const Vector2 &v) const {
     return Length() > v.Length();
   }
 
-  bool operator>=(const Vector2 &v) {
+  bool operator>=(const Vector2 &v) const {
     return Length() >= v.Length();
   }
 
   // comparisons by actual component values.
-  bool operator!=(const Vector2 &v) { 
+  bool operator!=(const Vector2 &v) const { 
     return (x != v.x || y != v.y);
   }
 
-  bool operator==(const Vector2 &v) {
+  bool operator==(const Vector2 &v) const {
     return (x == v.x && y == v.y);
   }
 
-  T Length() {
+  T Length() const {
     return Sqrt((x * x) + (y * y));
   }
 

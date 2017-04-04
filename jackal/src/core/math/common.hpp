@@ -5,6 +5,7 @@
 
 #include "../platform/public/jtypes.hpp"
 #include "../platform/public/platform.hpp"
+#include "../platform/public/api.hpp"
 #include <cmath>
 
 
@@ -22,5 +23,44 @@ template<typename T>
 inline bool IsNaN(T value)
 {
   return std::isnan(value);
+}
+
+// Standard absolute value wrap.
+template<typename T>
+inline T Abs(T value)
+{
+  return std::abs(value);
+}
+
+
+inline double Cos(double value)
+{
+  return std::cos(value);
+}
+
+
+inline double Sin(double value)
+{
+  return std::sin(value);
+}
+
+inline double Tan(double value)
+{
+  return std::tan(value);
+}
+
+inline float Cosf(float value)
+{
+  return std::cosf(value);
+}
+
+inline float Sinf(float value)
+{
+  return std::sinf(value);
+}
+
+inline float Tanf(float value)
+{
+  return std::tanf(value);
 }
 } // jkl
