@@ -17,12 +17,19 @@ template<typename Type,
          typename Allocator>
 class SPtr {
 public:
+  SPtr(Type &type, Allocator &alloc = Allocator())
+    : type(0), alloc(alloc) 
+  { 
+    
+  }
 
-  SPtr(Type *type, Allocator alloc = Allocator())
-    { }
+  SPtr(Allocator &alloc = Allocator()) 
+    : alloc(alloc) 
+  { }
 
   // TODO(): Need to define the Allocator interface first!
 private:
   Type *type;
+  Allocator alloc;
 };
 } // jkl

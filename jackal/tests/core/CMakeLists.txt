@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8.11)
 project("JackalCoreTests")
 
-set(JACKAL_CORE_TESTS "JackalCoreTests")
 set(TEST_MATH_DIR math)
 
 set(MATH_TESTS
