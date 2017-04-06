@@ -29,10 +29,13 @@ set(CORE_MATH
   ${CORE_MATH_DIR}/vector.hpp
   ${CORE_MATH_DIR}/matrix_math.hpp
   ${CORE_MATH_DIR}/vector_math.hpp
+  ${CORE_MATH_DIR}/quaternion_math.hpp
   ${MATH_INTERNAL_DIR}/matrix.inl
   ${MATH_INTERNAL_DIR}/matrix_math.inl
   ${MATH_INTERNAL_DIR}/vector.inl
   ${MATH_INTERNAL_DIR}/vector_math.inl
+  ${MATH_INTERNAL_DIR}/quaternion.inl
+  ${MATH_INTERNAL_DIR}/quaternion_math.inl
   ${MATH_BOUNDING_DIR}/bound_box.hpp
   ${MATH_BOUNDING_DIR}/bound_cylinder.hpp
   ${MATH_BOUNDING_DIR}/bound_sphere.hpp

@@ -22,6 +22,7 @@ template<typename T> struct Vector2;
 // Do not use this vector4 object, as the w component matters!
 template<typename T>
 struct Vector4 {
+  // Constructors.
   Vector4( 
     T x = static_cast<T>(0), 
     T y = static_cast<T>(0), 
@@ -43,60 +44,29 @@ struct Vector4 {
   ) : x(v.x), y(v.y), z(z), w(w)
     { }
 
-  Vector4 operator+(const Vector4 &v) const {
-    return Vector4(
-      x + v.x,
-      y + v.y,
-      z + v.z,
-      w + v.w
-    );
-  }
+  // Adds this vector to v, and returns a new
+  // 4 component vector.
+  Vector4 operator+(const Vector4 &v) const;
 
-  Vector4 operator-(const Vector4 &v) const {
-    return Vector4(
-      x - v.x,
-      y - v.y,
-      z - v.z,
-      w - v.w
-    );
-  }
+  // Subtracts this vector to v, and returns a new
+  // 4 component vector.
+  Vector4 operator-(const Vector4 &v) const;
   
-  Vector4 operator*(const Vector4 &v) const {
-    return Vector4(
-      x * v.x,
-      y * v.y,
-      z * v.z,
-      w * v.w
-    );
-  }
+  // Multiplies this vector to v, and returns a new
+  // 4 component vector.
+  Vector4 operator*(const Vector4 &v) const;
 
-  Vector4 operator*(const T scale) const {
-    return Vector4(
-      x * scale,
-      y * scale,
-      z * scale,
-      w * scale
-    );
-  } 
+  // Multiplies this vector to a scaler value, and 
+  // returns a new 4 component vector.
+  Vector4 operator*(const T scale) const;
 
-  Vector4 operator/(const Vector4 &v) const {
-    static_assert<>(v.x != 0 || v.y != 0 || v.z != 0 || v.w != 0, "Divide by zero!"); 
-    return Vector4(
-      x / v.x,
-      y / v.y,
-      z / v.z,
-      w / v.w
-    );
-  }
+  // Performs division of this vector with vector v,
+  // and returns a resulting 4 component vector.
+  Vector4 operator/(const Vector4 &v) const;
 
-  Vector4 operator-() const {
-    return Vector4(
-      -x,
-      -y,
-      -z,
-      -w
-    );
-  }
+  // Take the invert of this vector, and return it as
+  // a new 4 component vector.
+  Vector4 operator-() const;
 
   Vector4 operator!() const {
     return -(*this);
@@ -167,54 +137,29 @@ struct Vector3 {
   ) : x(v.x), y(v.y), z(z)
     { }
 
-  Vector3 operator+(const Vector3 &v) const {
-    return Vector3(
-      x + v.x,
-      y + v.y,
-      z + v.z
-    );
-  }
+  // Adds this vector to v, and returns a new
+  // 3 component vector.
+  Vector3 operator+(const Vector3 &v) const;
 
-  Vector3 operator-(const Vector3 &v) const {
-    return Vector3(
-      x - v.x,
-      y - v.y,
-      z - v.z
-    );
-  }
+  // Subtracts this vector to v, and returns a new
+  // 3 component vector.
+  Vector3 operator-(const Vector3 &v) const;
   
-  Vector3 operator*(const Vector3 &v) const {
-    return Vector3(
-      x * v.x,
-      y * v.y,
-      z * v.z
-    );
-  }
+  // Multiplies this vector to v, and returns a new
+  // 3 component vector.
+  Vector3 operator*(const Vector3 &v) const;
 
-  Vector3 operator*(const T scale) const {
-    return Vector3(
-      x * scale,
-      y * scale,
-      z * scale
-    );
-  }
+  // Multiplies this vector to a scaler value, and 
+  // returns a new 3 component vector.
+  Vector3 operator*(const T scale) const;
 
-  Vector3 operator/(const Vector3 &v) const {
-    static_assert(v.x != 0 || v.y != 0 || v.z != 0, "Divide by zero!");
-    return Vector3(
-      x / v.x,
-      y / v.y,
-      z / v.z
-    );
-  }
+  // Performs division of this vector with vector v,
+  // and returns a resulting 3 component vector.
+  Vector3 operator/(const Vector3 &v) const;
 
-  Vector3 operator-() const {
-    return Vector3(
-      -x,
-      -y,
-      -z
-    );
-  }
+  // Take the invert of this vector, and return it as
+  // a new 3 component vector.
+  Vector3 operator-() const;
   
   Vector3 operator!() {
     return -(*this);
@@ -266,48 +211,29 @@ struct Vector2 {
   ) : x(x), y(y)
     { }
 
-  Vector2 operator+(const Vector2 &v) const {
-    return Vector2(
-      x + v.x,
-      y + v.y
-    );
-  }
+  // Adds this vector to v, and returns a new
+  // 2 component vector.
+  Vector2 operator+(const Vector2 &v) const;
 
-  Vector2 operator-(const Vector2 &v) const {
-    return Vector2(
-      x - v.x,
-      y - v.y
-    );
-  }
+  // Subtracts this vector to v, and returns a new
+  // 2 component vector.
+  Vector2 operator-(const Vector2 &v) const;
 
-  Vector2 operator*(const Vector2 &v) const {
-    return Vector2(
-      x * v.x,  
-      y * v.y
-    );
-  }
+  // Multiplies this vector to v, and returns a new
+  // 2 component vector.
+  Vector2 operator*(const Vector2 &v) const;
 
-  Vector2 operator*(const T scale) const {
-    return Vector2(
-      x * scale,
-      y * scale
-    );
-  }
+  // Multiplies this vector to a scaler value, and 
+  // returns a new 2 component vector.
+  Vector2 operator*(const T scale) const;
 
-  Vector2 operator/(const Vector2 &v) const {
-    static_assert(v.x != 0 || v.y != 0, "Divide by zero!")
-    return Vector2(
-      x / v.x,
-      y / v.y
-    );  
-  }
+  // Performs division of this vector with vector v,
+  // and returns a resulting 2 component vector.
+  Vector2 operator/(const Vector2 &v) const;
 
-  Vector2 operator-() const {
-    return Vector2(
-      -x,
-      -y
-    );
-  }
+  // Take the invert of this vector, and return it as
+  // a new 2 component vector.
+  Vector2 operator-() const;
 
   Vector2 operator!() const {
     return -(*this);
@@ -355,3 +281,5 @@ typedef Vector3<real32> Vec3;
 typedef Vector2<real32> Vec2;
 typedef Vector4<real32> Vec4;
 } // jkl
+
+#include "internal/vector.inl"

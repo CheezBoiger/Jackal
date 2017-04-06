@@ -5,6 +5,7 @@
 #include "math/matrix.hpp"
 #include "math/vector.hpp"
 #include "math/vector_math.hpp"
+#include "math/quaternion.hpp"
 #include "math/common.hpp"
 #include <iostream>
 #include <iomanip>
@@ -31,6 +32,7 @@ void MatrixTest::Test()
   Mat3 D;
   Mat4 T = D;
   Mat4 C = A - B;
+  Quat q;
   for (uint32 i = 0; i < 4; ++i) {
     for (uint32 j = 0; j < 4; ++j) {
       std::cout << std::setw(5) << A[i][j] << " "; 
