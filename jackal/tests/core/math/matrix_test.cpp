@@ -32,7 +32,11 @@ void MatrixTest::Test()
   Mat3 D;
   Mat4 T = D;
   Mat4 C = A - B;
-  Quat q;
+  Quat q0(1.0f, 3.0f, 4.0f, 5.0f);
+  Quat q1(1.0f, 2.0f, 3.0f, 2.0f);
+  Quat ans = q0 * q1;
+  std::printf("quat ans: w=>%f x=>%f y=>%f z=>%f\n", 
+    ans.w, ans.x, ans.y, ans.z);
   for (uint32 i = 0; i < 4; ++i) {
     for (uint32 j = 0; j < 4; ++j) {
       std::cout << std::setw(5) << A[i][j] << " "; 
@@ -57,12 +61,12 @@ void MatrixTest::Test()
   Vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
   Vec3 a(1.0f, 2.0f, 3.0f);
   Vec3 b(4.0f, 5.0f, 6.0f);
+  //a *= b;
   std::printf("Vector values: x=%f y=%f z=%f w=%f\n", vec.r, vec.g, vec.b, vec.a);
   Vec3 c = Cross(a, b);
   bool yup = A == B;
   std::printf("Vector operation: x=%f y=%f z=%f\n", c.x, c.y, c.z);
-  std::printf("a < c: %d", yup);
-  std::cin.ignore();
+  std::printf("a < c: %d\n", yup);
 }
 } // test
 } // jkl

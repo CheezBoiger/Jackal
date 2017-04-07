@@ -66,22 +66,22 @@ struct Matrix4x4 {
 
   // Typical matrix multiplication. Instead of constructing a newly created
   // matrix, contents of this matrix are updated and modified.
-  Matrix4x4 &operator*=(const Matrix4x4 &m);
+  void operator*=(const Matrix4x4 &m);
 
   // Multiply all values in the matrix with the scaler value.
   Matrix4x4 operator*(const T scale) const;
 
   // Multiplay all values in the matrix with the scaler value. Does not
   // return a newly constructed matrix.
-  Matrix4x4 &operator*=(const T scale);
+  void operator*=(const T scale);
 
   // Matrix addition with m matrix. This does not return a newly constructed
   // matrix.
-  Matrix4x4 &operator+=(const Matrix4x4 &m);
+  void operator+=(const Matrix4x4 &m);
 
   // Matrix subtraction with m matrix. This does not return a newly constructed
   // matrix.
-  Matrix4x4 &operator-=(const Matrix4x4 &m);
+  void operator-=(const Matrix4x4 &m);
 
   // Retrieve the raw data array of the matrix. This is mainly used for the rendering engine.
   T *Raw() { 

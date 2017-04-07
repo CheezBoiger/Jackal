@@ -36,4 +36,9 @@ Quaternion<T> Normalize(const Quaternion<T> &q);
 template<typename T> inline
 Quaternion<T> Slerp(const Quaternion<T> &q0, const Quaternion<T> &q1, T t);
 
+// Produce a rotation about the hypersphere using x, y, z coordinates
+// and an angle to tell about how much the quaternion will rotate.
+// Quaternion q param descibes the initial position of the quaternion.
+template<typename T> inline
+Quaternion<T> AngleAxis(T angle, const Vector3<T> &axis);
 } // jkl

@@ -119,42 +119,39 @@ Matrix4x4<T> Matrix4x4<T>::operator*(const T scale) const
 
 
 template<typename T>
-Matrix4x4<T> &Matrix4x4<T>::operator*=(const T scale) 
+void Matrix4x4<T>::operator*=(const T scale) 
 {
   data[0][0] *= scale; data[0][1] *= scale; data[0][2] *= scale; data[0][3] *= scale;
   data[1][0] *= scale; data[1][1] *= scale; data[1][2] *= scale; data[1][3] *= scale;
   data[2][0] *= scale; data[2][1] *= scale; data[2][2] *= scale; data[2][3] *= scale;
   data[3][0] *= scale; data[3][1] *= scale; data[3][2] *= scale; data[3][3] *= scale;
-  return (*this);
 }
 
 
 template<typename T>
-Matrix4x4<T> &Matrix4x4<T>::operator+=(const Matrix4x4 &m) 
+void Matrix4x4<T>::operator+=(const Matrix4x4 &m) 
 {
   data[0][0] += m.data[0][0]; data[0][1] += m.data[0][1]; data[0][2] += m.data[0][2]; data[0][3] += m.data[0][3];
   data[1][0] += m.data[1][0]; data[1][1] += m.data[1][1]; data[1][2] += m.data[1][2]; data[1][3] += m.data[1][3];
   data[2][0] += m.data[2][0]; data[2][1] += m.data[2][1]; data[2][2] += m.data[2][2]; data[2][3] += m.data[2][3];
   data[3][0] += m.data[3][0]; data[3][1] += m.data[3][1]; data[3][2] += m.data[3][2]; data[3][3] += m.data[3][3];
-  return (*this);
 }
 
 
 template<typename T>
-Matrix4x4<T> &Matrix4x4<T>::operator-=(const Matrix4x4 &m) 
+void Matrix4x4<T>::operator-=(const Matrix4x4 &m) 
 {
   data[0][0] -= m.data[0][0]; data[0][1] -= m.data[0][1]; data[0][2] -= m.data[0][2]; data[0][3] -= m.data[0][3];
   data[1][0] -= m.data[1][0]; data[1][1] -= m.data[1][1]; data[1][2] -= m.data[1][2]; data[1][3] -= m.data[1][3];
   data[2][0] -= m.data[2][0]; data[2][1] -= m.data[2][1]; data[2][2] -= m.data[2][2]; data[2][3] -= m.data[2][3];
   data[3][0] -= m.data[3][0]; data[3][1] -= m.data[3][1]; data[3][2] -= m.data[3][2]; data[3][3] -= m.data[3][3];
-  return (*this);
 }
 
 
 template<typename T>
-Matrix4x4<T> &Matrix4x4<T>::operator*=(const Matrix4x4 &m) 
+void Matrix4x4<T>::operator*=(const Matrix4x4 &m) 
 {
-  Matrix4x4 ori = (*this);
+  Matrix4x4 ori = *this;
   data[0][0] = ori[0][0] * m.data[0][0] + ori[0][1] * m.data[1][0] + ori[0][2] * m.data[2][0] + ori[0][3] * m.data[3][0];
   data[0][1] = ori[0][0] * m.data[0][1] + ori[0][1] * m.data[1][1] + ori[0][2] * m.data[2][1] + ori[0][3] * m.data[3][1];
   data[0][2] = ori[0][0] * m.data[0][2] + ori[0][1] * m.data[1][2] + ori[0][2] * m.data[2][2] + ori[0][3] * m.data[3][2];
@@ -174,7 +171,6 @@ Matrix4x4<T> &Matrix4x4<T>::operator*=(const Matrix4x4 &m)
   data[3][1] = ori[3][0] * m.data[0][1] + ori[3][1] * m.data[1][1] + ori[3][2] * m.data[2][1] + ori[3][3] * m.data[3][1];
   data[3][2] = ori[3][0] * m.data[0][2] + ori[3][1] * m.data[1][2] + ori[3][2] * m.data[2][2] + ori[3][3] * m.data[3][2];
   data[3][3] = ori[3][0] * m.data[0][3] + ori[3][1] * m.data[1][3] + ori[3][2] * m.data[2][3] + ori[3][3] * m.data[3][3];
-  return (*this);
 }
 
 

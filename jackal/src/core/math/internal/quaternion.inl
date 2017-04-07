@@ -44,13 +44,12 @@ Quaternion<T> Quaternion<T>::operator*(const Quaternion &q) const
 
 
 template<typename T>
-Quaternion<T> &Quaternion<T>::operator*=(const Quaternion &q) 
+void Quaternion<T>::operator*=(const Quaternion &q) 
 {
   Quaternion ori = *this;
   w = (ori.w * q.w) - (ori.x * q.x) - (ori.y * q.y) - (ori.z * q.z);
   x = (ori.w * q.x) + (ori.x * q.w) + (ori.y * q.z) - (ori.z * q.y);
   y = (ori.w * q.y) - (ori.x * q.z) + (ori.y * q.w) + (ori.z * q.x);
   z = (ori.w * q.z) + (ori.x * q.y) - (ori.y * q.x) + (ori.z * q.w);
-  return *this;
 }
 } // jkl

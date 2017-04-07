@@ -58,7 +58,15 @@ struct Quaternion {
   // Note that quaternion multiplicatio is non-commutative,
   // so order matters!
   // Be aware that this operator will write to this quaternion object.
-  Quaternion &operator*=(const Quaternion &q);
+  void operator*=(const Quaternion &q);
+
+  // Addition of quaternion q onto this quaternion. Does not
+  // create a new quaternion, instead will modify this one.
+  void operator+=(const Quaternion &q);
+
+  // Subtraction of quaternion q from this quaternion. Does not
+  // create a new quaternion, instead will modify this one.
+  void operator-=(const Quaternion &q);
 
   // TODO(): More to be added soon.
 

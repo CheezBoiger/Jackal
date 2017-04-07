@@ -64,6 +64,31 @@ struct Vector4 {
   // and returns a resulting 4 component vector.
   Vector4 operator/(const Vector4 &v) const;
 
+  // Add values of v into this vector. This will not
+  // create a new vector object, it will instead modify
+  // this vector.
+  void operator+=(const Vector4 &v);
+
+  // Subtract values of v into this vector. This will not
+  // create a new vector object, it will instead modify
+  // this vector.
+  void operator-=(const Vector4 &v);
+
+  // Multiply values of v into this vector. This will not
+  // create a new vector object, it will instead modify
+  // this vector.
+  void operator*=(const Vector4 &v);
+
+  // Multiply a scaler value into this vector. Thise will 
+  // not create a new vector object, it will instead modify
+  // this vector.
+  void operator*=(const T scale);
+
+  // Divide values of v into this vector. This will not 
+  // create a new vector object, it will instead modify 
+  // this vector.
+  void operator/=(const Vector4 &v);
+
   // Take the invert of this vector, and return it as
   // a new 4 component vector.
   Vector4 operator-() const;
@@ -157,6 +182,31 @@ struct Vector3 {
   // and returns a resulting 3 component vector.
   Vector3 operator/(const Vector3 &v) const;
 
+  // Add a 3-component vector v into this vector.
+  // This will not create a new vector, it will instead
+  // modify this vector.
+  void operator+=(const Vector3 &v);
+
+  // Subtract a 3-component vector v into this vector.
+  // This will not create new vector, it will instead
+  // modify this vector.
+  void operator-=(const Vector3 &v);
+
+  // Multiply a 3-component vector v into this vector.
+  // This will not create a new vector, it will instead
+  // modify this vector.
+  void operator*=(const Vector3 &v);
+
+  // Multiply a scaler value into this vector.
+  // This will not create a new vector, it will instead
+  // modify this vector.
+  void operator*=(const T scale);
+
+  // Divide a 3-component vector v into this vector.
+  // This will not create a new vector, it will instead
+  // modify this vector.
+  void operator/=(const Vector3 &v);
+
   // Take the invert of this vector, and return it as
   // a new 3 component vector.
   Vector3 operator-() const;
@@ -230,6 +280,31 @@ struct Vector2 {
   // Performs division of this vector with vector v,
   // and returns a resulting 2 component vector.
   Vector2 operator/(const Vector2 &v) const;
+
+  // Add a 2-component vector v into this vector.
+  // It will not create a new vector, it will modify
+  // this vector instead.
+  void operator+=(const Vector2 &v);
+
+  // Subtract a 2-component vector v into this vector.
+  // It will not create a new vector, it will modify 
+  // this vector instead.
+  void operator-=(const Vector2 &v);
+
+  // Multiply a 2-component vector v into this vector.
+  // It will not create a new vector, it will modify
+  // this vector instead.
+  void operator*=(const Vector2 &v);
+
+  // Multiply a scaler value into this vector.
+  // It will not create a new vector, it will modify 
+  // this vector instead.
+  void operator*=(const T scale);
+  
+  // Divide a 2-component vector v into this vector.
+  // It will not create a new vector, it will modify
+  // this vector instead.
+  void operator/=(const Vector2 &v);
 
   // Take the invert of this vector, and return it as
   // a new 2 component vector.
