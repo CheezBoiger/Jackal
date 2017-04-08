@@ -58,15 +58,23 @@ Vector4<T> Vector4<T>::operator*(const T scale) const
 template<typename T>
 Vector4<T> Vector4<T>::operator/(const Vector4 &v) const 
 {
-  static_assert<>(v.x != static_cast<T>(0) || 
-    v.y != static_cast<T>(0) || 
-    v.z != static_cast<T>(0) || 
-    v.w != static_cast<T>(0), "Divide by zero!");
   return Vector4(
     x / v.x,
     y / v.y,
     z / v.z,
     w / v.w
+  );
+}
+
+
+template<typename T>
+Vector4<T> Vector4<T>::operator/(const T scaler) const
+{
+  return Vector4(
+    x / scaler,
+    y / scaler,
+    z / scaler,
+    w / scaler
   );
 }
 
@@ -114,15 +122,20 @@ void Vector4<T>::operator*=(const T scale)
 template<typename T>
 void Vector4<T>::operator/=(const Vector4 &v)
 {
-  static_assert(
-    v.x != static_cast<T>(0) ||
-    v.y != static_cast<T>(0) ||
-    v.z != static_cast<T>(0) ||
-    v.w != static_cast<T>(0), "Divide by zero!");
   x /= v.x;
   y /= v.y;
   z /= v.z;
   w /= v.w;
+}
+
+
+template<typename T>
+void Vector4<T>::operator/=(const T scaler)
+{
+  x /= scaler;
+  y /= scaler;
+  z /= scaler;
+  w /= scaler;
 }
 
 
@@ -185,14 +198,21 @@ Vector3<T> Vector3<T>::operator*(const T scale) const
 template<typename T>
 Vector3<T> Vector3<T>::operator/(const Vector3 &v) const 
 {
-  static_assert(
-    v.x != static_cast<T>(0) || 
-    v.y != static_cast<T>(0) || 
-    v.z != static_cast<T>(0), "Divide by zero!");
   return Vector3(
     x / v.x,
     y / v.y,
     z / v.z
+  );
+}
+
+
+template<typename T>
+Vector3<T> Vector3<T>::operator/(const T scaler) const
+{
+  return Vector3(
+    x / scaler,
+    y / scaler,
+    z / scaler
   );
 }
 
@@ -236,13 +256,18 @@ void Vector3<T>::operator*=(const T scale)
 template<typename T>
 void Vector3<T>::operator/=(const Vector3 &v)
 {
-  static_assert(
-    v.x != static_cast<T>(0) || 
-    v.y != static_cast<T>(0) || 
-    v.z != static_cast<T>(0), "Divide by zero!");
   x /= v.x;
   y /= v.y;
   z /= v.z;
+}
+
+
+template<typename T>
+void Vector3<T>::operator/=(const T scaler)
+{
+  x /= scaler;
+  y /= scaler;
+  z /= scaler;
 }
 
 
@@ -300,13 +325,20 @@ Vector2<T> Vector2<T>::operator*(const T scale) const
 template<typename T>
 Vector2<T> Vector2<T>::operator/(const Vector2 &v) const 
 {
-  static_assert(
-    v.x != static_cast<T>(0) || 
-    v.y != static_cast<T>(0), "Divide by zero!")
     return Vector2(
       x / v.x,
       y / v.y
     );
+}
+
+
+template<typename T>
+Vector2<T> Vector2<T>::operator/(const T scaler) const
+{
+  return Vector2(
+    x / scaler,
+    y / scaler
+  );
 }
 
 
@@ -345,11 +377,16 @@ void Vector2<T>::operator*=(const T scale)
 template<typename T>
 void Vector2<T>::operator/=(const Vector2 &v)
 {
-  static_cast(
-    v.x != static_cast<T>(0) ||
-    v.y != static_cast<T>(0), "Divide by zero!");
   x /= v.x;
   y /= v.y;
+}
+
+
+template<typename T>
+void Vector2<T>::operator/=(const T scaler)
+{
+  x /= scaler;
+  y /= scaler;
 }
 
 

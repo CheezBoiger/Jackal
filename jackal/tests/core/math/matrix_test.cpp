@@ -32,9 +32,10 @@ void MatrixTest::Test()
   Mat3 D;
   Mat4 T = D;
   Mat4 C = A - B;
-  Quat q0(1.0f, 3.0f, 4.0f, 5.0f);
-  Quat q1(1.0f, 2.0f, 3.0f, 2.0f);
+  Quat q0(1.0f, 0.0f, 0.0f, 2.0f);
+  Quat q1(3.0f, -1.0f, 4.0f, 3.0f);
   Quat ans = q0 * q1;
+  ans = ans.Inverse();
   std::printf("quat ans: w=>%f x=>%f y=>%f z=>%f\n", 
     ans.w, ans.x, ans.y, ans.z);
   for (uint32 i = 0; i < 4; ++i) {

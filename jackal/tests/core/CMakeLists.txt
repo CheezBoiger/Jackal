@@ -6,6 +6,8 @@ set(TEST_MATH_DIR math)
 set(MATH_TESTS
   ${TEST_MATH_DIR}/matrix_test.cpp
   ${TEST_MATH_DIR}/matrix_test.hpp
+  ${TEST_MATH_DIR}/quat_test.hpp
+  ${TEST_MATH_DIR}/quat_test.cpp
 )
 
 # Include core directory.

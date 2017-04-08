@@ -64,6 +64,11 @@ struct Vector4 {
   // and returns a resulting 4 component vector.
   Vector4 operator/(const Vector4 &v) const;
 
+  // Vector division. Divides this vector by the scaler
+  // value, and returns a new, fresh copy of a 4-component 
+  // vector.
+  Vector4 operator/(const T scaler) const;
+
   // Add values of v into this vector. This will not
   // create a new vector object, it will instead modify
   // this vector.
@@ -88,6 +93,10 @@ struct Vector4 {
   // create a new vector object, it will instead modify 
   // this vector.
   void operator/=(const Vector4 &v);
+
+  // Divides this vector's 4 components with the provided
+  // scaler value. Modifies this vector object.
+  void operator/=(const T scaler);
 
   // Take the invert of this vector, and return it as
   // a new 4 component vector.
@@ -126,7 +135,8 @@ struct Vector4 {
 
   // Returns the length of this vector.
   T Length() const {
-    return Sqrt((x * x) + (y * y) + (z * z) + (w * w)); 
+    return 
+      static_cast<T>(Sqrt((x * x) + (y * y) + (z * z) + (w * w))); 
   }
 
   union {
@@ -182,6 +192,11 @@ struct Vector3 {
   // and returns a resulting 3 component vector.
   Vector3 operator/(const Vector3 &v) const;
 
+  // Vector division. Divides this vector by the scaler
+  // value, and returns a new, fresh copy of a 3-component 
+  // vector.
+  Vector3 operator/(const T scaler) const;
+
   // Add a 3-component vector v into this vector.
   // This will not create a new vector, it will instead
   // modify this vector.
@@ -206,6 +221,10 @@ struct Vector3 {
   // This will not create a new vector, it will instead
   // modify this vector.
   void operator/=(const Vector3 &v);
+
+  // Divides this vector's 3 components with the provided
+  // scaler value. Modifies this vector object.
+  void operator/=(const T scaler);
 
   // Take the invert of this vector, and return it as
   // a new 3 component vector.
@@ -242,7 +261,8 @@ struct Vector3 {
   }
 
   T Length() const {
-    return Sqrt((x * x) + (y * y) + (z * z));
+    return 
+      static_cast<T>(Sqrt((x * x) + (y * y) + (z * z)));
   }
   union {
     struct { T x, y, z; };
@@ -281,6 +301,11 @@ struct Vector2 {
   // and returns a resulting 2 component vector.
   Vector2 operator/(const Vector2 &v) const;
 
+  // Vector division. Divides this vector by the scaler
+  // value, and returns a new, fresh copy of a 2-component 
+  // vector.
+  Vector2 operator/(const T scaler) const;
+
   // Add a 2-component vector v into this vector.
   // It will not create a new vector, it will modify
   // this vector instead.
@@ -305,6 +330,10 @@ struct Vector2 {
   // It will not create a new vector, it will modify
   // this vector instead.
   void operator/=(const Vector2 &v);
+
+  // Divides this vector's 2 components with the provided
+  // scaler value. Modifies this vector object.
+  void operator/=(const T scaler);
 
   // Take the invert of this vector, and return it as
   // a new 2 component vector.
@@ -341,7 +370,8 @@ struct Vector2 {
   }
 
   T Length() const {
-    return Sqrt((x * x) + (y * y));
+    return 
+      static_cast<T>(Sqrt((x * x) + (y * y)));
   }
 
   union {

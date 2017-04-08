@@ -6,6 +6,7 @@ option(RELEASE OFF "Build engine in release mode.")
 
 find_package(OpenAL)
 find_package(Vulkan)
+find_package(OpenGL)
 
 add_definitions(
   -DJACKAL_CURRENT_VERSION=0x00000100

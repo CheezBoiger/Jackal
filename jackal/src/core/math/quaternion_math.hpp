@@ -25,6 +25,10 @@ Vector4<T> ToVector4(const Quaternion<T> &q);
 template<typename T> inline
 Matrix4x4<T> ToMatrix4x4(const Quaternion<T> &q);
 
+
+template<typename T> inline
+Quaternion<T> ToQuaternion(const Vector3<T> &eulerAngle);
+
 // Normalize the quaternion. Normally, we should
 // be sticking to unit quaternions, so this call
 // should be kept limited.

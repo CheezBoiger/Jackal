@@ -44,6 +44,18 @@ Quaternion<T> Quaternion<T>::operator*(const Quaternion &q) const
 
 
 template<typename T>
+Quaternion<T> Quaternion<T>::operator/(const T scaler) const
+{
+  return Quaternion(
+    w / scaler,
+    x / scaler,
+    y / scaler,
+    z / scaler
+  );
+}
+
+
+template<typename T>
 void Quaternion<T>::operator*=(const Quaternion &q) 
 {
   Quaternion ori = *this;
@@ -51,5 +63,98 @@ void Quaternion<T>::operator*=(const Quaternion &q)
   x = (ori.w * q.x) + (ori.x * q.w) + (ori.y * q.z) - (ori.z * q.y);
   y = (ori.w * q.y) - (ori.x * q.z) + (ori.y * q.w) + (ori.z * q.x);
   z = (ori.w * q.z) + (ori.x * q.y) - (ori.y * q.x) + (ori.z * q.w);
+}
+
+
+template<typename T>
+void Quaternion<T>::operator+=(const Quaternion &q)
+{
+  w += q.w;
+  x += q.x;
+  y += q.y;
+  z += q.z;
+}
+
+
+template<typename T>
+void Quaternion<T>::operator-=(const Quaternion &q)
+{
+  w -= v.w;
+  x -= v.x;
+  y -= v.y;
+  z -= v.z;
+}
+
+
+template<typename T>
+Quaternion<T> Quaternion<T>::operator*(const T scaler) const
+{
+  return Quaternion(
+    w * scaler,
+    x * scaler,
+    y * scaler,
+    z * scaler
+  );
+}
+
+
+template<typename T>
+void Quaternion<T>::operator*=(const T scaler)
+{
+  w *= scaler;
+  x *= scaler;
+  y *= scaler;
+  z *= scaler;
+}
+
+
+template<typename T>
+Quaternion<T> Quaternion<T>::operator/(const Quaternion &q) const
+{
+  return Quaternion(
+    w / q.w,
+    x / q.x,
+    y / q.y,
+    z / q.z
+  );
+}
+
+
+template<typename T>
+void Quaternion<T>::operator/=(const Quaternion &q)
+{
+  w /= q.w;
+  x /= q.x;
+  y /= q.y;
+  z /= q.z;
+}
+
+
+template<typename T>
+void Quaternion<T>::operator/=(const T scaler)
+{
+  w /= scaler;
+  x /= scaler;
+  y /= scaler;
+  z /= scaler;
+}
+
+
+template<typename T>
+Quaternion<T> Quaternion<T>::Conjugate() const
+{
+  return Quaternion(w, -x, -y, -z);
+}
+
+
+template<typename T>
+Quaternion<T> Quaternion<T>::Inverse() const
+{
+  Quaternion conjugate = Conjugate();
+  T norm = Length();
+  norm = norm * norm;
+  // Inverse is q* / norm^2
+  conjugate /= norm;
+  return conjugate;
 }
 } // jkl
