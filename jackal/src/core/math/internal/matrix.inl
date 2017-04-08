@@ -235,7 +235,8 @@ Matrix4x4<T> Matrix4x4<T>::Adjugate() const
     sign = -sign;
     for (uint32 col = 0; col < 4; ++col) {
       sign = -sign;
-      CofactorMatrix[row][col] = Minor(row, col).Determinant() * sign;    }
+      CofactorMatrix[row][col] = Minor(row, col).Determinant() * sign;
+    }
   }
   // Transpose this CofactorMatrix to get the adjugate.
   return CofactorMatrix.Transpose();

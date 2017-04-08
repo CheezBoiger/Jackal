@@ -22,5 +22,6 @@ add_executable(${JACKAL_TEST_MAIN}
   main.cpp
 )
 
+
 target_link_libraries(${JACKAL_TEST_MAIN} ${JACKAL_CORE_TESTS})
 target_link_libraries(${JACKAL_TEST_MAIN} gtest)

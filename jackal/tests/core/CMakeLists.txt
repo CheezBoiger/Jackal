@@ -21,4 +21,4 @@ add_library(${JACKAL_CORE_TESTS} STATIC
 )
 
 
-link_libraries(${JACKAL_CORE_TESTS} Jackal-Core)
+target_link_libraries(${JACKAL_CORE_TESTS} Jackal-Core)

@@ -166,6 +166,21 @@ struct Matrix3x3 {
   // multiplying this matrix with matrix m.
   Matrix3x3 operator*(const Matrix3x3 &m) const;
 
+  // Matrix multiplation with scaler. It is commutative.
+  Matrix3x3 operator*(const T scaler) const;
+
+  // Matrix addition. Adds m matrix to this, without the need to 
+  // create a new matrix.
+  void operator+=(const Matrix3x3 &m);
+
+  // Matrix subtraction. Subtracts m matrix from this, without the
+  // need to create a new matrix. This matrix gets modified.
+  void operator-=(const Matrix3x3 &m);
+
+  void operator*=(const Matrix3x3 &m);
+
+  void operator*=(const T scaler);
+
   // Checks if this matrix is equal (in terms of values) to matrix m.
   bool operator==(const Matrix3x3 &m) const;
 

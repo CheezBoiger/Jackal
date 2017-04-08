@@ -5,6 +5,8 @@
 
 #include "../../platform/public/jtypes.hpp"
 #include "../../platform/public/platform.hpp"
+#include "text_base.hpp"
+
 
 namespace jkl {
 
@@ -16,16 +18,6 @@ namespace jkl {
 // must be noted to the user or programmer.
 class Log {
 public:
-  // The Log type of the message to be worked with.
-  enum LogType {
-    LOG_NORMAL = 0x1,
-    LOG_WARNING = 0x2,
-    LOG_ERROR = 0x4,
-    LOG_RUNTIME_DEBUG = 0x8,
-    LOG_NOTIFY = 0x10,
-    LOG_HIDDEN = 0x20,
-    LOG_ALL = 0xFFFF
-  };
 
   // Suppresses a specific message type in the logger. This will prevent
   // the logger from displaying the message to the standard output. This can
@@ -41,12 +33,14 @@ public:
   // Display a message immediately to the standard output.
   // This won't save the messae to the standard output, so be
   // sure that this is a one time only thing.
-  static void Messsage(LogType type, const char *msg);
+  static void Messsage(LogType type, const char *msg, 
+    TargetModule loc = MODULE_NONE, const char *nameTag = nullptr);
   
   // Stores a message into the Logger database. This allows the 
   // user to keep track of any logs needed, if required to look back
   // at anything during the status of the engine.
-  static void StoreMessage(LogType type, const char *msg);
+  static void StoreMessage(LogType type, const char *msg,
+    TargetModule loc = MODULE_NONE, const char *nameTag = nullptr);
 
   // Dumps all messages and flushes them to the standard output.
   // This will ensure that the user needs to look at the entire history
@@ -70,6 +64,11 @@ public:
   // Retrieves the last stored message from history. Returns NULL if no
   // message was last stored.
   static const char *GetLastStoredMessage();
+
+  // Get the array list of messages with log type specification.
+  // returns array, along with length of the list.
+  static LogMessage *GetMessages(LogType type, uint32 &length);
+
 
 private:
   // Suppressed values in the logger database.
