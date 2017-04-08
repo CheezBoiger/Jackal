@@ -31,7 +31,8 @@ void MatrixTest::Test()
   A *= B;
   Mat3 D;
   Mat4 T = D;
-  Mat4 C = A - B;
+  Mat4 C = B;
+  C = C.Inverse();
   Quat q0(1.0f, 0.0f, 0.0f, 2.0f);
   Quat q1(3.0f, -1.0f, 4.0f, 3.0f);
   Quat ans = q0 * q1;
@@ -54,11 +55,11 @@ void MatrixTest::Test()
   std::cout << "\n";
   for (uint32 i = 0; i < 4; ++i) {
     for (uint32 j = 0; j < 4; ++j) {
-      std::cout << std::setw(5) << C[i][j] << " ";
+      std::cout << std::setw(15) << C[i][j] << " ";
     }
     std::cout << "\n";
   }
-  std::cout << "\nDeterminant of A is: " << A.Determinant() << "\n";
+  std::cout << "\nDeterminant of B is: " << B.Determinant() << "\n";
   Vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
   Vec3 a(1.0f, 2.0f, 3.0f);
   Vec3 b(4.0f, 5.0f, 6.0f);

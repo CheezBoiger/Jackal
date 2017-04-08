@@ -207,19 +207,57 @@ Matrix4x4<T> Matrix4x4<T>::Transpose() const
 }
 
 
+// We calculate the inverse of a 4x4 matrix using the standard method
+// of finding the adjugate and multiplying it with one over
+// the determinant. The formula: 
+//
+// inv(A) = (1/detA) * adj(A)
 template<typename T>
 Matrix4x4<T> Matrix4x4<T>::Inverse() const 
 {
   T detA = Determinant();
-  return Matrix4x4();
+  if (detA == static_cast<T>(0)) {
+    return Matrix4x4<T>::Identity();
+  }
+  Matrix4x4<T> inverse = Adjugate() * (static_cast<T>(1) / detA);
+  return inverse;
 }
 
 
 template<typename T>
-Matrix4x4<T> Matrix4x4<T>::Adjoint() const 
+Matrix4x4<T> Matrix4x4<T>::Adjugate() const 
 {
-  static_assert(0, "Not implemented yet!");
-  return Matrix4x4();
+  // Calculating our adjugate using the transpose of the cofactor of our
+  // matrix.
+  Matrix4x4<T> CofactorMatrix;
+  T sign = static_cast<T>(1);
+  for (uint32 row = 0; row < 4; ++row) {
+    sign = -sign;
+    for (uint32 col = 0; col < 4; ++col) {
+      sign = -sign;
+      CofactorMatrix[row][col] = Minor(row, col).Determinant() * sign;    }
+  }
+  // Transpose this CofactorMatrix to get the adjugate.
+  return CofactorMatrix.Transpose();
+}
+
+
+template<typename T>
+Matrix3x3<T> Matrix4x4<T>::Minor(uint32 row, uint32 col) const
+{
+  Matrix3x3<T> minor;
+  uint32 r = 0, c;
+  for (uint32 i = 0; i < 4; ++i) {
+    if (i == row) continue;
+    c = 0;
+    for (uint32 j = 0; j < 4; ++j) {
+      if (j == col) continue;
+      minor[r][c] = data[i][j];
+      c++;
+    }
+    r++;
+  }
+  return minor;
 }
 
 
@@ -327,6 +365,15 @@ bool Matrix3x3<T>::operator==(const Matrix3x3 &m) const
     }
   }
   return true;
+}
+
+
+template<typename T>
+T Matrix3x3<T>::Determinant() const
+{
+  return  data[0][0] * (data[1][1] * data[2][2] - data[1][2] * data[2][1]) -
+          data[0][1] * (data[1][0] * data[2][2] - data[1][2] * data[2][0]) +
+          data[0][2] * (data[1][0] * data[2][1] - data[1][1] * data[2][0]);
 }
 
 

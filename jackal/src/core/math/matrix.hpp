@@ -99,19 +99,19 @@ struct Matrix4x4 {
   // up these math calls.
   T Determinant() const; 
 
-
   // Get the transpose of the matrix. This will create a new matrix.
   Matrix4x4 Transpose() const;
 
-  
   // Obtain the inverse of this matrix.
   // TODO(): Implement inverse!
   Matrix4x4 Inverse() const;
 
   // TODO(): Implement Adjoint!
-  // Retrieves the adjoint matrix from this matrix. The adjoint is the transpose of this
+  // Retrieves the adjugate matrix from this matrix. The adjugate is the transpose of this
   // matrix's cofactor matrix.
-  Matrix4x4 Adjoint() const;
+  Matrix4x4 Adjugate() const;
+
+  Matrix3x3<T> Minor(uint32 row, uint32 col) const;
 
   // Checks if this matrix does not contain a finite number.
   // If a number is NaN, within this matrix, true will be returned. Otherwise, false will
@@ -169,6 +169,18 @@ struct Matrix3x3 {
   // Checks if this matrix is equal (in terms of values) to matrix m.
   bool operator==(const Matrix3x3 &m) const;
 
+  // Get the 2x2 minor matrix within any position in the matrix.
+  Matrix2x2<T> Minor(uint32 row, uint32 col) const;
+
+  // Get the inverse of this 3x3 matrix.
+  Matrix3x3 Inverse() const;
+
+  // Get the adjugate of this 3x3 matrix.
+  Matrix3x3 Adjugate() const;
+
+  // Get the determinant of this matrix 3x3.
+  T Determinant() const;
+
   // Opposite of operator== in that it checks if this matrix is not equal
   // to matrix m.
   bool operator!=(const Matrix3x3 &m) {
@@ -207,6 +219,15 @@ struct Matrix2x2 {
   // Matrix multiplication. Returns newly constructed matrix after 
   // multiplying this matrix with matrix m.
   Matrix2x2 operator*(const Matrix2x2 &m) const;
+
+  // Get the determinant of this 2x2 matrix.
+  T Determinant() const;
+
+  // Get the adjugate of this 2x2 matrix.
+  Matrix2x2 Adjugate() const;
+  
+  // Get the inverse of this matrix.
+  Matrix2x2 Inverse() const;
 
   T *operator[](const uint32 row) {
     return data[row];
