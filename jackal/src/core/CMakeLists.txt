@@ -14,10 +14,16 @@ set(CORE_PUBLIC_MEMORY_DIR           public/memory)
 set(CORE_PUBLIC_PLATFORM_DIR         public/platform)
 set(CORE_PUBLIC_TEMPLATES_DIR        public/templates)
 set(CORE_PUBLIC_LOGGING_DIR          public/logging)
+set(CORE_PUBLIC_WIN32_DIR            public/win32)
+set(CORE_PUBLIC_LINUX_DIR            public/linux)
+set(CORE_PUBLIC_APPLE_DIR            public/apple)
 set(CORE_PRIVATE_MATH_DIR            public/math)
 set(CORE_PRIVATE_MEMORY_DIR          private/memory)
 set(CORE_PRIVATE_PLATFORM_DIR        private/platform)
 set(CORE_PRIVATE_LOGGING_DIR         private/logging)
+set(CORE_PRIVATE_WIN32_DIR           private/win32)
+set(CORE_PRIVATE_LINUX_DIR           private/linux)
+set(CORE_PRIVATE_APPLE_DIR           private/apple)
 
 
 # Math Directories.
@@ -45,40 +51,40 @@ set(CORE_MATH
 )
 
 # Platform Work.
-set(PLATFORM_WIN32_DIR       ${CORE_PRIVATE_PLATFORM_DIR}/win32)
-set(PLATFORM_LINUX_DIR       ${CORE_PRIVATE_PLATFORM_DIR}/linux)
-set(PLATFORM_APPLE_DIR       ${CORE_PRIVATE_PLATFORM_DIR}/apple)
-
 set(CORE_WIN32
-  ${PLATFORM_WIN32_DIR}/win32_clock.hpp
-  ${PLATFORM_WIN32_DIR}/win32_config.hpp
-  ${PLATFORM_WIN32_DIR}/win32_file.cpp
-  ${PLATFORM_WIN32_DIR}/win32_file.hpp
-  ${PLATFORM_WIN32_DIR}/win32_filesystem.cpp
-  ${PLATFORM_WIN32_DIR}/win32_filesystem.hpp
-  ${PLATFORM_WIN32_DIR}/win32_network.cpp
-  ${PLATFORM_WIN32_DIR}/win32_network.hpp
-  ${PLATFORM_WIN32_DIR}/win32_platform.hpp
-  ${PLATFORM_WIN32_DIR}/win32_thread.cpp
-  ${PLATFORM_WIN32_DIR}/win32_thread.hpp
-  ${PLATFORM_WIN32_DIR}/win32_window.cpp
-  ${PLATFORM_WIN32_DIR}/win32_window.hpp
+  ${CORE_PUBLIC_WIN32_DIR}/win32_clock.hpp
+  ${CORE_PUBLIC_WIN32_DIR}/win32_config.hpp
+  ${CORE_PRIVATE_WIN32_DIR}/win32_file.cpp
+  ${CORE_PUBLIC_WIN32_DIR}/win32_file.hpp
+  ${CORE_PRIVATE_WIN32_DIR}/win32_filesystem.cpp
+  ${CORE_PUBLIC_WIN32_DIR}/win32_filesystem.hpp
+  ${CORE_PRIVATE_WIN32_DIR}/win32_network.cpp
+  ${CORE_PUBLIC_WIN32_DIR}/win32_network.hpp
+  ${CORE_PUBLIC_WIN32_DIR}/win32_platform.hpp
+  ${CORE_PRIVATE_WIN32_DIR}/win32_thread.cpp
+  ${CORE_PUBLIC_WIN32_DIR}/win32_thread.hpp
+  ${CORE_PRIVATE_WIN32_DIR}/win32_window.cpp
+  ${CORE_PUBLIC_WIN32_DIR}/win32_window.hpp
+  ${CORE_PUBLIC_WIN32_DIR}/win32_mouse.hpp
+  ${CORE_PRIVATE_WIN32_DIR}/win32_mouse.cpp
 )
 
 set(CORE_LINUX
-  ${PLATFORM_LINUX_DIR}/linux_clock.hpp
-  ${PLATFORM_LINUX_DIR}/linux_config.hpp
-  ${PLATFORM_LINUX_DIR}/linux_file.cpp
-  ${PLATFORM_LINUX_DIR}/linux_file.hpp
-  ${PLATFORM_LINUX_DIR}/linux_filesystem.cpp
-  ${PLATFORM_LINUX_DIR}/linux_filesystem.hpp
-  ${PLATFORM_LINUX_DIR}/linux_network.cpp
-  ${PLATFORM_LINUX_DIR}/linux_network.hpp
-  ${PLATFORM_LINUX_DIR}/linux_platform.hpp
-  ${PLATFORM_LINUX_DIR}/linux_thread.cpp
-  ${PLATFORM_LINUX_DIR}/linux_thread.hpp
-  ${PLATFORM_LINUX_DIR}/linux_window.cpp
-  ${PLATFORM_LINUX_DIR}/linux_window.hpp
+  ${CORE_PUBLIC_LINUX_DIR}/linux_clock.hpp
+  ${CORE_PUBLIC_LINUX_DIR}/linux_config.hpp
+  ${CORE_PRIVATE_LINUX_DIR}/linux_file.cpp
+  ${CORE_PUBLIC_LINUX_DIR}/linux_file.hpp
+  ${CORE_PRIVATE_LINUX_DIR}/linux_filesystem.cpp
+  ${CORE_PUBLIC_LINUX_DIR}/linux_filesystem.hpp
+  ${CORE_PRIVATE_LINUX_DIR}/linux_network.cpp
+  ${CORE_PUBLIC_LINUX_DIR}/linux_network.hpp
+  ${CORE_PUBLIC_LINUX_DIR}/linux_platform.hpp
+  ${CORE_PRIVATE_LINUX_DIR}/linux_thread.cpp
+  ${CORE_PUBLIC_LINUX_DIR}/linux_thread.hpp
+  ${CORE_PRIVATE_LINUX_DIR}/linux_window.cpp
+  ${CORE_PUBLIC_LINUX_DIR}/linux_window.hpp
+  ${CORE_PUBLIC_LINUX_DIR}/linux_mouse.hpp
+  ${CORE_PRIVATE_LINUX_DIR}/linux_mouse.cpp
 )
 
 

@@ -21,27 +21,34 @@ private:
 // Window abstract of the core library. All windows are used here,
 // so the implementation is based on which Operating system the user
 // is in.
-class Window {
-public:
-  Window(uint32 os);
-  virtual ~Window() { }
+struct IWindow {
+  virtual ~IWindow() { }
 
-  virtual void Resize(uint32 width, uint32 height); 
+  virtual void Resize(uint32 width, uint32 height) = 0;
+  virtual bool8 IsMouseInWindow(int32 x, int32 y) = 0;
 
   virtual void Cleanup() = 0;
+
+  void *ExtractOwner() const { return owner; };
+
+  int32 xOffset;
+  int32 yOffset;
+  int32 width;
+  int32 height;
+  void *owner;
 };
 
 
 // Creates a window use with the renderer API. Must specify accurate width and height of the window,
 // along with optional title, monitor , and sharing window.
-Window *CreateWindow(uint32 width, uint32 height, const char *title, 
-  Monitor *monitor = nullptr, Window *sharing = nullptr);
+IWindow *CreateWindow(uint32 width, uint32 height, const char *title, 
+  Monitor *monitor = nullptr, IWindow *sharing = nullptr);
 
-bool8 DestroyWindow(Window *window);
+bool8 DestroyWindow(IWindow *window);
 
-void MakeContextCurrent(Window *window);
+void MakeContextCurrent(IWindow *window);
 
-Window *GetCurrentContext();
+IWindow *GetCurrentContext();
 
-void SwapBuffers(Window *window);
+void SwapBuffers(IWindow *window);
 } // jkl
