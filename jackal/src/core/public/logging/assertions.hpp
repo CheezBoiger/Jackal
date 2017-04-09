@@ -3,7 +3,7 @@
 //
 #pragma once
 
-#include "../../platform/public/platform.hpp"
+#include "platform/platform.hpp"
 #include <cassert>
 
 #define JKL_ASSERT(expr) assert(expr)

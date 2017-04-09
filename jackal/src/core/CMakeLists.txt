@@ -136,11 +136,13 @@ set(CORE_MEMORY
   ${CORE_PUBLIC_MEMORY_DIR}/memory_pool.hpp
   ${CORE_PUBLIC_MEMORY_DIR}/sptr.hpp
   ${CORE_PUBLIC_MEMORY_DIR}/stack_alloc.hpp
+  ${CORE_PUBLIC_MEMORY_DIR}/jmalloc.hpp
   ${CORE_PRIVATE_MEMORY_DIR}/memory_pool.cpp
   ${CORE_PRIVATE_MEMORY_DIR}/mem_leak_detection.hpp
   ${CORE_PRIVATE_MEMORY_DIR}/mem_leak_detection.cpp
   ${CORE_PRIVATE_MEMORY_DIR}/memory_alloc.hpp
   ${CORE_PRIVATE_MEMORY_DIR}/memory_alloc.cpp
+  ${CORE_PRIVATE_MEMORY_DIR}/jmalloc.cpp
 )
 
 
