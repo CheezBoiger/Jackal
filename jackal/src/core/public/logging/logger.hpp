@@ -3,8 +3,8 @@
 // 
 #pragma once
 
-#include "../../platform/public/jtypes.hpp"
-#include "../../platform/public/platform.hpp"
+#include "platform/jtypes.hpp"
+#include "platform/platform.hpp"
 #include "text_base.hpp"
 
 
@@ -34,7 +34,7 @@ public:
   // This won't save the messae to the standard output, so be
   // sure that this is a one time only thing.
   static void Messsage(LogType type, const char *msg, 
-    TargetModule loc = MODULE_NONE, const char *nameTag = nullptr);
+    TargetModule loc = MODULE_NONE, const char *tag = nullptr);
   
   // Stores a message into the Logger database. This allows the 
   // user to keep track of any logs needed, if required to look back

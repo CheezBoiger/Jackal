@@ -1,7 +1,7 @@
 //
 // Copyright (c) Jackal Engine. MIT License.
 //
-#include "../public/logger.hpp"
+#include "logging/logger.hpp"
 #include "log_data.hpp"
 #include <iostream>
 #include <iomanip>
@@ -45,5 +45,17 @@ void Log::Unsuppress(LogType type)
   if ((suppressed & type) == type) {
     suppressed ^= type;
   }
+}
+
+
+void Log::StoreMessage(LogType type, const char *msg,
+  TargetModule loc, const char *tag)
+{
+  LogMessage logMsg;
+  logMsg.logType = type;
+  logMsg.moduleLocation = loc;
+  logMsg.msg = msg;
+  logMsg.tag = tag;
+  MessageLogDatabase::StoreMessage(logMsg);
 }
 } // jkl

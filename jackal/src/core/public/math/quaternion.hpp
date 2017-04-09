@@ -3,8 +3,8 @@
 // 
 #pragma once
 
-#include "../platform/public/platform.hpp"
-#include "../platform/public/jtypes.hpp"
+#include "platform/platform.hpp"
+#include "platform/jtypes.hpp"
 #include "common.hpp"
 #include "matrix.hpp"
 #include "vector.hpp"

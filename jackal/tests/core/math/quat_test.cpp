@@ -3,7 +3,7 @@
 //
 #include "quat_test.hpp"
 #include "math/quaternion.hpp"
-#include "logging/public/logger.hpp"
+#include "logging/logger.hpp"
 
 namespace jkl {
 namespace test {

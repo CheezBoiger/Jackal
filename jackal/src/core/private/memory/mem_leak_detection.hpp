@@ -3,9 +3,9 @@
 //
 #pragma once
 
-#include "../../platform/public/jtypes.hpp"
-#include "../../platform/public/platform.hpp"
-#include "../public/memory_pool.hpp"
+#include "platform/jtypes.hpp"
+#include "platform/platform.hpp"
+#include "memory/memory_pool.hpp"
 
 
 namespace jkl {

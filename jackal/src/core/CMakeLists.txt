@@ -8,45 +8,46 @@ set(JACKAL_CORE_VERSION     0)
 set(JACKAL_CORE_NAME "Jackal-Core" CACHE STRING "Name of the Game Engine Core.")
 
 
-set(JACKAL_CORE_DIR    ${CMAKE_SOURCE_DIR}/core/)
-set(CORE_MATH_DIR      math)
-set(CORE_MEMORY_DIR    memory)
-set(CORE_PLATFORM_DIR  platform)
-set(CORE_TEMPLATES_DIR templates)
-set(CORE_LOGGING_DIR   logging)
-
+set(JACKAL_CORE_DIR                  ${CMAKE_CURRENT_SOURCE_DIR})
+set(CORE_PUBLIC_MATH_DIR             public/math)
+set(CORE_PUBLIC_MEMORY_DIR           public/memory)
+set(CORE_PUBLIC_PLATFORM_DIR         public/platform)
+set(CORE_PUBLIC_TEMPLATES_DIR        public/templates)
+set(CORE_PUBLIC_LOGGING_DIR          public/logging)
+set(CORE_PRIVATE_MATH_DIR            public/math)
+set(CORE_PRIVATE_MEMORY_DIR          private/memory)
+set(CORE_PRIVATE_PLATFORM_DIR        private/platform)
+set(CORE_PRIVATE_LOGGING_DIR         private/logging)
 
 
 # Math Directories.
-set(MATH_INTERNAL_DIR       ${CORE_MATH_DIR}/internal)
-set(MATH_BOUNDING_DIR       ${CORE_MATH_DIR}/bounding)
+set(MATH_PUBLIC_INTERNAL_DIR       ${CORE_PUBLIC_MATH_DIR}/internal)
+set(MATH_PUBLIC_BOUNDING_DIR       ${CORE_PUBLIC_MATH_DIR}/bounding)
 
 set(CORE_MATH
-  ${CORE_MATH_DIR}/common.hpp
-  ${CORE_MATH_DIR}/matrix.hpp
-  ${CORE_MATH_DIR}/quaternion.hpp
-  ${CORE_MATH_DIR}/ray.hpp
-  ${CORE_MATH_DIR}/vector.hpp
-  ${CORE_MATH_DIR}/matrix_math.hpp
-  ${CORE_MATH_DIR}/vector_math.hpp
-  ${CORE_MATH_DIR}/quaternion_math.hpp
-  ${MATH_INTERNAL_DIR}/matrix.inl
-  ${MATH_INTERNAL_DIR}/matrix_math.inl
-  ${MATH_INTERNAL_DIR}/vector.inl
-  ${MATH_INTERNAL_DIR}/vector_math.inl
-  ${MATH_INTERNAL_DIR}/quaternion.inl
-  ${MATH_INTERNAL_DIR}/quaternion_math.inl
-  ${MATH_BOUNDING_DIR}/bound_box.hpp
-  ${MATH_BOUNDING_DIR}/bound_cylinder.hpp
-  ${MATH_BOUNDING_DIR}/bound_sphere.hpp
+  ${CORE_PUBLIC_MATH_DIR}/common.hpp
+  ${CORE_PUBLIC_MATH_DIR}/matrix.hpp
+  ${CORE_PUBLIC_MATH_DIR}/quaternion.hpp
+  ${CORE_PUBLIC_MATH_DIR}/ray.hpp
+  ${CORE_PUBLIC_MATH_DIR}/vector.hpp
+  ${CORE_PUBLIC_MATH_DIR}/matrix_math.hpp
+  ${CORE_PUBLIC_MATH_DIR}/vector_math.hpp
+  ${CORE_PUBLIC_MATH_DIR}/quaternion_math.hpp
+  ${MATH_PUBLIC_INTERNAL_DIR}/matrix.inl
+  ${MATH_PUBLIC_INTERNAL_DIR}/matrix_math.inl
+  ${MATH_PUBLIC_INTERNAL_DIR}/vector.inl
+  ${MATH_PUBLIC_INTERNAL_DIR}/vector_math.inl
+  ${MATH_PUBLIC_INTERNAL_DIR}/quaternion.inl
+  ${MATH_PUBLIC_INTERNAL_DIR}/quaternion_math.inl
+  ${MATH_PUBLIC_BOUNDING_DIR}/bound_box.hpp
+  ${MATH_PUBLIC_BOUNDING_DIR}/bound_cylinder.hpp
+  ${MATH_PUBLIC_BOUNDING_DIR}/bound_sphere.hpp
 )
 
 # Platform Work.
-set(PLATFORM_PUBLIC_DIR      ${CORE_PLATFORM_DIR}/public)
-set(PLATFORM_PRIVATE_DIR     ${CORE_PLATFORM_DIR}/private)
-set(PLATFORM_WIN32_DIR       ${PLATFORM_PRIVATE_DIR}/win32)
-set(PLATFORM_LINUX_DIR       ${PLATFORM_PRIVATE_DIR}/linux)
-set(PLATFORM_APPLE_DIR       ${PLATFORM_PRIVATE_DIR}/apple)
+set(PLATFORM_WIN32_DIR       ${CORE_PRIVATE_PLATFORM_DIR}/win32)
+set(PLATFORM_LINUX_DIR       ${CORE_PRIVATE_PLATFORM_DIR}/linux)
+set(PLATFORM_APPLE_DIR       ${CORE_PRIVATE_PLATFORM_DIR}/apple)
 
 set(CORE_WIN32
   ${PLATFORM_WIN32_DIR}/win32_clock.hpp
@@ -86,17 +87,17 @@ set(CORE_APPLE
 )
 
 set(CORE_PLATFORM
-  ${PLATFORM_PUBLIC_DIR}/clock.hpp
-  ${PLATFORM_PUBLIC_DIR}/file.hpp
-  ${PLATFORM_PUBLIC_DIR}/filesystem.hpp
-  ${PLATFORM_PUBLIC_DIR}/hardware.hpp
-  ${PLATFORM_PUBLIC_DIR}/network.hpp
-  ${PLATFORM_PUBLIC_DIR}/platform.hpp
-  ${PLATFORM_PUBLIC_DIR}/threading.hpp
-  ${PLATFORM_PUBLIC_DIR}/timer.hpp
-  ${PLATFORM_PUBLIC_DIR}/window.hpp
-  ${PLATFORM_PUBLIC_DIR}/jtypes.hpp
-  ${PLATFORM_PUBLIC_DIR}/api.hpp
+  ${CORE_PUBLIC_PLATFORM_DIR}/clock.hpp
+  ${CORE_PUBLIC_PLATFORM_DIR}/file.hpp
+  ${CORE_PUBLIC_PLATFORM_DIR}/filesystem.hpp
+  ${CORE_PUBLIC_PLATFORM_DIR}/hardware.hpp
+  ${CORE_PUBLIC_PLATFORM_DIR}/network.hpp
+  ${CORE_PUBLIC_PLATFORM_DIR}/platform.hpp
+  ${CORE_PUBLIC_PLATFORM_DIR}/threading.hpp
+  ${CORE_PUBLIC_PLATFORM_DIR}/timer.hpp
+  ${CORE_PUBLIC_PLATFORM_DIR}/window.hpp
+  ${CORE_PUBLIC_PLATFORM_DIR}/jtypes.hpp
+  ${CORE_PUBLIC_PLATFORM_DIR}/api.hpp
 )
 
 # Operating System Dependent
@@ -115,37 +116,31 @@ endif()
 
 
 # logging stuff.
-set(LOGGING_PUBLIC_DIR  ${CORE_LOGGING_DIR}/public)
-set(LOGGING_PRIVATE_DIR ${CORE_LOGGING_DIR}/private)
-
 set(CORE_LOGGING
-  ${LOGGING_PUBLIC_DIR}/assertions.hpp
-  ${LOGGING_PUBLIC_DIR}/debugging.hpp
-  ${LOGGING_PUBLIC_DIR}/error_handler.hpp
-  ${LOGGING_PUBLIC_DIR}/logger.hpp
-  ${LOGGING_PUBLIC_DIR}/text_base.hpp
-  ${LOGGING_PRIVATE_DIR}/debugging.cpp
-  ${LOGGING_PRIVATE_DIR}/error_handler.cpp
-  ${LOGGING_PRIVATE_DIR}/log_data.cpp
-  ${LOGGING_PRIVATE_DIR}/log_data.hpp
-  ${LOGGING_PRIVATE_DIR}/logger.cpp
+  ${CORE_PUBLIC_LOGGING_DIR}/assertions.hpp
+  ${CORE_PUBLIC_LOGGING_DIR}/debugging.hpp
+  ${CORE_PUBLIC_LOGGING_DIR}/error_handler.hpp
+  ${CORE_PUBLIC_LOGGING_DIR}/logger.hpp
+  ${CORE_PUBLIC_LOGGING_DIR}/text_base.hpp
+  ${CORE_PRIVATE_LOGGING_DIR}/debugging.cpp
+  ${CORE_PRIVATE_LOGGING_DIR}/error_handler.cpp
+  ${CORE_PRIVATE_LOGGING_DIR}/log_data.cpp
+  ${CORE_PRIVATE_LOGGING_DIR}/log_data.hpp
+  ${CORE_PRIVATE_LOGGING_DIR}/logger.cpp
 )
 
 # Memory dir.
-set(MEMORY_PUBLIC_DIR   ${CORE_MEMORY_DIR}/public)
-set(MEMORY_PRIVATE_DIR  ${CORE_MEMORY_DIR}/private)
-set(MEMORY_ALLOCATORS_DIR ${MEMORY_PRIVATE_DIR}/allocators)
 
 set(CORE_MEMORY
-  ${MEMORY_PUBLIC_DIR}/allocator.hpp  
-  ${MEMORY_PUBLIC_DIR}/memory_pool.hpp
-  ${MEMORY_PUBLIC_DIR}/sptr.hpp
-  ${MEMORY_PUBLIC_DIR}/stack_alloc.hpp
-  ${MEMORY_PRIVATE_DIR}/memory_pool.cpp
-  ${MEMORY_PRIVATE_DIR}/mem_leak_detection.hpp
-  ${MEMORY_PRIVATE_DIR}/mem_leak_detection.cpp
-  ${MEMORY_PRIVATE_DIR}/memory_alloc.hpp
-  ${MEMORY_PRIVATE_DIR}/memory_alloc.cpp
+  ${CORE_PUBLIC_MEMORY_DIR}/allocator.hpp  
+  ${CORE_PUBLIC_MEMORY_DIR}/memory_pool.hpp
+  ${CORE_PUBLIC_MEMORY_DIR}/sptr.hpp
+  ${CORE_PUBLIC_MEMORY_DIR}/stack_alloc.hpp
+  ${CORE_PRIVATE_MEMORY_DIR}/memory_pool.cpp
+  ${CORE_PRIVATE_MEMORY_DIR}/mem_leak_detection.hpp
+  ${CORE_PRIVATE_MEMORY_DIR}/mem_leak_detection.cpp
+  ${CORE_PRIVATE_MEMORY_DIR}/memory_alloc.hpp
+  ${CORE_PRIVATE_MEMORY_DIR}/memory_alloc.cpp
 )
 
 
@@ -170,5 +165,9 @@ endif()
 
 add_library(${JACKAL_CORE_NAME} STATIC
   ${FILE_GLOB}
+)
+
+include_directories(SYSTEM
+  ${JACKAL_CORE_DIR}/public
 )
 

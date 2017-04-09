@@ -4,8 +4,8 @@
 #pragma once
 
 
-#include "../../platform/public/jtypes.hpp"
-#include "../../platform/public/platform.hpp"
+#include "platform/jtypes.hpp"
+#include "platform/platform.hpp"
 
 
 namespace jkl {
@@ -42,12 +42,12 @@ enum TargetModule {
 // Message log data.
 // moduleLocation : location module.
 // logType : type of message this is.
-// nameTag : the name of the module, or the tag of this message.
+// tag : the name of the module, or the tag of this message.
 // msg : the actual message.
 struct LogMessage {
   TargetModule  moduleLocation;
   LogType       logType;
-  const char    *nameTag;
+  const char    *tag;
   const char    *msg;
 };
 } // jkl
