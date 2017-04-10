@@ -7,13 +7,17 @@
 #include <iomanip>
 #include <cstdio>
 
+#define CASE_MODULE_PRINT(modEnum, str) \
+  case modEnum: std::cout << "Module location: " << str << "\n"; break
+
 
 namespace jkl {
 
 
 uint16 Log::suppressed = 0x8;
 
-void Log::Messsage(LogType type, const char *msg, TargetModule loc, const char *nameTag)
+void Log::MessageToConsole(LogType type, std::string msg, bool8 store,
+  std::string nameTag)
 {
   if ((suppressed & type) != type) {
     switch (type) {
@@ -25,9 +29,12 @@ void Log::Messsage(LogType type, const char *msg, TargetModule loc, const char *
       default: break;
     }
     std::cout << msg << "\n";
-    if (nameTag) {
-      std::cout << "From " << nameTag << "\n\n";
+    if (!nameTag.empty()) {
+      std::cout << "tag: " << nameTag << "\n\n";
     }
+  }
+  if (store) {
+    StoreMessage(type, msg, nameTag);
   }
 }
 
@@ -48,12 +55,11 @@ void Log::Unsuppress(LogType type)
 }
 
 
-void Log::StoreMessage(LogType type, const char *msg,
-  TargetModule loc, const char *tag)
+void Log::StoreMessage(LogType type, std::string msg, std::string tag)
 {
   LogMessage logMsg;
+  logMsg.timeStamp = nullptr; // for now.
   logMsg.logType = type;
-  logMsg.moduleLocation = loc;
   logMsg.msg = msg;
   logMsg.tag = tag;
   MessageLogDatabase::StoreMessage(logMsg);

@@ -7,6 +7,8 @@
 #include "platform/platform.hpp"
 #include "text_base.hpp"
 
+#include <string>
+
 
 namespace jkl {
 
@@ -30,17 +32,16 @@ public:
   // the programmer or user of anything, while other modules may not need it.
   static void Unsuppress(LogType type);
 
-  // Display a message immediately to the standard output.
-  // This won't save the messae to the standard output, so be
-  // sure that this is a one time only thing.
-  static void Messsage(LogType type, const char *msg, 
-    TargetModule loc = MODULE_NONE, const char *tag = nullptr);
+  // Display a message immediately to the standard output console.
+  // This won't save the message to the standard output unless specified
+  // with the "store" parameter.
+  static void MessageToConsole(LogType type, std::string msg, bool8 store = false,
+    std::string tag = "");
   
   // Stores a message into the Logger database. This allows the 
   // user to keep track of any logs needed, if required to look back
   // at anything during the status of the engine.
-  static void StoreMessage(LogType type, const char *msg,
-    TargetModule loc = MODULE_NONE, const char *nameTag = nullptr);
+  static void StoreMessage(LogType type, std::string msg, std::string nameTag = "");
 
   // Dumps all messages and flushes them to the standard output.
   // This will ensure that the user needs to look at the entire history

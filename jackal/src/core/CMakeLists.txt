@@ -17,6 +17,7 @@ set(CORE_PUBLIC_LOGGING_DIR          public/logging)
 set(CORE_PUBLIC_WIN32_DIR            public/win32)
 set(CORE_PUBLIC_LINUX_DIR            public/linux)
 set(CORE_PUBLIC_APPLE_DIR            public/apple)
+set(CORE_PUBLIC_STRUCTURE_DIR        public/structure)
 set(CORE_PRIVATE_MATH_DIR            public/math)
 set(CORE_PRIVATE_MEMORY_DIR          private/memory)
 set(CORE_PRIVATE_PLATFORM_DIR        private/platform)
@@ -24,6 +25,7 @@ set(CORE_PRIVATE_LOGGING_DIR         private/logging)
 set(CORE_PRIVATE_WIN32_DIR           private/win32)
 set(CORE_PRIVATE_LINUX_DIR           private/linux)
 set(CORE_PRIVATE_APPLE_DIR           private/apple)
+set(CORE_PRIVATE_STRUCTURE_DIR       private/structure)
 
 
 # Math Directories.
@@ -104,6 +106,7 @@ set(CORE_PLATFORM
   ${CORE_PUBLIC_PLATFORM_DIR}/window.hpp
   ${CORE_PUBLIC_PLATFORM_DIR}/jtypes.hpp
   ${CORE_PUBLIC_PLATFORM_DIR}/api.hpp
+  ${CORE_PRIVATE_PLATFORM_DIR}/window.cpp
 )
 
 # Operating System Dependent
@@ -151,12 +154,19 @@ set(CORE_MEMORY
   ${CORE_PRIVATE_MEMORY_DIR}/jmalloc.cpp
 )
 
+# Structure dir
+set(CORE_STRUCTURE
+  ${CORE_PUBLIC_STRUCTURE_DIR}/jstring.hpp
+  ${CORE_PRIVATE_STRUCTURE_DIR}/jstring.cpp
+)
+
 
 set(FILE_GLOB
   ${CORE_MATH}
   ${CORE_PLATFORM}
   ${CORE_LOGGING}
   ${CORE_MEMORY}
+  ${CORE_STRUCTURE}
 )
 
 
@@ -175,7 +185,10 @@ add_library(${JACKAL_CORE_NAME} STATIC
   ${FILE_GLOB}
 )
 
+target_link_libraries(${JACKAL_CORE_NAME} glfw)
+
 include_directories(SYSTEM
+  ${JACKAL_THIRD_PARTY_DIR}/glfw/include
   ${JACKAL_CORE_DIR}/public
 )
 

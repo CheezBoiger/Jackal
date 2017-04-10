@@ -14,7 +14,9 @@ void QuatTest::Test()
   Quat a;
   Quat b;
 
-  Log::Messsage(LOG_NORMAL, "Testing...");
+  Log::MessageToConsole(LOG_WARNING, R"(
+    This is a "test", and I mean a really good test "mate".
+  )", false, TARGET_OS_NAME);
 } 
 } // test
 } // jkl

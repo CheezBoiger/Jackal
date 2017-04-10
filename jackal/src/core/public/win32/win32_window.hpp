@@ -9,6 +9,8 @@
 #include <Windows.h>
 
 
+#define JWIN32_CLASSNAME L"JACKALWINDOW"
+
 namespace jkl {
 
 
@@ -16,6 +18,7 @@ namespace jkl {
 // this window for the Windows 7, 8, and 10 platforms.
 struct Win32Window : IWindow {
   HWND        wParent;
+  HWND        handle;
   HINSTANCE   wInstance;
   HMENU       wMenu;
   LPCSTR      wWindowName;
@@ -29,7 +32,9 @@ Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
 
 Win32Window *GetParentWindow(Win32Window *child);
 
-Win32Window *RequestCloseWin32Window(Win32Windw *window);
+Win32Window *RequestCloseWin32Window(Win32Window *window);
 
+bool8 DestroyWin32Window(Win32Window *window);
 
+void RegisterWin32Class();
 } // jkl

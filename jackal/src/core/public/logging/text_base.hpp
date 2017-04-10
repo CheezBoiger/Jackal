@@ -7,6 +7,8 @@
 #include "platform/jtypes.hpp"
 #include "platform/platform.hpp"
 
+#include <string>
+
 
 namespace jkl {
 
@@ -21,33 +23,16 @@ enum LogType {
   LOG_ALL = 0xFFFF
 };
 
-// Specifies a certain module to which the message came from.
-// Messages don't need to have a location, it only helps specify
-// where any situations come from.
-enum TargetModule {
-  MODULE_NONE,
-  MODULE_EXTERNAL,
-  MODULE_ENGINE,
-  MODULE_CORE,
-  MODULE_CORE_MEMORY,
-  MODULE_CORE_MATH,
-  MODULE_CORE_PLATFORM,
-  MODULE_AUDIO,
-  MODULE_ANIMATION,
-  MODULE_LOG,
-  MODULE_UNKNOWN
-};
-
 
 // Message log data.
-// moduleLocation : location module.
 // logType : type of message this is.
+// timeStamp : the time stamp from when the message was created.
 // tag : the name of the module, or the tag of this message.
 // msg : the actual message.
 struct LogMessage {
-  TargetModule  moduleLocation;
   LogType       logType;
-  const char    *tag;
-  const char    *msg;
+  std::string   timeStamp;
+  std::string   tag;
+  std::string   msg;
 };
 } // jkl

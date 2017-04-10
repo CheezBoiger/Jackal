@@ -9,3 +9,7 @@ add_subdirectory(googletest)
 # redefinition errors on visual studio 2017.
 set(ENABLE_GLSLANG_BINARIES OFF CACHE BOOL "glslang binaries")
 #add_subdirectory(glslang)
+
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "")
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "")
+add_subdirectory(glfw)

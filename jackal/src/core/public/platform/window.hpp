@@ -24,11 +24,6 @@ private:
 struct IWindow {
   virtual ~IWindow() { }
 
-  virtual void Resize(uint32 width, uint32 height) = 0;
-  virtual bool8 IsMouseInWindow(int32 x, int32 y) = 0;
-
-  virtual void Cleanup() = 0;
-
   void *ExtractOwner() const { return owner; };
 
   int32 xOffset;
