@@ -8,6 +8,8 @@
 #include "platform/api.hpp"
 #include <cmath>
 
+#define J_PI 3.141592653589793238462643383279502884197169399375
+
 
 namespace jkl {
 
@@ -62,5 +64,11 @@ inline float Sinf(float value)
 inline float Tanf(float value)
 {
   return std::tanf(value);
+}
+
+
+inline float ToRadians(float degrees)
+{
+  return degrees * (J_PI / 180.0f);
 }
 } // jkl

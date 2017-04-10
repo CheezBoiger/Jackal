@@ -13,6 +13,7 @@ set(MATH_TESTS
 # Include core directory.
 include_directories(SYSTEM
   ../../src/core/public
+  ../../thirdparty/g-truc/glm
 )
 
 

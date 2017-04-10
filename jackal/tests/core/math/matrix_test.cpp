@@ -5,8 +5,11 @@
 #include "math/matrix.hpp"
 #include "math/vector.hpp"
 #include "math/vector_math.hpp"
+#include "math/matrix_math.hpp"
 #include "math/quaternion.hpp"
 #include "math/common.hpp"
+#include "glm/common.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 #include <iostream>
 #include <iomanip>
 
@@ -30,7 +33,16 @@ void MatrixTest::Test()
   );
   A *= B;
   Mat3 D;
-  Mat4 T = D;
+#define GLM_TEST 0
+#if !GLM_TEST
+  Mat4 T = Translate(Mat4(), Vec3(12.0f, -12.4f, 1.0f)); 
+  T = Rotate(T, ToRadians(-74.0f), Vec3(1.0f, 0.0f, 0.0f));
+  T = Scale(T, Vec3(5.0f, 5.0f, 5.0f));
+#else
+  glm::mat4 T = glm::translate(glm::mat4(), glm::vec3(12.0f, -12.4f, 1.0f));
+  T = glm::rotate(T, glm::radians(-74.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+  T = glm::scale(T, glm::vec3(5.0f, 5.0f, 5.0f));
+#endif
   Mat4 C = B;
   C = C.Inverse();
   Quat q0(1.0f, 0.0f, 0.0f, 2.0f);
@@ -55,7 +67,7 @@ void MatrixTest::Test()
   std::cout << "\n";
   for (uint32 i = 0; i < 4; ++i) {
     for (uint32 j = 0; j < 4; ++j) {
-      std::cout << std::setw(15) << C[i][j] << " ";
+      std::cout << std::setw(15) << T[i][j] << " ";
     }
     std::cout << "\n";
   }

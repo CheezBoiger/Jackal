@@ -14,6 +14,10 @@
 namespace jkl {
 
 
+struct Win32WindowLibs {
+} windowLibs;
+
+
 // win32 specific window. Contains all necessities that govern 
 // this window for the Windows 7, 8, and 10 platforms.
 struct Win32Window : IWindow {
