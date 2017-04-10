@@ -33,8 +33,7 @@ void MatrixTest::Test()
   );
   A *= B;
   Mat3 D;
-#define GLM_TEST 0
-#if !GLM_TEST
+#if 1
   Mat4 T = Translate(Mat4(), Vec3(12.0f, -12.4f, 1.0f)); 
   T = Rotate(T, ToRadians(-74.0f), Vec3(1.0f, 0.0f, 0.0f));
   T = Scale(T, Vec3(5.0f, 5.0f, 5.0f));
