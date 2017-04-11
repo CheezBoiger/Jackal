@@ -43,8 +43,20 @@ Matrix4x4<T> LookAt(const Vector3<T> &eye, const Vector3<T> &center, const Vecto
 template<typename T> inline
 Matrix4x4<T> Perspective(const T fov, const T aspect, const T zNear, const T zFar);
 
+template<typename T> inline
+Matrix4x4<T> PerspectiveLH(const T fov, const T aspect, const T zNear, const T zFar);
+
+template<typename T> inline
+Matrix4x4<T> PerspectiveRH(const T fov, const T aspect, const T zNear, const T zFar);
+
 // Orthographic projection matrix. 
 template<typename T> inline
 Matrix4x4<T> Orthographic(const T fov, const T aspect, const T zNear, const T zFar);
+
+template<typename T> inline
+Matrix4x4<T> OrthographicLH(const T fov, const T aspect, const T zNear, const T zFar);
+
+template<typename T> inline
+Matrix4x4<T> OrthographicRH(const T fov, const T aspect, const T zNear, const T zFar);
 } // jkl
 #include "internal/matrix_math.inl"

@@ -202,6 +202,10 @@ struct Matrix3x3 {
     return !(*this == m);
   }
 
+  T *Raw() {
+    return data[0];
+  }
+
   // Access the matrix without having to access data.
   T *operator[](const uint32 row) {
     return data[row];
@@ -246,6 +250,10 @@ struct Matrix2x2 {
 
   T *operator[](const uint32 row) {
     return data[row];
+  }
+
+  T *Raw() {
+    return data[0];
   }
     
   // Data of the matrix.

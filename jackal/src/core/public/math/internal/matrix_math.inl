@@ -111,10 +111,33 @@ Matrix4x4<T> LookAt(const Vector3<T> &eye, const Vector3<T> &center, const Vecto
 
 
 template<typename T> inline
-Matrix4x4<T> Perspective(const T fov, const T aspect, const T zNear, const T zFar)
+Matrix4x4<T> PerspectiveRH(const T fov, const T aspect, const T zNear, const T zFar)
 {
-  Matrix4x4<T> perspective;
-  // we will implement later.
+  T tanHalfFov = Tan(fov / static_cast<T>(2));
+  Matrix4x4<T> perspective = Matrix4x4<T>::Identity();
+  perspective[3][3] = static_cast<T>(0);
+  perspective[0][0] = static_cast<T>(1) / (aspect * tanHalfFov);
+  perspective[1][1] = static_cast<T>(1) / (tanHalfFov);
+  perspective[2][3] = -static_cast<T>(1);
+
+  perspective[2][2] = -(zFar + zNear) / (zFar - zNear);
+  perspective[3][2] = -(static_cast<T>(2) * zFar * zNear) / (zFar - zNear);
+  return perspective;
+}
+
+
+template<typename T> inline
+Matrix4x4<T> PerspectiveLH(const T fov, const T aspect, const T zNear, const T zFar)
+{
+  T tanHalfFov = Tan(fov / static_cast<T>(2));
+  Matrix4x4<T> perspective = Matrix4x4<T>::Identity();
+  perspective[3][3] = static_cast<T>(0);
+  perspective[0][0] = static_cast<T>(1) / (aspect * tanHalfFov);
+  perspective[1][1] = static_cast<T>(1) / (tanHalfFov);
+  perspective[2][3] = static_cast<T>(1);
+
+  perspective[2][2] = (zFar + zNear) / (zFar - zNear);
+  perspective[3][2] = -(static_cast<T>(2) * zFar * zNear) / (zFar - zNear);
   return perspective;
 }
 } // jkl
