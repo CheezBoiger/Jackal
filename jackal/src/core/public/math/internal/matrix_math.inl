@@ -3,6 +3,7 @@
 //
 
 //#include "../matrix_math.hpp"
+#include "../vector_math.hpp"
 
 namespace jkl {
 
@@ -64,5 +65,56 @@ Matrix4x4<T> Scale(const Matrix4x4<T> &original, const Vector3<T> &scale)
     0,        0,        0,        1
   );
   return scaleMatrix * original;
+}
+
+
+template<typename T> inline
+Matrix4x4<T> LookAtRH(const Vector3<T> &eye, const Vector3<T> &center, const Vector3<T> &up)
+{
+  Vector3<T> front(Normalize(center - eye));
+  Vector3<T> right(Normalize(Cross(front, up)));
+  Vector3<T> u(Cross(right, front));
+  Matrix4x4<T> lookAt(
+    right.x,          u.x,          -front.x,         static_cast<T>(0),
+    right.y,          u.y,          -front.y,         static_cast<T>(0),
+    right.z,          u.z,          -front.z,         static_cast<T>(0),
+    -Dot(right, eye), -Dot(u, eye), Dot(front, eye),  static_cast<T>(1)
+  );
+  return lookAt;
+}
+
+
+template<typename T> inline
+Matrix4x4<T> LookAtLH(const Vector3<T> &eye, const Vector3<T> &center, const Vector3<T> &up)
+{
+  Vector3<T> front(Normalize(center - eye));
+  Vector3<T> right(Normalize(Cross(up, front)));
+  Vector3<T> u(Cross(front, right));
+  Matrix4x4<T> lookAt(
+    right.x,          u.x,          front.x,          static_cast<T>(0),
+    right.y,          u.y,          front.y,          static_cast<T>(0),
+    right.z,          u.z,          front.z,          static_cast<T>(0),
+    -Dot(right, eye), -Dot(u, eye), -Dot(front, eye), static_cast<T>(1)
+  );
+  return lookAt;
+}
+
+
+template<typename T> inline
+Matrix4x4<T> LookAt(const Vector3<T> &eye, const Vector3<T> &center, const Vector3<T> &up, bool left)
+{
+  if (left) {
+    return LookAtLH(eye, center, up);
+  }
+  return LookAtRH(eye, center, up);
+}
+
+
+template<typename T> inline
+Matrix4x4<T> Perspective(const T fov, const T aspect, const T zNear, const T zFar)
+{
+  Matrix4x4<T> perspective;
+  // we will implement later.
+  return perspective;
 }
 } // jkl

@@ -172,6 +172,11 @@ struct Vector3 {
   ) : x(v.x), y(v.y), z(z)
     { }
 
+  Vector3(
+    const Vector3 &v
+  ) : x(v.x), y(v.y), z(v.z)
+  { }
+
   // Adds this vector to v, and returns a new
   // 3 component vector.
   Vector3 operator+(const Vector3 &v) const;

@@ -33,15 +33,15 @@ void MatrixTest::Test()
   );
   A *= B;
   Mat3 D;
-#if 1
-  Mat4 T = Translate(Mat4(), Vec3(12.0f, -12.4f, 1.0f)); 
-  T = Rotate(T, ToRadians(-74.0f), Vec3(1.0f, 0.0f, 0.0f));
-  T = Scale(T, Vec3(5.0f, 5.0f, 5.0f));
-#else
-  glm::mat4 T = glm::translate(glm::mat4(), glm::vec3(12.0f, -12.4f, 1.0f));
-  T = glm::rotate(T, glm::radians(-74.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-  T = glm::scale(T, glm::vec3(5.0f, 5.0f, 5.0f));
-#endif
+  Mat4 T = LookAtLH(Vec3(1.0f, 16.0f, -123.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 1.0f, 0.0f));
+  //Translate(Mat4(), Vec3(12.0f, -12.4f, 1.0f)); 
+  //T = Rotate(T, ToRadians(-74.0f), Vec3(1.0f, 0.0f, 0.0f));
+  //T = Scale(T, Vec3(5.0f, 5.0f, 5.0f));
+  glm::mat4 glmT = glm::lookAtLH(glm::vec3(1.0f, 16.0f, -123.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+/*  glm::translate(glm::mat4(), glm::vec3(12.0f, -12.4f, 1.0f));
+  glmT = glm::rotate(glmT, glm::radians(-74.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+  glmT = glm::scale(glmT, glm::vec3(5.0f, 5.0f, 5.0f));
+*/
   Mat4 C = B;
   C = C.Inverse();
   Quat q0(1.0f, 0.0f, 0.0f, 2.0f);
@@ -63,10 +63,17 @@ void MatrixTest::Test()
     }
     std::cout << "\n";
   }
-  std::cout << "\n";
+  std::cout << "\nJackal Math library:\n";
   for (uint32 i = 0; i < 4; ++i) {
     for (uint32 j = 0; j < 4; ++j) {
       std::cout << std::setw(15) << T[i][j] << " ";
+    }
+    std::cout << "\n";
+  }
+  std::cout << "\nGLM library:\n";
+  for (uint32 i = 0; i < 4; ++i) {
+    for (uint32 j = 0; j < 4; ++j) {
+      std::cout << std::setw(15) << glmT[i][j] << " ";
     }
     std::cout << "\n";
   }

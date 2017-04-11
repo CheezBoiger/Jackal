@@ -37,14 +37,14 @@ Matrix4x4<T> LookAtRH(const Vector3<T> &eye, const Vector3<T> &center, const Vec
 // Default call of LookAt function, which will return the Left hand side 
 // or right hand side matrix depending on the rendering api.
 template<typename T> inline
-Matrix4x4<T> LookAt(const Vector3<T> &eye, const Vector3<T> &center, const Vector3<T> &up);
+Matrix4x4<T> LookAt(const Vector3<T> &eye, const Vector3<T> &center, const Vector3<T> &up, bool left = false);
 
 // Perspective projection matrix.
 template<typename T> inline
-Matrix4x4<T> Perspective(T fov, T aspect, T zNear, T zFar);
+Matrix4x4<T> Perspective(const T fov, const T aspect, const T zNear, const T zFar);
 
 // Orthographic projection matrix. 
 template<typename T> inline
-Matrix4x4<T> Orthographic(T fov, T aspect, T zNear, T zFar);
+Matrix4x4<T> Orthographic(const T fov, const T aspect, const T zNear, const T zFar);
 } // jkl
 #include "internal/matrix_math.inl"
