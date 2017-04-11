@@ -63,13 +63,14 @@ void MatrixTest::Test()
     }
     std::cout << "\n";
   }
+
   std::cout << "\nJackal Math library:\n";
   for (uint32 i = 0; i < 4; ++i) {
     for (uint32 j = 0; j < 4; ++j) {
       std::cout << std::setw(15) << T[i][j] << " ";
     }
     std::cout << "\n";
-  }
+  } glm::mat4 m;
   std::cout << "\nGLM library:\n";
   for (uint32 i = 0; i < 4; ++i) {
     for (uint32 j = 0; j < 4; ++j) {

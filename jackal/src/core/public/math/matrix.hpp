@@ -85,7 +85,7 @@ struct Matrix4x4 {
 
   // Retrieve the raw data array of the matrix. This is mainly used for the rendering engine.
   T *Raw() { 
-    return data; 
+    return data[0]; 
   }
 
   // Quick access to a value in the matrix.
