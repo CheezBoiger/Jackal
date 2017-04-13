@@ -29,10 +29,24 @@ enum LogType {
 // timeStamp : the time stamp from when the message was created.
 // tag : the name of the module, or the tag of this message.
 // msg : the actual message.
-struct LogMessage {
+
+
+
+// TODO(): Remove strings from this message and replace with JString.
+struct Message {
   LogType       logType;
   std::string   timeStamp;
+  bool8         isWideString;
+};
+
+
+struct LogMessage : public Message {
   std::string   tag;
   std::string   msg;
+};
+
+struct LogMessageW : public Message {
+  std::wstring wtag;
+  std::wstring wmsg;
 };
 } // jkl

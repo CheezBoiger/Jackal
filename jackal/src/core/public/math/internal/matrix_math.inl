@@ -129,7 +129,7 @@ Matrix4x4<T> PerspectiveRH(const T fov, const T aspect, const T zNear, const T z
 template<typename T> inline
 Matrix4x4<T> PerspectiveLH(const T fov, const T aspect, const T zNear, const T zFar)
 {
-  T tanHalfFov = Tan(fov / static_cast<T>(2));
+  T tanHalfFov = static_cast<T>(Tan(fov / static_cast<T>(2)));
   Matrix4x4<T> perspective = Matrix4x4<T>::Identity();
   perspective[3][3] = static_cast<T>(0);
   perspective[0][0] = static_cast<T>(1) / (aspect * tanHalfFov);

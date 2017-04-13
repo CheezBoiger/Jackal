@@ -10,6 +10,12 @@
 #define CASE_MODULE_PRINT(modEnum, str) \
   case modEnum: std::cout << "Module location: " << str << "\n"; break
 
+#if TARGET_PLATFORM == JACKAL_WINDOWS
+ // TODO(): Will need to be wcout in the future. Once we add in jstring.
+ #define STDOUTPUT(text) std::cout << text;
+#else
+ #define STDOUTPUT(text) std::cout << text;
+#endif
 
 namespace jkl {
 
@@ -28,7 +34,7 @@ void Log::MessageToConsole(LogType type, std::string msg, bool8 store,
       case LOG_HIDDEN: std::cout << "Hidden: "; break;
       default: break;
     }
-    std::cout << msg << "\n";
+    STDOUTPUT(msg << "\n");
     if (!nameTag.empty()) {
       std::cout << "tag: " << nameTag << "\n\n";
     }
@@ -58,6 +64,7 @@ void Log::Unsuppress(LogType type)
 void Log::StoreMessage(LogType type, std::string msg, std::string tag)
 {
   LogMessage logMsg;
+  logMsg.isWideString = false;
   logMsg.timeStamp = nullptr; // for now.
   logMsg.logType = type;
   logMsg.msg = msg;

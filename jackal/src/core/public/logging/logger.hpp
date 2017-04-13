@@ -68,7 +68,7 @@ public:
 
   // Get the array list of messages with log type specification.
   // returns array, along with length of the list.
-  static LogMessage *GetMessages(LogType type, uint32 &length);
+  static Message *GetMessages(LogType type, uint32 &length);
 
 
 private:

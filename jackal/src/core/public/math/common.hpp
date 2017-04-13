@@ -69,6 +69,6 @@ inline float Tanf(float value)
 
 inline float ToRadians(float degrees)
 {
-  return degrees * (J_PI / 180.0f);
+  return degrees * (static_cast<float>(J_PI) / 180.0f);
 }
 } // jkl
