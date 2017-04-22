@@ -15,11 +15,11 @@ include_directories(SYSTEM
 )
 
 # add test programs.
-add_subdirectory(core)
+add_subdirectory(Core)
 
 
 add_executable(${JACKAL_TEST_MAIN}
-  main.cpp
+  Main.cpp
 )
 
 

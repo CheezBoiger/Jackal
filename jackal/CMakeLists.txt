@@ -26,6 +26,6 @@ endif (RELEASE)
 set(JACKAL_THIRD_PARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty)
 
 
-add_subdirectory(src)
-add_subdirectory(tests)
-add_subdirectory(thirdparty)
+add_subdirectory(Source)
+add_subdirectory(Tests)
+add_subdirectory(ThirdParty)

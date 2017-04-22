@@ -1,19 +1,19 @@
 cmake_minimum_required(VERSION 2.8.11)
 project("JackalCoreTests")
 
-set(TEST_MATH_DIR math)
+set(TEST_MATH_DIR Math)
 
 set(MATH_TESTS
-  ${TEST_MATH_DIR}/matrix_test.cpp
-  ${TEST_MATH_DIR}/matrix_test.hpp
-  ${TEST_MATH_DIR}/quat_test.hpp
-  ${TEST_MATH_DIR}/quat_test.cpp
+  ${TEST_MATH_DIR}/MatrixTest.cpp
+  ${TEST_MATH_DIR}/MatrixTest.hpp
+  ${TEST_MATH_DIR}/QuatTest.hpp
+  ${TEST_MATH_DIR}/QuatTest.cpp
 )
 
 # Include core directory.
 include_directories(SYSTEM
-  ../../src/core/public
-  ../../thirdparty/g-truc/glm
+  ../../Source/Core/Public
+  ../../ThirdParty/g-truc/glm
 )
 
 

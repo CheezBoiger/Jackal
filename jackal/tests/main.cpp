@@ -1,8 +1,8 @@
 //
 // Copyright (c) Jackal Engine. MIT License.
 //
-#include "core/math/matrix_test.hpp"
-#include "core/math/quat_test.hpp"
+#include "Core/Math/MatrixTest.hpp"
+#include "Core/Math/QuatTest.hpp"
 #include <iostream>
 
 int main(int c, char *argv[]) {
