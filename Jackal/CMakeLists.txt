@@ -23,7 +23,7 @@ else()
   )
 endif (RELEASE)
 
-set(JACKAL_THIRD_PARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty)
+set(JACKAL_THIRD_PARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
 
 add_subdirectory(Source)
