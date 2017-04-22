@@ -1,9 +1,0 @@
-[submodule "Jackal/ThirdParty/glslang"]
-	path = Jackal/ThirdParty/glslang
-	url = https://github.com/KhronosGroup/glslang.git
-[submodule "Jackal/ThirdParty/googletest"]
-	path = Jackal/ThirdParty/googletest
-	url = https://github.com/google/googletest.git
-[submodule "Jackal/ThirdParty/glfw"]
-	path = Jackal/ThirdParty/glfw
-	url = https://github.com/GLFW/glfw.git
