@@ -10,18 +10,14 @@
 namespace jkl {
 
 
-MemoryPool::MemoryPool(uint64 startSizeBytes)
-  : totalSizeBytes(startSizeBytes)
-  , bytesLeft(startSizeBytes)
-  , memory(new byte[static_cast<size_t>(startSizeBytes)])
-  , reserved(new byte[static_cast<size_t>(startSizeBytes / 8)])
+MemoryPool::MemoryPool(uint64 startSize)
+  : totalSize(startSize)
+  , sizeLeft(startSize)
+  , memory(new void *[static_cast<size_t>(startSize)])
 {
   Log::MessageToConsole(LOG_NOTIFY, "Memory pool allocated to size of array: "
-    + std::to_string(GetTotalMemoryPoolSizeBytes()) 
+    + std::to_string(GetTotalMemoryPoolSize() * sizeof(size_t)) 
     + " bytes");
-  for (uint64 i = 0; i < static_cast<size_t>(startSizeBytes / 8); ++i) {
-    *(reserved + i) = 0x0;
-  }
 }
    
 
@@ -30,7 +26,6 @@ MemoryPool::~MemoryPool()
   // Make sure to delete memory.
   if (memory) {
     delete[] memory;
-    delete[] reserved;
   }
 }
 
@@ -62,67 +57,46 @@ void MemoryPool::LazyCleanMemoryPool()
 void MemoryPool::ClearMemoryPool()
 {
   // Full clear of the memory cache.
-  for (uint64 i = 0; i < totalSizeBytes; ++i) {
+  for (uint64 i = 0; i < totalSize; ++i) {
     
   }
-  bytesLeft = totalSizeBytes;
+  sizeLeft = totalSize;
 }
 
 
-void *MemoryPool::AllocateMemory(uint64 startBytes, uint64 sizeBytes)
+void *MemoryPool::AllocateMemory(uint64 start, uint64 sizeBytes)
 {
-  if ((startBytes + sizeBytes) >= totalSizeBytes) {
+  if ((start + (sizeBytes / sizeof(size_t))) >= totalSize) {
     Log::MessageToConsole(LOG_ERROR, "Unable to allocate memory due to out of bounds."
-      " Allocated at byte => " + std::to_string(startBytes), false, "Memory Pool");
+      " Allocated at location => " + std::to_string(start), false, "Memory Pool");
     return nullptr;
   }
-  
-  for (uint64 i = startBytes; i < (startBytes + sizeBytes); ++i) {
-    size_t location = i / 8;
-    size_t fill = (7 - (i % 8));
-    if (((*(reserved + location) & (1 << fill)) == (1 << fill))) {
-      
-      Log::MessageToConsole(LOG_ERROR, "Memory overlap, will cause corruption! => " +
-        std::to_string(*(reserved + location)), 
-        false, "Memory Pool");
-      return nullptr;
-    }
-    *(reserved + location) |= (1 << fill);
-  }
 
-  bytesLeft -= sizeBytes;
-  return ((size_t *)memory + startBytes);
+  sizeLeft -= sizeBytes / sizeof(size_t);
+  return ((size_t *)memory + start);
 }
 
 
-void MemoryPool::DeallocateMemory(uint64 startBytes, uint64 sizeBytes)
+void MemoryPool::DeallocateMemory(uint64 start, uint64 sizeBytes)
 {
-  if ((startBytes + sizeBytes) >= totalSizeBytes) {
+  if ((start + (sizeBytes / sizeof(size_t))) >= totalSize) {
     Log::MessageToConsole(LOG_ERROR, "Unable to allocate memory due to out of bounds."
-      " Allocated at byte => " + std::to_string(startBytes), false, "Memory Pool");
+      " Allocated at location => " + std::to_string(start), false, "Memory Pool");
     return;
   }
-
-  for (uint64 i = startBytes; i < (startBytes + sizeBytes); ++i) {
-    size_t location = i / 8;
-    size_t fill = (7 - (i % 8));
-    if (((*(reserved + location) & (1 << fill)) == (1 << fill))) {
-      *(reserved + location) ^= (1 << fill);
-    }
-  }
-  bytesLeft += sizeBytes;
+  sizeLeft += sizeBytes / sizeof(size_t);
 }
 
 
-void *MemoryPool::GetMemoryLocation(uint64 locationBytes)
+void *MemoryPool::GetMemoryLocation(uint64 location)
 {
-  if (locationBytes >= totalSizeBytes) {
+  if (location >= totalSize) {
     Log::MessageToConsole(LOG_ERROR, "Attempted to access memory location past"
-      " total size. Attempted access at byte => " + std::to_string(locationBytes),
+      " total size. Attempted access at location => " + std::to_string(location),
       false, "Memory Pool");
     return nullptr;
   }
 
-  return ((size_t *)memory + locationBytes);
+  return ((size_t *)memory + location);
 }
 } // jkl

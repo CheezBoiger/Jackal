@@ -20,7 +20,7 @@ namespace jkl {
 class MemoryPool {
 public:
   // Default constructor
-  MemoryPool(uint64 startSizeBytes = 2048);
+  MemoryPool(uint64 startSize = 2048);
 
   ~MemoryPool();
 
@@ -45,36 +45,33 @@ public:
   void ClearMemoryPool();
 
   // Get the actual array size of our memory pages.
-  uint64 GetTotalMemoryPoolSizeBytes() const { return totalSizeBytes; }
+  uint64 GetTotalMemoryPoolSize() const { return totalSize; }
 
   // Gets the memory pool's remaining size.
-  uint64 GetMemorySizeLeftBytes() const { return bytesLeft; }
+  uint64 GetMemorySizeLeft() const { return sizeLeft; }
 
   // Allocate memory within the memory pool. Specifies the starting
-  // location page, along with the overall size of the allocation in terms of
+  // location, along with the overall size of the allocation in terms of
   // bytes.
-  void *AllocateMemory(uint64 startBytes, uint64 sizeBytes);
+  void *AllocateMemory(uint64 start, uint64 sizeBytes);
 
   // Deallocate memory within the memory pool. Specifies the starting
-  // location page, along with the overall size of the allocation in terms of 
+  // location, along with the overall size of the allocation in terms of 
   // bytes.
-  void DeallocateMemory(uint64 startBytes, uint64 sizeBytes);
+  void DeallocateMemory(uint64 start, uint64 sizeBytes);
 
   // Get hold of the memory location address within the memory pool.
   // Uses location address.
-  void *GetMemoryLocation(uint64 locationBytes);
+  void *GetMemoryLocation(uint64 location);
 
 private:
   // Total size of the memory pool in bytes.
-  uint64 totalSizeBytes;
+  uint64 totalSize;
 
   // Indices left over after totalSize - allocation.
-  uint64 bytesLeft;
+  uint64 sizeLeft;
 
   // The raw memory on the heap. 
-  byte *memory;
-
-  // Reserved memory check, to ensure there is no corruption when allocating.
-  byte *reserved;
+  void *memory;
 };
 } // jkl
