@@ -23,9 +23,9 @@ public:
 
   // TODO(): Need to define the interface!
 
-  virtual void *Allocate(uint32 addBytes) = 0;
+  virtual void *Allocate(uint32 size, uint8 alignment = sizeof(void *)) = 0;
 
-  virtual void Deallocate() = 0;
+  virtual void Deallocate(void *pointer) = 0;
 
   virtual void Construct() = 0;
 

@@ -5,8 +5,6 @@
 
 #include "Platform/Platform.hpp"
 #include "Platform/JTypes.hpp"
-#include "Structure/HTable.hpp"
-#include "Allocator.hpp"
 
 
 namespace jkl {
@@ -16,48 +14,49 @@ namespace jkl {
 // This is will be able to detect memory leaks, as well as speed up performance by
 // minimizing the number of new calls.
 // This is a handler for raw memory, how this memory is allocated, however, is 
-// handled by the Allocator interfaces.
+// handled by the Allocator interfaces, since our memory pool is purely raw, no
+// complete data type is specified.
 class MemoryPool {
 public:
-  MemoryPool();
+  // Default constructor
+  MemoryPool(uint64 startSize = 1024);
 
   ~MemoryPool();
 
-  void ReserveTotalMemoryPoolSize(uint64 uid, uint64 size);
+  // Reserve the total memory pool size.
+  void ReserveTotalMemoryPoolSize(uint64 size);
 
   void ResizeTotalMemoryPoolSize(uint64 size);
 
   void CleanMemoryPool();
 
-  // Delete a memory pool allocation from this Memory Pool.
+  void LazyCleanMemoryPool();
+
+  // Clear the memory pool completely. This will destroy all objects
+  // and data that is already allocated in the pool.
   void ClearMemoryPool();
 
-  uint64 GetMemoryPoolSize() { return totalSizeBytes; }
-  uint64 GetBytesAllocated() { return bytesAllocated; }
-  uint64 GetBytesDeallocated() { return bytesDeallocated; }
-
-  void AdjustMemory(uint64 bytes);
+  uint64 GetTotalMemoryPoolSize() { return totalSize; }
+  uint64 GetTotalMemoryPoolSizeBytes() { return totalSize * sizeof(void *); }
 
   // Get memory pool size that is left, in bytes.
   uint64 GetBytesLeft() { return bytesLeft; }
 
-  // Grab the raw memory.
-  void *GetMemoryRaw() { return memory; }
+  // Allocate memory within the memory pool.
+  void *AllocateMemory(uint64 start, uint64 end);
+
+  // Get hold of the memory location address within the memory pool.
+  void *GetMemory(uint64 location);
 
 private:
-  // Total number of bytes allocated on the memory pool.
-  uint64 bytesAllocated;
 
-  // Total size of the memory pool in bytes.
-  uint64 totalSizeBytes;
+  // Total size of the memory pool.
+  uint64 totalSize;
 
-  // Number of bytes deallocated prior to allocation.
-  uint64 bytesDeallocated;
-
-  // Bytes left over after totalSize - allocation.
+  // size left over after totalSize - allocation.
   uint64 bytesLeft;
 
-  // The raw memory 
+  // The raw memory on the heap.
   void *memory;
 };
 } // jkl
