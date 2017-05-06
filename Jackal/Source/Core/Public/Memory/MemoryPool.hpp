@@ -20,7 +20,7 @@ namespace jkl {
 class MemoryPool {
 public:
   // Default constructor
-  MemoryPool(uint64 startSizeBytes = 1024);
+  MemoryPool(uint64 startSizeBytes = 2048);
 
   ~MemoryPool();
 
@@ -55,12 +55,16 @@ public:
   // bytes.
   void *AllocateMemory(uint64 startBytes, uint64 sizeBytes);
 
+  // Deallocate memory within the memory pool. Specifies the starting
+  // location page, along with the overall size of the allocation in terms of 
+  // bytes.
+  void DeallocateMemory(uint64 startBytes, uint64 sizeBytes);
+
   // Get hold of the memory location address within the memory pool.
   // Uses location address.
   void *GetMemoryLocation(uint64 locationBytes);
 
 private:
-
   // Total size of the memory pool in bytes.
   uint64 totalSizeBytes;
 
@@ -69,5 +73,8 @@ private:
 
   // The raw memory on the heap. 
   byte *memory;
+
+  // Reserved memory check, to ensure there is no corruption when allocating.
+  byte *reserved;
 };
 } // jkl

@@ -21,14 +21,15 @@ void QuatTest::Test()
   MemoryPool pool;
   Log::MessageToConsole(LOG_NOTIFY, "Total memory pool size in bytes: " 
     + std::to_string(pool.GetTotalMemoryPoolSizeBytes()));
-  int *p = (int *)pool.AllocateMemory(0, sizeof(int));
-  *p = -11;
-  long long *p1 = (long long *)pool.AllocateMemory(4, sizeof(long long));
-  
+  double *p = (double *)pool.AllocateMemory(0, sizeof(double));
+  *p = -11.32456243f;
+  pool.DeallocateMemory(0, sizeof(double));
+  long long *p1 = (long long *)pool.AllocateMemory(0, sizeof(long long));
+
   *p1 = 49;
   Log::MessageToConsole(LOG_NORMAL, 
-    std::to_string(*(int *)pool.GetMemoryLocation(0)) + " " 
-    + std::to_string(*(long long *)pool.GetMemoryLocation(4)));
+    std::to_string(*(long long *)pool.GetMemoryLocation(0)) + " " 
+    + std::to_string(*(long long *)pool.GetMemoryLocation(0)));
 
   Log::MessageToConsole(LOG_NOTIFY, "Bytes left after allocating: " 
     + std::to_string(pool.GetMemorySizeLeftBytes()));
