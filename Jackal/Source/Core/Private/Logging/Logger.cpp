@@ -36,7 +36,7 @@ void Log::MessageToConsole(LogType type, std::string msg, bool8 store,
     }
     STDOUTPUT(msg << "\n");
     if (!nameTag.empty()) {
-      std::cout << "tag: " << nameTag << "\n\n";
+      std::cout << "Tag: " << nameTag << "\n\n";
     }
   }
   if (store) {

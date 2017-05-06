@@ -10,6 +10,9 @@
 #include <string>
 
 
+#define VT100_CMD_CLR "\33[2K\r"
+
+
 namespace jkl {
 
 // The Log type of the message to be worked with.

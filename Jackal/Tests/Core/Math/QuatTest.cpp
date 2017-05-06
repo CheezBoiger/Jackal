@@ -19,10 +19,18 @@ void QuatTest::Test()
     This is a "test", and I mean a really good test "mate".
   )", false, TARGET_OS_NAME);
   MemoryPool pool;
-  Log::MessageToConsole(LOG_NOTIFY, "Total memory pool size in bytes: " + std::to_string(pool.GetTotalMemoryPoolSizeBytes()));
-  int *p = (int *)pool.AllocateMemory(0, 1);
-  *p = 5;
-  Log::MessageToConsole(LOG_NOTIFY, "Bytes left after allocating: " + std::to_string(pool.GetBytesLeft()));
+  Log::MessageToConsole(LOG_NOTIFY, "Total memory pool size in bytes: " 
+    + std::to_string(pool.GetTotalMemoryPoolSizeBytes()));
+  long long *p = (long long *)pool.AllocateMemory(0, sizeof(long long));
+  *p = -11;
+  long long *p1 = (long long *)pool.AllocateMemory(1, sizeof(long long));
+  
+  *p1 = 49;
+  Log::MessageToConsole(LOG_NORMAL, 
+    std::to_string(*(long long *)pool.GetMemoryLocation(1)));
+
+  Log::MessageToConsole(LOG_NOTIFY, "Bytes left after allocating: " 
+    + std::to_string(pool.GetBytesLeft()));
 } 
 } // test
 } // jkl

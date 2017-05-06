@@ -11,12 +11,12 @@ namespace jkl {
 
 
 MemoryPool::MemoryPool(uint64 startSize)
-  : totalSize(startSize)
-  , bytesLeft(startSize * sizeof(size_t))
+  : totalPagesSize(startSize)
+  , pagesLeft(startSize)
   , memory(new void *[startSize])
 {
   Log::MessageToConsole(LOG_NOTIFY, "Memory pool allocated to size of array: "
-    + std::to_string(startSize) + " which is " + std::to_string(GetTotalMemoryPoolSizeBytes()) 
+    + std::to_string(GetTotalMemoryPoolSizeBytes()) 
     + " bytes");
 }
 
@@ -30,13 +30,13 @@ MemoryPool::~MemoryPool()
 }
 
 
-void MemoryPool::ReserveTotalMemoryPoolSize(uint64 size)
+void MemoryPool::ReserveTotalMemoryPoolSize(uint64 sizeBytes)
 {
   
 }
 
 
-void MemoryPool::ResizeTotalMemoryPoolSize(uint64 size)
+void MemoryPool::ResizeTotalMemoryPoolSize(uint64 sizeBytes)
 {
   
 }
@@ -56,33 +56,37 @@ void MemoryPool::LazyCleanMemoryPool()
 
 void MemoryPool::ClearMemoryPool()
 {
+  // Full clear of the memory cache.
+  for (uint64 i = 0; i < totalPagesSize; ++i) {
+    
+  }
+  pagesLeft = totalPagesSize;
 }
 
 
-void *MemoryPool::AllocateMemory(uint64 start, uint64 end)
+void *MemoryPool::AllocateMemory(uint64 startPage, uint64 sizeBytes)
 {
-  if (start >= totalSize || end >= totalSize) {
-    Log::MessageToConsole(LOG_ERROR, "Unable to allocate memory due to out of bounds.");
+  if ((startPage + sizeBytes) >= totalPagesSize) {
+    Log::MessageToConsole(LOG_ERROR, "Unable to allocate memory due to out of bounds."
+      " Allocated at page => " + std::to_string(startPage), false, "Memory Pool");
     return nullptr;
   }
-  if (start > end) {
-    Log::MessageToConsole(LOG_ERROR, "Start location can not be larger than end location!");
-    return nullptr; 
-  }
-  uint64 bytes = (end - start) * sizeof(void *);
-  bytesLeft -= bytes;
-  return ((size_t *)memory + start);
+
+  uint64 padBytes = (sizeBytes % sizeof(size_t));
+  pagesLeft -= ((sizeBytes + padBytes) / sizeof(size_t));
+  return ((size_t *)memory + startPage);
 }
 
 
-void *MemoryPool::GetMemory(uint64 location)
+void *MemoryPool::GetMemoryLocation(uint64 locationPage)
 {
-  if (location > totalSize) {
-    Log::MessageToConsole(LOG_WARNING, "Attempted to access memory location past"
-      " total size. Attempted location => " + std::to_string(location));
+  if (locationPage >= totalPagesSize) {
+    Log::MessageToConsole(LOG_ERROR, "Attempted to access memory location past"
+      " total size. Attempted access at page => " + std::to_string(locationPage),
+      false, "Memory Pool");
     return nullptr;
   }
 
-  return ((size_t *)memory + location);
+  return ((size_t *)memory + locationPage);
 }
 } // jkl
