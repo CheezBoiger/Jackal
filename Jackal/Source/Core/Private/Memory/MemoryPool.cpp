@@ -10,10 +10,10 @@
 namespace jkl {
 
 
-MemoryPool::MemoryPool(uint64 startSize)
-  : totalPagesSize(startSize)
-  , pagesLeft(startSize)
-  , memory(new void *[startSize])
+MemoryPool::MemoryPool(uint64 startSizeBytes)
+  : totalSizeBytes(startSizeBytes)
+  , bytesLeft(startSizeBytes)
+  , memory(new byte[static_cast<size_t>(startSizeBytes)])
 {
   Log::MessageToConsole(LOG_NOTIFY, "Memory pool allocated to size of array: "
     + std::to_string(GetTotalMemoryPoolSizeBytes()) 
@@ -30,13 +30,13 @@ MemoryPool::~MemoryPool()
 }
 
 
-void MemoryPool::ReserveTotalMemoryPoolSize(uint64 sizeBytes)
+void MemoryPool::ReserveTotalMemoryPoolSize(uint64 sizePages)
 {
   
 }
 
 
-void MemoryPool::ResizeTotalMemoryPoolSize(uint64 sizeBytes)
+void MemoryPool::ResizeTotalMemoryPoolSize(uint64 sizePages)
 {
   
 }
@@ -57,36 +57,35 @@ void MemoryPool::LazyCleanMemoryPool()
 void MemoryPool::ClearMemoryPool()
 {
   // Full clear of the memory cache.
-  for (uint64 i = 0; i < totalPagesSize; ++i) {
+  for (uint64 i = 0; i < totalSizeBytes; ++i) {
     
   }
-  pagesLeft = totalPagesSize;
+  bytesLeft = totalSizeBytes;
 }
 
 
-void *MemoryPool::AllocateMemory(uint64 startPage, uint64 sizeBytes)
+void *MemoryPool::AllocateMemory(uint64 startBytes, uint64 sizeBytes)
 {
-  if ((startPage + sizeBytes) >= totalPagesSize) {
+  if ((startBytes + sizeBytes) >= totalSizeBytes) {
     Log::MessageToConsole(LOG_ERROR, "Unable to allocate memory due to out of bounds."
-      " Allocated at page => " + std::to_string(startPage), false, "Memory Pool");
+      " Allocated at byte => " + std::to_string(startBytes), false, "Memory Pool");
     return nullptr;
   }
 
-  uint64 padBytes = (sizeBytes % sizeof(size_t));
-  pagesLeft -= ((sizeBytes + padBytes) / sizeof(size_t));
-  return ((size_t *)memory + startPage);
+  bytesLeft -= sizeBytes;
+  return ((size_t *)memory + startBytes);
 }
 
 
-void *MemoryPool::GetMemoryLocation(uint64 locationPage)
+void *MemoryPool::GetMemoryLocation(uint64 locationBytes)
 {
-  if (locationPage >= totalPagesSize) {
+  if (locationBytes >= totalSizeBytes) {
     Log::MessageToConsole(LOG_ERROR, "Attempted to access memory location past"
-      " total size. Attempted access at page => " + std::to_string(locationPage),
+      " total size. Attempted access at byte => " + std::to_string(locationBytes),
       false, "Memory Pool");
     return nullptr;
   }
 
-  return ((size_t *)memory + locationPage);
+  return ((size_t *)memory + locationBytes);
 }
 } // jkl
