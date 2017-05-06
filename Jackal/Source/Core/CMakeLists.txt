@@ -18,7 +18,7 @@ set(CORE_PUBLIC_WIN32_DIR            Public/Win32)
 set(CORE_PUBLIC_LINUX_DIR            Public/Linux)
 set(CORE_PUBLIC_APPLE_DIR            Public/Apple)
 set(CORE_PUBLIC_STRUCTURE_DIR        Public/Structure)
-set(CORE_PRIVATE_MATH_DIR            Public/Math)
+set(CORE_PRIVATE_MATH_DIR            Private/Math)
 set(CORE_PRIVATE_MEMORY_DIR          Private/Memory)
 set(CORE_PRIVATE_PLATFORM_DIR        Private/Platform)
 set(CORE_PRIVATE_LOGGING_DIR         Private/Logging)
@@ -31,6 +31,7 @@ set(CORE_PRIVATE_STRUCTURE_DIR       Private/Structure)
 # Math Directories.
 set(MATH_PUBLIC_INTERNAL_DIR       ${CORE_PUBLIC_MATH_DIR}/Internal)
 set(MATH_PUBLIC_BOUNDING_DIR       ${CORE_PUBLIC_MATH_DIR}/Bounding)
+set(MATH_PRIVATE_BOUNDING_DIR      ${CORE_PRIVATE_MATH_DIR}/Bounding)
 
 set(CORE_MATH
   ${CORE_PUBLIC_MATH_DIR}/Common.hpp
@@ -47,9 +48,18 @@ set(CORE_MATH
   ${MATH_PUBLIC_INTERNAL_DIR}/VectorMath.inl
   ${MATH_PUBLIC_INTERNAL_DIR}/Quaternion.inl
   ${MATH_PUBLIC_INTERNAL_DIR}/QuaternionMath.inl
-  ${MATH_PUBLIC_BOUNDING_DIR}/BoundBox.hpp
+  ${MATH_PUBLIC_BOUNDING_DIR}/BoundBox2D.hpp
+  ${MATH_PUBLIC_BOUNDING_DIR}/BoundBox3D.hpp
   ${MATH_PUBLIC_BOUNDING_DIR}/BoundCylinder.hpp
   ${MATH_PUBLIC_BOUNDING_DIR}/BoundSphere.hpp
+  ${MATH_PUBLIC_BOUNDING_DIR}/BoundCapsule.hpp
+  ${MATH_PUBLIC_BOUNDING_DIR}/BoundMesh.hpp
+  ${MATH_PRIVATE_BOUNDING_DIR}/BoundBox2D.cpp
+  ${MATH_PRIVATE_BOUNDING_DIR}/BoundBox3D.cpp
+  ${MATH_PRIVATE_BOUNDING_DIR}/BoundSphere.cpp
+  ${MATH_PRIVATE_BOUNDING_DIR}/BoundCylinder.cpp
+  ${MATH_PRIVATE_BOUNDING_DIR}/BoundCapsule.cpp
+  ${MATH_PRIVATE_BOUNDING_DIR}/BoundMesh.cpp
 )
 
 # Platform Work.

@@ -10,10 +10,12 @@
 namespace jkl {
 
 
+class MemoryPool;
+
 // The Allocator interface for Jackal Engine. This is used to provide us
 // abstraction from how we allocate memory. This comes handy for allocations
 // that require speed. We can't always use new for runtime, the best approach
-// is to use preallocated memory to speed up memory caching.
+// is to use preallocated memory to speed up memory caching. 
 class Allocator {
 public:
 
@@ -32,5 +34,9 @@ public:
   virtual uint32 GetSize() = 0;
 
   virtual void *ReConstruct() = 0;
+
+protected:
+  // Memory pool used to deal with allocations.
+  MemoryPool *memPool;
 };
 } // jkl

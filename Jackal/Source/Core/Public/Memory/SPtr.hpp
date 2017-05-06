@@ -4,7 +4,6 @@
 #pragma once
 
 #include "Allocator.hpp"
-#include <memory>
 
 namespace jkl {
 
