@@ -39,8 +39,7 @@ Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
   Win32Window *window = new Win32Window();
 
   WCHAR *wTitle;
-  DWORD style = 
-  SetPropW(window->handle, L"JWin32Window", window);
+  DWORD style = SetPropW(window->handle, L"JWin32Window", window);
   return window;
 }
 

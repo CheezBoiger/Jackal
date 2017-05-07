@@ -3,6 +3,7 @@
 // 
 #pragma once
 
+#include "Platform/Api.hpp"
 #include "Platform/JTypes.hpp"
 #include "Platform/Platform.hpp"
 #include "TextBase.hpp"
