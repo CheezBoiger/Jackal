@@ -20,16 +20,16 @@ namespace jkl {
 class MemoryPool {
 public:
   // Default constructor
-  MemoryPool(uint64 startSize = 2048);
+  MemoryPool(size_t startSize = 2048);
 
   ~MemoryPool();
 
   // Reserve the total memory pool size.
-  void ReserveTotalMemoryPoolSize(uint64 sizeBytes);
+  void ReserveTotalMemoryPoolSize(size_t sizeBytes);
 
   // Resize the memory pool. This will reallocate a new
   // memory space according to the new size.
-  void ResizeTotalMemoryPoolSize(uint64 sizeBytes);
+  void ResizeTotalMemoryPoolSize(size_t sizeBytes);
 
   // Clean the memory pool properly. This is a bit slow, but it 
   // properly cleans out the memory pool for better coherence of 
@@ -45,33 +45,33 @@ public:
   void ClearMemoryPool();
 
   // Get the actual array size of our memory pages.
-  uint64 GetTotalMemoryPoolSize() const { return totalSize; }
+  size_t GetTotalMemoryPoolSize() const { return totalSize; }
 
   // Gets the memory pool's remaining size.
-  uint64 GetMemorySizeLeft() const { return sizeLeft; }
+  size_t GetMemorySizeLeft() const { return sizeLeft; }
 
   // Allocate memory within the memory pool. Specifies the starting
   // location, along with the overall size of the allocation in terms of
   // bytes.
-  void *AllocateMemory(uint64 start, uint64 sizeBytes);
+  void *AllocateMemory(size_t start, size_t sizeBytes);
 
   // Deallocate memory within the memory pool. Specifies the starting
   // location, along with the overall size of the allocation in terms of 
   // bytes.
-  void DeallocateMemory(uint64 start, uint64 sizeBytes);
+  void DeallocateMemory(size_t start, size_t sizeBytes);
 
   // Get hold of the memory location address within the memory pool.
   // Uses location address.
-  void *GetMemoryLocation(uint64 location);
+  void *GetMemoryLocation(size_t location);
 
 private:
-  // Total size of the memory pool in bytes.
-  uint64 totalSize;
-
-  // Indices left over after totalSize - allocation.
-  uint64 sizeLeft;
-
   // The raw memory on the heap. 
   void *memory;
+
+  // Total size of the memory pool in bytes.
+  size_t totalSize;
+
+  // Indices left over after totalSize - allocation.
+  size_t sizeLeft;
 };
 } // jkl
