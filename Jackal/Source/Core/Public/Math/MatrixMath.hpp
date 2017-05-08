@@ -21,6 +21,21 @@ Matrix4x4<T> Translate(const Matrix4x4<T> &original, const Vector3<T> &v);
 template<typename T> inline
 Matrix4x4<T> Rotate(const Matrix4x4<T> &original, const T angle, const Vector3<T> &axis);
 
+// Rotates the given matrix using the given angle (in radians) along its
+// x axis.
+template<typename T> inline
+Matrix4x4<T> RotateX(const Matrix4x4<T> &original, const T angle);
+
+// Rotates the given matrix using the given angle (in radians) along its
+// y axis.
+template<typename T> inline
+Matrix4x4<T> RotateY(const Matrix4x4<T> &original, const T angle);
+
+// Rotates the given matrix using the given angle (in radians) along its
+// z axis.
+template<typename T> inline
+Matrix4x4<T> RotateZ(const Matrix4x4<T> &original, const T angle);
+
 // Scale the matrix, to provide for the zooming in of objects in space.
 // This is handy with zooming and whatnot.
 template<typename T> inline

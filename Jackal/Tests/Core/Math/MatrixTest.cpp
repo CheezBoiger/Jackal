@@ -12,6 +12,8 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include <iostream>
 #include <iomanip>
+#include <chrono>
+
 
 namespace jkl {
 namespace test {
@@ -33,17 +35,32 @@ void MatrixTest::Test()
   );
   A *= B;
   Mat3 D;
-  Mat4 T = PerspectiveLH(45.0f, 1.0f, 0.1f, 1000.0f);
-  //LookAtLH(Vec3(1.0f, 16.0f, -123.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 1.0f, 0.0f));
-  //Translate(Mat4(), Vec3(12.0f, -12.4f, 1.0f)); 
-  //T = Rotate(T, ToRadians(-74.0f), Vec3(1.0f, 0.0f, 0.0f));
-  //T = Scale(T, Vec3(5.0f, 5.0f, 5.0f));
-  glm::mat4 glmT = glm::perspectiveLH(45.0f, 1.0f, 0.1f, 1000.0f);
+
+  // TODO(): Tests are not super accurate, seems like which ever transformation
+  // from either library is done first, it will be the slowest... Both libraries
+  // perform about the same optimal time, average.
+
+  auto start = std::chrono::high_resolution_clock::now();
+  glm::mat4 glmT = //glm::perspectiveLH(45.0f, 1.0f, 0.1f, 1000.0f);
   //glm::lookAtLH(glm::vec3(1.0f, 16.0f, -123.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-/*  glm::translate(glm::mat4(), glm::vec3(12.0f, -12.4f, 1.0f));
-  glmT = glm::rotate(glmT, glm::radians(-74.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+  glm::translate(glm::mat4(), glm::vec3(12.0f, -12.4f, 1.0f));
+  glmT = glm::rotate(glmT, glm::radians(-74.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+  glmT = glm::rotate(glmT, glm::radians(50.0f), glm::vec3(1.0f, 0.0f, 0.0f));
   glmT = glm::scale(glmT, glm::vec3(5.0f, 5.0f, 5.0f));
-*/
+  auto end = std::chrono::high_resolution_clock::now();
+  long long tG = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+
+  start = std::chrono::high_resolution_clock::now();
+  Mat4 T = //PerspectiveLH(45.0f, 1.0f, 0.1f, 1000.0f);
+           //LookAtLH(Vec3(1.0f, 16.0f, -123.0f), Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 1.0f, 0.0f));
+    Translate(Mat4(), Vec3(12.0f, -12.4f, 1.0f));
+  T = Rotate(T, ToRadians(-74.0f), Vec3(0.0f, 1.0f, 0.0f));
+  T = Rotate(T, ToRadians(50.0f), Vec3(1.0f, 0.0f, 0.0f));
+  T = Scale(T, Vec3(5.0f, 5.0f, 5.0f));
+  end = std::chrono::high_resolution_clock::now();
+  long long tJ = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+
+  std::printf("tJ=%d tG=%d", tJ, tG);
   Mat4 C = B;
   C = C.Inverse();
   Quat q0(1.0f, 0.0f, 0.0f, 2.0f);

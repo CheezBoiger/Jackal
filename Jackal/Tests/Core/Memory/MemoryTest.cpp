@@ -12,6 +12,7 @@ namespace jkl {
 namespace test {
 
 
+// Testing optimality of memory allocation on pre-initialized memory on the heap.
 void MemoryTest::Test()
 {
   MemoryPool pool;
