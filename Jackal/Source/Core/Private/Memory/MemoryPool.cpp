@@ -35,13 +35,22 @@ MemoryPool::~MemoryPool()
 
 void MemoryPool::ReserveTotalMemoryPoolSize(size_t size)
 {
-  
+  if (size > totalSize) {
+    ResizeTotalMemoryPoolSize(size);
+  }
 }
 
 
 void MemoryPool::ResizeTotalMemoryPoolSize(size_t size)
 {
-  
+  void *memTemp = memory;
+  memory = new void*[size];
+  for (size_t i = 0; i < size; ++i) {
+    *((size_t *)memory + i) = *((size_t *)memTemp + i);
+  }
+
+  // Delete original memory afterwards.
+  delete[] memTemp;
 }
 
 
@@ -61,7 +70,7 @@ void MemoryPool::ClearMemoryPool()
 {
   // Full clear of the memory cache.
   for (uint64 i = 0; i < totalSize; ++i) {
-    *((size_t *)memory + i);
+    *((size_t *)memory + i) = 0x0;
   }
   sizeLeft = totalSize;
 }
@@ -75,7 +84,6 @@ void *MemoryPool::AllocateMemory(size_t start, size_t sizeBytes)
       " Allocated at location => " + std::to_string(start), false, "Memory Pool");
     return nullptr;
   });
-
   sizeLeft -= sizeBytes / sizeof(size_t);
   return ((size_t *)memory + start);
 }
@@ -91,7 +99,7 @@ void MemoryPool::DeallocateMemory(size_t start, size_t sizeBytes)
   });
   sizeLeft += sizeBytes / sizeof(size_t);
 }
-
+  
 
 void *MemoryPool::GetMemoryLocation(size_t location)
 {

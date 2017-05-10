@@ -2,7 +2,8 @@
 // Copyright (c) Jackal Engine. MIT License.
 //
 #pragma once
-#include <stdint.h>
+#include <cstdint>
+#include <cstddef>
 
 
 

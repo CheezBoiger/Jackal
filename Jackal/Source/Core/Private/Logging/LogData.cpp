@@ -3,6 +3,8 @@
 //
 #include "LogData.hpp"
 #include "Logging/Logger.hpp"
+#include "Memory/MemoryPool.hpp"
+#include "Memory/StackAlloc.hpp"
 
 #include <vector>
 #include <map>

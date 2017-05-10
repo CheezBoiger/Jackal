@@ -6,20 +6,21 @@
 #include "Platform/JTypes.hpp"
 #include "Platform/Platform.hpp"
 #include "Memory/MemoryPool.hpp"
+#include "Memory/Allocator.hpp"
 
 
 namespace jkl {
 
 
-// Memory Leak detector, used to check for any memory leaks within the memory pool.
+// Memory Leak detector, used to check for any memory leaks within Allocator.
 class MemoryLeakDetector {
 public:
 
-  
+  bool8 CheckForLeaks(Allocator *allocator);
+
+  void AutoCleanup(Allocator *allocator);
 
 private:
-  
-  // Observed memory pool, to check for memory leaks.
-  MemoryPool *observedMemoryPool;
+  uint32 numLeaks;
 };
 } // jkl

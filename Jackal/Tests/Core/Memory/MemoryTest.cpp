@@ -18,19 +18,20 @@ void MemoryTest::Test()
   MemoryPool pool;
   
   auto start = std::chrono::high_resolution_clock::now();
-  long long *ptr = (long long *)pool.AllocateMemory(0, sizeof(long long) * 1000);
+  long long *ptr = (long long *)pool.AllocateMemory(0, sizeof(long long) * 2000);
   auto end = std::chrono::high_resolution_clock::now();
 
   auto t = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
-  Log::MessageToConsole(LOG_NOTIFY, std::to_string(t) + " ns");
+  Log::MessageToConsole(LOG_NOTIFY, "MemPool time " + std::to_string(t) + " ns");
 
   start = std::chrono::high_resolution_clock::now();
-  long long *mptr = (long long *)std::malloc(sizeof(long long) * 1000);
+  long long *mptr = (long long *)std::malloc(sizeof(long long) * 2000);
   end = std::chrono::high_resolution_clock::now();
 
   t = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-  Log::MessageToConsole(LOG_NOTIFY, std::to_string(t) + " ns");
+  Log::MessageToConsole(LOG_NOTIFY, "Malloc time " + std::to_string(t) + " ns");
+  Log::MessageToConsole(LOG_NOTIFY, "MemoryPool memory left: " + std::to_string(pool.GetMemorySizeLeft() * sizeof(size_t)));
 
   free(mptr);
   

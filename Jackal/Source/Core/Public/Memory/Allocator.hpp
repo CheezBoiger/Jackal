@@ -20,27 +20,40 @@ class MemoryPool;
 // implementation of memory management with handling our memory pool.
 class Allocator {
 public:
-  Allocator()
+  Allocator(MemoryPool *memory = nullptr)
     : start(0)
     , numberOfAllocations(0)
     , usedMemory(0)
-    , memPool(nullptr)
+    , memPool(memory)
   { }
 
-  virtual ~Allocator() { }
+  // Allocator used to handle memory leaks that may occur as a result of 
+  // no call to deconstruct our objects.
+  virtual ~Allocator();
 
   // TODO(): Need to define the interface!
 
-  virtual void *Allocate(uint32 size, uint8 alignment = sizeof(void *)) = 0;
+  // Allocate memory within a memory pool structure. This Allocator will 
+  // handle most of the work done for allocation.
+  virtual void *Allocate(size_t size, size_t alignment = sizeof(void *)) = 0;
 
+  // Deallocate memory from the memory pool structure. This Allocator will
+  // handle most of the work done to deallocate from the memory pool.
   virtual void Deallocate(void *pointer) = 0;
 
-  virtual uint32 GetSize() = 0;
+  // Get the overall size of the memory pool structure. This is returned in
+  // bytes.
+  virtual size_t GetSizeBytes() = 0;
 
+  // TODO(): Reconstruct? Do we need this?
   virtual void *ReConstruct() = 0;
 
+  // Get the memory pool structure from this allocator.
   MemoryPool *GetMemoryPool() { return memPool; }
 
+  // Attach a new memory pool structure to this allocator. This will ultimately
+  // lose reference to the last memory pool structure, which can be detrimental 
+  // if there is no handle to that memory pool other than this allocator.
   void AttachMemoryPool(MemoryPool *pool) { memPool = pool; }
 
 protected:
