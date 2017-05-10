@@ -70,7 +70,7 @@ void MemoryPool::ClearMemoryPool()
 {
   // Full clear of the memory cache.
   for (uint64 i = 0; i < totalSize; ++i) {
-    *((size_t *)memory + i) = 0x0;
+    *((size_t *)memory + i) = ~0;
   }
   sizeLeft = totalSize;
 }

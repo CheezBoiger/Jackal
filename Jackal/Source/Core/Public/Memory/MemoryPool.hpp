@@ -41,7 +41,13 @@ public:
   void LazyCleanMemoryPool();
 
   // Clear the memory pool completely. This will destroy all objects
-  // and data that is already allocated in the pool.
+  // and data that is already allocated in the pool. Be advised this 
+  // can have detrimental effects to any objects being used currently.
+  // Use with caution, or if you know for a fact that this memory pool
+  // is not being used an must be cleared.
+  // Keep in mind that this call will also lose references to any 
+  // newly allocated objects on the heap! Be sure to handle these first
+  // before calling this function!
   void ClearMemoryPool();
 
   // Get the actual array size of our memory pages.

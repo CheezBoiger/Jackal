@@ -60,7 +60,7 @@ void MatrixTest::Test()
   end = std::chrono::high_resolution_clock::now();
   long long tJ = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
-  std::printf("tJ=%d tG=%d", tJ, tG);
+  std::printf("tJ=%llu tG=%llu", tJ, tG);
   Mat4 C = B;
   C = C.Inverse();
   Quat q0(1.0f, 0.0f, 0.0f, 2.0f);

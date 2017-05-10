@@ -29,9 +29,9 @@ template<typename T> inline
 Matrix4x4<T> Rotate(const Matrix4x4<T> &original, 
   const T angle, const Vector3<T> &axis)
 {
-  T oneMinusCosine = static_cast<T>(1) - Cos(angle);
-  T cosine = Cos(angle);
-  T sine = Sin(angle);
+  T oneMinusCosine = static_cast<T>(1) - static_cast<T>(Cos(angle));
+  T cosine = static_cast<T>(Cos(angle));
+  T sine = static_cast<T>(Sin(angle));
   Matrix4x4<T> rotator(
     cosine + (axis.x * axis.x) * oneMinusCosine,
     axis.x * axis.y * oneMinusCosine - axis.z * sine,

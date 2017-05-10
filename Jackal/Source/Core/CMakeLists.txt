@@ -213,6 +213,10 @@ add_library(${JACKAL_CORE_NAME} STATIC
 
 target_link_libraries(${JACKAL_CORE_NAME} glfw)
 
+if (WIN32)
+  set_target_properties(${JACKAL_CORE_NAME} PROPERTIES COMPILE_FLAGS ${MSVC_BUILD_FLAGS})
+endif()
+
 include_directories(SYSTEM
   ${JACKAL_THIRD_PARTY_DIR}/glfw/include
   ${JACKAL_CORE_DIR}/Public

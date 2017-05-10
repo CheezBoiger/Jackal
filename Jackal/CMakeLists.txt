@@ -23,8 +23,12 @@ else()
   )
 endif (RELEASE)
 
-set(JACKAL_THIRD_PARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
+set(MSVC_BUILD_FLAGS "/MT")
+set(CLANG_BUILD_FLAGS "")
+set(GCC_BUILD_FLAGS "")
+
+set(JACKAL_THIRD_PARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
 add_subdirectory(Source)
 add_subdirectory(Tests)

@@ -31,3 +31,7 @@ add_library(${JACKAL_CORE_TESTS} STATIC
 
 
 target_link_libraries(${JACKAL_CORE_TESTS} Jackal-Core)
+
+if (WIN32)
+  set_target_properties(${JACKAL_CORE_TESTS} PROPERTIES COMPILE_FLAGS ${MSVC_BUILD_FLAGS})
+endif()
