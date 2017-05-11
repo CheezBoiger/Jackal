@@ -1,3 +1,4 @@
+# Copyright (c) 2017 Jackal Engine, MIT License. 
 cmake_minimum_required(VERSION 2.8.11)
 project("ThirdParty")
 
@@ -10,6 +11,8 @@ add_subdirectory(googletest)
 set(ENABLE_GLSLANG_BINARIES OFF CACHE BOOL "glslang binaries")
 #add_subdirectory(glslang)
 
+
+# Override these fields for glfw testing.
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "")
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "")
 add_subdirectory(glfw)

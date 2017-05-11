@@ -1,10 +1,9 @@
-#
 # Copyright (c) 2017 Jackal Engine, under the MIT License.
-#
 cmake_minimum_required(VERSION 2.8.11)
 project("JackalCore")
 
-set(JACKAL_CORE_VERSION     0)
+# Set up the core versioning.
+set(JACKAL_BUILD_CORE_VERSION     0)
 set(JACKAL_CORE_NAME "Jackal-Core" CACHE STRING "Name of the Game Engine Core.")
 
 
@@ -207,14 +206,22 @@ if (${CMAKE_CXX_COMPILER_ID})
   endif()
 endif()
 
+
+# Actual library we are building.
 add_library(${JACKAL_CORE_NAME} STATIC
   ${FILE_GLOB}
 )
 
+# Link glfw for testing and implementation. This is used temporarily.
 target_link_libraries(${JACKAL_CORE_NAME} glfw)
+
+# Set the preprocessor directives as well. Make them public to show onto other modules
+# that link to our core.
+target_compile_definitions(${JACKAL_CORE_NAME} PUBLIC JACKAL_CORE_VERSION=${JACKAL_BUILD_CORE_VERSION})
 
 if (WIN32)
   set_target_properties(${JACKAL_CORE_NAME} PROPERTIES COMPILE_FLAGS ${MSVC_BUILD_FLAGS})
+  set_property(TARGET   ${JACKAL_CORE_NAME} PROPERTY   FOLDER ${JACKAL_ENGINE_DIRECTORY})
 endif()
 
 include_directories(SYSTEM

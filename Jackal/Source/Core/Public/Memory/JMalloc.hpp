@@ -10,12 +10,12 @@
 namespace jkl {
 
 
-
 class JMalloc {
 public:
   
 
 private:
+
   
 };
 } // jkl
