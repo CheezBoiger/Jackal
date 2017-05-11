@@ -1,6 +1,8 @@
 //
 // Copyright (c) Jackal Engine. MIT License.
 //
+#pragma once
+
 #include "Platform/Api.hpp"
 #include "Assertions.hpp"
 
@@ -13,6 +15,9 @@
 #if JACKAL_DEBUG
  #define JACKAL_REMOVE_ON_RELEASE(cond) cond 
  #define JASSERT(cond) JKL_ASSERT(cond)
+ #define JACKAL_ASSERT(cond) JASSERT(cond)
 #else
  #define JACKAL_REMOVE_ON_RELEASE(cond)
+ #define JASSERT(cond)
+ #deifne JACKAL_ASSERT(cond)
 #endif 
