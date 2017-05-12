@@ -26,8 +26,17 @@ else()
   )
 endif (RELEASE)
 
+# Third party software should not be affected by compiler configurations.
+add_subdirectory(ThirdParty)
 
-set(MSVC_BUILD_FLAGS "/MT")
+
+if (MSVC)
+  set(MSVC_BUILD_FLAGS "/MT")
+  set(MSVC_BUILD_DEBUG_FLAGS "/MTd")
+
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${MSVC_BUILD_DEBUG_FLAGS}")
+  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${MSVC_BUILD_FLAGS}")
+endif()
 set(CLANG_BUILD_FLAGS "")
 set(GCC_BUILD_FLAGS "")
 
@@ -35,4 +44,3 @@ set(JACKAL_THIRD_PARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
 add_subdirectory(Source)
 add_subdirectory(Tests)
-add_subdirectory(ThirdParty)

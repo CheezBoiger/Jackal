@@ -42,6 +42,5 @@ target_link_libraries(${JACKAL_CORE_TESTS} Jackal-Core)
 # Windows implementation, we will need to figure out out and take control of the 
 # operating system checking soon enough.
 if (WIN32)
-  set_target_properties(${JACKAL_CORE_TESTS} PROPERTIES COMPILE_FLAGS ${MSVC_BUILD_FLAGS})
   set_property(TARGET ${JACKAL_CORE_TESTS} PROPERTY FOLDER ${JACKAL_TESTING_DIRECTORY})
 endif()

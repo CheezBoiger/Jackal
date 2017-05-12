@@ -29,7 +29,6 @@ add_executable(${JACKAL_TEST_MAIN}
 
 
 if (WIN32)
-  set_target_properties(${JACKAL_TEST_MAIN} PROPERTIES COMPILE_FLAGS ${MSVC_BUILD_FLAGS})
   set_property(TARGET ${JACKAL_TEST_MAIN} PROPERTY FOLDER ${JACKAL_TESTING_DIRECTORY})
   message("Set Runtime Library to static for GoogleTesting")
 endif()
