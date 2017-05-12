@@ -25,7 +25,7 @@ uint16 Log::suppressed = 0x8;
 void Log::MessageToConsole(LogType type, std::string msg, bool8 store,
   std::string nameTag)
 {
-  if ((suppressed & type) != type) {
+  if (!(suppressed & type)) {
     switch (type) {
       case LOG_WARNING: std::cout << "Warning: "; break;
       case LOG_ERROR: std::cout << "Error: "; break;
@@ -47,16 +47,79 @@ void Log::MessageToConsole(LogType type, std::string msg, bool8 store,
 
 void Log::Suppress(LogType type)
 {
-  if ((suppressed & type) != type) {
-    suppressed ^= type;
-  } 
+  if (type == LOG_ALL) {
+    suppressed = LOG_ALL;
+    return;
+  }
+  if (type & LOG_NORMAL) {
+    if (!(suppressed & LOG_NORMAL)) {
+      suppressed ^= LOG_NORMAL;
+    }
+  }
+  if (type & LOG_WARNING) {
+    if (!(suppressed & LOG_WARNING)) {
+      suppressed ^= LOG_WARNING;   
+    }   
+  }
+  if (type & LOG_ERROR) {
+    if (!(suppressed & LOG_ERROR)) {
+      suppressed ^= LOG_ERROR;  
+    }
+  }
+  if (type & LOG_RUNTIME_DEBUG) {
+    if (!(suppressed & LOG_RUNTIME_DEBUG)) {
+      suppressed ^= LOG_RUNTIME_DEBUG;
+    }
+  }
+  if (type & LOG_NOTIFY) {
+    if (!(suppressed & LOG_NOTIFY)) {
+      suppressed ^= LOG_NOTIFY;
+    }
+  }
+  if (type & LOG_HIDDEN) {
+    if (!(suppressed & LOG_HIDDEN)) {
+      suppressed ^= LOG_HIDDEN;
+    }
+  }
 }
 
 
 void Log::Unsuppress(LogType type) 
 {
-  if ((suppressed & type) == type) {
-    suppressed ^= type;
+  if (type == LOG_ALL) {
+    suppressed = 0x0;
+    return;
+  }
+
+  if (type & LOG_NORMAL) {
+    if (suppressed & LOG_NORMAL) {
+      suppressed ^= LOG_NORMAL;
+    }
+  }
+  if (type & LOG_WARNING) {
+    if (suppressed & LOG_WARNING) {
+      suppressed ^= LOG_WARNING;
+    }
+  }
+  if (type & LOG_ERROR) {
+    if (suppressed & LOG_ERROR) {
+      suppressed ^= LOG_ERROR;
+    }
+  }
+  if (type & LOG_RUNTIME_DEBUG) {
+    if (suppressed & LOG_RUNTIME_DEBUG) {
+      suppressed ^= LOG_RUNTIME_DEBUG;
+    }
+  }
+  if (type & LOG_NOTIFY) {  
+    if (suppressed & LOG_NOTIFY) {
+      suppressed ^= LOG_NOTIFY;
+    }
+  }
+  if (type & LOG_HIDDEN) {
+    if (suppressed & LOG_HIDDEN) {
+      suppressed ^= LOG_HIDDEN;
+    }
   }
 }
 
