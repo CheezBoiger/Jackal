@@ -79,10 +79,10 @@ void Quaternion<T>::operator+=(const Quaternion &q)
 template<typename T>
 void Quaternion<T>::operator-=(const Quaternion &q)
 {
-  w -= v.w;
-  x -= v.x;
-  y -= v.y;
-  z -= v.z;
+  w -= q.w;
+  x -= q.x;
+  y -= q.y;
+  z -= q.z;
 }
 
 

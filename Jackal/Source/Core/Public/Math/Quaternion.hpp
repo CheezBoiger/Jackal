@@ -131,7 +131,7 @@ struct Quaternion {
   union {
     struct { T w, x, y, z; };
     struct { T a, r, g, b; };
-    struct { T q, s, t, r; };
+    struct { T q, s, t, p; };
   };
 };
 

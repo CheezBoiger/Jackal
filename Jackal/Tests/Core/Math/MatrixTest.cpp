@@ -8,7 +8,7 @@
 #include "Math/VectorMath.hpp"
 #include "Math/MatrixMath.hpp"
 #include "Math/Quaternion.hpp"
-#include "Math/common.hpp"
+#include "Math/Common.hpp"
 #include "glm/common.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 

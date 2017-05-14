@@ -53,17 +53,17 @@ inline double Tan(double value)
 
 inline float Cosf(float value)
 {
-  return std::cosf(value);
+  return cosf(value);
 }
 
 inline float Sinf(float value)
 {
-  return std::sinf(value);
+  return sinf(value);
 }
 
 inline float Tanf(float value)
 {
-  return std::tanf(value);
+  return tanf(value);
 }
 
 
