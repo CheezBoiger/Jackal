@@ -37,3 +37,6 @@ endif()
 # Link up our testing libraries.
 target_link_libraries(${JACKAL_TEST_MAIN} ${JACKAL_CORE_TESTS})
 target_link_libraries(${JACKAL_TEST_MAIN} gtest)
+
+set_property(TARGET ${JACKAL_TEST_MAIN} PROPERTY CXX_STANDARD 11)
+set_property(TARGET ${JACKAL_TEST_MAIN} PROPERTY CXX_STANDARD_REQUIRED 11)
