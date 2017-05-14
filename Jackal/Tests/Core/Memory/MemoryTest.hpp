@@ -6,14 +6,9 @@
 #include "gtest/gtest.h"
 
 
-
-namespace jkl {
-namespace test {
+namespace coretest {
 
 
-class MemoryTest {
-public:
-  void Test();
-};
-} // test
-} // jkl
+// Run memory allocate tests.
+void MemoryTesting();
+} // coretest

@@ -8,14 +8,13 @@
 #include <chrono>
 
 
-namespace jkl {
-namespace test {
+namespace coretest {
 
 
 // Memory allocations with resulting testing for use with malloc, and 
 // whatnot.
 TEST(MemoryTesting, AllocateMemory) {
-  MemoryPool pool;
+  jkl::MemoryPool pool;
   auto start = std::chrono::high_resolution_clock::now();
   long long *ptr = (long long *)pool.AllocateMemory(0, sizeof(long long) * 2000);
   auto end = std::chrono::high_resolution_clock::now();
@@ -26,15 +25,15 @@ TEST(MemoryTesting, AllocateMemory) {
 
   auto t = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
-  Log::MessageToConsole(LOG_NOTIFY, "MemPool alloc time " + std::to_string(t) + " ns");
+  jkl::Log::MessageToConsole(jkl::LOG_NOTIFY, "MemPool alloc time " + std::to_string(t) + " ns");
 
   start = std::chrono::high_resolution_clock::now();
   long long *mptr = (long long *)std::malloc(sizeof(long long) * 2000);
   end = std::chrono::high_resolution_clock::now();
 
   t = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-  Log::MessageToConsole(LOG_NOTIFY, "Malloc alloc time " + std::to_string(t) + " ns");
-  Log::MessageToConsole(LOG_NOTIFY, "MemoryPool memory left: "
+  jkl::Log::MessageToConsole(jkl::LOG_NOTIFY, "Malloc alloc time " + std::to_string(t) + " ns");
+  jkl::Log::MessageToConsole(jkl::LOG_NOTIFY, "MemoryPool memory left: "
     + std::to_string(pool.GetMemorySizeLeft() * sizeof(size_t))
     + " bytes");
 
@@ -48,15 +47,13 @@ TEST(MemoryTesting, AllocateMemory) {
 
   EXPECT_EQ(pool.GetMemorySizeLeft(), pool.GetTotalMemoryPoolSize());
 
-  Log::MessageToConsole(LOG_NOTIFY, "MemoryPool memory left after clearing: "
+  jkl::Log::MessageToConsole(jkl::LOG_NOTIFY, "MemoryPool memory left after clearing: "
     + std::to_string(pool.GetMemorySizeLeft() * sizeof(size_t))
     + " bytes");
 }
 
 
-// Testing optimality of memory allocation on pre-initialized memory on the heap.
-void MemoryTest::Test()
+void MemoryTesting()
 {
 }
-} // test
-} // jkl
+} // coretest

@@ -3,14 +3,18 @@
 //
 #pragma once
 
-
-namespace jkl {
-namespace test {
+#include "gtest/gtest.h"
 
 
-class MatrixTest {
+namespace coretest {
+
+
+class MatrixTestFixture : public ::testing::Test {
 public:
-  void Test();
 };
-} // test
-} // jkl
+
+
+
+// Launch testing of matrix library.
+void MatrixTesting();
+} // coretest
