@@ -3,4 +3,4 @@
 
 set(JACKAL_ENGINE_DIRECTORY "JackalEngineDirectory")
 
-add_subdirectory(core)
+add_subdirectory(Core)
