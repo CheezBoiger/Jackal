@@ -9,7 +9,7 @@ project("JackalEngineModules")
 set(JACKAL_NAME        "Jackal" CACHE STRING "")
 set(JACKAL_DESCRIPTION "Jackal Open Source Game Engine" CACHE STRING "")
 
-include(CMake/Packages.cmake)
+include(Packages)
 
 # Find our packages We might include these in a separate cmake folder in the long run.
 find_package(OpenAL)
@@ -25,5 +25,5 @@ if (NOT OPENAL_FOUND)
 endif()
 
 # Include the setup for our engine.
-include (CMake/Setup.cmake)
+include (Setup)
 

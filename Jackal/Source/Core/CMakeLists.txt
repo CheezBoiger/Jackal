@@ -228,5 +228,8 @@ include_directories(SYSTEM
   ${JACKAL_CORE_DIR}/Public
 )
 
-set_property(TARGET ${JACKAL_CORE_NAME} PROPERTY CXX_STANDARD 14)
-set_property(TARGET ${JACKAL_CORE_NAME} PROPERTY CXX_STANDARD_REQUIRED 14)
+# Utility for setting our standard.
+include(Macros)
+
+# Set the C++ standard for GCC compilers
+set_cxx_standard(${JACKAL_CORE_NAME} 14)

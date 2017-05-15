@@ -38,5 +38,6 @@ endif()
 target_link_libraries(${JACKAL_TEST_MAIN} ${JACKAL_CORE_TESTS})
 target_link_libraries(${JACKAL_TEST_MAIN} gtest)
 
-set_property(TARGET ${JACKAL_TEST_MAIN} PROPERTY CXX_STANDARD 14)
-set_property(TARGET ${JACKAL_TEST_MAIN} PROPERTY CXX_STANDARD_REQUIRED 14)
+include(Macros)
+
+set_cxx_standard(${JACKAL_TEST_MAIN} 14)

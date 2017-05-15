@@ -29,6 +29,10 @@ endif (RELEASE)
 # Third party software should not be affected by compiler configurations.
 add_subdirectory(ThirdParty)
 
+# Finally, start to set up the enviroment for our engine.
+# Add the cmake module path, for module build paths for this cmake file.
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/CMake/")
+
 
 if (MSVC)
   set(MSVC_BUILD_FLAGS "/MT")
