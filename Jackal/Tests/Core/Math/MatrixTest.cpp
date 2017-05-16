@@ -71,7 +71,7 @@ TEST(MathTesting, MatrixTesting) {
   end = std::chrono::high_resolution_clock::now();
   long long tJ = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
-  std::printf("tJ=%llu tG=%llu", tJ, tG);
+  std::printf("tJackal=%llu ms tGLM=%llu ms\n", tJ, tG);
   jkl::Mat4 C = B;
   C = C.Inverse();
   jkl::Quat q0(1.0f, 0.0f, 0.0f, 2.0f);
