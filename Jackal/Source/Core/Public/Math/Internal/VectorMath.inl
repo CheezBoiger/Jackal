@@ -1,6 +1,4 @@
-//
-// Copyright(c) Jackal Engine. MIT License.
-//
+// Copyright (c) 2017 Jackal Engine, MIT License.
 
 namespace jkl {
 

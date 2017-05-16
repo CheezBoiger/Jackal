@@ -1,6 +1,4 @@
-//
-// Copyright (c) Jackal Engine. MIT License.
-//
+// Copyright (c) 2017 Jackal Engine, MIT License.
 #include "Core/Math/QuatTest.hpp"
 #include "Core/Memory/MemoryTest.hpp"
 #include "gtest/gtest.h"

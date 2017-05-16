@@ -1,7 +1,4 @@
-//
-// Copyright (c) Jackal Engine. MIT License.
-// 
-//#include "../matrix.hpp"
+// Copyright (c) 2017 Jackal Engine, MIT License.
 
 
 namespace jkl {
