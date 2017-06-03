@@ -3,8 +3,8 @@
 // 
 #pragma once
 
-#include "Platform/JTypes.hpp"
-#include "Platform/Platform.hpp"
+#include "Core/Platform/JTypes.hpp"
+#include "Core/Platform/Platform.hpp"
 
 #include <string>
 #include <fstream>

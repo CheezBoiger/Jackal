@@ -1,8 +1,8 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #pragma once
 
-#include "Platform/Platform.hpp"
-#include "Platform/JTypes.hpp"
+#include "Core/Platform/Platform.hpp"
+#include "Core/Platform/JTypes.hpp"
 #include "Common.hpp"
 #include "Matrix4.hpp"
 #include "Vector4.hpp"

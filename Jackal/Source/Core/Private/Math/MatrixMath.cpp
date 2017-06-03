@@ -1,6 +1,6 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
-#include "Math/MatrixMath.hpp"
-#include "Math/VectorMath.hpp"
+#include "Core/Math/MatrixMath.hpp"
+#include "Core/Math/VectorMath.hpp"
 
 namespace jkl {
 

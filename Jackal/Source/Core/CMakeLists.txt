@@ -6,17 +6,15 @@ project("JackalCore")
 set(JACKAL_BUILD_CORE_VERSION     0)
 set(JACKAL_CORE_NAME "Jackal-Core" CACHE STRING "Name of the Game Engine Core.")
 
-
-set(JACKAL_CORE_DIR                  ${CMAKE_CURRENT_SOURCE_DIR})
-set(CORE_PUBLIC_MATH_DIR             Public/Math)
-set(CORE_PUBLIC_MEMORY_DIR           Public/Memory)
-set(CORE_PUBLIC_PLATFORM_DIR         Public/Platform)
-set(CORE_PUBLIC_TEMPLATES_DIR        Public/Templates)
-set(CORE_PUBLIC_LOGGING_DIR          Public/Logging)
-set(CORE_PUBLIC_WIN32_DIR            Public/Win32)
-set(CORE_PUBLIC_LINUX_DIR            Public/Linux)
-set(CORE_PUBLIC_APPLE_DIR            Public/Apple)
-set(CORE_PUBLIC_STRUCTURE_DIR        Public/Structure)
+set(CORE_PUBLIC_MATH_DIR             Public/Core/Math)
+set(CORE_PUBLIC_MEMORY_DIR           Public/Core/Memory)
+set(CORE_PUBLIC_PLATFORM_DIR         Public/Core/Platform)
+set(CORE_PUBLIC_TEMPLATES_DIR        Public/Core/Templates)
+set(CORE_PUBLIC_LOGGING_DIR          Public/Core/Logging)
+set(CORE_PUBLIC_WIN32_DIR            Public/Core/Win32)
+set(CORE_PUBLIC_LINUX_DIR            Public/Core/Linux)
+set(CORE_PUBLIC_APPLE_DIR            Public/Core/Apple)
+set(CORE_PUBLIC_STRUCTURE_DIR        Public/Core/Structure)
 set(CORE_PRIVATE_MATH_DIR            Private/Math)
 set(CORE_PRIVATE_MEMORY_DIR          Private/Memory)
 set(CORE_PRIVATE_PLATFORM_DIR        Private/Platform)
@@ -233,7 +231,7 @@ endif()
 
 include_directories(SYSTEM
   ${JACKAL_THIRD_PARTY_DIR}/glfw/include
-  ${JACKAL_CORE_DIR}/Public
+  ${JACKAL_INCLUDE_DIR}
 )
 
 # Utility for setting our standard.

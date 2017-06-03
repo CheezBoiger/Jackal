@@ -1,8 +1,8 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #include "QuatTest.hpp"
-#include "Math/QuaternionMath.hpp"
-#include "Math/Quaternion.hpp"
-#include "Logging/Logger.hpp"
+#include "Core/Math/QuaternionMath.hpp"
+#include "Core/Math/Quaternion.hpp"
+#include "Core/Logging/Logger.hpp"
 
 #include "glm/gtc/quaternion.hpp"
 #include "glm/gtx/quaternion.hpp"

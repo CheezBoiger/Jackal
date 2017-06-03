@@ -1,13 +1,13 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #include "MatrixTest.hpp"
 
-#include "Math/Matrix4.hpp"
-#include "Math/Vector4.hpp"
-#include "Math/VectorMath.hpp"
-#include "Math/MatrixMath.hpp"
-#include "Math/Quaternion.hpp"
-#include "Math/QuaternionMath.hpp"
-#include "Math/Common.hpp"
+#include "Core/Math/Matrix4.hpp"
+#include "Core/Math/Vector4.hpp"
+#include "Core/Math/VectorMath.hpp"
+#include "Core/Math/MatrixMath.hpp"
+#include "Core/Math/Quaternion.hpp"
+#include "Core/Math/QuaternionMath.hpp"
+#include "Core/Math/Common.hpp"
 
 //#define GLM_FORCE_PURE
 #include "glm/common.hpp"

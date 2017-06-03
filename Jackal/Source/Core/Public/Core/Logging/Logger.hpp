@@ -1,9 +1,9 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #pragma once
 
-#include "Platform/Api.hpp"
-#include "Platform/JTypes.hpp"
-#include "Platform/Platform.hpp"
+#include "Core/Platform/Api.hpp"
+#include "Core/Platform/JTypes.hpp"
+#include "Core/Platform/Platform.hpp"
 #include "TextBase.hpp"
 
 // For now.

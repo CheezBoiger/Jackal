@@ -1,7 +1,7 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #include "MemoryTest.hpp"
-#include "Memory/MemoryPool.hpp"
-#include "Logging/Logger.hpp"
+#include "Core/Memory/MemoryPool.hpp"
+#include "Core/Logging/Logger.hpp"
 #include <stdlib.h>
 #include <chrono>
 

@@ -1,8 +1,8 @@
 //
 // Copyright (c) Jackal Engine. MIT License.
 //
-#include "Win32/Win32Window.hpp"
-#include "Logging/Logger.hpp"
+#include "Core/Win32/Win32Window.hpp"
+#include "Core/Logging/Logger.hpp"
 
 namespace jkl {
 

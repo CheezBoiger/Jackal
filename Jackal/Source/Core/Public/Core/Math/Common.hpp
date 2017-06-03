@@ -1,9 +1,9 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #pragma once
 
-#include "Platform/JTypes.hpp"
-#include "Platform/Platform.hpp"
-#include "Platform/Api.hpp"
+#include "Core/Platform/JTypes.hpp"
+#include "Core/Platform/Platform.hpp"
+#include "Core/Platform/Api.hpp"
 #include <math.h>
 
 #define J_PI 3.141592653589793238462643383279502884197169399375

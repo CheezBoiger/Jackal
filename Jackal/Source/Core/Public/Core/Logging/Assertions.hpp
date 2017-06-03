@@ -1,7 +1,7 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #pragma once
 
-#include "Platform/Platform.hpp"
+#include "Core/Platform/Platform.hpp"
 #include <cassert>
 
 #define JKL_ASSERT(expr) assert(expr)

@@ -1,10 +1,9 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 
-#include "Platform/Api.hpp"
-#include "Platform/Platform.hpp"
-#include "Platform/JTypes.hpp"
+#include "Core/Platform/Api.hpp"
+#include "Core/Platform/Platform.hpp"
+#include "Core/Platform/JTypes.hpp"
 #include "Common.hpp"
-
 
 namespace jkl { 
 

@@ -1,9 +1,9 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #pragma once
 
-#include "Platform/JTypes.hpp"
-#include "Platform/Platform.hpp"
-#include "Platform/Window.hpp"
+#include "Core/Platform/JTypes.hpp"
+#include "Core/Platform/Platform.hpp"
+#include "Core/Platform/Window.hpp"
 #include <Windows.h>
 
 

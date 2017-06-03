@@ -1,6 +1,6 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 
-#include "Math/QuaternionMath.hpp"
+#include "Core/Math/QuaternionMath.hpp"
 
 namespace jkl {
 

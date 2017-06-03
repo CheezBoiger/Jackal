@@ -1,6 +1,6 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 
-#include "Math/Matrix2.hpp"
+#include "Core/Math/Matrix2.hpp"
 
 namespace jkl {
 

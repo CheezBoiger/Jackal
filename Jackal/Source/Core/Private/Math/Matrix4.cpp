@@ -1,6 +1,6 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 
-#include "Math/Matrix4.hpp"
+#include "Core/Math/Matrix4.hpp"
 
 
 namespace jkl {
@@ -13,7 +13,7 @@ Matrix4 Matrix4::operator+(const Matrix4 &m) const
     data[1][0] + m.data[1][0], data[1][1] + m.data[1][1], data[1][2] + m.data[1][2], data[1][3] + m.data[1][3],
     data[2][0] + m.data[2][0], data[2][1] + m.data[2][1], data[2][2] + m.data[2][2], data[2][3] + m.data[2][3],
     data[3][0] + m.data[3][0], data[3][1] + m.data[3][1], data[3][2] + m.data[3][2], data[3][3] + m.data[3][3]
-  );
+  ); 
 }
 
 

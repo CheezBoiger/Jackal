@@ -1,6 +1,6 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 
-#include "Math/Vector3.hpp"
+#include "Core/Math/Vector3.hpp"
 
 
 namespace jkl {

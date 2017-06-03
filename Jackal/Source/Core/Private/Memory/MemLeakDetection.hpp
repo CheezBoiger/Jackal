@@ -1,10 +1,10 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #pragma once
 
-#include "Platform/JTypes.hpp"
-#include "Platform/Platform.hpp"
-#include "Memory/MemoryPool.hpp"
-#include "Memory/Allocator.hpp"
+#include "Core/Platform/JTypes.hpp"
+#include "Core/Platform/Platform.hpp"
+#include "Core/Memory/MemoryPool.hpp"
+#include "Core/Memory/Allocator.hpp"
 
 
 namespace jkl {
