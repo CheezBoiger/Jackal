@@ -1,10 +1,10 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #pragma once
 
-#include "Platform/JTypes.hpp"
-#include "Logging/TextBase.hpp"
-#include "Platform/Platform.hpp"
-#include "Structure/JVector.hpp"
+#include "Core/Platform/JTypes.hpp"
+#include "Core/Logging/TextBase.hpp"
+#include "Core/Platform/Platform.hpp"
+#include "Core/Structure/JVector.hpp"
 
 
 namespace jkl {
