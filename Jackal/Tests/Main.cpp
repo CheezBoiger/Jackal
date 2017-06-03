@@ -1,6 +1,10 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #include "Core/Math/QuatTest.hpp"
 #include "Core/Memory/MemoryTest.hpp"
+#if defined(_WIN32)
+ #define TEST_WINDOWS
+ #include "Core/Win32/Win32ThreadTest.hpp"
+#endif
 #include "gtest/gtest.h"
 
 #include "Core/Math/MatrixTest.hpp"
@@ -12,6 +16,11 @@ int main(int c, char *argv[]) {
   coretest::QuaternionTesting();
   coretest::MatrixTesting();
   coretest::MemoryTesting();
+
+#if defined(TEST_WINDOWS)
+  win32test::Run();
+
+#endif
 
   int success = RUN_ALL_TESTS();
 

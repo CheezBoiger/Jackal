@@ -4,6 +4,7 @@ project("JackalCoreTests")
 
 set(TEST_MATH_DIR Math)
 set(TEST_MEMORY_DIR Memory)
+set(TEST_WIN32_DIR  Win32)
 
 
 # Set our math test directory, we will need to add in google test 
@@ -22,6 +23,17 @@ set(MEMORY_TESTS
   ${TEST_MEMORY_DIR}/MemoryTest.hpp
 )
 
+
+# Win32 testing files. Should find a better way to check.
+if (WIN32)
+  set(WIN32_TESTS
+    ${TEST_WIN32_DIR}/Win32ThreadTest.hpp
+    ${TEST_WIN32_DIR}/Win32ThreadTest.cpp
+)
+else()
+  set(WIN32_TESTS)
+endif()
+
 # Include core directory.
 include_directories(SYSTEM
   ../../Source/Core/Public
@@ -34,6 +46,7 @@ include_directories(SYSTEM
 add_library(${JACKAL_CORE_TESTS} STATIC
   ${MATH_TESTS}
   ${MEMORY_TESTS}
+  ${WIN32_TESTS}
 )
 
 # We are targeting our main core engine library to this testing framework.
