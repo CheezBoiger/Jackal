@@ -2,16 +2,13 @@
 cmake_minimum_required(VERSION 2.8.11)
 project("VulkanRenderDevice")
 
+
+# Find our precious Vulkan Rendering API
+find_package(Vulkan)
+
 set(JACKAL_VULKAN_RENDEV_NAME "VulkanDevice")
 set(VULKAN_PUBLIC_DIR         Public/VulkanDevice)
 set(VULKAN_PRIVATE_DIR        Private)
-
-
-include_directories(
-  ${JACKAL_INCLUDE_DIR}
-  ${Vulkan_INCLUDE_DIRS}
-  ${JACKAL_THIRD_PARTY_DIR}/glslang
-)
 
 set(VULKAN_FILES
   ${VULKAN_PUBLIC_DIR}/VulkanDevice.hpp
@@ -21,6 +18,14 @@ set(VULKAN_FILES
 # If vulkan is found, add to the build configurations. Else, just ignore
 # Vulkan.
 if (Vulkan_FOUND)
+
+  include_directories(
+    ${JACKAL_INCLUDE_DIR}
+    ${Vulkan_INCLUDE_DIRS}
+    ${JACKAL_THIRD_PARTY_DIR}/glslang 
+  )
+
+
   add_library(${JACKAL_VULKAN_RENDEV_NAME} STATIC
     ${VULKAN_FILES}
   )
@@ -49,4 +54,6 @@ if (Vulkan_FOUND)
   include (Macros)
 
   set_cxx_standard(${JACKAL_VULKAN_RENDEV_NAME} 14)
+else()
+  message(WARNING "Vulkan not found, ignoring Vulkan Device build...")
 endif()

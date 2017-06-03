@@ -77,12 +77,7 @@ include(Packages)
 
 # Find our packages We might include these in a separate cmake folder in the long run.
 find_package(OpenAL)
-find_package(Vulkan)
 find_package(OpenGL)
-
-if (NOT Vulkan_FOUND)
- # Fail safe for finding vulkan.
-endif()
 
 if (NOT OPENAL_FOUND)
   message(WARNING "OpenAL not found!")
