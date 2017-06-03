@@ -5,7 +5,7 @@
 #include "Core/Platform/JTypes.hpp"
 #include "Core/Platform/Api.hpp"
 
-#if defined(JACKAL_WINDOWS)
+#if (JACKAL_PLATFORM == JACKAL_WINDOWS)
  #define WIN32_LEAN_AND_MEAN
  #include <Windows.h>
 
