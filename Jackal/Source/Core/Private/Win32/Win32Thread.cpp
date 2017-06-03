@@ -30,7 +30,7 @@ void Win32Thread::Join()
     return;
   }
 
-  LPDWORD exitCode;
+  LPDWORD exitCode = nullptr;
   do {
     GetExitCodeThread(handle, exitCode);
   } while (*exitCode != STILL_ACTIVE);

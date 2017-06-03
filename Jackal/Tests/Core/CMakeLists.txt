@@ -2,9 +2,10 @@
 cmake_minimum_required(VERSION 2.8.11)
 project("JackalCoreTests")
 
-set(TEST_MATH_DIR Math)
-set(TEST_MEMORY_DIR Memory)
-set(TEST_WIN32_DIR  Win32)
+set(TEST_MATH_DIR       Math)
+set(TEST_MEMORY_DIR     Memory)
+set(TEST_WIN32_DIR      Win32)
+set(TEST_STRUCTURE_DIR  Structure)
 
 
 # Set our math test directory, we will need to add in google test 
@@ -21,6 +22,12 @@ set(MATH_TESTS
 set(MEMORY_TESTS
   ${TEST_MEMORY_DIR}/MemoryTest.cpp
   ${TEST_MEMORY_DIR}/MemoryTest.hpp
+)
+
+# Structure testing functionality.
+set(STRUCTURE_TESTS
+  ${TEST_STRUCTURE_DIR}/JStringTest.hpp
+  ${TEST_STRUCTURE_DIR}/JStringTest.cpp
 )
 
 
@@ -47,6 +54,7 @@ add_library(${JACKAL_CORE_TESTS} STATIC
   ${MATH_TESTS}
   ${MEMORY_TESTS}
   ${WIN32_TESTS}
+  ${STRUCTURE_TESTS}
 )
 
 # We are targeting our main core engine library to this testing framework.

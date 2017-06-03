@@ -84,6 +84,7 @@ set(CORE_WIN32
   ${CORE_PUBLIC_WIN32_DIR}/Win32Window.hpp
   ${CORE_PUBLIC_WIN32_DIR}/Win32Mouse.hpp
   ${CORE_PRIVATE_WIN32_DIR}/Win32Mouse.cpp
+  ${CORE_PRIVATE_WIN32_DIR}/Win32Clock.cpp
 )
 
 set(CORE_LINUX

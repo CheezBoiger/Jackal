@@ -19,7 +19,11 @@ public:
   class ThisThread {
   public:
     static DWORD GetId();
+
+    // TODO(): Still needs work.
     static void SleepFor();
+
+    // TODO(): Still needs work.
     static void SleepUntil();
   };
 

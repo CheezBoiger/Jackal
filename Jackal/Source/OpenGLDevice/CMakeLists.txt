@@ -11,6 +11,8 @@ set(OPENGL_PRIVATE_DIR   Private)
 set(OPENGL_FILES
   ${OPENGL_PUBLIC_DIR}/OpenGLDevice.hpp
   ${OPENGL_PRIVATE_DIR}/OpenGLDevice.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLConfigs.hpp
+
   ${JACKAL_THIRD_PARTY_DIR}/opengl/glad/glad.c
 )
 
