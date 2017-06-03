@@ -9,11 +9,9 @@
 int main(int c, char *argv[]) {
   ::testing::InitGoogleTest(&c, argv);
 
-  jkl::test::QuatTest qtest;
-
+  coretest::QuaternionTesting();
   coretest::MatrixTesting();
   coretest::MemoryTesting();
-  qtest.Test();
 
   int success = RUN_ALL_TESTS();
 

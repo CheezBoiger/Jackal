@@ -1,13 +1,14 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #pragma once
 
+#include "Math/QuaternionMath.hpp"
+
 namespace jkl {
 
 
-template<typename T> inline
-Quaternion<T> Normalize(const Quaternion<T> &q)
+Quaternion Normalize(const Quaternion &q)
 {
-  T norm = q.Length();
+  real32 norm = q.Length();
   return (q / norm);
 }
 } // jkl

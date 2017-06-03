@@ -4,74 +4,62 @@
 #pragma once
 
 #include "Common.hpp"
-#include "Matrix.hpp"
-#include "Vector.hpp"
+#include "Matrix4.hpp"
+#include "Vector4.hpp"
 
 
 namespace jkl {
 
 
+Matrix4 Inverse(const Matrix4 &original);
+
+Matrix4 Transpose(const Matrix4 &original);
+
 // Translates the given matrix, to a new matrix value output.
 // This is handy to move objects in space.
-template<typename T> inline
-Matrix4x4<T> Translate(const Matrix4x4<T> &original, const Vector3<T> &v);
+Matrix4 Translate(const Matrix4 &original, const Vector3 &v);
 
 // Rotates the given matrix using the given angle (in radians) along the given
 // axis.
-template<typename T> inline
-Matrix4x4<T> Rotate(const Matrix4x4<T> &original, const T angle, const Vector3<T> &axis);
+Matrix4 Rotate(const Matrix4 &original, const real32 angle, const Vector3 &axis);
 
 // Rotates the given matrix using the given angle (in radians) along its
 // x axis.
-template<typename T> inline
-Matrix4x4<T> RotateX(const Matrix4x4<T> &original, const T angle);
+Matrix4 RotateX(const Matrix4 &original, const real32 angle);
 
 // Rotates the given matrix using the given angle (in radians) along its
 // y axis.
-template<typename T> inline
-Matrix4x4<T> RotateY(const Matrix4x4<T> &original, const T angle);
+Matrix4 RotateY(const Matrix4 &original, const real32 angle);
 
 // Rotates the given matrix using the given angle (in radians) along its
 // z axis.
-template<typename T> inline
-Matrix4x4<T> RotateZ(const Matrix4x4<T> &original, const T angle);
+Matrix4 RotateZ(const Matrix4 &original, const real32 angle);
 
 // Scale the matrix, to provide for the zooming in of objects in space.
 // This is handy with zooming and whatnot.
-template<typename T> inline
-Matrix4x4<T> Scale(const Matrix4x4<T> &original, const Vector3<T> &scale);
+Matrix4 Scale(const Matrix4 &original, const Vector3 &scale);
 
-// LookAt, Persepective and Orthographic need to be implemented as well!
-template<typename T> inline
-Matrix4x4<T> LookAtLH(const Vector3<T> &eye, const Vector3<T> &center, const Vector3<T> &up);
+// LookAt, Persepective and Orthographic need to be implemented as well.
+Matrix4 LookAtLH(const Vector3 &eye, const Vector3 &center, const Vector3 &up);
 
 //
-template<typename T> inline
-Matrix4x4<T> LookAtRH(const Vector3<T> &eye, const Vector3<T> &center, const Vector3<T> &up);
+Matrix4 LookAtRH(const Vector3 &eye, const Vector3 &center, const Vector3 &up);
 
 // Default call of LookAt function, which will return the Left hand side 
 // or right hand side matrix depending on the rendering api.
-template<typename T> inline
-Matrix4x4<T> LookAt(const Vector3<T> &eye, const Vector3<T> &center, const Vector3<T> &up, bool left = false);
+Matrix4 LookAt(const Vector3 &eye, const Vector3 &center, const Vector3 &up, bool left = false);
 
 // Perspective projection matrix.
-template<typename T> inline
-Matrix4x4<T> Perspective(const T fov, const T aspect, const T zNear, const T zFar);
+Matrix4 Perspective(const real32 fov, const real32 aspect, const real32 zNear, const real32 zFar);
 
-template<typename T> inline
-Matrix4x4<T> PerspectiveLH(const T fov, const T aspect, const T zNear, const T zFar);
+Matrix4 PerspectiveLH(const real32 fov, const real32 aspect, const real32 zNear, const real32 zFar);
 
-template<typename T> inline
-Matrix4x4<T> PerspectiveRH(const T fov, const T aspect, const T zNear, const T zFar);
+Matrix4 PerspectiveRH(const real32 fov, const real32 aspect, const real32 zNear, const real32 zFar);
 
 // Orthographic projection matrix. 
-template<typename T> inline
-Matrix4x4<T> Orthographic(const T fov, const T aspect, const T zNear, const T zFar);
+Matrix4 Orthographic(const real32 fov, const real32 aspect, const real32 zNear, const real32 zFar);
 
-template<typename T> inline
-Matrix4x4<T> OrthographicLH(const T fov, const T aspect, const T zNear, const T zFar);
+Matrix4 OrthographicLH(const real32 fov, const real32 aspect, const real32 zNear, const real32 zFar);
 
-template<typename T> inline
-Matrix4x4<T> OrthographicRH(const T fov, const T aspect, const T zNear, const T zFar);
+Matrix4 OrthographicRH(const real32 fov, const real32 aspect, const real32 zNear, const real32 zFar);
 } // jkl
-#include "Internal/MatrixMath.inl"

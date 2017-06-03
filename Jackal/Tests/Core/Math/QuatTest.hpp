@@ -2,16 +2,8 @@
 #pragma once
 
 
-namespace jkl {
-namespace test {
+namespace coretest {
 
 
-class QuatTest {
-public:
-  void Test();
-
-private:
-
-};
-} // test
-} // jkl
+void QuaternionTesting();
+} // coretest

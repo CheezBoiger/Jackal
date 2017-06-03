@@ -4,8 +4,8 @@
 #include "Platform/Platform.hpp"
 #include "Platform/JTypes.hpp"
 #include "Common.hpp"
-#include "Matrix.hpp"
-#include "Vector.hpp"
+#include "Matrix4.hpp"
+#include "Vector4.hpp"
 
 
 namespace jkl {
@@ -26,21 +26,20 @@ namespace jkl {
 // and, since rotation matrices use up too much memory, can 
 // be space efficient. One of the notable features as well with
 // quaternions is that they also avoid gimbal lock.
-template<typename T>
 struct Quaternion {
   // Returns the quaternion identity. By default,
   // the default constructor already returns it, but this
   // is for code clarification.
-  static Quaternion<T> Identity() {
-    return Quaternion<T>();
+  static Quaternion Identity() {
+    return Quaternion();
   }
   
   // Initial state of the quaternion.
   Quaternion(
-    T w = static_cast<T>(1), 
-    T x = static_cast<T>(0), 
-    T y = static_cast<T>(0), 
-    T z = static_cast<T>(0)
+    real32 w = 1.0f, 
+    real32 x = 0.0f, 
+    real32 y = 0.0f, 
+    real32 z = 0.0f
   ) : w(w), x(x), y(y), z(z) 
   { } 
 
@@ -63,7 +62,7 @@ struct Quaternion {
 
   // Scaler multiplication with quaternions. This will return
   // a fresh copy of a quaternion.
-  Quaternion operator*(const T scaler) const;
+  Quaternion operator*(const real32 scaler) const;
 
   // Division between quaternions. this will return a fresh
   // copy of the resulting quaternion.
@@ -72,7 +71,7 @@ struct Quaternion {
   // Division of a scaler value to this quaternion.
   // Will return a fresh copy of the resulting 
   // quaternion.
-  Quaternion operator/(const T scaler) const;
+  Quaternion operator/(const real32 scaler) const;
 
   // Quaternion multiplication, using the Hamilton Product.
   // Note that quaternion multiplicatio is non-commutative,
@@ -81,7 +80,7 @@ struct Quaternion {
   void operator*=(const Quaternion &q);
 
   // Multiply this quaternion by a scaler value.
-  void operator*=(const T scaler);
+  void operator*=(const real32 scaler);
 
   // Addition of quaternion q onto this quaternion. Does not
   // create a new quaternion, instead will modify this one.
@@ -97,7 +96,7 @@ struct Quaternion {
 
   // Division between this quaternion, and the given scaler value.
   // Modifies this quaternion.
-  void operator/=(const T scaler);
+  void operator/=(const real32 scaler);
 
   // Get the conjugate of this quaternion object.
   // Represented as q*
@@ -109,31 +108,28 @@ struct Quaternion {
   Quaternion Inverse() const;
 
   // Returns the vector representation of this quaternion object.
-  Vector3<T> ToEulerAngles() const;
+  Vector3f ToEulerAngles() const;
 
   // Returns the matrix representation of this quaternion object.
-  Matrix4x4<T> ToMatrix4x4() const;
+  Matrix4f ToMatrix4x4() const;
 
   
 
   // TODO(): More to be added soon.
 
   // Returns the magnitude/norm/length of the quaternion.
-  T Length() const {
-    return 
-      static_cast<T>(Sqrt((w * w) + (x * x) + (y * y) + (z * z)));
+  real32 Length() const {
+    return Sqrtf((w * w) + (x * x) + (y * y) + (z * z));
   }
 
   // Quaternion parameters set up like in 
   // math: w + xi + yj + zk 
   union {
-    struct { T w, x, y, z; };
-    struct { T a, r, g, b; };
-    struct { T q, s, t, p; };
+    struct { real32 w, x, y, z; };
+    struct { real32 a, r, g, b; };
+    struct { real32 q, s, t, p; };
   };
 };
 
-typedef Quaternion<real32> Quat;
+typedef Quaternion Quat;
 } // jkl
-
-#include "Internal/Quaternion.inl"

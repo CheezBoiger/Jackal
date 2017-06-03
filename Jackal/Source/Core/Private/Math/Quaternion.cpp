@@ -1,12 +1,12 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
-#pragma once
+
+#include "Math/Quaternion.hpp"
 
 
 namespace jkl {
 
 
-template<typename T>
-Quaternion<T> Quaternion<T>::operator+(const Quaternion &q) const 
+Quaternion Quaternion::operator+(const Quaternion &q) const 
 {
   return Quaternion(
     w + q.w,
@@ -17,8 +17,7 @@ Quaternion<T> Quaternion<T>::operator+(const Quaternion &q) const
 }
 
 
-template<typename T>
-Quaternion<T> Quaternion<T>::operator-(const Quaternion &q) const
+Quaternion Quaternion::operator-(const Quaternion &q) const
 {
   return Quaternion(
     w - q.w,
@@ -29,8 +28,7 @@ Quaternion<T> Quaternion<T>::operator-(const Quaternion &q) const
 }
 
 
-template<typename T>
-Quaternion<T> Quaternion<T>::operator*(const Quaternion &q) const 
+Quaternion Quaternion::operator*(const Quaternion &q) const 
 {
   return Quaternion(
     (w * q.w) - (x * q.x) - (y * q.y) - (z * q.z),
@@ -41,8 +39,7 @@ Quaternion<T> Quaternion<T>::operator*(const Quaternion &q) const
 }
 
 
-template<typename T>
-Quaternion<T> Quaternion<T>::operator/(const T scaler) const
+Quaternion Quaternion::operator/(const real32 scaler) const
 {
   return Quaternion(
     w / scaler,
@@ -53,8 +50,7 @@ Quaternion<T> Quaternion<T>::operator/(const T scaler) const
 }
 
 
-template<typename T>
-void Quaternion<T>::operator*=(const Quaternion &q) 
+void Quaternion::operator*=(const Quaternion &q) 
 {
   Quaternion ori = *this;
   w = (ori.w * q.w) - (ori.x * q.x) - (ori.y * q.y) - (ori.z * q.z);
@@ -64,8 +60,7 @@ void Quaternion<T>::operator*=(const Quaternion &q)
 }
 
 
-template<typename T>
-void Quaternion<T>::operator+=(const Quaternion &q)
+void Quaternion::operator+=(const Quaternion &q)
 {
   w += q.w;
   x += q.x;
@@ -74,8 +69,7 @@ void Quaternion<T>::operator+=(const Quaternion &q)
 }
 
 
-template<typename T>
-void Quaternion<T>::operator-=(const Quaternion &q)
+void Quaternion::operator-=(const Quaternion &q)
 {
   w -= q.w;
   x -= q.x;
@@ -84,8 +78,7 @@ void Quaternion<T>::operator-=(const Quaternion &q)
 }
 
 
-template<typename T>
-Quaternion<T> Quaternion<T>::operator*(const T scaler) const
+Quaternion Quaternion::operator*(const real32 scaler) const
 {
   return Quaternion(
     w * scaler,
@@ -96,8 +89,7 @@ Quaternion<T> Quaternion<T>::operator*(const T scaler) const
 }
 
 
-template<typename T>
-void Quaternion<T>::operator*=(const T scaler)
+void Quaternion::operator*=(const real32 scaler)
 {
   w *= scaler;
   x *= scaler;
@@ -106,8 +98,7 @@ void Quaternion<T>::operator*=(const T scaler)
 }
 
 
-template<typename T>
-Quaternion<T> Quaternion<T>::operator/(const Quaternion &q) const
+Quaternion Quaternion::operator/(const Quaternion &q) const
 {
   return Quaternion(
     w / q.w,
@@ -118,8 +109,7 @@ Quaternion<T> Quaternion<T>::operator/(const Quaternion &q) const
 }
 
 
-template<typename T>
-void Quaternion<T>::operator/=(const Quaternion &q)
+void Quaternion::operator/=(const Quaternion &q)
 {
   w /= q.w;
   x /= q.x;
@@ -128,8 +118,7 @@ void Quaternion<T>::operator/=(const Quaternion &q)
 }
 
 
-template<typename T>
-void Quaternion<T>::operator/=(const T scaler)
+void Quaternion::operator/=(const real32 scaler)
 {
   w /= scaler;
   x /= scaler;
@@ -138,18 +127,16 @@ void Quaternion<T>::operator/=(const T scaler)
 }
 
 
-template<typename T>
-Quaternion<T> Quaternion<T>::Conjugate() const
+Quaternion Quaternion::Conjugate() const
 {
   return Quaternion(w, -x, -y, -z);
 }
 
 
-template<typename T>
-Quaternion<T> Quaternion<T>::Inverse() const
+Quaternion Quaternion::Inverse() const
 {
   Quaternion conjugate = Conjugate();
-  T norm = Length();
+  real32 norm = Length();
   norm = norm * norm;
   // Inverse is q* / norm^2
   conjugate /= norm;

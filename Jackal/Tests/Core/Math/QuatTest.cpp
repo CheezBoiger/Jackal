@@ -1,18 +1,43 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #include "QuatTest.hpp"
+#include "Math/QuaternionMath.hpp"
 #include "Math/Quaternion.hpp"
 #include "Logging/Logger.hpp"
 
+#include "glm/gtc/quaternion.hpp"
+#include "glm/gtx/quaternion.hpp"
+#include "gtest/gtest.h"
 
-namespace jkl {
-namespace test {
+#include <chrono>
+
+namespace coretest {
 
 
-void QuatTest::Test()
+TEST(QuaternionTesting, QuatTest)
 {
-  Quat a;
-  Quat b;
+  jkl::Quat a(5.0f, 12.0f, 3.0f, 3.0f);
+  jkl::Quat b;
 
+  glm::quat glma(5.0f, 12.0f, 3.0f, 3.0f);
+  glm::quat glmb;
+
+  glma = glm::inverse(glma);
+
+  a = a.Inverse();
+
+  std::cout << "Quaternion testing\n";
+  std::cout << a.x << " " << a.y << " " << a.z << " " << a.w << "\n";
+  std::cout << glma.x << " " << glma.y << " " << glma.z << " " << glma.w << "\n";
+
+  // Testing with the GLM Library.
+  EXPECT_EQ(a.x, glma.x);
+  EXPECT_EQ(a.y, glma.y);
+  EXPECT_EQ(a.z, glma.z);
+  EXPECT_EQ(a.w, glma.w);
 } 
-} // test
-} // jkl
+
+
+void QuaternionTesting()
+{
+}
+} // coretest

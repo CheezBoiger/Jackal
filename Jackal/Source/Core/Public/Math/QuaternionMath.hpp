@@ -6,8 +6,8 @@
 #include "Platform/Platform.hpp"
 #include "Common.hpp"
 #include "Quaternion.hpp"
-#include "Vector.hpp"
-#include "Matrix.hpp"
+#include "Vector4.hpp"
+#include "Matrix4.hpp"
 
 
 namespace jkl {
@@ -15,32 +15,26 @@ namespace jkl {
 
 // Convert a quaternion into a 4 component vector
 // representation.
-template<typename T> inline
-Vector4<T> ToVector4(const Quaternion<T> &q);
+Vector4f ToVector4(const Quaternion &q);
 
 // Convert a quaternion into a 4 by 4 matrix
 // representation.
-template<typename T> inline
-Matrix4x4<T> ToMatrix4x4(const Quaternion<T> &q);
+Matrix4 ToMatrix4x4(const Quaternion &q);
 
 
-template<typename T> inline
-Quaternion<T> ToQuaternion(const Vector3<T> &eulerAngle);
+Quaternion ToQuaternion(const Vector3f &eulerAngle);
 
 // Normalize the quaternion. Normally, we should
 // be sticking to unit quaternions, so this call
 // should be kept limited.
-template<typename T> inline
-Quaternion<T> Normalize(const Quaternion<T> &q);
+Quaternion Normalize(const Quaternion &q);
 
 // Spherical Linear Interpolation. Useful for 
 // animations and whatnot.
-template<typename T> inline
-Quaternion<T> Slerp(const Quaternion<T> &q0, const Quaternion<T> &q1, T t);
+Quaternion Slerp(const Quaternion &q0, const Quaternion &q1, real32 t);
 
 // Produce a rotation about the hypersphere using x, y, z coordinates
 // and an angle to tell about how much the quaternion will rotate.
 // Quaternion q param descibes the initial position of the quaternion.
-template<typename T> inline
-Quaternion<T> AngleAxis(T angle, const Vector3<T> &axis);
+Quaternion AngleAxis(real32 angle, const Vector3f &axis);
 } // jkl

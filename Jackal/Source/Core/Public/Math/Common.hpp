@@ -4,49 +4,56 @@
 #include "Platform/JTypes.hpp"
 #include "Platform/Platform.hpp"
 #include "Platform/Api.hpp"
-#include <cmath>
+#include <math.h>
 
 #define J_PI 3.141592653589793238462643383279502884197169399375
+#define J_PI_2 (J_PI / 2)
 
 
 namespace jkl {
 
 
 
+inline float Sqrtf(float value)
+{
+  return sqrtf(value);
+}
+
+
 inline double Sqrt(double value)
 {
-  return std::sqrt(value);
+  return sqrt(value);
 }
 
 
 template<typename T>
 inline bool IsNaN(T value)
 {
-  return std::isnan(value);
+  return isnan(value);
 }
 
 // Standard absolute value wrap.
 template<typename T>
 inline T Abs(T value)
 {
-  return std::abs(value);
+  return abs(value);
 }
 
 
 inline double Cos(double value)
 {
-  return std::cos(value);
+  return cos(value);
 }
 
 
 inline double Sin(double value)
 {
-  return std::sin(value);
+  return sin(value);
 }
 
 inline double Tan(double value)
 {
-  return std::tan(value);
+  return tan(value);
 }
 
 inline float Cosf(float value)

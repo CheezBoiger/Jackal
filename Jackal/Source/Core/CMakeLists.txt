@@ -34,19 +34,27 @@ set(MATH_PRIVATE_BOUNDING_DIR      ${CORE_PRIVATE_MATH_DIR}/Bounding)
 
 set(CORE_MATH
   ${CORE_PUBLIC_MATH_DIR}/Common.hpp
-  ${CORE_PUBLIC_MATH_DIR}/Matrix.hpp
+  ${CORE_PUBLIC_MATH_DIR}/Matrix4.hpp
+  ${CORE_PUBLIC_MATH_DIR}/Matrix3.hpp
+  ${CORE_PUBLIC_MATH_DIR}/Matrix2.hpp
   ${CORE_PUBLIC_MATH_DIR}/Quaternion.hpp
   ${CORE_PUBLIC_MATH_DIR}/Ray.hpp
-  ${CORE_PUBLIC_MATH_DIR}/Vector.hpp
+  ${CORE_PUBLIC_MATH_DIR}/Vector4.hpp
+  ${CORE_PUBLIC_MATH_DIR}/Vector3.hpp
+  ${CORE_PUBLIC_MATH_DIR}/Vector2.hpp
   ${CORE_PUBLIC_MATH_DIR}/MatrixMath.hpp
   ${CORE_PUBLIC_MATH_DIR}/VectorMath.hpp
   ${CORE_PUBLIC_MATH_DIR}/QuaternionMath.hpp
-  ${MATH_PUBLIC_INTERNAL_DIR}/Matrix.inl
-  ${MATH_PUBLIC_INTERNAL_DIR}/MatrixMath.inl
-  ${MATH_PUBLIC_INTERNAL_DIR}/Vector.inl
-  ${MATH_PUBLIC_INTERNAL_DIR}/VectorMath.inl
-  ${MATH_PUBLIC_INTERNAL_DIR}/Quaternion.inl
-  ${MATH_PUBLIC_INTERNAL_DIR}/QuaternionMath.inl
+  ${CORE_PRIVATE_MATH_DIR}/Matrix4.cpp
+  ${CORE_PRIVATE_MATH_DIR}/Matrix3.cpp
+  ${CORE_PRIVATE_MATH_DIR}/Matrix2.cpp
+  ${CORE_PRIVATE_MATH_DIR}/MatrixMath.cpp
+  ${CORE_PRIVATE_MATH_DIR}/Vector4.cpp
+  ${CORE_PRIVATE_MATH_DIR}/Vector3.cpp
+  ${CORE_PRIVATE_MATH_DIR}/Vector2.cpp
+  ${CORE_PRIVATE_MATH_DIR}/VectorMath.cpp
+  ${CORE_PRIVATE_MATH_DIR}/Quaternion.cpp
+  ${CORE_PRIVATE_MATH_DIR}/QuaternionMath.cpp
   ${MATH_PUBLIC_BOUNDING_DIR}/BoundBox2D.hpp
   ${MATH_PUBLIC_BOUNDING_DIR}/BoundBox3D.hpp
   ${MATH_PUBLIC_BOUNDING_DIR}/BoundCylinder.hpp
