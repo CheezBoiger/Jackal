@@ -7,3 +7,9 @@
 [submodule "Jackal/ThirdParty/googletest"]
 	path = Jackal/ThirdParty/googletest
 	url = https://github.com/Google/googletest
+[submodule "Jackal/ThirdParty/protobuf"]
+	path = Jackal/ThirdParty/protobuf
+	url = https://github.com/google/protobuf.git
+[submodule "Jackal/ThirdParty/zlib"]
+	path = Jackal/ThirdParty/zlib
+	url = https://github.com/madler/zlib.git
