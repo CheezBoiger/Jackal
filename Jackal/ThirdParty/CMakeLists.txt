@@ -34,6 +34,13 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "")
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "")
 add_subdirectory(glfw)
 
+# Adding Compression and Interchange format libraries into ThirdParty
+add_subdirectory(zlib)
+
+set(protobuf_BUILD_TESTS OFF CACHE BOOL "")
+set(protobuf_BUILD_EXAMPLES OFF CACHE BOOL "")
+add_subdirectory(protobuf/cmake)
+
 
 # For organization inside Visual Studio specifically.
 if (MSVC)
@@ -43,6 +50,10 @@ if (MSVC)
   set_property(TARGET
     glfw
     PROPERTY FOLDER "ThirdParty/GLFW3")
-
-
+  set_property(TARGET
+    zlib zlibstatic minigzip example
+    PROPERTY FOLDER "ThirdParty/zlib")
+  set_property(TARGET
+    libprotobuf libprotobuf-lite js_embed libprotoc protoc
+    PROPERTY FOLDER "ThirdParty/protobuf")
 endif()
