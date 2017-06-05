@@ -21,7 +21,13 @@ namespace jkl {
 
 #if JACKAL_PLATFORM == JACKAL_WINDOWS
 typedef std::wstring JString;
+
+ #define JCOUT() std::wcout
+ #define jcout std::wcout
 #else
 typedef std::string JString;
+
+ #define JCOUT() std::cout
+ #define jcout   std::cout
 #endif
 } // jkl
