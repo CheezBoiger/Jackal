@@ -5,7 +5,7 @@
 #include "Core/Logging/TextBase.hpp"
 #include <gtest/gtest.h>
 #include <string>
-
+#include <Windows.h>
 
 TEST(StructureTests, JStringTesting)
 {
@@ -19,11 +19,14 @@ TEST(StructureTests, JStringTesting)
   jkl::Log::MessageToConsole(message->verbose, message->msg, false, message->tag);
 
   setlocale(LC_ALL, "ja-JP");
-  jkl::JString jstr("これは簡単なテストです。");
+  jkl::JString jstr(u"これは簡単なテストです。");
 
-  std::wcout.imbue(std::locale("ja_JP.UTF-8"));
-  std::cout << "これは簡単なテストです。" << "\n";
+  std::locale::global(std::locale("ja-JP"));
+  std::wcout.imbue(std::locale("ja-JP"));
+  std::wcout << JTEXT("これは簡単なテストです。") << L"\n";
   std::cout << jstr.CStr() << "\n";
+  std::wcout << jstr.WideCStr() << L"\n";
+  MessageBoxW(GetActiveWindow(), jstr.WideCStr().c_str(), L"cAT", (UINT )MB_OK);
 }
 
 

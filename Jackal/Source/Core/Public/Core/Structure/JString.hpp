@@ -91,8 +91,8 @@ private:
 
 
 #if TARGET_PLATFORM == JACKAL_WINDOWS
- #define JSTRING(text) L##text
+ #define JTEXT(text) L##text
 #else
- #define JSTRING(text) text
+ #define JTEXT(text) text
 #endif
 } // jkl

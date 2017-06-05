@@ -3,6 +3,10 @@
 #include "Core/Structure/JString.hpp"
 #include "Core/Logging/Logger.hpp"
 
+#if JACKAL_PLATFORM == JACKAL_WINDOWS
+ #include "Core/Win32/Win32Config.hpp"
+#endif 
+
 #include <codecvt>
 #include <locale>
 #include <string>
@@ -80,39 +84,56 @@ JString &JString::operator=(JString &&str)
 
 void JString::StringUTF16ToUTF8(const char16_t *utf16)
 {
+#if defined(_WIN32)
+  std::wstring_convert<std::codecvt_utf8_utf16<int16>, int16> converter;
+  auto p = reinterpret_cast<const int16 *>(utf16);
+  ref = converter.to_bytes(p, p + std::char_traits<char16_t>::length(utf16));
+#else
   std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> converter;
   auto p = reinterpret_cast<const int16 *>(utf16);
   ref = converter.to_bytes(utf16);
+#endif
 }
 
 
 void JString::StringUTF32ToUTF8(const char32_t *utf32)
 {
+#if defined(_WIN32)
+  std::wstring_convert<std::codecvt_utf8<int32>, int32> converter;
+  auto p = reinterpret_cast<const int32 *>(utf32);
+  ref = converter.to_bytes(p , p + std::char_traits<char32_t>::length(utf32));
+#else
   std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
   auto p = reinterpret_cast<const int32 *>(utf32);
   ref = converter.to_bytes(utf32);
+#endif
 }
 
 
 void JString::StringWideToUTF8(const wchar_t *wide)
 {
-  std::wstring temp(wide);
-  ref = std::string(temp.begin(), temp.end());
+#if defined(_WIN32)
+  size_t wideSize = wcslen(wide);
+  int overallSize = WideCharToMultiByte(CP_UTF8, 0, &wide[0], (int32 )wideSize,
+    NULL, 0, NULL, NULL);
+  
+  ref = std::string(overallSize, 0);
+  WideCharToMultiByte(CP_UTF8, 0, &wide[0], (int32 )wideSize, 
+    &ref[0], overallSize, NULL, NULL);
+#else
+  
+#endif
 }
 
 
 std::wstring JString::WideCStr()
 {
-  size_t decodedSize = 1;
-  switch (format) {
-    case UTF8: decodedSize  = 1; break;
-    case UTF16: decodedSize = 2; break;
-    case UTF32: decodedSize = 4; break;
-    default: decodedSize = 1; break;
-  }
-  std::wstring wstr;
-  wstr.resize(ref.size() / decodedSize);
-  mbstowcs(&wstr[0], ref.data(), ref.size() / decodedSize);
+#if defined(_WIN32)
+  int overallSize = MultiByteToWideChar(CP_UTF8, 0, &ref[0], (int32 )ref.size(), NULL, 0);
+  std::wstring wstr(overallSize, 0);
+  MultiByteToWideChar(CP_UTF8, 0, &ref[0], (int32 )ref.size(), &wstr[0], overallSize);
   return wstr;
+#else
+#endif
 }
 } // jkl
