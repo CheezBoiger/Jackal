@@ -15,6 +15,7 @@ set(CORE_PUBLIC_WIN32_DIR            Public/Core/Win32)
 set(CORE_PUBLIC_LINUX_DIR            Public/Core/Linux)
 set(CORE_PUBLIC_APPLE_DIR            Public/Core/Apple)
 set(CORE_PUBLIC_STRUCTURE_DIR        Public/Core/Structure)
+set(CORE_PUBLIC_UTILITY_DIR          Public/Core/Utility)
 set(CORE_PRIVATE_MATH_DIR            Private/Math)
 set(CORE_PRIVATE_MEMORY_DIR          Private/Memory)
 set(CORE_PRIVATE_PLATFORM_DIR        Private/Platform)
@@ -23,7 +24,7 @@ set(CORE_PRIVATE_WIN32_DIR           Private/Win32)
 set(CORE_PRIVATE_LINUX_DIR           Private/Linux)
 set(CORE_PRIVATE_APPLE_DIR           Private/Apple)
 set(CORE_PRIVATE_STRUCTURE_DIR       Private/Structure)
-
+set(CORE_PRIVATE_UTILITY_DIR         Private/Utility)
 
 # Math Directories.
 set(MATH_PUBLIC_INTERNAL_DIR       ${CORE_PUBLIC_MATH_DIR}/Internal)
@@ -175,7 +176,6 @@ set(CORE_STRUCTURE
   ${CORE_PUBLIC_STRUCTURE_DIR}/JString.hpp
   ${CORE_PRIVATE_STRUCTURE_DIR}/JString.cpp
   ${CORE_PUBLIC_STRUCTURE_DIR}/JVector.hpp
-  ${CORE_PRIVATE_STRUCTURE_DIR}/JVector.inl
   ${CORE_PUBLIC_STRUCTURE_DIR}/HTable.hpp
   ${CORE_PUBLIC_STRUCTURE_DIR}/Queue.hpp
   ${CORE_PUBLIC_STRUCTURE_DIR}/Stack.hpp
@@ -183,13 +183,12 @@ set(CORE_STRUCTURE
   ${CORE_PUBLIC_STRUCTURE_DIR}/SList.hpp
   ${CORE_PUBLIC_STRUCTURE_DIR}/PriorityQueue.hpp
   ${CORE_PUBLIC_STRUCTURE_DIR}/JIterator.hpp
-  ${CORE_PRIVATE_STRUCTURE_DIR}/HTable.inl
-  ${CORE_PRIVATE_STRUCTURE_DIR}/Queue.inl
-  ${CORE_PRIVATE_STRUCTURE_DIR}/Stack.inl
-  ${CORE_PRIVATE_STRUCTURE_DIR}/DList.inl
-  ${CORE_PRIVATE_STRUCTURE_DIR}/SList.inl
-  ${CORE_PRIVATE_STRUCTURE_DIR}/PriorityQueue.inl
-  ${CORE_PRIVATE_STRUCTURE_DIR}/JIterator.inl
+)
+
+
+set(CORE_UTILITY
+  ${CORE_PUBLIC_UTILITY_DIR}/JStringUtils.hpp
+  ${CORE_PRIVATE_UTILITY_DIR}/JStringUtils.cpp
 )
 
 
@@ -199,6 +198,7 @@ set(FILE_GLOB
   ${CORE_LOGGING}
   ${CORE_MEMORY}
   ${CORE_STRUCTURE}
+  ${CORE_UTILITY}
 )
 
 
@@ -234,6 +234,8 @@ include_directories(SYSTEM
   ${JACKAL_THIRD_PARTY_DIR}/glfw/include
   ${JACKAL_INCLUDE_DIR}
 )
+
+add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 
 # Utility for setting our standard.
 include(Macros)

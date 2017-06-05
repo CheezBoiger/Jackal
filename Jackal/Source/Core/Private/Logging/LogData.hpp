@@ -7,6 +7,9 @@
 #include "Core/Structure/JVector.hpp"
 
 
+#include <vector>
+
+
 namespace jkl {
 
 
@@ -22,20 +25,20 @@ public:
   static void StoreMessage(Message &mesg);
 
   // Get a message packet that was stored inside this database.
-  static Message *GetMessage(LogType type, uint32 index);
+  static Message *GetMessage(LogVerbosity type, uint32 index);
 
   // Get the size of the list for a particular log type.
-  static uint32 LogListSize(LogType type);
+  static uint32 LogListSize(LogVerbosity type);
 
   // Grab any messages from a particular log type. This 
   // will return an array of log messages for the type.
   // Will also return the total size of the array.
-  static Message *GetMessage(LogType type, uint32 &size);
+  static std::vector<Message> &GetMessages(LogVerbosity type);
 
-  static bool8 ListEmpty(LogType type);
+  static bool8 ListEmpty(LogVerbosity type);
 
   // Clear all messages from a particular 
-  static bool8 ClearMessageList(LogType type);
+  static bool8 ClearMessageList(LogVerbosity type);
 
   // Clear all messages from this database.
   static bool8 ClearAll();

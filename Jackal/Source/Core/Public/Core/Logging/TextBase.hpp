@@ -6,6 +6,7 @@
 #include "Core/Platform/Platform.hpp"
 
 #include <string>
+#include <utility>
 
 
 #define VT100_CMD_CLR "\33[2K\r"
@@ -14,7 +15,7 @@
 namespace jkl {
 
 // The Log type of the message to be worked with.
-enum LogType {
+enum LogVerbosity {
   LOG_NORMAL = 0x1,
   LOG_WARNING = 0x2,
   LOG_ERROR = 0x4,
@@ -35,19 +36,49 @@ enum LogType {
 
 // TODO(): Remove strings from this message and replace with JString.
 struct Message {
-  LogType       logType;
+  LogVerbosity  verbose;
   std::string   timeStamp;
-  bool8         isWideString;
-};
-
-
-struct LogMessage : public Message {
   std::string   tag;
   std::string   msg;
-};
 
-struct LogMessageW : public Message {
-  std::wstring wtag;
-  std::wstring wmsg;
+  Message(LogVerbosity verbosity = LogVerbosity::LOG_NORMAL, std::string msg = "",
+    std::string tag = "", std::string timestamp = "")
+    : verbose(verbosity)
+    , timeStamp(timestamp)
+    , tag(tag)
+    , msg(msg)
+  {
+  }
+
+  Message(const Message &log)
+    : tag(log.tag)
+    , msg(log.msg)
+    , verbose(log.verbose)
+    , timeStamp(log.timeStamp)
+  {
+  }
+
+  Message(Message &&log) {
+    std::swap(tag, log.tag);
+    std::swap(msg, log.msg);
+    std::swap(verbose, log.verbose);
+    std::swap(timeStamp, log.timeStamp);
+  }
+
+  Message &operator=(Message &&log) {
+    std::swap(tag, log.tag);
+    std::swap(msg, log.msg);
+    std::swap(verbose, log.verbose);
+    std::swap(timeStamp, log.timeStamp);
+    return (*this);
+  }
+
+  Message &operator=(const Message &log) {
+    tag = log.tag;
+    msg = log.msg;
+    verbose = log.verbose;
+    timeStamp = log.timeStamp;
+    return (*this);
+  }
 };
 } // jkl

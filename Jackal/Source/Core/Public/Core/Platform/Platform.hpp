@@ -10,6 +10,7 @@
 
 #if defined(_WIN32)
  #define JACKAL_PLATFORM JACKAL_WINDOWS
+ #define _CRT_SECURE_NO_WARNINGS 1
  #if defined (_WIN64)
   #define OS_BIT64
  #endif // _WIN64

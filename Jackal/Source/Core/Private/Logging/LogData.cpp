@@ -5,7 +5,7 @@
 #include "Core/Memory/StackAlloc.hpp"
 
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <mutex>
 #include <memory>
 
@@ -19,26 +19,33 @@ std::mutex databaseMutex;
 // Map data structure.
 // used as meant for temporary until JHTable and JVector 
 // are finished.
-std::map<LogType, std::vector<std::unique_ptr<Message> > > msgTable;
+std::unordered_map<LogVerbosity, std::vector<Message> > msgTable;
 
 
 void MessageLogDatabase::StoreMessage(Message &mesg)
 {
-  auto iter = msgTable.find(mesg.logType);
+  auto iter = msgTable.find(mesg.verbose);
   if (iter != msgTable.end()) {
-    std::vector<std::unique_ptr<Message> > msgs;
-    msgTable[mesg.logType] = std::move(msgs);
+    std::vector<Message> msgs;
+    msgTable[mesg.verbose] = std::move(msgs);
   }
-  msgTable[mesg.logType].push_back(std::make_unique<Message>(mesg));
+  msgTable[mesg.verbose].push_back(std::move(mesg));
 }
 
 
-Message *MessageLogDatabase::GetMessage(LogType type, uint32 index)
+Message *MessageLogDatabase::GetMessage(LogVerbosity type, uint32 index)
 {
   auto iter = msgTable.find(type);
-  LogMessage *message = nullptr;
+  Message *message = nullptr;
 
   if (iter != msgTable.end()) {
+    auto &table = iter->second;
+    if (index < table.size()) {
+      message = &table[index];
+    } else {
+      Log::MessageToConsole(LOG_ERROR, "Attempting to access out of bounds of database "
+        " storage.", false, "Message Database");
+    }
   } else {
     Log::MessageToConsole(LOG_NOTIFY, "Message was not found.",
       false, "Message Database");

@@ -20,7 +20,7 @@ namespace jkl {
 
 uint16 Log::suppressed = 0x8;
 
-void Log::MessageToConsole(LogType type, std::string msg, bool8 store,
+void Log::MessageToConsole(LogVerbosity type, std::string msg, bool8 store,
   std::string nameTag)
 {
   if (!(suppressed & type)) {
@@ -43,7 +43,7 @@ void Log::MessageToConsole(LogType type, std::string msg, bool8 store,
 }
 
 
-void Log::Suppress(LogType type)
+void Log::Suppress(LogVerbosity type)
 {
   if (type == LOG_ALL) {
     suppressed = LOG_ALL;
@@ -82,7 +82,7 @@ void Log::Suppress(LogType type)
 }
 
 
-void Log::Unsuppress(LogType type) 
+void Log::Unsuppress(LogVerbosity type) 
 {
   if (type == LOG_ALL) {
     suppressed = 0x0;
@@ -122,14 +122,19 @@ void Log::Unsuppress(LogType type)
 }
 
 
-void Log::StoreMessage(LogType type, std::string msg, std::string tag)
+void Log::StoreMessage(LogVerbosity type, std::string msg, std::string tag)
 {
-  LogMessage logMsg;
-  logMsg.isWideString = false;
-  logMsg.timeStamp = nullptr; // for now.
-  logMsg.logType = type;
+  Message logMsg;
+  logMsg.timeStamp = ""; // for now.
+  logMsg.verbose = type;
   logMsg.msg = msg;
   logMsg.tag = tag;
   MessageLogDatabase::StoreMessage(logMsg);
+}
+
+
+Message *Log::GetStoredMessage(LogVerbosity verbose, uint32 index)
+{
+  return MessageLogDatabase::GetMessage(verbose, index);
 }
 } // jkl
