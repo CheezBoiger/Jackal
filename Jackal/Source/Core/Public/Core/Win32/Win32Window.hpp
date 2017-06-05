@@ -15,18 +15,23 @@ namespace jkl {
 // win32 specific window. Contains all necessities that govern 
 // this window for the Windows 7, 8, and 10 platforms.
 struct Win32Window {
+  int32       x, y;
+  int32       width, height;
   HWND        wParent;
   HWND        handle;
   HINSTANCE   wInstance;
   HMENU       wMenu;
-  LPCSTR      wWindowName;
+  LPCWSTR      wWindowName;
   bool8       requestClose;
   bool8       requestMinimize;
 };
 
 
+
+bool8 InitWin32WindowLibs();
+
 Win32Window *CreateWin32Window(int32 x, int32 y, int32 width, 
-  int32 height, LPCSTR wWindowName, HWND parent);
+  int32 height, LPCWSTR wWindowName, HWND parent);
 
 Win32Window *GetParentWindow(Win32Window *child);
 
@@ -38,4 +43,7 @@ bool8 DestroyWin32Window(Win32Window *window);
 void PrintToWin32Console(HANDLE consoleHandle, JString str);
 
 void RegisterWin32Class();
+
+
+void CleanUpWin32WindowLibs();
 } // jkl

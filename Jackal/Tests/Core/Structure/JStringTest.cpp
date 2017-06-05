@@ -8,8 +8,15 @@
 #include <gtest/gtest.h>
 #include <string>
 
+#if defined(_WIN32)
+#include "Core/Win32/Win32Window.hpp"
+#endif
+
 TEST(StructureTests, JStringTesting)
 {
+#if defined(_WIN32)
+  jkl::InitWin32WindowLibs();
+#endif
   jkl::Locale::SetLanguage(jkl::J_JAPANESE);
 
   jkl::JString str(JTEXT("Testing simple string."));
@@ -24,6 +31,15 @@ TEST(StructureTests, JStringTesting)
 
   jkl::JString jstr(JTEXT("これは簡単なテストです。\n"));
   jkl::PrintToStdConsole(jstr);
+#if defined(_WIN32)
+  jkl::Win32Window *window = jkl::CreateWin32Window(0, 0, 640, 640, 
+    JTEXT("これは簡単なテストです。"), NULL);
+
+  jkl::PrintToStdConsole(JTEXT("Press Enter to continue through."));
+  std::cin.ignore();
+  jkl::DestroyWin32Window(window);
+  jkl::CleanUpWin32WindowLibs();
+#endif
 }
 
 
