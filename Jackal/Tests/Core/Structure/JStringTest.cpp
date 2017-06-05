@@ -19,11 +19,11 @@ TEST(StructureTests, JStringTesting)
   jkl::Log::MessageToConsole(message->verbose, message->msg, false, message->tag);
 
   setlocale(LC_ALL, "ja-JP");
-  jkl::JString jstr(U"これは簡単なテストです。");
+  jkl::JString jstr("これは簡単なテストです。");
 
-  std::wcout.imbue(std::locale("ja-JP"));
-  std::wcout << L"これは簡単なテストです。" << L"\n";
-  std::wcout << jstr.WideCStr() << L"\n";
+  std::wcout.imbue(std::locale("ja_JP.UTF-8"));
+  std::cout << "これは簡単なテストです。" << "\n";
+  std::cout << jstr.CStr() << "\n";
 }
 
 

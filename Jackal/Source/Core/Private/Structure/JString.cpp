@@ -80,17 +80,17 @@ JString &JString::operator=(JString &&str)
 
 void JString::StringUTF16ToUTF8(const char16_t *utf16)
 {
-  std::wstring_convert<std::codecvt_utf8_utf16<int16>, int16> converter;
+  std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> converter;
   auto p = reinterpret_cast<const int16 *>(utf16);
-  ref = converter.to_bytes(p, p + std::char_traits<char16_t>::length(utf16));
+  ref = converter.to_bytes(utf16);
 }
 
 
 void JString::StringUTF32ToUTF8(const char32_t *utf32)
 {
-  std::wstring_convert<std::codecvt_utf8<int32>, int32> converter;
+  std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
   auto p = reinterpret_cast<const int32 *>(utf32);
-  ref = converter.to_bytes(p, p + std::char_traits<char32_t>::length(utf32));
+  ref = converter.to_bytes(utf32);
 }
 
 

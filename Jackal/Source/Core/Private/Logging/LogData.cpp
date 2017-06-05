@@ -1,5 +1,6 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #include "LogData.hpp"
+#include "Core/Logging/TextBase.hpp"
 #include "Core/Logging/Logger.hpp"
 #include "Core/Memory/MemoryPool.hpp"
 #include "Core/Memory/StackAlloc.hpp"
@@ -9,6 +10,9 @@
 #include <mutex>
 #include <memory>
 
+namespace std {
+}
+
 
 namespace jkl {
 
@@ -16,10 +20,19 @@ namespace jkl {
 // this data base.
 std::mutex databaseMutex;
 
+
+struct VerboseHash {
+  std::size_t operator()(const LogVerbosity &v) const {
+    return std::hash<int32>{} ((int32 )v);
+  }
+};
+
+  
+  
 // Map data structure.
 // used as meant for temporary until JHTable and JVector 
 // are finished.
-std::unordered_map<LogVerbosity, std::vector<Message> > msgTable;
+  std::unordered_map<LogVerbosity, std::vector<Message>, VerboseHash> msgTable;
 
 
 void MessageLogDatabase::StoreMessage(Message &mesg)
