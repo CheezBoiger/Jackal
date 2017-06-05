@@ -134,6 +134,9 @@ std::wstring JString::WideCStr()
   MultiByteToWideChar(CP_UTF8, 0, &ref[0], (int32 )ref.size(), &wstr[0], overallSize);
   return wstr;
 #else
+  
+  std::wstring wstr;
+  return wstr;
 #endif
 }
 } // jkl

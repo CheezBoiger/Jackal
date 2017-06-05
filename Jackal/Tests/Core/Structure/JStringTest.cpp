@@ -5,7 +5,10 @@
 #include "Core/Logging/TextBase.hpp"
 #include <gtest/gtest.h>
 #include <string>
-#include <Windows.h>
+
+#if defined(_WIN32)
+ #include <Windows.h>
+#endif
 
 TEST(StructureTests, JStringTesting)
 {
@@ -21,12 +24,14 @@ TEST(StructureTests, JStringTesting)
   setlocale(LC_ALL, "ja-JP");
   jkl::JString jstr(u"これは簡単なテストです。");
 
-  std::locale::global(std::locale("ja-JP"));
-  std::wcout.imbue(std::locale("ja-JP"));
+  std::locale::global(std::locale("ja_JP.UTF-8"));
+  std::wcout.imbue(std::locale("ja_JP.UTF-8"));
   std::wcout << JTEXT("これは簡単なテストです。") << L"\n";
   std::cout << jstr.CStr() << "\n";
   std::wcout << jstr.WideCStr() << L"\n";
+#if defined(_WIN32)
   MessageBoxW(GetActiveWindow(), jstr.WideCStr().c_str(), L"cAT", (UINT )MB_OK);
+#endif
 }
 
 
