@@ -1,6 +1,8 @@
 ﻿// Copyright (c) 2017 Jackal Engine, MIT License.
 #include "JStringTest.hpp"
+#include "Core/Internationalization/Locale.hpp"
 #include "Core/Structure/JString.hpp"
+#include "Core/Utility/JStringUtils.hpp"
 #include "Core/Logging/Logger.hpp"
 #include "Core/Logging/TextBase.hpp"
 #include <gtest/gtest.h>
@@ -12,10 +14,15 @@
 
 TEST(StructureTests, JStringTesting)
 {
-  std::string str("Testing simple string.");
+#if defined(_WIN32)
+  SetConsoleOutputCP(CP_UTF8);
+#endif
+  jkl::Locale::SetLanguage(jkl::J_JAPANESE);
 
-  jkl::Log::MessageToConsole(jkl::LogVerbosity::LOG_NORMAL, str, true, "Chicken"); 
-  jkl::Log::MessageToConsole(jkl::LogVerbosity::LOG_NORMAL, std::to_string(str.empty())); 
+  jkl::JString str(JTEXT("Testing simple string."));
+
+  jkl::Log::MessageToConsole(jkl::LogVerbosity::LOG_NORMAL, str, true, JTEXT("Chicken")); 
+  jkl::Log::MessageToConsole(jkl::LogVerbosity::LOG_NORMAL, jkl::JStringUtils::ToString(str.empty())); 
 
   jkl::Message *message = jkl::Log::GetStoredMessage(jkl::LOG_NORMAL, 0);
 
@@ -24,10 +31,8 @@ TEST(StructureTests, JStringTesting)
   jkl::JString jstr(JTEXT("これは簡単なテストです。"));
 
   std::wcout << JTEXT("これは簡単なテストです。") << L"\n";
-  std::cout << jstr.CStr() << "\n";
-  std::wcout << jstr.WideCStr() << L"\n";
 #if defined(_WIN32)
-  MessageBoxW(GetActiveWindow(), jstr.WideCStr().c_str(), L"cAT", (UINT )MB_OK);
+  MessageBoxW(GetActiveWindow(), jstr.c_str(), JTEXT("Chickens"), (UINT )MB_OK);
 #endif
 }
 

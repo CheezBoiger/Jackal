@@ -2,6 +2,7 @@
 #include "MemoryTest.hpp"
 #include "Core/Memory/MemoryPool.hpp"
 #include "Core/Logging/Logger.hpp"
+#include "Core/Utility/JStringUtils.hpp"
 #include <stdlib.h>
 #include <chrono>
 
@@ -23,17 +24,19 @@ TEST(MemoryTesting, AllocateMemory) {
 
   auto t = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
-  jkl::Log::MessageToConsole(jkl::LOG_NOTIFY, "MemPool alloc time " + std::to_string(t) + " ns");
+  jkl::Log::MessageToConsole(jkl::LOG_NOTIFY, JTEXT("MemPool alloc time ") 
+    + jkl::JStringUtils::ToString(t) + JTEXT(" ns"));
 
   start = std::chrono::high_resolution_clock::now();
   long long *mptr = (long long *)std::malloc(sizeof(long long) * 2000);
   end = std::chrono::high_resolution_clock::now();
 
   t = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-  jkl::Log::MessageToConsole(jkl::LOG_NOTIFY, "Malloc alloc time " + std::to_string(t) + " ns");
-  jkl::Log::MessageToConsole(jkl::LOG_NOTIFY, "MemoryPool memory left: "
-    + std::to_string(pool.GetMemorySizeLeft() * sizeof(size_t))
-    + " bytes");
+  jkl::Log::MessageToConsole(jkl::LOG_NOTIFY, JTEXT("Malloc alloc time ")
+    + jkl::JStringUtils::ToString(t) + JTEXT(" ns"));
+  jkl::Log::MessageToConsole(jkl::LOG_NOTIFY, JTEXT("MemoryPool memory left: ")
+    + jkl::JStringUtils::ToString(pool.GetMemorySizeLeft() * sizeof(size_t))
+    + JTEXT(" bytes"));
 
   size_t allocSize = (pool.GetTotalMemoryPoolSize() * sizeof(size_t))
     - (pool.GetMemorySizeLeft() * sizeof(size_t));
@@ -45,9 +48,9 @@ TEST(MemoryTesting, AllocateMemory) {
 
   EXPECT_EQ(pool.GetMemorySizeLeft(), pool.GetTotalMemoryPoolSize());
 
-  jkl::Log::MessageToConsole(jkl::LOG_NOTIFY, "MemoryPool memory left after clearing: "
-    + std::to_string(pool.GetMemorySizeLeft() * sizeof(size_t))
-    + " bytes");
+  jkl::Log::MessageToConsole(jkl::LOG_NOTIFY, JTEXT("MemoryPool memory left after clearing: ")
+    + jkl::JStringUtils::ToString(pool.GetMemorySizeLeft() * sizeof(size_t))
+    + JTEXT(" bytes"));
 }
 
 
