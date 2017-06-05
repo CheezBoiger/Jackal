@@ -15,6 +15,8 @@ void PrintToStdConsole(JString str)
 } // jkl
 #else
 
+#include <iostream>
+
 
 namespace jkl {
 
