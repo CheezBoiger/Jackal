@@ -33,7 +33,7 @@ public:
   // Display a message immediately to the standard output console.
   // This won't save the message to the standard output unless specified
   // with the "store" parameter.
-  static void MessageToConsole(LogVerbosity type, JString msg, bool8 store = false,
+  static void MessageToStdOutput(LogVerbosity type, JString msg, bool8 store = false,
     JString tag = JTEXT(""));
   
   // Stores a message into the Logger database. This allows the 

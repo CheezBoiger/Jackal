@@ -31,12 +31,12 @@ void JStringUtils::UTF8ToWide(const char *input, wchar_t *output)
 {
 #if defined(_WIN32)
   size_t siz = strlen(input);
-  int overallSize = MultiByteToWideChar(CP_UTF8, 0, input, siz, NULL, 0);
+  int overallSize = MultiByteToWideChar(CP_UTF8, 0, input, (int32 )siz, NULL, 0);
   if (output) {
     delete[] output;
   }
   output = new wchar_t[overallSize];
-  MultiByteToWideChar(CP_UTF8, 0, input, siz, output, overallSize);
+  MultiByteToWideChar(CP_UTF8, 0, input, (int32 )siz, output, overallSize);
 #else
 #endif
 }

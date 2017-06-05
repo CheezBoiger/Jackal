@@ -30,4 +30,7 @@ typedef std::string JString;
  #define JCOUT() std::cout
  #define jcout   std::cout
 #endif
+
+
+void PrintToStdConsole(JString str);
 } // jkl

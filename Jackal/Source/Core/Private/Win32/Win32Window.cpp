@@ -3,6 +3,7 @@
 //
 #include "Core/Win32/Win32Window.hpp"
 #include "Core/Logging/Logger.hpp"
+#include "Core/Structure/JString.hpp"
 
 namespace jkl {
 
@@ -23,14 +24,14 @@ Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
   int32 height, LPCSTR wWindowName, HWND parent)
 {
   if (x < 0 || y < 0) {
-    Log::MessageToConsole(LOG_ERROR, JTEXT(R"(
+    Log::MessageToStdOutput(LOG_ERROR, JTEXT(R"(
       Unable to create window due to improper initialization x
       or y offsets.
     )"), true, TARGET_OS_NAME);
     return nullptr;
   }
   if (width <= 0 || height <= 0) {
-    Log::MessageToConsole(LOG_ERROR, JTEXT(R"(
+    Log::MessageToStdOutput(LOG_ERROR, JTEXT(R"(
       Unable to create window due to improper initialization 
       of "width" or "height". 
     )"), true, TARGET_OS_NAME);
@@ -38,7 +39,7 @@ Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
   }
   Win32Window *window = new Win32Window();
 
-  WCHAR *wTitle;
+  WCHAR *wTitle = nullptr;
   DWORD style = SetPropW(window->handle, L"JWin32Window", window);
   return window;
 }
@@ -72,9 +73,19 @@ void RegisterWin32Class()
   }
 
   if (!RegisterClassExW(&wc)) {
-    Log::MessageToConsole(LOG_ERROR, JTEXT(R"(
+    Log::MessageToStdOutput(LOG_ERROR, JTEXT(R"(
       Unable to register Win32 window class!
     )"), true, TARGET_OS_NAME);
   }
+}
+
+
+void PrintToWin32Console(HANDLE consoleHandle, JString str)
+{
+  SetConsoleOutputCP(CP_UTF8);
+
+  LPDWORD written = nullptr;
+  WriteConsoleW(consoleHandle, str.c_str(),
+    (DWORD )str.size(), written, NULL);
 }
 } // jkl

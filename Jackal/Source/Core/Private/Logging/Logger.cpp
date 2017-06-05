@@ -8,33 +8,27 @@
 #define CASE_MODULE_PRINT(modEnum, str) \
   case modEnum: std::cout << "Module location: " << str << "\n"; break
 
-#if TARGET_PLATFORM == JACKAL_WINDOWS
- // TODO(): Will need to be wcout in the future. Once we add in jstring.
- #define STDOUTPUT(text) std::wcout << text;
-#else
- #define STDOUTPUT(text) std::cout << text;
-#endif
 
 namespace jkl {
 
 
 uint16 Log::suppressed = 0x8;
 
-void Log::MessageToConsole(LogVerbosity type, JString msg, bool8 store,
+void Log::MessageToStdOutput(LogVerbosity type, JString msg, bool8 store,
   JString nameTag)
 {
   if (!(suppressed & type)) {
     switch (type) {
-      case LOG_WARNING: STDOUTPUT("Warning: "); break;
-      case LOG_ERROR: STDOUTPUT("Error: "); break;
-      case LOG_RUNTIME_DEBUG: STDOUTPUT("Debug: "); break;
-      case LOG_NOTIFY: STDOUTPUT("Notice: "); break;
-      case LOG_HIDDEN: STDOUTPUT("Hidden: "); break;
+      case LOG_WARNING: PrintToStdConsole(JTEXT("Warning: ")); break;
+      case LOG_ERROR: PrintToStdConsole(JTEXT("Error: ")); break;
+      case LOG_RUNTIME_DEBUG: PrintToStdConsole(JTEXT("Debug: ")); break;
+      case LOG_NOTIFY: PrintToStdConsole(JTEXT("Notice: ")); break;
+      case LOG_HIDDEN: PrintToStdConsole(JTEXT("Hidden: ")); break;
       default: break;
     }
-    STDOUTPUT(msg << "\n");
+    PrintToStdConsole(msg + JTEXT("\n"));
     if (!nameTag.empty()) {
-      STDOUTPUT("Tag: " << nameTag << "\n\n");
+      PrintToStdConsole(JTEXT("Tag: ") + nameTag + JTEXT("\n\n"));
     }
   }
   if (store) {

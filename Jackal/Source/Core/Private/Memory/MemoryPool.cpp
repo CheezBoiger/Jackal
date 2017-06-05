@@ -17,7 +17,7 @@ MemoryPool::MemoryPool(size_t startSize)
   , memory(new void *[startSize])
 {
   JACKAL_REMOVE_ON_RELEASE(
-  Log::MessageToConsole(LOG_NOTIFY, JTEXT("Memory pool allocated to size of array: ")
+  Log::MessageToStdOutput(LOG_NOTIFY, JTEXT("Memory pool allocated to size of array: ")
     + JStringUtils::ToString(GetTotalMemoryPoolSize() * sizeof(size_t)) 
     + JTEXT(" bytes"))); 
 }
@@ -79,7 +79,7 @@ void *MemoryPool::AllocateMemory(size_t start, size_t sizeBytes)
 {
   JACKAL_REMOVE_ON_RELEASE(
   if ((start + (sizeBytes / sizeof(size_t))) >= totalSize) {
-    Log::MessageToConsole(LOG_ERROR, JTEXT("Unable to allocate memory due to out of bounds."
+    Log::MessageToStdOutput(LOG_ERROR, JTEXT("Unable to allocate memory due to out of bounds."
       " Allocated at location => ") + JStringUtils::ToString(start), false, JTEXT("Memory Pool"));
     return nullptr;
   });
@@ -92,7 +92,7 @@ void MemoryPool::DeallocateMemory(size_t start, size_t sizeBytes)
 {
   JACKAL_REMOVE_ON_RELEASE(
   if ((start + (sizeBytes / sizeof(size_t))) >= totalSize) {
-    Log::MessageToConsole(LOG_ERROR, JTEXT("Unable to allocate memory due to out of bounds."
+    Log::MessageToStdOutput(LOG_ERROR, JTEXT("Unable to allocate memory due to out of bounds."
       " Allocated at location => ") + JStringUtils::ToString(start), false, JTEXT("Memory Pool"));
     return;
   });
@@ -104,7 +104,7 @@ void *MemoryPool::GetMemoryLocation(size_t location)
 {
  JACKAL_REMOVE_ON_RELEASE(
   if (location >= totalSize) {
-    Log::MessageToConsole(LOG_ERROR, JTEXT("Attempted to access memory location past"
+    Log::MessageToStdOutput(LOG_ERROR, JTEXT("Attempted to access memory location past"
       " total size. Attempted access at location => ") + JStringUtils::ToString(location),
       false, JTEXT("Memory Pool"));
     return nullptr;
