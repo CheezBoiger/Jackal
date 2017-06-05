@@ -42,15 +42,17 @@ void StartWindow(Win32Window *window)
   UpdateWindow(window->handle);
 }
 
-void WinProcRunner(Win32Window *window)
+void Win32MessagePump(Win32Window *window)
 {
   RegisterWin32Class();
   StartWindow(window);
 
   MSG msg;
-  while (!window->requestClose && GetMessage(&msg, window->handle, 0, 0)) { 
-    TranslateMessage(&msg);
-    DispatchMessage(&msg);
+  while (!window->requestClose) {
+    while ((PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) == TRUE)) { 
+      TranslateMessage(&msg);
+      DispatchMessage(&msg);
+    }
   }
 
   DestroyWindow(window->handle);
@@ -105,7 +107,7 @@ Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
    
 
   windows[window->wWindowName] = window;
-  std::thread thr(WinProcRunner, window);
+  std::thread thr(Win32MessagePump, window);
   thr.detach();
   return window;
 }
