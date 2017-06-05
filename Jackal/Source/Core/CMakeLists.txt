@@ -16,6 +16,8 @@ set(CORE_PUBLIC_LINUX_DIR            Public/Core/Linux)
 set(CORE_PUBLIC_APPLE_DIR            Public/Core/Apple)
 set(CORE_PUBLIC_STRUCTURE_DIR        Public/Core/Structure)
 set(CORE_PUBLIC_UTILITY_DIR          Public/Core/Utility)
+set(CORE_PUBLIC_INTRN_DIR            Public/Core/Internationalization)
+set(CORE_PRIVATE_INTRN_DIR           Private/Internationalization)
 set(CORE_PRIVATE_MATH_DIR            Private/Math)
 set(CORE_PRIVATE_MEMORY_DIR          Private/Memory)
 set(CORE_PRIVATE_PLATFORM_DIR        Private/Platform)
@@ -192,6 +194,12 @@ set(CORE_UTILITY
 )
 
 
+set(CORE_INTERNATIONALIZATION
+  ${CORE_PUBLIC_INTRN_DIR}/Locale.hpp
+  ${CORE_PRIVATE_INTRN_DIR}/Locale.cpp
+)
+
+
 set(FILE_GLOB
   ${CORE_MATH}
   ${CORE_PLATFORM}
@@ -199,6 +207,7 @@ set(FILE_GLOB
   ${CORE_MEMORY}
   ${CORE_STRUCTURE}
   ${CORE_UTILITY}
+  ${CORE_INTERNATIONALIZATION}
 )
 
 
