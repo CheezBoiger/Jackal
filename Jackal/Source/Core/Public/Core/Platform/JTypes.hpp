@@ -34,6 +34,6 @@ typedef const char *jstring;
 #if defined(_WIN32)
  typedef wchar_t    tchar;
 #else
- typdef char        tchar;
+ typedef char        tchar;
 #endif
 } // jkl

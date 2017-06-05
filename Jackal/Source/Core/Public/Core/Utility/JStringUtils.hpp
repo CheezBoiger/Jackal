@@ -31,7 +31,7 @@ public:
 #if defined(_WIN32)
     JString str = std::to_wstring(n);
 #else
-    JSTring str = std::to_string(n);
+    JString str = std::to_string(n);
 #endif
     return str;
   }

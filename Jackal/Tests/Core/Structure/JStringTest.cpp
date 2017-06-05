@@ -30,7 +30,7 @@ TEST(StructureTests, JStringTesting)
 
   jkl::JString jstr(JTEXT("これは簡単なテストです。"));
 
-  std::wcout << JTEXT("これは簡単なテストです。") << L"\n";
+  std::cout << jstr << "\n";
 #if defined(_WIN32)
   MessageBoxW(GetActiveWindow(), jstr.c_str(), JTEXT("Chickens"), (UINT )MB_OK);
 #endif
