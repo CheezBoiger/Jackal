@@ -56,12 +56,12 @@ Message *MessageLogDatabase::GetMessage(LogVerbosity type, uint32 index)
     if (index < table.size()) {
       message = &table[index];
     } else {
-      Log::MessageToConsole(LOG_ERROR, "Attempting to access out of bounds of database "
-        " storage.", false, "Message Database");
+      Log::MessageToConsole(LOG_ERROR, JTEXT("Attempting to access out of bounds of database "
+        " storage."), false, JTEXT("Message Database"));
     }
   } else {
-    Log::MessageToConsole(LOG_NOTIFY, "Message was not found.",
-      false, "Message Database");
+    Log::MessageToConsole(LOG_NOTIFY, JTEXT("Message was not found."),
+      false, JTEXT("Message Database"));
   }
 
   return message;

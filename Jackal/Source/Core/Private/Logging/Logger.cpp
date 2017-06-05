@@ -10,7 +10,7 @@
 
 #if TARGET_PLATFORM == JACKAL_WINDOWS
  // TODO(): Will need to be wcout in the future. Once we add in jstring.
- #define STDOUTPUT(text) std::cout << text;
+ #define STDOUTPUT(text) std::wcout << text;
 #else
  #define STDOUTPUT(text) std::cout << text;
 #endif
@@ -20,21 +20,21 @@ namespace jkl {
 
 uint16 Log::suppressed = 0x8;
 
-void Log::MessageToConsole(LogVerbosity type, std::string msg, bool8 store,
-  std::string nameTag)
+void Log::MessageToConsole(LogVerbosity type, JString msg, bool8 store,
+  JString nameTag)
 {
   if (!(suppressed & type)) {
     switch (type) {
-      case LOG_WARNING: std::cout << "Warning: "; break;
-      case LOG_ERROR: std::cout << "Error: "; break;
-      case LOG_RUNTIME_DEBUG: std::cout << "Debug: "; break;
-      case LOG_NOTIFY: std::cout << "Notice: "; break;
-      case LOG_HIDDEN: std::cout << "Hidden: "; break;
+      case LOG_WARNING: STDOUTPUT("Warning: "); break;
+      case LOG_ERROR: STDOUTPUT("Error: "); break;
+      case LOG_RUNTIME_DEBUG: STDOUTPUT("Debug: "); break;
+      case LOG_NOTIFY: STDOUTPUT("Notice: "); break;
+      case LOG_HIDDEN: STDOUTPUT("Hidden: "); break;
       default: break;
     }
     STDOUTPUT(msg << "\n");
     if (!nameTag.empty()) {
-      std::cout << "Tag: " << nameTag << "\n\n";
+      STDOUTPUT("Tag: " << nameTag << "\n\n");
     }
   }
   if (store) {
@@ -122,13 +122,13 @@ void Log::Unsuppress(LogVerbosity type)
 }
 
 
-void Log::StoreMessage(LogVerbosity type, std::string msg, std::string tag)
+void Log::StoreMessage(LogVerbosity type, JString msg, JString tag)
 {
   Message logMsg;
-  logMsg.timeStamp = ""; // for now.
+  logMsg.timeStamp = JTEXT(""); // for now.
   logMsg.verbose = type;
-  logMsg.msg = msg;
-  logMsg.tag = tag;
+  logMsg.msg = std::move(msg);
+  logMsg.tag = std::move(tag);
   MessageLogDatabase::StoreMessage(logMsg);
 }
 

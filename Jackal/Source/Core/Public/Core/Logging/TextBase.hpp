@@ -4,8 +4,8 @@
 
 #include "Core/Platform/JTypes.hpp"
 #include "Core/Platform/Platform.hpp"
+#include "Core/Structure/JString.hpp"
 
-#include <string>
 #include <utility>
 
 
@@ -37,12 +37,12 @@ enum LogVerbosity {
 // TODO(): Remove strings from this message and replace with JString.
 struct Message {
   LogVerbosity  verbose;
-  std::string   timeStamp;
-  std::string   tag;
-  std::string   msg;
+  JString   timeStamp;
+  JString   tag;
+  JString   msg;
 
-  Message(LogVerbosity verbosity = LogVerbosity::LOG_NORMAL, std::string msg = "",
-    std::string tag = "", std::string timestamp = "")
+  Message(LogVerbosity verbosity = LogVerbosity::LOG_NORMAL, 
+    JString msg = JTEXT(""), JString tag = JTEXT(""), JString timestamp = JTEXT(""))
     : verbose(verbosity)
     , timeStamp(timestamp)
     , tag(tag)

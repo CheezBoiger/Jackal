@@ -3,6 +3,7 @@
 
 #include <locale.h>
 #include <locale>
+#include <iostream>
 #include <unordered_map>
 #include <codecvt>
 
@@ -62,5 +63,6 @@ void Locale::SetLanguage(Language code)
 {
   setlocale(LC_ALL, languageLookUp[code]);
   std::locale::global(std::locale(languageLookUp[code]));
+  std::wcout.imbue(std::locale(languageLookUp[code]));
 }
 } // jkl

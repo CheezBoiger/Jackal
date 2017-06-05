@@ -4,10 +4,8 @@
 #include "Core/Platform/Api.hpp"
 #include "Core/Platform/JTypes.hpp"
 #include "Core/Platform/Platform.hpp"
+#include "Core/Structure/JString.hpp"
 #include "TextBase.hpp"
-
-// For now.
-#include <string>
 
 
 namespace jkl {
@@ -35,13 +33,14 @@ public:
   // Display a message immediately to the standard output console.
   // This won't save the message to the standard output unless specified
   // with the "store" parameter.
-  static void MessageToConsole(LogVerbosity type, std::string msg, bool8 store = false,
-    std::string tag = "");
+  static void MessageToConsole(LogVerbosity type, JString msg, bool8 store = false,
+    JString tag = JTEXT(""));
   
   // Stores a message into the Logger database. This allows the 
   // user to keep track of any logs needed, if required to look back
   // at anything during the status of the engine.
-  static void StoreMessage(LogVerbosity type, std::string msg, std::string nameTag = "");
+  static void StoreMessage(LogVerbosity type, JString msg, 
+    JString nameTag = JTEXT(""));
 
   // Dumps all messages and flushes them to the standard output.
   // This will ensure that the user needs to look at the entire history

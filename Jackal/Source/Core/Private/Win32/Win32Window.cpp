@@ -23,17 +23,17 @@ Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
   int32 height, LPCSTR wWindowName, HWND parent)
 {
   if (x < 0 || y < 0) {
-    Log::MessageToConsole(LOG_ERROR, R"(
+    Log::MessageToConsole(LOG_ERROR, JTEXT(R"(
       Unable to create window due to improper initialization x
       or y offsets.
-    )", true, TARGET_OS_NAME);
+    )"), true, TARGET_OS_NAME);
     return nullptr;
   }
   if (width <= 0 || height <= 0) {
-    Log::MessageToConsole(LOG_ERROR, R"(
+    Log::MessageToConsole(LOG_ERROR, JTEXT(R"(
       Unable to create window due to improper initialization 
       of "width" or "height". 
-    )", true, TARGET_OS_NAME);
+    )"), true, TARGET_OS_NAME);
     return nullptr;
   }
   Win32Window *window = new Win32Window();
@@ -72,9 +72,9 @@ void RegisterWin32Class()
   }
 
   if (!RegisterClassExW(&wc)) {
-    Log::MessageToConsole(LOG_ERROR, R"(
+    Log::MessageToConsole(LOG_ERROR, JTEXT(R"(
       Unable to register Win32 window class!
-    )", true, TARGET_OS_NAME);
+    )"), true, TARGET_OS_NAME);
   }
 }
 } // jkl
