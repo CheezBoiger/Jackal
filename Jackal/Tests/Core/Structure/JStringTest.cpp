@@ -32,8 +32,13 @@ TEST(StructureTests, JStringTesting)
   jkl::JString jstr(JTEXT("これは簡単なテストです。\n"));
   jkl::PrintToStdConsole(jstr);
 #if defined(_WIN32)
-  jkl::Win32Window *window = jkl::CreateWin32Window(0, 0, 640, 640, 
+  jkl::int32 width = 1440;
+  jkl::int32 height = 800;
+  jkl::Win32Window *window = jkl::CreateWin32Window(0, 0, width, height, 
     JTEXT("これは簡単なテストです。"), NULL);
+
+  ASSERT_EQ(window->width, width);
+  ASSERT_EQ(window->height, height);
 
   jkl::PrintToStdConsole(JTEXT("Press Enter to continue through."));
   std::cin.ignore();

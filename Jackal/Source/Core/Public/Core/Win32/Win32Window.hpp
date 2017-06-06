@@ -21,7 +21,7 @@ struct Win32Window {
   HWND        handle;
   HINSTANCE   wInstance;
   HMENU       wMenu;
-  LPCWSTR      wWindowName;
+  LPCWSTR     wWindowName;
   bool8       requestClose;
   bool8       requestMinimize;
 };

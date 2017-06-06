@@ -2,6 +2,8 @@
 // Copyright (c) Jackal Engine. MIT License.
 //
 #include "Core/Win32/Win32Window.hpp"
+#include "Core/Win32/Win32Thread.hpp"
+
 #include "Core/Logging/Logger.hpp"
 #include "Core/Structure/JString.hpp"
 
@@ -12,18 +14,13 @@
 namespace jkl {
 
 
-bool8 keepRunning = true;
-
-
 std::map<JString, Win32Window *> windows;
-
 
 void StartWindow(Win32Window *window)
 {
   window->wInstance = GetModuleHandle(NULL);
 
-  HWND handle = CreateWindowExW(
-    WS_EX_APPWINDOW,
+  HWND handle = CreateWindowW(
     JWIN32_CLASSNAME,
     window->wWindowName,
     WS_OVERLAPPEDWINDOW,
@@ -38,6 +35,15 @@ void StartWindow(Win32Window *window)
 
   window->handle = handle;
   DWORD style = SetPropW(window->handle, L"JWin32Window", window);
+
+  // Readjust the client window size, because WS_OVERLLAPPED forces win32
+  // to make room for the menu tabs above and the borders. This will ensure
+  // the the screen size want is EXACTLY what we told the program to make.
+  RECT windowRect = { window->x, window->y, window->width, window->height };
+  AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, GetMenu(window->handle) != NULL);
+  MoveWindow(window->handle, window->x, window->y, 
+    windowRect.right - windowRect.left, windowRect.bottom - windowRect.top, FALSE);
+
   ShowWindow(window->handle, SW_SHOW);
   UpdateWindow(window->handle);
 }
@@ -56,20 +62,34 @@ void Win32MessagePump(Win32Window *window)
   }
 
   DestroyWindow(window->handle);
-  std::printf("Stopped running.\n");
+  std::printf("\nStopped running.\n");
+}
+
+
+DWORD Win32WindowRunFunc(LPVOID d)
+{
+  Win32Window *window = reinterpret_cast<Win32Window *>(d);
+  std::printf("window size of %d\n", window->height);
+  return 0;
 }
 
 
 static LRESULT CALLBACK WindowProc(HWND hWnd,
   UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-  Win32Window *window = reinterpret_cast<Win32Window *>(GetPropW(hWnd, L"JWin32Window"));
+  // Keeps the handle to the window.
+  Win32Window *window = 
+    reinterpret_cast<Win32Window *>(GetPropW(hWnd, L"JWin32Window"));
   switch (uMsg) {
     case WM_CLOSE: 
     {
       window->requestClose = true;
     } break;
-  
+    case WM_SIZE:
+    {
+      window->width = LOWORD(lParam);
+      window->height = HIWORD(lParam);
+    } break;
   }
   return DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
@@ -108,6 +128,15 @@ Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
 
   windows[window->wWindowName] = window;
   std::thread thr(Win32MessagePump, window);
+
+  // Testing Win32 native thread handling through the STL library.
+  DWORD id = 0;
+  HANDLE thrHandle = CreateThread(NULL, 0, Win32WindowRunFunc, (LPVOID )window,
+    0,  &id);
+  
+  WaitForSingleObject(thrHandle, INFINITE);
+
+  CloseHandle(thrHandle);
   thr.detach();
   return window;
 }
@@ -118,9 +147,9 @@ bool8 DestroyWin32Window(Win32Window *window)
   if (!window) {
     return false;
   }
+
   window->requestClose = true;
   delete window;
-  window = nullptr;
   return true;
 }
 
@@ -171,7 +200,6 @@ bool8 InitWin32WindowLibs()
 
 void CleanUpWin32WindowLibs()
 {
-  keepRunning = false;
   for (auto window : windows) {
     window.second->requestClose = true;
   }
