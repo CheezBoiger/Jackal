@@ -21,29 +21,21 @@ private:
 // Window abstract of the core library. All windows are used here,
 // so the implementation is based on which Operating system the user
 // is in.
-struct IWindow {
-  virtual ~IWindow() { }
-
-  void *ExtractOwner() const { return owner; };
-
-  int32 xOffset;
-  int32 yOffset;
-  int32 width;
-  int32 height;
-  void *owner;
+struct Window {
+  virtual ~Window() { }
 };
 
 
 // Creates a window use with the renderer API. Must specify accurate width and height of the window,
 // along with optional title, monitor , and sharing window.
-IWindow *CreateWindow(uint32 width, uint32 height, const char *title, 
-  Monitor *monitor = nullptr, IWindow *sharing = nullptr);
+Window *(CreateWindow)(uint32 width, uint32 height, const char *title, 
+  Monitor *monitor = nullptr, Window *sharing = nullptr);
 
-bool8 DestroyWindow(IWindow *window);
+bool8 DestroyWindow(Window *window);
 
-void MakeContextCurrent(IWindow *window);
+void MakeContextCurrent(Window *window);
 
-IWindow *GetCurrentContext();
+Window *GetCurrentContext();
 
-void SwapBuffers(IWindow *window);
+void SwapBuffers(Window *window);
 } // jkl

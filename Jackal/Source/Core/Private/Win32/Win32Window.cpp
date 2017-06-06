@@ -62,6 +62,7 @@ void Win32MessagePump(Win32Window *window)
   }
 
   DestroyWindow(window->handle);
+  window->isClosed = true;
   std::printf("\nStopped running.\n");
 }
 
@@ -147,8 +148,9 @@ bool8 DestroyWin32Window(Win32Window *window)
   if (!window) {
     return false;
   }
-
-  window->requestClose = true;
+  if (!window->isClosed) {
+    return false;
+  }
   delete window;
   return true;
 }
@@ -203,5 +205,11 @@ void CleanUpWin32WindowLibs()
   for (auto window : windows) {
     window.second->requestClose = true;
   }
+}
+
+
+void RequestCloseWin32Window(Win32Window *window)
+{
+  window->requestClose = true;
 }
 } // jkl
