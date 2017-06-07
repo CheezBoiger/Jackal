@@ -150,11 +150,11 @@ Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
 
   windows[window->wWindowName] = window;
   //std::thread thr(Win32MessagePump, window);
-
   // Testing Win32 native thread handling through the STL library.
   DWORD id = 0;
-  HANDLE thrHandle = CreateThread(NULL, 0, Win32WindowRunFunc, (LPVOID )window,
-    0,  &id);
+  HANDLE thrHandle = CreateThread(NULL, 0, 
+    (LPTHREAD_START_ROUTINE )Win32WindowRunFunc, 
+    (LPVOID )window, 0,  &id);
 
   // If planning to join, simply wait for it to finish.  
   //WaitForSingleObject(thrHandle, INFINITE);
