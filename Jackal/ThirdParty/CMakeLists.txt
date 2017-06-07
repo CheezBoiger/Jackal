@@ -41,6 +41,8 @@ set(protobuf_BUILD_TESTS OFF CACHE BOOL "")
 set(protobuf_BUILD_EXAMPLES OFF CACHE BOOL "")
 add_subdirectory(protobuf/cmake)
 
+add_subdirectory(stb)
+
 
 # For organization inside Visual Studio specifically.
 if (MSVC)
@@ -56,4 +58,7 @@ if (MSVC)
   set_property(TARGET
     libprotobuf libprotobuf-lite js_embed libprotoc protoc
     PROPERTY FOLDER "ThirdParty/protobuf")
+  set_property(TARGET 
+    stb
+    PROPERTY FOLDER "ThirdParty/stb")
 endif()
