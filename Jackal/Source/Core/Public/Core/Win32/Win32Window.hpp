@@ -26,6 +26,7 @@ struct Win32Window : public Window {
   bool8       requestClose    : 1;
   bool8       requestMinimize : 1;
   bool8       isClosed        : 1;
+  bool8       isFullScreen    : 1;
 };
 
 

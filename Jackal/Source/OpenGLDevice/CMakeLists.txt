@@ -5,8 +5,10 @@ project("OpenGLRenderDevice")
 find_package(OpenGL)
 
 set(JACKAL_OPENGL_RENDEV_NAME "OpenGLDevice")
-set(OPENGL_PUBLIC_DIR    Public/OpenGLDevice)
-set(OPENGL_PRIVATE_DIR   Private)
+set(OPENGL_PUBLIC_DIR            Public/OpenGLDevice)
+set(OPENGL_PRIVATE_DIR           Private)
+set(OPENGL_WIN32_PUBLIC_DIR      ${OPENGL_PUBLIC_DIR}/Win32)
+set(OPENGL_WIN32_PRIVATE_DIR     ${OPENGL_PRIVATE_DIR}/Win32)
 
 set(OPENGL_FILES
   ${OPENGL_PUBLIC_DIR}/OpenGLDevice.hpp
@@ -15,6 +17,14 @@ set(OPENGL_FILES
 
   ${JACKAL_THIRD_PARTY_DIR}/opengl/glad/glad.c
 )
+
+if (WIN32)
+  set(OPENGL_FILES
+    ${OPENGL_FILES}
+    ${OPENGL_WIN32_PUBLIC_DIR}/Win32OpenGL.hpp
+    ${OPENGL_WIN32_PRIVATE_DIR}/Win32OpenGL.cpp
+  )
+endif()
 
 
 if (OPENGL_FOUND)

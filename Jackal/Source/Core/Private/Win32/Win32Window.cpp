@@ -7,7 +7,7 @@
 #include "Core/Logging/Logger.hpp"
 #include "Core/Structure/JString.hpp"
 
-#include <thread>
+// Standard template library temp.
 #include <map>
 
 
@@ -66,12 +66,26 @@ void Win32MessagePump(Win32Window *window)
   std::printf("\nStopped running.\n");
 }
 
-
 DWORD Win32WindowRunFunc(LPVOID d)
 {
   Win32Window *window = reinterpret_cast<Win32Window *>(d);
   std::printf("window size of %d\n", window->height);
+  Win32MessagePump(window);
   return 0;
+}
+
+
+void UpdateClientRect(Win32Window *window)
+{
+  if (window) {
+    RECT rect;
+    GetClientRect(window->handle, &rect);
+    ClientToScreen(window->handle, (POINT *)&rect.left);
+    ClientToScreen(window->handle, (POINT *)&rect.right);
+    ClipCursor(&rect);
+  } else {
+    ClipCursor(NULL);
+  }
 }
 
 
@@ -82,6 +96,12 @@ static LRESULT CALLBACK WindowProc(HWND hWnd,
   Win32Window *window = 
     reinterpret_cast<Win32Window *>(GetPropW(hWnd, L"JWin32Window"));
   switch (uMsg) {
+    case WM_PAINT:
+    {
+      PAINTSTRUCT ps;
+      HDC hdc = BeginPaint(hWnd, &ps);
+      EndPaint(hWnd, &ps);
+    } break;
     case WM_CLOSE: 
     {
       window->requestClose = true;
@@ -89,7 +109,7 @@ static LRESULT CALLBACK WindowProc(HWND hWnd,
     case WM_SIZE:
     {
       window->width = LOWORD(lParam);
-      window->height = HIWORD(lParam);
+      window->height = HIWORD(lParam); 
     } break;
   }
   return DefWindowProcW(hWnd, uMsg, wParam, lParam);
@@ -121,6 +141,7 @@ Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
   window->handle = nullptr;
   window->wWindowName = wWindowName;
   window->requestClose = false;
+  window->isFullScreen = false;
   window->x = x;
   window->y = y;
   window->width = width;
@@ -128,17 +149,18 @@ Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
    
 
   windows[window->wWindowName] = window;
-  std::thread thr(Win32MessagePump, window);
+  //std::thread thr(Win32MessagePump, window);
 
   // Testing Win32 native thread handling through the STL library.
   DWORD id = 0;
   HANDLE thrHandle = CreateThread(NULL, 0, Win32WindowRunFunc, (LPVOID )window,
     0,  &id);
-  
-  WaitForSingleObject(thrHandle, INFINITE);
 
+  // If planning to join, simply wait for it to finish.  
+  //WaitForSingleObject(thrHandle, INFINITE);
+
+  // Release handle to thread.
   CloseHandle(thrHandle);
-  thr.detach();
   return window;
 }
 
@@ -151,7 +173,14 @@ bool8 DestroyWin32Window(Win32Window *window)
   if (!window->isClosed) {
     return false;
   }
+
+  auto it = windows.find(window->wWindowName);
+  if (it != windows.end()) {
+    windows.erase(it);  
+  }
+
   delete window;
+  window = nullptr;
   return true;
 }
 
@@ -203,8 +232,19 @@ bool8 InitWin32WindowLibs()
 void CleanUpWin32WindowLibs()
 {
   for (auto window : windows) {
+
     window.second->requestClose = true;
+
+    while (!window.second->isClosed) {
+      if (window.second->isClosed) {
+          delete window.second;
+          break;
+      }
+    }
   }
+
+  // Final clear.
+  windows.clear();
 }
 
 

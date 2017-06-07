@@ -36,12 +36,15 @@ TEST(StructureTests, JStringTesting)
   jkl::int32 height = 800;
   jkl::Win32Window *window = jkl::CreateWin32Window(0, 0, width, height, 
     JTEXT("これは簡単なテストです。"), NULL);
+  
+  SetWindowTextW(window->handle, JTEXT("Fook you..."));
 
   ASSERT_EQ(window->width, width);
   ASSERT_EQ(window->height, height);
 
   jkl::PrintToStdConsole(JTEXT("Press Enter to continue through."));
   std::cin.ignore();
+  jkl::RequestCloseWin32Window(window);
   jkl::DestroyWin32Window(window);
   jkl::CleanUpWin32WindowLibs();
 #endif
