@@ -29,7 +29,7 @@ struct Win32Window : public Window {
 };
 
 
-
+// Initialize the Window Library.
 bool8 InitWin32WindowLibs();
 
 Win32Window *CreateWin32Window(int32 x, int32 y, int32 width, 

@@ -23,7 +23,8 @@ void SetWin32WindowOpenGLContext(Win32Window *window)
   if (window) {
     PIXELFORMATDESCRIPTOR pfd;
     int pf;
-
+    // TODO(): Need to set this on a seperate call, in order to avoid calling
+    // ChoosePixelFormat, as it is slow.
     JDEBUG("DC\n");
     HDC hDC = GetDC(window->handle);
     memset(&pfd, 0, sizeof(pfd));
@@ -66,5 +67,15 @@ void InitWGL()
 {
   wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMAT )
     wglGetProcAddress("wglChoosePixelFormatARB");
+}
+
+
+void Win32WindowMakeContextCurrent(Win32Window *window)
+{
+  if (window) {
+    wglMakeCurrent(GetDC(window->handle), wglGetCurrentContext());
+  } else {
+    wglMakeCurrent(NULL, NULL);
+  }
 }
 } // jkl

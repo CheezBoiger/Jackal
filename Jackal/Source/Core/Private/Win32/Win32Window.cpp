@@ -177,6 +177,7 @@ bool8 DestroyWin32Window(Win32Window *window)
     windows.erase(it);  
   }
 
+  RemovePropW(window->handle, L"JWin32Window");
   DestroyWindow(window->handle);
 
   delete window;
