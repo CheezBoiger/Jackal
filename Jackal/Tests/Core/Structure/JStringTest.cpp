@@ -19,7 +19,7 @@ TEST(StructureTests, JStringTesting)
 #if JACKAL_PLATFORM == JACKAL_WINDOWS
   jkl::InitWin32WindowLibs();
 #endif
-  jkl::Locale::SetLanguage(jkl::J_JAPANESE);
+  jkl::Locale::SetLanguage(jkl::L_JAPANESE);
 
   jkl::JString str(JTEXT("Testing simple string."));
 

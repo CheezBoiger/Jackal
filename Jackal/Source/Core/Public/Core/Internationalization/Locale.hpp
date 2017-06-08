@@ -9,31 +9,31 @@ namespace jkl {
 
 
 enum Language {
-  J_ENGLISH_EN,
-  J_SPANISH,
-  J_GERMAN,
-  J_RUSSIAN,
-  J_DUTCH,
-  J_ENGLISH_US,
-  J_FRENCH,
-  J_CHINESE,
-  J_KOREAN,
-  J_JAPANESE,
-  J_VIETNAMESE,
-  J_ENGLISH_CAN,
-  J_ARABIC,
+  L_ENGLISH_EN,
+  L_SPANISH,
+  L_GERMAN,
+  L_RUSSIAN,
+  L_DUTCH,
+  L_ENGLISH_US,
+  L_FRENCH,
+  L_CHINESE,
+  L_KOREAN,
+  L_JAPANESE,
+  L_VIETNAMESE,
+  L_ENGLISH_CAN,
+  L_ARABIC,
 };
 
 
 enum Currency {
-  J_D_US,
-  J_D_CAN,
-  J_D_DONG,
-  J_D_YEN,
-  J_D_YUAN,
-  J_D_F_FRANC,
-  J_D_EURO,
-  J_D_RUBLE,
+  C_D_US,
+  C_D_CAN,
+  C_D_DONG,
+  C_D_YEN,
+  C_D_YUAN,
+  C_D_F_FRANC,
+  c_D_EURO,
+  C_D_RUBLE,
 };
 
 
