@@ -2,10 +2,16 @@
 #include "OpenGLDevice/Win32/Win32OpenGL.hpp"
 #include "Core/Win32/Win32Config.hpp"
 
+#include "../OpenGLConfigs.hpp"
 #include "Core/Platform/Api.hpp"
 #include "Core/Logging/Debugging.hpp"
 #include "Core/Logging/Logger.hpp"
 
+
+
+typedef BOOL (APIENTRY * PFNWGLCHOOSEPIXELFORMAT)(HDC, 
+  const int *, const FLOAT *, UINT, int *, UINT *);
+PFNWGLCHOOSEPIXELFORMAT wglChoosePixelFormatARB;
 
 namespace jkl {
 
@@ -13,6 +19,7 @@ namespace jkl {
 
 void SetWin32WindowOpenGLContext(Win32Window *window)
 {
+  InitWGL();
   if (window) {
     PIXELFORMATDESCRIPTOR pfd;
     int pf;
@@ -30,6 +37,7 @@ void SetWin32WindowOpenGLContext(Win32Window *window)
     pfd.iLayerType = PFD_MAIN_PLANE;
     JDEBUG("PixelFormat choose\n");
     pf = ChoosePixelFormat(hDC, &pfd);
+ 
     if (pf == 0) {
       MessageBoxW(window->handle, 
         JTEXT("Failed to choose proper pixel format."), JTEXT("Failed"), MB_OK);
@@ -38,6 +46,7 @@ void SetWin32WindowOpenGLContext(Win32Window *window)
     JDEBUG("Set Pixel Format\n");
     SetPixelFormat(hDC, pf, &pfd);
     
+   
     HGLRC renderContext = wglCreateContext(hDC);
     wglMakeCurrent(hDC, renderContext);
   }
@@ -50,5 +59,12 @@ void Win32SwapBuffers(Win32Window *window)
     HDC hDC = GetDC(window->handle);
     SwapBuffers(hDC);
   }
+}
+
+
+void InitWGL()
+{
+  wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMAT )
+    wglGetProcAddress("wglChoosePixelFormatARB");
 }
 } // jkl

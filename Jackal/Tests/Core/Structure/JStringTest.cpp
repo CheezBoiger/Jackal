@@ -8,6 +8,8 @@
 #include <gtest/gtest.h>
 #include <string>
 
+#include <GLFW/glfw3.h>
+
 #if JACKAL_PLATFORM == JACKAL_WINDOWS
 #include "Core/Win32/Win32Window.hpp"
 #include "OpenGLDevice/Win32/Win32OpenGL.hpp"
@@ -16,6 +18,7 @@
 
 TEST(StructureTests, JStringTesting)
 {
+  //glfwInit();
 #if JACKAL_PLATFORM == JACKAL_WINDOWS
   jkl::InitWin32WindowLibs();
 #endif
@@ -42,8 +45,9 @@ TEST(StructureTests, JStringTesting)
     JTEXT("これは簡単なテストです。"), NULL);
   //jkl::Win32Window *window2 = jkl::CreateWin32Window(0, 0, width, height,
   //  JTEXT("هذه سلسلة اختبار بسيطة."), NULL);
-  
+  //GLFWwindow *win = glfwCreateWindow(640, 640, "Amazing", nullptr, nullptr);
   jkl::SetWin32WindowOpenGLContext(window);
+  //jkl::SetWin32WindowOpenGLContext(window2);
   jkl::OpenGLDevice::InitOpenGL();  
 
   ASSERT_EQ(window->width, width);
@@ -51,10 +55,14 @@ TEST(StructureTests, JStringTesting)
 
   jkl::PrintToStdConsole(JTEXT("Press close to continue through."));
 
-  while (!jkl::Win32WindowShouldClose(window)) {
+  while (!jkl::Win32WindowShouldClose(window) /*&& !glfwWindowShouldClose(win) */) {
     jkl::Win32SwapBuffers(window);
+    //jkl::Win32SwapBuffers(window2);
+    //glfwSwapBuffers(win);
+    //glfwPollEvents();
+    jkl::Win32WindowPollEvents();
   }
-  jkl::RequestCloseWin32Window(window);
+  //glfwDestroyWindow(win);
   jkl::DestroyWin32Window(window);
   //jkl::DestroyWin32Window(window2);
   jkl::CleanUpWin32WindowLibs();

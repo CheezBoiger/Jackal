@@ -25,7 +25,6 @@ struct Win32Window : public Window {
 
   bool8       requestClose    : 1;
   bool8       requestMinimize : 1;
-  bool8       isClosed        : 1;
   bool8       isFullScreen    : 1;
 };
 
@@ -48,6 +47,7 @@ void PrintToWin32Console(HANDLE consoleHandle, JString str);
 
 void RegisterWin32Class();
 
+void Win32WindowPollEvents();
 
 void CleanUpWin32WindowLibs();
 } // jkl
