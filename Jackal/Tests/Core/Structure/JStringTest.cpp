@@ -10,6 +10,8 @@
 
 #if JACKAL_PLATFORM == JACKAL_WINDOWS
 #include "Core/Win32/Win32Window.hpp"
+#include "OpenGLDevice/Win32/Win32OpenGL.hpp"
+#include "OpenGLDevice/OpenGLDevice.hpp"
 #endif
 
 TEST(StructureTests, JStringTesting)
@@ -38,18 +40,23 @@ TEST(StructureTests, JStringTesting)
 
   jkl::Win32Window *window = jkl::CreateWin32Window(0, 0, width, height, 
     JTEXT("これは簡単なテストです。"), NULL);
-  jkl::Win32Window *window2 = jkl::CreateWin32Window(0, 0, width, height,
-    JTEXT("هذه سلسلة اختبار بسيطة."), NULL);
+  //jkl::Win32Window *window2 = jkl::CreateWin32Window(0, 0, width, height,
+  //  JTEXT("هذه سلسلة اختبار بسيطة."), NULL);
   
+  jkl::SetWin32WindowOpenGLContext(window);
+  jkl::OpenGLDevice::InitOpenGL();  
 
   ASSERT_EQ(window->width, width);
   ASSERT_EQ(window->height, height);
 
-  jkl::PrintToStdConsole(JTEXT("Press Enter to continue through."));
+  jkl::PrintToStdConsole(JTEXT("Press close to continue through."));
 
+  while (!jkl::Win32WindowShouldClose(window)) {
+    jkl::Win32SwapBuffers(window);
+  }
   jkl::RequestCloseWin32Window(window);
   jkl::DestroyWin32Window(window);
-  jkl::DestroyWin32Window(window2);
+  //jkl::DestroyWin32Window(window2);
   jkl::CleanUpWin32WindowLibs();
 #endif
 }

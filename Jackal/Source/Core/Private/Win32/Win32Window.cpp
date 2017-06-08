@@ -64,13 +64,13 @@ void Win32MessagePump(Win32Window *window)
 
   DestroyWindow(window->handle);
   window->isClosed = true;
-  std::printf("\nStopped running.\n");
+  JDEBUG("\nStopped running.\n");
 }
 
 DWORD Win32WindowRunFunc(LPVOID d)
 {
   Win32Window *window = reinterpret_cast<Win32Window *>(d);
-  std::printf("window size of %d\n", window->height);
+  JDEBUG("window size of %d\n", window->height);
   Win32MessagePump(window);
   return 0;
 }
@@ -159,7 +159,9 @@ Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
 
   // If planning to join, simply wait for it to finish.  
   //WaitForSingleObject(thrHandle, INFINITE);
-
+  do {
+    WaitForSingleObject(GetModuleHandle(NULL), (DWORD )50);
+  } while(!window->handle);
   // Release handle to thread.
   CloseHandle(thrHandle);
   return window;
@@ -253,5 +255,11 @@ void CleanUpWin32WindowLibs()
 void RequestCloseWin32Window(Win32Window *window)
 {
   window->requestClose = true;
+}
+
+
+bool8 Win32WindowShouldClose(Win32Window *window)
+{
+  return window->requestClose;
 }
 } // jkl

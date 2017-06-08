@@ -42,6 +42,7 @@ void RequestCloseWin32Window(Win32Window *window);
 
 bool8 DestroyWin32Window(Win32Window *window);
 
+bool8 Win32WindowShouldClose(Win32Window *window);
 
 void PrintToWin32Console(HANDLE consoleHandle, JString str);
 

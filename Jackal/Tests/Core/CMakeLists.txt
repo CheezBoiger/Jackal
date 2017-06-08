@@ -44,6 +44,8 @@ endif()
 # Include core directory.
 include_directories(SYSTEM
   ../../Source/Core/Public
+  ../../Source/OpenGLDevice/Public
+  ../../Source/RenderDevice/Public
   ../../ThirdParty/g-truc/glm
 )
 
@@ -58,7 +60,7 @@ add_library(${JACKAL_CORE_TESTS} STATIC
 )
 
 # We are targeting our main core engine library to this testing framework.
-target_link_libraries(${JACKAL_CORE_TESTS} Jackal-Core)
+target_link_libraries(${JACKAL_CORE_TESTS} Jackal-Core OpenGLDevice)
 
 # Windows implementation, we will need to figure out out and take control of the 
 # operating system checking soon enough.
