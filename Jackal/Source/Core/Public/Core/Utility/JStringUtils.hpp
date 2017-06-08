@@ -28,11 +28,7 @@ public:
   template<typename Type>
   static JString ToString(Type n) {
     //static_assert<std::is_same<decltype(Type), tchar>::value, "No need to convert tchar");
-#if defined(_WIN32)
-    JString str = std::to_wstring(n);
-#else
-    JString str = std::to_string(n);
-#endif
+    JString str = TO_JSTRING(n);
     return str;
   }
 };
