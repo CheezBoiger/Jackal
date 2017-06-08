@@ -17,7 +17,6 @@ void SetWin32WindowOpenGLContext(Win32Window *window)
     PIXELFORMATDESCRIPTOR pfd;
     int pf;
 
-    // sample.
     JDEBUG("DC\n");
     HDC hDC = GetDC(window->handle);
     memset(&pfd, 0, sizeof(pfd));
@@ -26,8 +25,9 @@ void SetWin32WindowOpenGLContext(Win32Window *window)
     pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
     pfd.iPixelType = PFD_TYPE_RGBA;
     pfd.cColorBits = 32;
-    pfd.cDepthBits = 24;
+    pfd.cDepthBits = 32;
     pfd.cStencilBits = 8;
+    pfd.iLayerType = PFD_MAIN_PLANE;
     JDEBUG("PixelFormat choose\n");
     pf = ChoosePixelFormat(hDC, &pfd);
     if (pf == 0) {

@@ -17,6 +17,8 @@ public:
   // Initialize OpenGL library for first time.
   // This must be called if you plan on using OpenGL.
   static bool8 InitOpenGL();
+
+
 private:
 };
 } // jkl

@@ -195,7 +195,7 @@ void RegisterWin32Class()
   HINSTANCE instance = GetModuleHandle(NULL);
 
   wc.cbSize = sizeof(wc);
-  wc.style = CS_HREDRAW | CS_VREDRAW;
+  wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
   wc.hCursor = LoadCursorW(NULL, (LPCWSTR)IDC_ARROW);
   wc.lpszClassName = JWIN32_CLASSNAME;
   wc.lpfnWndProc = WindowProc;
