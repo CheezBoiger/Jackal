@@ -15,11 +15,12 @@ class JStringUtils {
 public:
 
   // TODO(): Remove heap allocation from these functions!
-  static void WideToUTF8(const wchar_t *input, char *output);
+  static void UTF8To16(const uint8 *input, uint16 *output);
+  static void UTF16To8(const uint16 *input, uint8 *output);
+  static void UTF16To32(const uint16 *input, uint32 *output);
+  static void UTF32To16(const uint32 *input, uint16 *output);
 
-  static void UTF8ToWide(const char *input, wchar_t *output);
-
-
+  // Get the string size of the tchar.
   static size_t GetStringSize(const tchar *src);
   static tchar *AllocateStringSize(size_t size);
 

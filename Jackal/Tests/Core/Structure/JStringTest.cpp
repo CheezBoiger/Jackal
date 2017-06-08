@@ -8,13 +8,13 @@
 #include <gtest/gtest.h>
 #include <string>
 
-#if defined(_WIN32)
+#if JACKAL_PLATFORM == JACKAL_WINDOWS
 #include "Core/Win32/Win32Window.hpp"
 #endif
 
 TEST(StructureTests, JStringTesting)
 {
-#if defined(_WIN32)
+#if JACKAL_PLATFORM == JACKAL_WINDOWS
   jkl::InitWin32WindowLibs();
 #endif
   jkl::Locale::SetLanguage(jkl::J_JAPANESE);
@@ -31,21 +31,25 @@ TEST(StructureTests, JStringTesting)
 
   jkl::JString jstr(JTEXT("これは簡単なテストです。\n"));
   jkl::PrintToStdConsole(jstr);
-#if defined(_WIN32)
+
+#if JACKAL_PLATFORM == JACKAL_WINDOWS
   jkl::int32 width = 1440;
   jkl::int32 height = 800;
+
   jkl::Win32Window *window = jkl::CreateWin32Window(0, 0, width, height, 
     JTEXT("これは簡単なテストです。"), NULL);
+  jkl::Win32Window *window2 = jkl::CreateWin32Window(0, 0, width, height,
+    JTEXT("هذه سلسلة اختبار بسيطة."), NULL);
   
-  SetWindowTextW(window->handle, JTEXT("Fook you..."));
 
   ASSERT_EQ(window->width, width);
   ASSERT_EQ(window->height, height);
 
   jkl::PrintToStdConsole(JTEXT("Press Enter to continue through."));
-  std::cin.ignore();
+
   jkl::RequestCloseWin32Window(window);
   jkl::DestroyWin32Window(window);
+  jkl::DestroyWin32Window(window2);
   jkl::CleanUpWin32WindowLibs();
 #endif
 }

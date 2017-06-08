@@ -9,36 +9,13 @@
 
 namespace jkl {
 
-void JStringUtils::WideToUTF8(const wchar_t *input, char *output)
+void JStringUtils::UTF8To16(const uint8 *input, uint16 *output)
 {
-#if JACKAL_PLATFORM == JACKAL_WINDOWS
-  size_t wideSize = wcslen(input);
-  int overallSize = WideCharToMultiByte(CP_UTF8, 0, &input[0], (int32)wideSize,
-    NULL, 0, NULL, NULL);
-
-  if (output) {
-    delete[] output;
-  }
-  output = new char[overallSize];
-
-  WideCharToMultiByte(CP_UTF8, 0, &input[0], (int32)wideSize,
-   output, overallSize, NULL, NULL);
-#endif
 }
 
 
-void JStringUtils::UTF8ToWide(const char *input, wchar_t *output)
+void JStringUtils::UTF16To8(const uint16 *input, uint8 *output)
 {
-#if defined(_WIN32)
-  size_t siz = strlen(input);
-  int overallSize = MultiByteToWideChar(CP_UTF8, 0, input, (int32 )siz, NULL, 0);
-  if (output) {
-    delete[] output;
-  }
-  output = new wchar_t[overallSize];
-  MultiByteToWideChar(CP_UTF8, 0, input, (int32 )siz, output, overallSize);
-#else
-#endif
 }
 
 

@@ -11,11 +11,15 @@
 // Be sure you are absolutely positive you need to remove a condition
 // from source code when on release, otherwise do not use this at all!
 #if JACKAL_DEBUG
+ #include <stdio.h>
+
  #define JACKAL_REMOVE_ON_RELEASE(cond) cond 
  #define JASSERT(cond) JKL_ASSERT(cond)
  #define JACKAL_ASSERT(cond) JASSERT(cond)
+ #define JDEBUG(p, ...) printf(p, ## __VA_ARGS__)
 #else
  #define JACKAL_REMOVE_ON_RELEASE(cond)
  #define JASSERT(cond)
- #deifne JACKAL_ASSERT(cond)
+ #define JACKAL_ASSERT(cond)
+ #define JDEBUG(p, ...)
 #endif 

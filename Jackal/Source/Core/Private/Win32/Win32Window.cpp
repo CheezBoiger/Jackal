@@ -4,6 +4,7 @@
 #include "Core/Win32/Win32Window.hpp"
 #include "Core/Win32/Win32Thread.hpp"
 
+#include "Core/Logging/Debugging.hpp"
 #include "Core/Logging/Logger.hpp"
 #include "Core/Structure/JString.hpp"
 
@@ -178,7 +179,7 @@ bool8 DestroyWin32Window(Win32Window *window)
   if (it != windows.end()) {
     windows.erase(it);  
   }
-
+  
   delete window;
   window = nullptr;
   return true;
@@ -231,20 +232,21 @@ bool8 InitWin32WindowLibs()
 
 void CleanUpWin32WindowLibs()
 {
-  for (auto window : windows) {
-
+  for (auto &window : windows) {
     window.second->requestClose = true;
-
-    while (!window.second->isClosed) {
+    do {
+      WaitForSingleObject(GetModuleHandle(NULL), (DWORD )100);
       if (window.second->isClosed) {
           delete window.second;
           break;
       }
-    }
+    } while (!window.second->isClosed);
   }
 
   // Final clear.
   windows.clear();
+
+  JDEBUG("Cleared\n");
 }
 
 
