@@ -33,7 +33,9 @@ typedef const char *jstring;
 // we need to compensate on win32 machines.
 #if defined(_WIN32)
  typedef wchar_t    tchar;
+ #define JTEXT(text) L##text
 #else
  typedef char        tchar;
+ #define JTEXT(text) text
 #endif
 } // jkl

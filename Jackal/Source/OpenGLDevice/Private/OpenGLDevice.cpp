@@ -8,6 +8,7 @@
 namespace jkl {
 
 
+const tchar *OpenGLDevice::renderAPI = JTEXT("OpenGL");
 
 bool8 OpenGLDevice::InitOpenGL()
 {

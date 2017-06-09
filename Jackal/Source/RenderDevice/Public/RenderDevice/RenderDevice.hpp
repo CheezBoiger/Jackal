@@ -3,7 +3,6 @@
 
 #include "Core/Platform/JTypes.hpp"
 #include "Core/Platform/Platform.hpp"
-#include "Core/Structure/JString.hpp"
 
 namespace jkl {
 
@@ -58,7 +57,7 @@ public:
   // we go with CPU based rendering calls.
   virtual void SubmitCommandBuffers(CommandBuffer *commandbuffers) = 0;
 
-  virtual JString RenderAPIString() = 0;
+  virtual const tchar *RenderAPIString() = 0;
   
   Type RenderAPI() { return api; }
 private:

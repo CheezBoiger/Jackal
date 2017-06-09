@@ -22,6 +22,8 @@ TEST(Win32, Win32WindowTest)
 
   jkl::OpenGLDevice::InitOpenGL();
 
+  //jkl::OpenGLDevice device;
+
   ASSERT_EQ(window->width, width);
   ASSERT_EQ(window->height, height);
 

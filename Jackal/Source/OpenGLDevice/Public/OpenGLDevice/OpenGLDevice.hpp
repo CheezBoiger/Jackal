@@ -13,6 +13,7 @@ namespace jkl {
 // Rendering functionality. It should act as a RHI, or 
 // Rendering Hardware Interface implementation of OpenGL.
 class OpenGLDevice : public RenderDevice {
+  static const tchar *renderAPI;
 public:
   // Initialize OpenGL library for first time.
   // This must be called if you plan on using OpenGL.
@@ -38,6 +39,10 @@ public:
   // Submit command buffers to the GPU for rendering. If OpenGL is being used, 
   // we go with CPU based rendering calls.
   void SubmitCommandBuffers(CommandBuffer *commandbuffers) override;
+
+  const tchar *RenderAPIString() override {  
+    return renderAPI;
+  }
 
 private:
 };

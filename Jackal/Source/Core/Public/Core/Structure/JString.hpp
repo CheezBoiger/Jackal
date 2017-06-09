@@ -9,13 +9,6 @@
 #include <string>
 
 
-#if TARGET_PLATFORM == JACKAL_WINDOWS
-#define JTEXT(text) L##text
-#else
-#define JTEXT(text) text
-#endif
-
-
 namespace jkl {
 
 
