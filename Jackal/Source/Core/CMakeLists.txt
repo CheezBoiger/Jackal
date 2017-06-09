@@ -228,6 +228,15 @@ add_library(${JACKAL_CORE_NAME} STATIC
   ${FILE_GLOB}
 )
 
+
+# Need to link our Core with xlib libraries.
+if (UNIX)
+ # X11 is required in order to run windows on Linux
+ find_package(X11 REQUIRED)
+ target_link_libraries(${JACKAL_CORE_NAME} ${X11_LIBRARIES})
+ include_directories(${X11_INCLUDE_DIR} )
+endif()
+
 # Link glfw for testing and implementation. This is used temporarily.
 target_link_libraries(${JACKAL_CORE_NAME} glfw)
 
