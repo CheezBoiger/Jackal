@@ -17,7 +17,7 @@ namespace jkl {
 
 
 
-void SetWin32WindowOpenGLContext(Win32Window *window)
+void Win32OpenGL::SetOpenGLContext(Win32Window *window)
 {
   InitWGL();
   if (window) {
@@ -54,7 +54,7 @@ void SetWin32WindowOpenGLContext(Win32Window *window)
 }
 
 
-void Win32SwapBuffers(Win32Window *window)
+void Win32OpenGL::SwapWindowBuffers(Win32Window *window)
 {
   if (window) {
     HDC hDC = GetDC(window->handle);
@@ -63,14 +63,14 @@ void Win32SwapBuffers(Win32Window *window)
 }
 
 
-void InitWGL()
+void Win32OpenGL::InitWGL()
 {
   wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMAT )
     wglGetProcAddress("wglChoosePixelFormatARB");
 }
 
 
-void Win32WindowMakeContextCurrent(Win32Window *window)
+void Win32OpenGL::MakeContextCurrent(Win32Window *window)
 {
   if (window) {
     wglMakeCurrent(GetDC(window->handle), wglGetCurrentContext());

@@ -10,7 +10,7 @@ namespace jkl {
 
 void PrintToStdConsole(JString str)
 {
-  PrintToWin32Console(GetStdHandle(STD_OUTPUT_HANDLE), str);
+  Win32Window::PrintToStdConsole(GetStdHandle(STD_OUTPUT_HANDLE), str);
 }
 } // jkl
 #else

@@ -36,6 +36,8 @@ if (WIN32)
   set(WIN32_TESTS
     ${TEST_WIN32_DIR}/Win32ThreadTest.hpp
     ${TEST_WIN32_DIR}/Win32ThreadTest.cpp
+    ${TEST_WIN32_DIR}/Win32WindowTest.cpp
+    ${TEST_WIN32_DIR}/Win32WindowTest.hpp
 )
 else()
   set(WIN32_TESTS)

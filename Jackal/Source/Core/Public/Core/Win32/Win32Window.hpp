@@ -26,28 +26,26 @@ struct Win32Window : public Window {
   bool8       requestClose    : 1;
   bool8       requestMinimize : 1;
   bool8       isFullScreen    : 1;
+
+  static Win32Window *Create(int32 width,
+    int32 height, LPCWSTR wWindowName, HWND parent);
+  
+  Win32Window *GetParent();
+
+  bool8 Destroy();
+
+  void RequestClose();
+
+  bool8 ShouldClose() {
+    return requestClose;
+  }
+
+  static void PrintToStdConsole(HANDLE consoleHandle, JString str);
+  static void RegisterWin32Class();
+  static void PollEvents();
 };
 
 
-// Initialize the Window Library.
 bool8 InitWin32WindowLibs();
-
-Win32Window *CreateWin32Window(int32 x, int32 y, int32 width, 
-  int32 height, LPCWSTR wWindowName, HWND parent);
-
-Win32Window *GetParentWindow(Win32Window *child);
-
-void RequestCloseWin32Window(Win32Window *window);
-
-bool8 DestroyWin32Window(Win32Window *window);
-
-bool8 Win32WindowShouldClose(Win32Window *window);
-
-void PrintToWin32Console(HANDLE consoleHandle, JString str);
-
-void RegisterWin32Class();
-
-void Win32WindowPollEvents();
-
-void CleanUpWin32WindowLibs();
+void Win32CleanUpWindowLibs();
 } // jkl

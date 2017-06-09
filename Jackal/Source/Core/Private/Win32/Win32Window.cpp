@@ -19,7 +19,7 @@ std::map<JString, Win32Window *> windows;
 
 void StartWindow(Win32Window *window)
 {
-  RegisterWin32Class();
+  Win32Window::RegisterWin32Class();
 
   window->wInstance = GetModuleHandle(NULL);
 
@@ -64,7 +64,7 @@ DWORD Win32WindowRunFunc(LPVOID d)
 }
 
 
-void Win32WindowPollEvents()
+void Win32Window::PollEvents()
 {
   MSG msg;
   while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
@@ -126,16 +126,9 @@ static LRESULT CALLBACK WindowProc(HWND hWnd,
 }
 
 
-Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
+Win32Window *Win32Window::Create(int32 width,
   int32 height, LPCWSTR wWindowName, HWND parent)
 {
-  if (x < 0 || y < 0) {
-    Log::MessageToStdOutput(LOG_ERROR, JTEXT(R"(
-      Unable to create window due to improper initialization x
-      or y offsets.
-    )"), true, TARGET_OS_NAME);
-    return nullptr;
-  }
   if (width <= 0 || height <= 0) {
     Log::MessageToStdOutput(LOG_ERROR, JTEXT(R"(
       Unable to create window due to improper initialization 
@@ -152,8 +145,8 @@ Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
   window->wWindowName = wWindowName;
   window->requestClose = false;
   window->isFullScreen = false;
-  window->x = x;
-  window->y = y;
+  window->x = 0;
+  window->y = 0;
   window->width = width;
   window->height = height;
    
@@ -166,27 +159,21 @@ Win32Window *CreateWin32Window(int32 x, int32 y, int32 width,
 }
 
 
-bool8 DestroyWin32Window(Win32Window *window)
+bool8 Win32Window::Destroy()
 {
-  if (!window) {
-    return false;
-  }
 
-  auto it = windows.find(window->wWindowName);
+  auto it = windows.find(wWindowName);
   if (it != windows.end()) {
     windows.erase(it);  
   }
 
-  RemovePropW(window->handle, L"JWin32Window");
-  DestroyWindow(window->handle);
-
-  delete window;
-  window = nullptr;
+  RemovePropW(handle, L"JWin32Window");
+  DestroyWindow(handle);
   return true;
 }
 
 
-void RegisterWin32Class()
+void Win32Window::RegisterWin32Class()
 {
   WNDCLASSEXW wc;
   ZeroMemory(&wc, sizeof(wc));
@@ -214,7 +201,7 @@ void RegisterWin32Class()
 }
 
 
-void PrintToWin32Console(HANDLE consoleHandle, JString str)
+void Win32Window::PrintToStdConsole(HANDLE consoleHandle, JString str)
 {
   SetConsoleOutputCP(CP_UTF8);
 
@@ -230,7 +217,7 @@ bool8 InitWin32WindowLibs()
 }
 
 
-void CleanUpWin32WindowLibs()
+void Win32CleanUpWindowLibs()
 {
   for (auto &window : windows) {
     delete window.second;
@@ -243,14 +230,8 @@ void CleanUpWin32WindowLibs()
 }
 
 
-void RequestCloseWin32Window(Win32Window *window)
+void Win32Window::RequestClose()
 {
-  window->requestClose = true;
-}
-
-
-bool8 Win32WindowShouldClose(Win32Window *window)
-{
-  return window->requestClose;
+  requestClose = true;
 }
 } // jkl
