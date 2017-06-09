@@ -2,6 +2,8 @@
 // Copyright (c) Jackal Engine. MIT License.
 //
 #pragma once
+#include "Core/Platform/Platform.hpp"
+
 #include <cstdint>
 #include <cstddef>
 
@@ -31,7 +33,7 @@ typedef const char *jstring;
 // Windows based systems love wide characters as unicode.
 // Unfortunately, this is ridiculous of them to do so, now
 // we need to compensate on win32 machines.
-#if defined(_WIN32)
+#if JACKAL_PLATFORM == JACKAL_WINDOWS
  typedef wchar_t    tchar;
  #define JTEXT(text) L##text
 #else
