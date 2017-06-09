@@ -45,16 +45,20 @@ if (Vulkan_FOUND)
       endforeach()
     endif()
 
-# Visual Studio organization. For Good purposes.
-  if (WIN32)
-    set_property(TARGET ${JACKAL_VULKAN_RENDEV_NAME} 
-      PROPERTY 
-      FOLDER ${JACKAL_ENGINE_DIRECTORY})
+  # Visual Studio organization. For Good purposes.
+    if (WIN32)
+      set_property(TARGET ${JACKAL_VULKAN_RENDEV_NAME} 
+        PROPERTY 
+        FOLDER ${JACKAL_ENGINE_DIRECTORY})
     endif()
   endif()
+
+
   include (Macros)
 
   set_cxx_standard(${JACKAL_VULKAN_RENDEV_NAME} 14)
+
+
 else()
   message(WARNING "Vulkan not found, ignoring Vulkan Device build...")
 endif()
