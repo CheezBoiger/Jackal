@@ -15,8 +15,8 @@ class Texture;
 class UniformBuffer;
 class GraphicsPipelineState;
 class ComputePipelineState;
-class CommandList;
 class CommandBuffer;
+class Material;
 
 // RenderDevice interface, used for the rendering system of the 
 // Jackal Game Engine. This is the Rendering Hardware Interface used
@@ -48,7 +48,16 @@ public:
   virtual RenderTarget *CreateRenderTarget() = 0;
   virtual VertexBuffer *CreateVertexBuffer() = 0;
   virtual CommandBuffer *CreateCommandBuffer() = 0;
-  virtual CommandList *CreateCommandList() = 0;
+
+
+  virtual void DestroyShader(Shader *shader) = 0;
+  virtual void DestroyFrameBuffer(FrameBuffer *framebuffer) = 0;
+  virtual void Destroy(RenderPass *pass) = 0;
+  virtual void Destroy(Texture *texture) = 0;
+  virtual void DestoryUniformBuffer(UniformBuffer *uniformbuffer) = 0;
+  virtual void DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) = 0;
+  virtual void DestroyComputePipelineState(ComputePipelineState *pipeline) = 0;
+  virtual void DestroyCommandBuffer(CommandBuffer *buffer) = 0;
 
   // Still Ongoing work.
   // TODO(): Setters for setting up the pipeline and rendering core.

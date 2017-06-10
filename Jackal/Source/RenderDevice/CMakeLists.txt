@@ -14,7 +14,6 @@ include_directories(
 
 set(RENDEV_FILES
   ${RENDEV_PUBLIC_DIR}/CommandBuffer.hpp
-  ${RENDEV_PUBLIC_DIR}/CommandList.hpp
   ${RENDEV_PUBLIC_DIR}/FrameBuffer.hpp
   ${RENDEV_PUBLIC_DIR}/GPUQuery.hpp
   ${RENDEV_PUBLIC_DIR}/RenderDevice.hpp
@@ -25,7 +24,7 @@ set(RENDEV_FILES
   ${RENDEV_PUBLIC_DIR}/TextureConfig.hpp
   ${RENDEV_PUBLIC_DIR}/UniformBuffer.hpp
   ${RENDEV_PUBLIC_DIR}/VertexBuffer.hpp
-  ${RENDEV_PRIVATE_DIR}/CommandList.cpp
+  ${RENDEV_PUBLIC_DIR}/Material.hpp
   ${RENDEV_PRIVATE_DIR}/GPUQuery.cpp
 )
 

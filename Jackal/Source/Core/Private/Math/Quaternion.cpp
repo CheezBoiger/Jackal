@@ -142,4 +142,37 @@ Quaternion Quaternion::Inverse() const
   conjugate /= norm;
   return conjugate;
 }
+
+
+Vector3f Quaternion::ToEulerAngles() const
+{
+  Vector3f eulerAngles;
+  real32 ysqrt = y * y;
+  
+  real32 t0 = 2.0f * (w * x + y * z);
+  real32 t1 = 1.0f - 2.0f * (x * x  + ysqrt);
+  eulerAngles.x = atan2f(t0, t1);
+
+  real32 t2 = 2.0f * (w * y  - z * x);
+  t2 = t2 > 1.0f ? 1.0f : t2;
+  t2 = t2 < -1.0f ? -1.0f : t2;
+  eulerAngles.y = asinf(t2);
+
+  real32 t3 = 2.0f * (w * z + x * y);
+  real32 t4 = 1.0f - 2.0f * (ysqrt + z * z);
+  eulerAngles.z = atan2f(t3, t4);
+
+  return eulerAngles;
+}
+
+
+Matrix4f Quaternion::ToMatrix4() const
+{
+  return Matrix4f(
+    1.0f - 2.0f*(y*y + z*z),  2.0f*(x*y + w*z),         2.0f*(x*z - w*y),         0.0f,
+    2.0f*(x*y - w*z),         1.0f - 2.0f*(x*x + z*z),  2.0f*(y*z + w*x),         0.0f,
+    2.0f*(x*z + w*y),         2.0f*(y*z - w*x),         1.0f - 2.0f*(x*x + y*y),  0.0f,
+    0.0f,                     0.0f,                     0.0f,                     1.0f   
+  );
+}
 } // jkl

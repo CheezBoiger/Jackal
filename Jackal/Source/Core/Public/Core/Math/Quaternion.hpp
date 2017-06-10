@@ -43,6 +43,7 @@ struct Quaternion {
   ) : w(w), x(x), y(y), z(z) 
   { } 
 
+  // Copy constructor.
   Quaternion(const Quaternion &quat)
     : w(quat.w), x(quat.x), y(quat.y), z(quat.z)
   { }
@@ -111,9 +112,7 @@ struct Quaternion {
   Vector3f ToEulerAngles() const;
 
   // Returns the matrix representation of this quaternion object.
-  Matrix4f ToMatrix4x4() const;
-
-  
+  Matrix4f ToMatrix4() const;
 
   // TODO(): More to be added soon.
 

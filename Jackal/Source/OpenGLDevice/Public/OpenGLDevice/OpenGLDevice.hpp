@@ -31,7 +31,15 @@ public:
   RenderTarget *CreateRenderTarget() override;
   VertexBuffer *CreateVertexBuffer() override;
   CommandBuffer *CreateCommandBuffer() override;
-  CommandList *CreateCommandList() override;
+
+  void DestroyShader(Shader *shader) override;
+  void DestroyFrameBuffer(FrameBuffer *framebuffer) override;
+  void Destroy(RenderPass *pass) override;
+  void Destroy(Texture *texture) override;
+  void DestoryUniformBuffer(UniformBuffer *uniformbuffer) override;
+  void DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
+  void DestroyComputePipelineState(ComputePipelineState *pipeline) override;
+  void DestroyCommandBuffer(CommandBuffer *buffer) override;
 
   // Still Ongoing work.
   // TODO(): Setters for setting up the pipeline and rendering core.
