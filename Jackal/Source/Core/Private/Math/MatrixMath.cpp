@@ -141,4 +141,38 @@ Matrix4 PerspectiveLH(const real32 fov, const real32 aspect, const real32 zNear,
   perspective[3][2] = -(2.0f * zFar * zNear) / (zFar - zNear);
   return perspective;
 }
+
+
+Matrix4 OrthographicLH(const real32 left, const real32 right, const real32 bottom,
+  const real32 top, const real32 zNear, const real32 zFar)
+{ 
+  Matrix4 proj = Matrix4::Identity();
+  proj[0][0] = 2.0f / (right - left);
+  proj[1][1] = 2.0f / (top - bottom);
+  proj[2][2] = 2.0f / (zFar - zNear);
+  proj[3][3] = 1.0f;
+
+  proj[3][0] = -(right + left) / (right - left);
+  proj[3][1] = -(top + bottom) / (top - bottom);
+  proj[3][2] = -(zFar + zNear) / (zFar - zNear);
+
+  return proj;
+}
+
+
+Matrix4 OrthographicRH(const real32 left, const real32 right, const real32 bottom, 
+  const real32 top, const real32 zNear, const real32 zFar)
+{
+  Matrix4 proj = Matrix4::Identity();
+  proj[0][0] = 2.0f / (right - left);
+  proj[1][1] = 2.0f / (top - bottom);
+  proj[2][2] = -2.0f / (zFar - zNear);
+  proj[3][3] = 1.0f;
+
+  proj[3][0] = -(right + left) / (right - left);
+  proj[3][1] = -(top + bottom) / (top - bottom);
+  proj[3][2] = -(zFar + zNear) / (zFar - zNear);
+
+  return proj;
+}
 } // jkl

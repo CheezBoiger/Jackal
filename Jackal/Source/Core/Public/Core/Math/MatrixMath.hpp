@@ -57,9 +57,12 @@ Matrix4 PerspectiveLH(const real32 fov, const real32 aspect, const real32 zNear,
 Matrix4 PerspectiveRH(const real32 fov, const real32 aspect, const real32 zNear, const real32 zFar);
 
 // Orthographic projection matrix. 
-Matrix4 Orthographic(const real32 fov, const real32 aspect, const real32 zNear, const real32 zFar);
+Matrix4 Orthographic(const real32 left, const real32 right, const real32 bottom, 
+  const real32 top, const real32 zNear, const real32 zFar);
 
-Matrix4 OrthographicLH(const real32 fov, const real32 aspect, const real32 zNear, const real32 zFar);
+Matrix4 OrthographicLH(const real32 left, const real32 right, const real32 bottom, 
+  const real32 top, const real32 zNear, const real32 zFar);
 
-Matrix4 OrthographicRH(const real32 fov, const real32 aspect, const real32 zNear, const real32 zFar);
+Matrix4 OrthographicRH(const real32 left, const real32 right, const real32 bottom, 
+  const real32 top, const real32 zNear, const real32 zFar);
 } // jkl
