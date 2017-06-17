@@ -97,6 +97,12 @@ struct Matrix4 {
   // matrix.
   void operator+=(const Matrix4 &m);
 
+  // Matrix addition with a scaler. 
+  void operator+=(const real32 scaler);
+
+  // Matrix subtraction with a  scaler.
+  void operator-=(const real32 scaler);
+
   // Matrix subtraction with m matrix. This does not return a newly constructed
   // matrix.
   void operator-=(const Matrix4 &m);

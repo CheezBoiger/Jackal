@@ -11,6 +11,8 @@ namespace jkl {
 
 
 // 2x2 Matrix. This handles relatively easy transformations, or conducting minors and whatnot.
+// This matrix is used for 2D transformations, as well as other, simple transformations should
+// users wish to simplify their work using 2D matrices.
 struct Matrix2 {
   Matrix2(
     real32 a00 = 1.0f, real32 a01 = 0.0f,
@@ -32,13 +34,25 @@ struct Matrix2 {
   // adding this matrix with m matrix.
   Matrix2 operator+(const Matrix2 &m) const;
 
+  Matrix2 operator+(const real32 scaler) const;
+
   // Typical Matrix subtraction. Returns a newly constructed matrix after
   // subtracting this matrix with m matrix.
   Matrix2 operator-(const Matrix2 &m) const;
 
+  Matrix2 operator-(const real32 scaler) const;
+
   // Matrix multiplication. Returns newly constructed matrix after 
-  // multiplying this matrix with matrix m.
+  // multiplying this matrix with matrix m. 
   Matrix2 operator*(const Matrix2 &m) const;
+
+  void operator+=(const Matrix2 &m);
+  void operator+=(const real32 scaler);
+  void operator-=(const Matrix2 &m);
+  void operator-=(const real32 scaler);
+  void operator*=(const Matrix2 &m);
+  void operator*=(const real32 scaler);
+  
 
   // Get the determinant of this 2x2 matrix.
   real32 Determinant() const;

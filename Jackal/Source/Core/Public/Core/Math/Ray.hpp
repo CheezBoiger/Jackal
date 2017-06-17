@@ -5,6 +5,9 @@
 #include "Core/Platform/JTypes.hpp"
 #include "Common.hpp"
 
+#include "Vector3.hpp"
+
+
 namespace jkl { 
 
 
@@ -12,6 +15,8 @@ namespace jkl {
 // a start point, and a direction. Such an object theoretically
 // extends infinitely, as we can assume. The importance simply allows
 // for raycasting, ray tracing, and many other useful tools for our arsenal.
-class Ray {
+struct Ray {
+  Vector3 point;
+  Vector3 direction;
 };
 } // jkl

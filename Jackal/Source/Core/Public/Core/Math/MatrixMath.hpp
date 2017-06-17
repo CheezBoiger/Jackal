@@ -13,7 +13,14 @@ namespace jkl {
 
 Matrix4 Inverse(const Matrix4 &original);
 
+// Transpose a 4x4 matrix.
 Matrix4 Transpose(const Matrix4 &original);
+
+// Transpose a 3x3 matrix.
+Matrix3 Transpose(const Matrix3 &original);
+
+// Transpose a 2x2 matrix.
+Matrix2 Transpose(const Matrix2 &original);
 
 // Translates the given matrix, to a new matrix value output.
 // This is handy to move objects in space.
