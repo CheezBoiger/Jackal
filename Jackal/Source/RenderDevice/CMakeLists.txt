@@ -26,6 +26,9 @@ set(RENDEV_FILES
   ${RENDEV_PUBLIC_DIR}/VertexBuffer.hpp
   ${RENDEV_PUBLIC_DIR}/Material.hpp
   ${RENDEV_PRIVATE_DIR}/GPUQuery.cpp
+  ${RENDEV_PUBLIC_DIR}/Blend.hpp
+  ${RENDEV_PUBLIC_DIR}/Vertex.hpp
+  ${RENDEV_PUBLIC_DIR}/ViewPort.hpp
 )
 
 add_library(${JACKAL_RENDEV_NAME} STATIC

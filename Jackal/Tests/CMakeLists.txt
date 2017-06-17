@@ -12,7 +12,7 @@ set(GOOGLE_TEST_DIR ${JACKAL_THIRD_PARTY_DIR}/googletest/googletest)
 # Subdirectory you are planning to link to.
 set(JACKAL_TEST_MAIN "JackalTestingFramework")
 set(JACKAL_CORE_TESTS "JackalCoreTests")
-set(JACKAL_TESTING_DIRECTORY "JackalTestDirectory")
+set(JACKAL_TESTING_DIRECTORY "JackalTest")
 
 include_directories(SYSTEM
   ${GOOGLE_TEST_DIR}/include

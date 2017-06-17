@@ -1,7 +1,7 @@
 # Copyright (c) Jackal Engine. MIT License.
 # Setup file.
 
-set(JACKAL_ENGINE_DIRECTORY "JackalEngineDirectory")
+set(JACKAL_ENGINE_DIRECTORY "JackalEngine")
 
 add_subdirectory(Core)
 add_subdirectory(RenderDevice)
