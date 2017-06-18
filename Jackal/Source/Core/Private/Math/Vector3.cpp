@@ -122,4 +122,13 @@ Vector3 Vector3::operator-() const
     -z
   );
 }
+
+
+void Vector3::Normalize()
+{
+  real32 magnitude = Magnitude();
+  x /= magnitude;
+  y /= magnitude;
+  z /= magnitude;
+}
 } // jkl

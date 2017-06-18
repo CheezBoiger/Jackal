@@ -2,7 +2,6 @@
 #include "OpenGLDevice/Win32/Win32OpenGL.hpp"
 #include "Core/Win32/Win32Config.hpp"
 
-#include "../OpenGLConfigs.hpp"
 #include "Core/Platform/Api.hpp"
 #include "Core/Logging/Debugging.hpp"
 #include "Core/Logging/Logger.hpp"

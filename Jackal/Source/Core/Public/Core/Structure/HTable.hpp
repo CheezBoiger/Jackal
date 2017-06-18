@@ -10,7 +10,11 @@ namespace jkl {
 template<typename K, typename V>
 class JMap {
 public:
-
+  virtual ~JMap() { }
+  virtual void Insert(const K &key, V &value) = 0;
+  virtual V *Get(const K &key) = 0;
+  virtual bool8 Remove(const K &key) = 0;
+  
 private:
 
 };
@@ -25,9 +29,13 @@ public:
   JHTable(uint32 size, V *data);
   
 
-  void Insert(const K &key, const V &value);
-  V *Get(const K &key);
-  bool Remove(const K &key);
+  void Insert(const K &key, V &value) override;
+  V *Get(const K &key) override;
+  bool8 Remove(const K &key) override;
+  bool8 Contains(const K &key) const;
+
+  void Clear();
+
 private:
 
   struct TPair {

@@ -42,6 +42,9 @@ struct Vector2 {
   // vector.
   Vector2 operator/(const real32 scaler) const;
 
+  // Normalize this object.
+  void Normalize();
+
   // Add a 2-component vector v into this vector.
   // It will not create a new vector, it will modify
   // this vector instead.
@@ -81,19 +84,19 @@ struct Vector2 {
 
   // comparisons by length.
   bool operator<(const Vector2 &v) const {
-    return Length() < v.Length();
+    return Magnitude() < v.Magnitude();
   }
 
   bool operator<=(const Vector2 &v) const {
-    return Length() <= v.Length();
+    return Magnitude() <= v.Magnitude();
   }
 
   bool operator>(const Vector2 &v) const {
-    return Length() > v.Length();
+    return Magnitude() > v.Magnitude();
   }
 
   bool operator>=(const Vector2 &v) const {
-    return Length() >= v.Length();
+    return Magnitude() >= v.Magnitude();
   }
 
   // comparisons by actual component values.
@@ -105,7 +108,7 @@ struct Vector2 {
     return (x == v.x && y == v.y);
   }
 
-  real32 Length() const {
+  real32 Magnitude() const {
     return Sqrtf((x * x) + (y * y));
   }
 

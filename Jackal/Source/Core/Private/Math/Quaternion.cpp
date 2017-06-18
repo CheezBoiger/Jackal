@@ -136,7 +136,7 @@ Quaternion Quaternion::Conjugate() const
 Quaternion Quaternion::Inverse() const
 {
   Quaternion conjugate = Conjugate();
-  real32 norm = Length();
+  real32 norm = Magnitude();
   norm = norm * norm;
   // Inverse is q* / norm^2
   conjugate /= norm;
@@ -174,5 +174,15 @@ Matrix4f Quaternion::ToMatrix4() const
     2.0f*(x*z + w*y),         2.0f*(y*z - w*x),         1.0f - 2.0f*(x*x + y*y),  0.0f,
     0.0f,                     0.0f,                     0.0f,                     1.0f   
   );
+}
+
+
+void Quaternion::Normalize()
+{
+  real32 norm = Magnitude();
+  w /= norm;
+  x /= norm;
+  y /= norm;
+  z /= norm;
 }
 } // jkl

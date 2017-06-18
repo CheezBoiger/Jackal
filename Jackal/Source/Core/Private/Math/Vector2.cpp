@@ -109,4 +109,12 @@ Vector2 Vector2::operator-() const
     -y
   );
 }
+
+
+void Vector2::Normalize()
+{
+  real32 magnitude = Magnitude();
+  x /= magnitude;
+  y /= magnitude;
+}
 } // jkl

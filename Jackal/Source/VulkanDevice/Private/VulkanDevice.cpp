@@ -2,7 +2,6 @@
 #pragma once
 
 #include "VulkanDevice/VulkanDevice.hpp"
-#include "VulkanConfigs.hpp"
 
 
 namespace jkl {

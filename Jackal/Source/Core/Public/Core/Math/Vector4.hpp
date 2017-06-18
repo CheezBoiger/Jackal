@@ -92,6 +92,8 @@ struct Vector4 {
   // scaler value. Modifies this vector object.
   void operator/=(const real32 scaler);
 
+  void Normalize();
+
   // Take the invert of this vector, and return it as
   // a new 4 component vector.
   Vector4 operator-() const;
@@ -102,19 +104,19 @@ struct Vector4 {
 
   // Comparison by length.
   bool operator<(const Vector4 &v) const {
-    return Length() < v.Length();
+    return Magnitude() < v.Magnitude();
   }
 
   bool operator>(const Vector4 &v) const {
-    return Length() > v.Length();
+    return Magnitude() > v.Magnitude();
   }
 
   bool operator<=(const Vector4 &v) const {
-    return Length() <= v.Length();
+    return Magnitude() <= v.Magnitude();
   }
 
   bool operator>=(const Vector4 &v) const {
-    return Length() >= v.Length();
+    return Magnitude() >= v.Magnitude();
   }
 
   // Comparison by actual values in the vector.
@@ -127,8 +129,8 @@ struct Vector4 {
   }
 
 
-  // Returns the length of this vector.
-  real32 Length() const {
+  // Returns the length/magnitude of this vector.
+  real32 Magnitude() const {
     return Sqrtf((x * x) + (y * y) + (z * z) + (w * w)); 
   }
 
@@ -143,4 +145,5 @@ struct Vector4 {
 typedef Vector4 Vec4;
 typedef Vector4 Vec4f;
 typedef Vector4 Vector4f;
+typedef Vector4 Colorf;
 } // jkl

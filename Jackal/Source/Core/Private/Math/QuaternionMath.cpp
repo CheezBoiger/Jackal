@@ -7,7 +7,7 @@ namespace jkl {
 
 Quaternion Normalize(const Quaternion &q)
 {
-  real32 norm = q.Length();
+  real32 norm = q.Magnitude();
   return (q / norm);
 }
 
@@ -40,5 +40,11 @@ Quaternion ToQuaternion(const Vector3f &eulerAngle)
   q.z = t1*t2*t4-t0*t3*t5;
 
   return q;
+}
+
+
+Quaternion Slerp(const Quaternion &q0, const Quaternion &q1, real32 t)
+{
+  return q0;
 }
 } // jkl

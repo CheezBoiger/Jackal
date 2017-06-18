@@ -115,9 +115,10 @@ struct Quaternion {
   Matrix4f ToMatrix4() const;
 
   // TODO(): More to be added soon.
+  void Normalize();
 
   // Returns the magnitude/norm/length of the quaternion.
-  real32 Length() const {
+  real32 Magnitude() const {
     return Sqrtf((w * w) + (x * x) + (y * y) + (z * z));
   }
 

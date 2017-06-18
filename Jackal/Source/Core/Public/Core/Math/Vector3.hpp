@@ -96,21 +96,23 @@ struct Vector3 {
     return -(*this);
   }
 
+  void Normalize();
+
   // comparisons by length.
   bool operator<(const Vector3 &v) const {
-    return Length() < v.Length();
+    return Magnitude() < v.Magnitude();
   }
 
   bool operator<=(const Vector3 &v) const {
-    return Length() <= v.Length();
+    return Magnitude() <= v.Magnitude();
   }
 
   bool operator>(const Vector3 &v) const {
-    return Length() > v.Length();
+    return Magnitude() > v.Magnitude();
   }
 
   bool operator>=(const Vector3 &v) const {
-    return Length() >= v.Length();
+    return Magnitude() >= v.Magnitude();
   }
 
   // comparison by actual components.
@@ -122,7 +124,7 @@ struct Vector3 {
     return (x == v.x && y == v.y && z == v.z);
   }
 
-  real32 Length() const {
+  real32 Magnitude() const {
     return Sqrtf((x * x) + (y * y) + (z * z));
   }
   union {

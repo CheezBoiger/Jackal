@@ -8,7 +8,7 @@ namespace jkl {
 
 Vector4 Normalize(const Vector4 &vec)
 {
-  real32 length = vec.Length();
+  real32 length = vec.Magnitude();
   return Vector4(
     vec.x / length,
     vec.y / length,
@@ -20,7 +20,7 @@ Vector4 Normalize(const Vector4 &vec)
 
 Vector3 Normalize(const Vector3 &vec)
 {
-  real32 length = vec.Length();
+  real32 length = vec.Magnitude();
   return Vector3(
     vec.x / length,
     vec.y / length,
@@ -31,7 +31,7 @@ Vector3 Normalize(const Vector3 &vec)
 
 Vector2 Normalize(const Vector2 &vec)
 {
-  real32 length = vec.Length();
+  real32 length = vec.Magnitude();
   return Vector2(
     vec.x / length,
     vec.y / length

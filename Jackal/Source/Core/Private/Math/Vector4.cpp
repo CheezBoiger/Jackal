@@ -135,4 +135,14 @@ Vector4 Vector4::operator-() const
     -w
   );
 }
+
+
+void Vector4::Normalize()
+{
+  real32 magnitude = Magnitude();
+  x /= magnitude;
+  y /= magnitude;
+  z /= magnitude;
+  w /= magnitude;
+}
 } // jkl
