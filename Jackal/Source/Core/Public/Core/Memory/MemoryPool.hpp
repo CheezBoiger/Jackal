@@ -17,8 +17,8 @@ namespace jkl {
 // as a data structure to handle most of the proper memory allocations.
 class MemoryPool {
 public:
-  // Default constructor
-  MemoryPool(size_t startSize = 2048);
+  // Default constructor 
+  MemoryPool(size_t startSizeBytes = 65536);
 
   ~MemoryPool();
 

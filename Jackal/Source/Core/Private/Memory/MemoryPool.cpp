@@ -11,10 +11,10 @@
 namespace jkl {
 
 
-MemoryPool::MemoryPool(size_t startSize)
-  : totalSize(startSize)
-  , sizeLeft(startSize)
-  , memory(new void *[startSize])
+MemoryPool::MemoryPool(size_t startSizeBytes)
+  : totalSize(startSizeBytes / sizeof(size_t))
+  , sizeLeft(startSizeBytes / sizeof(size_t))
+  , memory(new void *[startSizeBytes / sizeof(size_t)])
 {
   JACKAL_REMOVE_ON_RELEASE(
   Log::MessageToStdOutput(LOG_NOTIFY, JTEXT("Memory pool allocated to size of array: ")
@@ -43,7 +43,10 @@ void MemoryPool::ReserveTotalMemoryPoolSize(size_t size)
 void MemoryPool::ResizeTotalMemoryPoolSize(size_t size)
 {
   void *memTemp = memory;
-  memory = new void*[size];
+  memory = new void *[size / sizeof(size_t)];
+  totalSize = size / sizeof(size_t);
+  sizeLeft = totalSize;
+
   for (size_t i = 0; i < size; ++i) {
     *((size_t *)memory + i) = *((size_t *)memTemp + i);
   }

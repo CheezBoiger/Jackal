@@ -14,6 +14,30 @@ set(OPENGL_FILES
   ${OPENGL_PUBLIC_DIR}/OpenGLDevice.hpp
   ${OPENGL_PRIVATE_DIR}/OpenGLDevice.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLConfigs.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLCommandBuffer.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLComputePipelineState.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLGraphicsPipelineState.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLCubemap.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLFrameBuffer.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLGPUQuery.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLMaterial.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLRenderPass.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLRenderTarget.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLShader.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLTexture.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLUniformBuffer.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLVertexBuffer.hpp
+
+  ${OPENGL_PRIVATE_DIR}/OpenGLComputePipelineState.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLGraphicsPipelineState.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLGPUQuery.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLMaterial.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLRenderPass.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLRenderTarget.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLShader.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLTexture.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLUniformBuffer.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLVertexBuffer.cpp
 
   ${JACKAL_THIRD_PARTY_DIR}/opengl/glad/glad.c
 )

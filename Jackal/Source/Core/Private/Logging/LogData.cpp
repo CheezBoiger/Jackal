@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <unordered_map>
+#include <condition_variable>
 #include <mutex>
 #include <memory>
 
@@ -19,6 +20,7 @@ namespace jkl {
 // Data base mutex used to handle multi threading for 
 // this data base.
 std::mutex databaseMutex;
+std::condition_variable cv;
 
 
 struct VerboseHash {
@@ -37,17 +39,23 @@ struct VerboseHash {
 
 void MessageLogDatabase::StoreMessage(Message &mesg)
 {
+  std::unique_lock<std::mutex> lock(databaseMutex);
   auto iter = msgTable.find(mesg.verbose);
   if (iter != msgTable.end()) {
     std::vector<Message> msgs;
     msgTable[mesg.verbose] = std::move(msgs);
   }
   msgTable[mesg.verbose].push_back(std::move(mesg));
+
+  lock.unlock();
+  cv.notify_one();
 }
 
 
 Message *MessageLogDatabase::GetMessage(LogVerbosity type, uint32 index)
 {
+  std::unique_lock<std::mutex> lock(databaseMutex);
+
   auto iter = msgTable.find(type);
   Message *message = nullptr;
 
@@ -63,6 +71,9 @@ Message *MessageLogDatabase::GetMessage(LogVerbosity type, uint32 index)
     Log::MessageToStdOutput(LOG_NOTIFY, JTEXT("Message was not found."),
       false, JTEXT("Message Database"));
   }
+
+  lock.unlock();
+  cv.notify_one();
 
   return message;
 }

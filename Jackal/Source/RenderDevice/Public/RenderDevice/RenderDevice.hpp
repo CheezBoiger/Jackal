@@ -48,9 +48,11 @@ public:
   virtual RenderTarget *CreateRenderTarget() = 0;
   virtual VertexBuffer *CreateVertexBuffer() = 0;
   virtual CommandBuffer *CreateCommandBuffer() = 0;
+  virtual Material *CreateMaterial() = 0;
 
 
   virtual void DestroyShader(Shader *shader) = 0;
+  virtual void DestroyMaterial(Material *material) = 0;
   virtual void DestroyFrameBuffer(FrameBuffer *framebuffer) = 0;
   virtual void Destroy(RenderPass *pass) = 0;
   virtual void Destroy(Texture *texture) = 0;
