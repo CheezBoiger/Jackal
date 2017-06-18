@@ -54,7 +54,7 @@ endif()
 if (OPENGL_FOUND)
   include_directories(
     ${JACKAL_INCLUDE_DIR}
-    ${OPENGL_LIBRARIES}
+    ${OPENGL_INCLUDE_DIR}
   )
 
   # Add up the files of opengl.
