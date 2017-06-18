@@ -7,7 +7,7 @@
 #include "JTypes.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 // Network Abstraction. Provides all functionality for low level
@@ -18,4 +18,4 @@ public:
 private:
 
 };
-} // jkl
+} // jackal

@@ -2,7 +2,7 @@
 #include "Allocator.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 class StackAllocator : public Allocator {
@@ -18,4 +18,4 @@ public:
   void *ReConstruct() override;
 
 };
-} // jkl
+} // jackal

@@ -17,7 +17,7 @@
 #endif
 
 
-namespace jkl {
+namespace jackal {
 
 
-} // jkl
+} // jackal

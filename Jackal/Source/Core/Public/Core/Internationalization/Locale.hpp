@@ -5,7 +5,7 @@
 #include "Core/Platform/JTypes.hpp"
 #include "Core/Platform/Platform.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 enum Language {
@@ -46,4 +46,4 @@ public:
   static Language GetLanguage();
   static Currency GetCurrency();
 };
-} // jkl
+} // jackal

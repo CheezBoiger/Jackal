@@ -2,7 +2,7 @@
 #include "Core/Math/MatrixMath.hpp"
 #include "Core/Math/VectorMath.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 Matrix4 Transpose(const Matrix4 &original)
@@ -175,4 +175,4 @@ Matrix4 OrthographicRH(const real32 left, const real32 right, const real32 botto
 
   return proj;
 }
-} // jkl
+} // jackal

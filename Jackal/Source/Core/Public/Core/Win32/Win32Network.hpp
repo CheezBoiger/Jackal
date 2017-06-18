@@ -5,7 +5,7 @@
 #include "Core/Win32/Win32Config.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 // Win32 defined socket.
@@ -15,4 +15,4 @@ public:
 
 private:
 };
-} // jkl
+} // jackal

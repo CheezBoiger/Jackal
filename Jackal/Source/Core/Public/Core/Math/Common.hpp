@@ -10,7 +10,7 @@
 #define J_PI_2 (J_PI / 2)
 
 
-namespace jkl {
+namespace jackal {
 
 
 
@@ -76,4 +76,4 @@ inline float ToRadians(float degrees)
 {
   return degrees * (static_cast<float>(J_PI) / 180.0f);
 }
-} // jkl
+} // jackal

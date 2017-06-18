@@ -5,4 +5,4 @@
 namespace win32test {
 
 void WindowTest();
-} // jkl
+} // jackal

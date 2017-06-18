@@ -8,7 +8,7 @@
 #include "Vector4.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 Matrix4 Inverse(const Matrix4 &original);
@@ -72,4 +72,4 @@ Matrix4 OrthographicLH(const real32 left, const real32 right, const real32 botto
 
 Matrix4 OrthographicRH(const real32 left, const real32 right, const real32 bottom, 
   const real32 top, const real32 zNear, const real32 zFar);
-} // jkl
+} // jackal

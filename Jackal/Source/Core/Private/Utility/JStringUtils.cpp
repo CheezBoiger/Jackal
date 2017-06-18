@@ -7,7 +7,7 @@
  #include "Core/Win32/Win32Config.hpp"
 #endif
 
-namespace jkl {
+namespace jackal {
 
 void JStringUtils::UTF8To16(const uint8 *input, uint16 *output)
 {
@@ -46,4 +46,4 @@ void JStringUtils::StringCopy(tchar *dest, const tchar *src)
 
 
 
-} // jkl
+} // jackal

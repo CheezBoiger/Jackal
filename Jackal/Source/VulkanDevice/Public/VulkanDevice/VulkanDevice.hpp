@@ -4,7 +4,7 @@
 #include "RenderDevice/RenderDevice.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 // Vulkan Render Device, which handles all of Vulkan rendering API and 
@@ -16,4 +16,4 @@ public:
 private:
 
 };
-} // jkl
+} // jackal

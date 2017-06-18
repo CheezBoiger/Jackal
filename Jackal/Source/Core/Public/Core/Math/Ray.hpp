@@ -8,7 +8,7 @@
 #include "Vector3.hpp"
 
 
-namespace jkl { 
+namespace jackal { 
 
 
 // Ray class defines a Ray object in 3D space that defines 
@@ -19,4 +19,4 @@ struct Ray {
   Vector3 point;
   Vector3 direction;
 };
-} // jkl
+} // jackal

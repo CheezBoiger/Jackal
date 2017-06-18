@@ -4,7 +4,7 @@
 #include "Core/Platform/JTypes.hpp"
 #include "Core/Platform/Platform.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 template<typename T>
@@ -66,4 +66,4 @@ private:
   uint32 size;
   Type *arr;
 };
-} // jkl
+} // jackal

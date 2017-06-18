@@ -3,7 +3,7 @@
 #include "Core/Math/Matrix4.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 Matrix4 Matrix4::operator+(const Matrix4 &m) const 
@@ -224,4 +224,4 @@ bool Matrix4::operator==(const Matrix4 &m) const
   }
   return true;
 }
-} // jkl
+} // jackal

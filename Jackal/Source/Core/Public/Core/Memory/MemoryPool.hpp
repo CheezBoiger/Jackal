@@ -5,7 +5,7 @@
 #include "Core/Platform/JTypes.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 // Memory Pool used by the engine to allocate, deallocate and monitor memory usage.
@@ -78,4 +78,4 @@ private:
   // Indices left over after totalSize - allocation.
   size_t sizeLeft;
 };
-} // jkl
+} // jackal

@@ -5,7 +5,7 @@
 #include "Core/Platform/JTypes.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 class MemoryPool;
@@ -67,4 +67,4 @@ protected:
   // Used memory that was allocated by this allocator.
   size_t usedMemory;
 };
-} // jkl
+} // jackal

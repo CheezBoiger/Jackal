@@ -8,7 +8,7 @@
 #include "Common.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 // Matrix 4 by 4 square. Used for mainly things like transformation and whatnot.
 // Structure is as follows: 
@@ -159,4 +159,4 @@ struct Matrix4 {
 typedef Matrix4 Mat4;
 typedef Matrix4 Mat4f;
 typedef Matrix4 Matrix4f;
-} // jkl
+} // jackal

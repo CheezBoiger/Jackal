@@ -5,11 +5,11 @@
 #include "Core/Platform/JTypes.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 
 struct Thread {
 
 };
-} // jkl
+} // jackal

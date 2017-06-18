@@ -10,7 +10,7 @@
 #include "Matrix4.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 // Convert a quaternion into a 4 by 4 matrix
 // representation.
@@ -40,4 +40,4 @@ real32 Dot(const Quaternion &quat1, const Quaternion &quat2);
 
 // Rotate a quaternion to the direction of a vector.
 Quaternion Rotate(const Quaternion &quat, const Vector3f &dir);
-} // jkl
+} // jackal

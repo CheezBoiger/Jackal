@@ -12,7 +12,7 @@
 #define VT100_CMD_CLR "\33[2K\r"
 
 
-namespace jkl {
+namespace jackal {
 
 // The Log type of the message to be worked with.
 enum LogVerbosity {
@@ -81,4 +81,4 @@ struct Message {
     return (*this);
   }
 };
-} // jkl
+} // jackal

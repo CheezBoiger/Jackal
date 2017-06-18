@@ -12,7 +12,7 @@
 #include <map>
 
 
-namespace jkl {
+namespace jackal {
 
 
 std::map<JString, Win32Window *> windows;
@@ -234,4 +234,4 @@ void Win32Window::RequestClose()
 {
   requestClose = true;
 }
-} // jkl
+} // jackal

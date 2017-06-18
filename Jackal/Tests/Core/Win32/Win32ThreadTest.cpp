@@ -7,7 +7,7 @@
 
 TEST(Win32ThreadTesting, Win32ThreadCreation)
 {
-  jkl::Win32Thread thr;
+  jackal::Win32Thread thr;
 }
 
 

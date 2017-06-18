@@ -5,7 +5,7 @@
 #include "Core/Platform/Platform.hpp"
 #include "Core/Platform/JTypes.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 // Win32 Thread handler object. This thread object is intended to 
@@ -69,4 +69,4 @@ private:
   // Handle to the Win32 thread object.
   HANDLE handle;
 };
-} // jkl
+} // jackal

@@ -7,7 +7,7 @@
 #include "Common.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 // 3-Component vector object for use in mathematics inside jackal.

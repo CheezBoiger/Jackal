@@ -5,7 +5,7 @@
 #include "RenderDevice/RenderDevice.hpp"
 #include "OpenGLConfigs.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 // OpenGL Rendering Device. This Device handles all 
@@ -52,4 +52,4 @@ public:
 
 private:
 };
-} // jkl
+} // jackal

@@ -3,7 +3,7 @@
 #include "Core/Math/Quaternion.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 Quaternion Quaternion::operator+(const Quaternion &q) const 
@@ -185,4 +185,4 @@ void Quaternion::Normalize()
   y /= norm;
   z /= norm;
 }
-} // jkl
+} // jackal

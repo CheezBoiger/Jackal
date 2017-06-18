@@ -3,7 +3,7 @@
 #include "Core/Math/Vector4.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 Vector4 Vector4::operator+(const Vector4 &v) const 
@@ -145,4 +145,4 @@ void Vector4::Normalize()
   z /= magnitude;
   w /= magnitude;
 }
-} // jkl
+} // jackal

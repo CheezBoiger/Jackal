@@ -3,7 +3,7 @@
 #include "Core/Platform/JTypes.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 class VertexBuffer;
@@ -34,4 +34,4 @@ public:
 protected:
   bool8 recording;
 };
-} // jkl
+} // jackal

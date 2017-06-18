@@ -3,7 +3,7 @@
 #include "Core/Math/Vector2.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 Vector2 Vector2::operator+(const Vector2 &v) const 
@@ -117,4 +117,4 @@ void Vector2::Normalize()
   x /= magnitude;
   y /= magnitude;
 }
-} // jkl
+} // jackal

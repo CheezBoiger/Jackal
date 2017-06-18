@@ -15,7 +15,7 @@ namespace std {
 }
 
 
-namespace jkl {
+namespace jackal {
 
 // Data base mutex used to handle multi threading for 
 // this data base.
@@ -77,4 +77,4 @@ Message *MessageLogDatabase::GetMessage(LogVerbosity type, uint32 index)
 
   return message;
 }
-} // jkl
+} // jackal

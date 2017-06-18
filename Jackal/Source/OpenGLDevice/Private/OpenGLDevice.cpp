@@ -4,7 +4,7 @@
 #include "OpenGLDevice/OpenGLDevice.hpp"
 #include "Core/Logging/Debugging.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 const tchar *OpenGLDevice::renderAPI = JTEXT("OpenGL");
@@ -15,4 +15,4 @@ bool8 OpenGLDevice::InitOpenGL()
   JDEBUG("OpenGL init: %d\n", success);
   return success;
 }
-} // jkl
+} // jackal

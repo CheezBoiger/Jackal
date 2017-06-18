@@ -2,7 +2,7 @@
 
 #include "Core/Math/QuaternionMath.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 Quaternion Normalize(const Quaternion &q)
@@ -47,4 +47,4 @@ Quaternion Slerp(const Quaternion &q0, const Quaternion &q1, real32 t)
 {
   return q0;
 }
-} // jkl
+} // jackal

@@ -7,7 +7,7 @@
 #include "Core/Memory/Allocator.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 // Memory Leak detector, used to check for any memory leaks within Allocator.
@@ -21,4 +21,4 @@ public:
 private:
   uint32 numLeaks;
 };
-} // jkl
+} // jackal

@@ -7,7 +7,7 @@
 
 
 
-namespace jkl {
+namespace jackal {
 
 
 // Win32 OpenGL class singleton, is used to handle opengl specific features 
@@ -34,4 +34,4 @@ public:
   // rendered.
   static void MakeContextCurrent(Win32Window *window);
 };
-} // jkl
+} // jackal

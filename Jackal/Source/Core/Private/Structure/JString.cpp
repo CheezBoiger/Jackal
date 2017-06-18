@@ -6,25 +6,25 @@
 #include "Core/Win32/Win32Window.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 void PrintToStdConsole(JString str)
 {
   Win32Window::PrintToStdConsole(GetStdHandle(STD_OUTPUT_HANDLE), str);
 }
-} // jkl
+} // jackal
 #else
 
 #include <iostream>
 
 
-namespace jkl {
+namespace jackal {
 
 void PrintToStdConsole(JString str)
 {
   std::cout << str;
 }
-} // jkl
+} // jackal
 #endif
 
 

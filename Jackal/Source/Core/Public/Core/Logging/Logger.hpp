@@ -8,7 +8,7 @@
 #include "TextBase.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 // Static Logger class. Organizes, manages, and displays messages
@@ -74,4 +74,4 @@ private:
   // Suppressed values in the logger database.
   static uint16 suppressed;
 };
-} // jkl
+} // jackal

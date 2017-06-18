@@ -7,7 +7,7 @@
 #include "Common.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 // 2x2 Matrix. This handles relatively easy transformations, or conducting minors and whatnot.
@@ -79,4 +79,4 @@ struct Matrix2 {
 typedef Matrix2 Mat2;
 typedef Matrix2 Mat2f;
 typedef Matrix2 Matrix2f;
-} // jkl
+} // jackal

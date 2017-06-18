@@ -3,7 +3,7 @@
 #include "Core/Math/Matrix3.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 Matrix3 Matrix3::operator+(const Matrix3 &m) const
@@ -127,4 +127,4 @@ Matrix2 Matrix3::Minor(uint32 row, uint32 col) const
   
   return minor;
 }
-} // jkl
+} // jackal

@@ -4,7 +4,7 @@
 #pragma once
 
 
-namespace jkl {
+namespace jackal {
 
 
 // Hardware Abstraction Layer object. Performs
@@ -16,4 +16,4 @@ public:
   
   
 };
-} // jkl
+} // jackal

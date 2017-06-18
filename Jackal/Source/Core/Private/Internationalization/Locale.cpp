@@ -41,7 +41,7 @@
 #endif
 
 #define L_PAIR(lang, loc) { lang, loc }
-namespace jkl {
+namespace jackal {
 
 
 class LanguageHash {
@@ -68,4 +68,4 @@ void Locale::SetLanguage(Language code)
   std::locale::global(std::locale(languageLookUp[code]));
   std::wcout.imbue(std::locale(languageLookUp[code]));
 }
-} // jkl
+} // jackal

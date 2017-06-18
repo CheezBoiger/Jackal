@@ -8,7 +8,7 @@
 #include "Common.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 // 3x3 matrix implementation.
@@ -105,4 +105,4 @@ struct Matrix3 {
 typedef Matrix3 Mat3;
 typedef Matrix3 Mat3f;
 typedef Matrix3 Matrix3f;
-} // jkl
+} // jackal

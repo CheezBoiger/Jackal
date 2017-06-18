@@ -13,7 +13,7 @@ namespace coretest {
 // Memory allocations with resulting testing for use with malloc, and 
 // whatnot.
 TEST(MemoryTesting, AllocateMemory) {
-  jkl::MemoryPool pool;
+  jackal::MemoryPool pool;
   auto start = std::chrono::high_resolution_clock::now();
   long long *ptr = (long long *)pool.AllocateMemory(0, sizeof(long long) * 2000);
   auto end = std::chrono::high_resolution_clock::now();
@@ -24,18 +24,18 @@ TEST(MemoryTesting, AllocateMemory) {
 
   auto t = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
-  jkl::Log::MessageToStdOutput(jkl::LOG_NOTIFY, JTEXT("MemPool alloc time ") 
-    + jkl::JStringUtils::ToString(t) + JTEXT(" ns"));
+  jackal::Log::MessageToStdOutput(jackal::LOG_NOTIFY, JTEXT("MemPool alloc time ") 
+    + jackal::JStringUtils::ToString(t) + JTEXT(" ns"));
 
   start = std::chrono::high_resolution_clock::now();
   long long *mptr = (long long *)std::malloc(sizeof(long long) * 2000);
   end = std::chrono::high_resolution_clock::now();
 
   t = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-  jkl::Log::MessageToStdOutput(jkl::LOG_NOTIFY, JTEXT("Malloc alloc time ")
-    + jkl::JStringUtils::ToString(t) + JTEXT(" ns"));
-  jkl::Log::MessageToStdOutput(jkl::LOG_NOTIFY, JTEXT("MemoryPool memory left: ")
-    + jkl::JStringUtils::ToString(pool.GetMemorySizeLeft() * sizeof(size_t))
+  jackal::Log::MessageToStdOutput(jackal::LOG_NOTIFY, JTEXT("Malloc alloc time ")
+    + jackal::JStringUtils::ToString(t) + JTEXT(" ns"));
+  jackal::Log::MessageToStdOutput(jackal::LOG_NOTIFY, JTEXT("MemoryPool memory left: ")
+    + jackal::JStringUtils::ToString(pool.GetMemorySizeLeft() * sizeof(size_t))
     + JTEXT(" bytes"));
 
   size_t allocSize = (pool.GetTotalMemoryPoolSize() * sizeof(size_t))
@@ -48,8 +48,8 @@ TEST(MemoryTesting, AllocateMemory) {
 
   EXPECT_EQ(pool.GetMemorySizeLeft(), pool.GetTotalMemoryPoolSize());
 
-  jkl::Log::MessageToStdOutput(jkl::LOG_NOTIFY, JTEXT("MemoryPool memory left after clearing: ")
-    + jkl::JStringUtils::ToString(pool.GetMemorySizeLeft() * sizeof(size_t))
+  jackal::Log::MessageToStdOutput(jackal::LOG_NOTIFY, JTEXT("MemoryPool memory left after clearing: ")
+    + jackal::JStringUtils::ToString(pool.GetMemorySizeLeft() * sizeof(size_t))
     + JTEXT(" bytes"));
 }
 

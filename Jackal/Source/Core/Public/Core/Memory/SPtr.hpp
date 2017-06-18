@@ -3,7 +3,7 @@
 
 #include "Allocator.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 // Simple smart pointer, not having to deal with the STL library standard.
@@ -29,4 +29,4 @@ private:
   Type *type;
   Allocator alloc;
 };
-} // jkl
+} // jackal

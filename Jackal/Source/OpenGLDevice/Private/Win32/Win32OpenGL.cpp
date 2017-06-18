@@ -12,7 +12,7 @@ typedef BOOL (APIENTRY * PFNWGLCHOOSEPIXELFORMAT)(HDC,
   const int *, const FLOAT *, UINT, int *, UINT *);
 PFNWGLCHOOSEPIXELFORMAT wglChoosePixelFormatARB;
 
-namespace jkl {
+namespace jackal {
 
 
 
@@ -77,4 +77,4 @@ void Win32OpenGL::MakeContextCurrent(Win32Window *window)
     wglMakeCurrent(NULL, NULL);
   }
 }
-} // jkl
+} // jackal

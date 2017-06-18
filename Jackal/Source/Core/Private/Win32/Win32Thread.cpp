@@ -3,7 +3,7 @@
 
 #include "Core/Win32/Win32Thread.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 void Win32Thread::ThisThread::SleepFor()
@@ -45,4 +45,4 @@ bool8 Win32Thread::IsJoinable()
 
 
 
-} // jkl
+} // jackal

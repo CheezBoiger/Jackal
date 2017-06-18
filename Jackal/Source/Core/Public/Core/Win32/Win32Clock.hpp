@@ -6,11 +6,11 @@
 #include "Core/Platform/JTypes.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 class Win32Clock {
 public:
   static SYSTEMTIME GetSystemTime();
 };
-} // jkl
+} // jackal

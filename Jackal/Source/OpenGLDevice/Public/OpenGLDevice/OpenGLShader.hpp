@@ -5,7 +5,7 @@
 #include "OpenGLConfigs.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 // OpenGL Shader object.
@@ -24,4 +24,4 @@ private:
 
   GLuint id;
 };
-} // jkl
+} // jackal

@@ -18,8 +18,8 @@ namespace coretest {
 
 TEST(QuaternionTesting, QuatTest)
 {
-  jkl::Quat a(5.0f, 12.0f, 3.0f, 3.0f);
-  jkl::Quat b;
+  jackal::Quat a(5.0f, 12.0f, 3.0f, 3.0f);
+  jackal::Quat b;
 
   glm::quat glma(5.0f, 12.0f, 3.0f, 3.0f);
   glm::quat glmb;
@@ -27,13 +27,13 @@ TEST(QuaternionTesting, QuatTest)
   glma = glm::angleAxis(glm::radians(82.0f), 
     glm::vec3(1.0f, 0.8f, 0.5f));//glm::inverse(glma);
 
-  a = jkl::AngleAxis(jkl::ToRadians(82.0f), 
-    jkl::Vec3(1.0f, 0.8f, 0.5f));//a.Inverse();
+  a = jackal::AngleAxis(jackal::ToRadians(82.0f), 
+    jackal::Vec3(1.0f, 0.8f, 0.5f));//a.Inverse();
 
-  jkl::Vec3f eulerA = a.ToEulerAngles();
+  jackal::Vec3f eulerA = a.ToEulerAngles();
   glm::vec3 eulerGLM = glm::eulerAngles(glma);
 
-  jkl::Mat4 rotA = a.ToMatrix4();
+  jackal::Mat4 rotA = a.ToMatrix4();
   glm::mat4 rotB = glm::toMat4(glma);
 
   std::cout << "Quaternion AngleAxis testing\n";
@@ -42,15 +42,15 @@ TEST(QuaternionTesting, QuatTest)
 
   std::cout << "Quaternion Mat4 testing\n";
   std::cout << "\nJackal:\n";
-  for (jkl::uint32 i = 0; i < 4; ++i) {
-    for (jkl::uint32 j = 0; j < 4; ++j) {
+  for (jackal::uint32 i = 0; i < 4; ++i) {
+    for (jackal::uint32 j = 0; j < 4; ++j) {
       std::cout << std::setw(15) << rotA[i][j] << " ";
     }
     std::cout << "\n";
   }
   std::cout << "\nGLM:\n";
-  for (jkl::uint32 i = 0; i < 4; ++i) {
-    for (jkl::uint32 j = 0; j < 4; ++j) {
+  for (jackal::uint32 i = 0; i < 4; ++i) {
+    for (jackal::uint32 j = 0; j < 4; ++j) {
       std::cout << std::setw(15) << rotB[i][j] << " ";
     }
     std::cout << "\n";

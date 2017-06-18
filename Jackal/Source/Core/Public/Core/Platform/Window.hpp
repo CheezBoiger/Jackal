@@ -6,7 +6,7 @@
 #include "Platform.hpp"
 #include "JTypes.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 // Monitor device, specifies the application's monitors in use for 
@@ -38,4 +38,4 @@ void MakeContextCurrent(Window *window);
 Window *GetCurrentContext();
 
 void SwapBuffers(Window *window);
-} // jkl
+} // jackal

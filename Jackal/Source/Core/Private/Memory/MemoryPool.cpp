@@ -8,7 +8,7 @@
 #include <new>
 
 
-namespace jkl {
+namespace jackal {
 
 
 MemoryPool::MemoryPool(size_t startSizeBytes)
@@ -115,4 +115,4 @@ void *MemoryPool::GetMemoryLocation(size_t location)
 
   return ((size_t *)memory + location);
 }
-} // jkl
+} // jackal

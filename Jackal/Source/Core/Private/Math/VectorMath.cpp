@@ -2,7 +2,7 @@
 
 #include "Core/Math/VectorMath.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 
@@ -79,4 +79,4 @@ Vector3 Lerp(const Vector3 &v0, const Vector3 &v1, real32 t)
 {
   return v0 * (1.0f - t) + v1 * t;
 }
-} // jkl
+} // jackal

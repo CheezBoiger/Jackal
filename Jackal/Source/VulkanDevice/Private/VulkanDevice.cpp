@@ -4,5 +4,5 @@
 #include "VulkanDevice/VulkanDevice.hpp"
 
 
-namespace jkl {
-} // jkl
+namespace jackal {
+} // jackal

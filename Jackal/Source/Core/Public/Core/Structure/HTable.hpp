@@ -4,7 +4,7 @@
 #include "Core/Platform/JTypes.hpp"
 #include "Core/Platform/Platform.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 template<typename K, typename V>
@@ -45,4 +45,4 @@ private:
 
   TPair *table;
 };
-} // jkl
+} // jackal

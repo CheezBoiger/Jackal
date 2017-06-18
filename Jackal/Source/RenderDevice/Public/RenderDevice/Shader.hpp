@@ -4,7 +4,7 @@
 #include "Core/Platform/Platform.hpp"
 #include "Core/Structure/JString.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 // Shader configuration. Abstract Shader. Used overall throughout the
@@ -45,4 +45,4 @@ protected:
   Type    shaderType;
   bool8   compiled;
 };
-} // jkl
+} // jackal

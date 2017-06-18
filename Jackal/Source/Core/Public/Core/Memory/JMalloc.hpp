@@ -5,7 +5,7 @@
 #include "Core/Platform/Platform.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 class JMalloc {
@@ -16,4 +16,4 @@ private:
 
   
 };
-} // jkl
+} // jackal

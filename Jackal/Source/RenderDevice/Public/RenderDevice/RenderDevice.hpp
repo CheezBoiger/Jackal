@@ -4,7 +4,7 @@
 #include "Core/Platform/JTypes.hpp"
 #include "Core/Platform/Platform.hpp"
 
-namespace jkl {
+namespace jackal {
 
 class Shader;
 class RenderPass;
@@ -58,4 +58,4 @@ public:
   // we go with CPU based rendering calls.
   virtual void SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 buffers) = 0;
 };
-} // jkl
+} // jackal

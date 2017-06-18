@@ -2,7 +2,7 @@
 
 #include "Core/Math/Matrix2.hpp"
 
-namespace jkl {
+namespace jackal {
 
 
 Matrix2 Matrix2::operator+(const Matrix2 &m) const 
@@ -77,4 +77,4 @@ void Matrix2::operator-=(const real32 scaler)
   data[0][0] -= scaler; data[0][1] -= scaler;
   data[1][0] -= scaler; data[1][1] -= scaler;
 }
-} // jkl
+} // jackal

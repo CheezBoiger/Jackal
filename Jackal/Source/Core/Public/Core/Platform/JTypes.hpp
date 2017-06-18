@@ -9,7 +9,7 @@
 
 
 
-namespace jkl {
+namespace jackal {
 
 
 typedef int8_t      bool8;
@@ -40,4 +40,4 @@ typedef const char *jstring;
  typedef char        tchar;
  #define JTEXT(text) text
 #endif
-} // jkl
+} // jackal

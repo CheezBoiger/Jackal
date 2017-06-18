@@ -9,7 +9,7 @@
   case modEnum: std::cout << "Module location: " << str << "\n"; break
 
 
-namespace jkl {
+namespace jackal {
 
 
 uint16 Log::suppressed = 0x8;
@@ -131,4 +131,4 @@ Message *Log::GetStoredMessage(LogVerbosity verbose, uint32 index)
 {
   return MessageLogDatabase::GetMessage(verbose, index);
 }
-} // jkl
+} // jackal

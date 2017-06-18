@@ -2,8 +2,8 @@
 #include "OpenGLDevice/OpenGLShader.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 const tchar *OpenGLShader::shaderLanguage = JTEXT("glsl");
-} // jkl
+} // jackal

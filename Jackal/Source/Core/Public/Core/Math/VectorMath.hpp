@@ -5,7 +5,7 @@
 #include "Common.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 // Normalize the Vector4 object to a unit length.
@@ -36,4 +36,4 @@ Vector3 Lerp(const Vector3 &u, const Vector3 &v, real32 t);
 // Calculat the linear interpolation of a 2-component vector in space, at time
 // t.
 Vector2 Lerp(const Vector2 &v0, const Vector2 &v1, real32 t);
-} // jkl
+} // jackal

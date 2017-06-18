@@ -8,7 +8,7 @@
 #include "Vector4.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 // Quaternion object, used to represent 
@@ -132,4 +132,4 @@ struct Quaternion {
 };
 
 typedef Quaternion Quat;
-} // jkl
+} // jackal

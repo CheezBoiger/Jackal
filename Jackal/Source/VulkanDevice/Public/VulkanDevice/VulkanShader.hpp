@@ -4,7 +4,7 @@
 #include "RenderDevice/Shader.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 // Vulkan Shader object.
@@ -14,4 +14,4 @@ public:
 private:
 
 };
-} // jkl
+} // jackal

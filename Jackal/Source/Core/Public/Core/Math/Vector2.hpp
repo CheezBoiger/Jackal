@@ -6,7 +6,7 @@
 #include "Common.hpp"
 
 
-namespace jkl {
+namespace jackal {
 
 
 struct Vector2 {
@@ -123,4 +123,4 @@ struct Vector2 {
 typedef Vector2 Vec2;
 typedef Vector2 Vec2f;
 typedef Vector2 Vector2f;
-} // jkl
+} // jackal

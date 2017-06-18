@@ -10,7 +10,7 @@
 #include <vector>
 
 
-namespace jkl {
+namespace jackal {
 
 
 // Message log database used for storing messaging packets
@@ -47,4 +47,4 @@ public:
   // messages total, in this database).
   static uint32 OverallSize();
 };
-} // jkl
+} // jackal

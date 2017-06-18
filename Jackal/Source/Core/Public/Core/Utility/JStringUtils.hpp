@@ -8,7 +8,7 @@
 #include <string>
 #include <type_traits>
 
-namespace jkl {
+namespace jackal {
 
 
 class JStringUtils {
@@ -33,4 +33,4 @@ public:
     return str;
   }
 };
-} // jkl
+} // jackal

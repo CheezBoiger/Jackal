@@ -9,7 +9,7 @@
 
 #define JWIN32_CLASSNAME L"JACKALWINDOW"
 
-namespace jkl {
+namespace jackal {
 
 
 // win32 specific window. Contains all necessities that govern 
@@ -48,4 +48,4 @@ struct Win32Window : public Window {
 
 bool8 InitWin32WindowLibs();
 void Win32CleanUpWindowLibs();
-} // jkl
+} // jackal

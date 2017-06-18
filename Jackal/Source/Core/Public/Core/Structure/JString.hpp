@@ -9,7 +9,7 @@
 #include <string>
 
 
-namespace jkl {
+namespace jackal {
 
 
 #if JACKAL_PLATFORM == JACKAL_WINDOWS
@@ -28,4 +28,4 @@ typedef std::string JString;
 
 
 void PrintToStdConsole(JString str);
-} // jkl
+} // jackal
