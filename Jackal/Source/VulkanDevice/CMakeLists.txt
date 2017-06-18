@@ -14,6 +14,37 @@ set(VULKAN_FILES
   ${VULKAN_PUBLIC_DIR}/VulkanDevice.hpp
   ${VULKAN_PRIVATE_DIR}/VulkanDevice.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanConfigs.hpp
+
+  ${VULKAN_PUBLIC_DIR}/Vulkan.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanCommandBuffer.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanComputePipelineState.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanCubemap.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanFrameBuffer.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanGraphicsPipelineState.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanMaterial.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanPhysicalDevice.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanRenderPass.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanRenderTarget.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanShader.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanTexture.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanUniformBuffer.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanVertexBuffer.hpp
+
+  ${VULKAN_PRIVATE_DIR}/Vulkan.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanCommandBuffer.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanComputePipelineState.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanCubemap.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanFrameBuffer.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanGraphicsPipelineState.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanMaterial.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanPhysicalDevice.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanRenderPass.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanRenderTarget.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanShader.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanSurface.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanTexture.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanUniformBuffer.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanVertexBuffer.cpp
 )
 
 # If vulkan is found, add to the build configurations. Else, just ignore

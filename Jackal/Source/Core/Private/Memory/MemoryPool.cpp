@@ -27,7 +27,7 @@ MemoryPool::~MemoryPool()
 {
   // Make sure to delete memory.
   if (memory) {
-    delete[] memory;
+    delete[] reinterpret_cast<char *>(memory);
   }
 }
 
@@ -52,7 +52,7 @@ void MemoryPool::ResizeTotalMemoryPoolSize(size_t size)
   }
 
   // Delete original memory afterwards.
-  delete[] memTemp;
+  delete[] reinterpret_cast<char *>(memTemp);
 }
 
 
