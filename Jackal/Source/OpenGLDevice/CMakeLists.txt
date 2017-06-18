@@ -54,7 +54,6 @@ endif()
 if (OPENGL_FOUND)
   include_directories(
     ${JACKAL_INCLUDE_DIR}
-    ${JACKAL_THIRD_PARTY_DIR}/opengl/
     ${OPENGL_LIBRARIES}
   )
 

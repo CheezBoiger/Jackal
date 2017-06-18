@@ -10,8 +10,8 @@
 #include "Core/Math/Common.hpp"
 
 //#define GLM_FORCE_PURE
-#include "glm/common.hpp"
-#include "glm/gtc/matrix_transform.hpp"
+#include "g-truc/glm/glm/common.hpp"
+#include "g-truc/glm/glm/gtc/matrix_transform.hpp"
 
 #include <iostream>
 #include <iomanip>

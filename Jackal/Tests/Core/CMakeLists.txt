@@ -46,9 +46,10 @@ endif()
 # Include core directory.
 include_directories(SYSTEM
   ../../Source/Core/Public
-  ../../Source/OpenGLDevice/Public
   ../../Source/RenderDevice/Public
-  ../../ThirdParty/g-truc/glm
+  ../../Source/OpenGLDevice/Public
+
+  ../../ThirdParty
 )
 
 

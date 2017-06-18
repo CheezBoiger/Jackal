@@ -4,8 +4,8 @@
 #include "Core/Math/Quaternion.hpp"
 #include "Core/Logging/Logger.hpp"
 
-#include "glm/gtc/quaternion.hpp"
-#include "glm/gtx/quaternion.hpp"
+#include "g-truc/glm/glm/gtc/quaternion.hpp"
+#include "g-truc/glm/glm/gtx/quaternion.hpp"
 #include "gtest/gtest.h"
 
 #include <chrono>
