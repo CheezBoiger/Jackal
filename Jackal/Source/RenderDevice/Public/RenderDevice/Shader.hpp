@@ -30,7 +30,8 @@ public:
         const JString filepath = JTEXT(""));
 
   // Compiles the shader. This is dependent on the rendering api. 
-  virtual bool8 Compile(const JString filepath) = 0;
+  virtual bool8 Compile(const JString filepath) = 0;  
+  virtual const tchar *ShaderLanguage() const = 0;
 
   JString &SourceCode() const;
 

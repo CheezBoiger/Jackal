@@ -24,18 +24,6 @@ class Material;
 // DirectX, and possibly even our own implementation.
 class RenderDevice {
 public:
-  enum Type {
-    rOpenGL,
-    rVulkan,
-    rMetal,
-    rDirectX12,
-    rNone
-  };
-
-protected:
-  RenderDevice(Type type) : api(type) { }
-
-public:
   virtual ~RenderDevice() { }
 
   virtual Shader *CreateShader() = 0;
@@ -54,24 +42,20 @@ public:
   virtual void DestroyShader(Shader *shader) = 0;
   virtual void DestroyMaterial(Material *material) = 0;
   virtual void DestroyFrameBuffer(FrameBuffer *framebuffer) = 0;
-  virtual void Destroy(RenderPass *pass) = 0;
-  virtual void Destroy(Texture *texture) = 0;
+  virtual void DestroyRenderPass(RenderPass *pass) = 0;
+  virtual void DestroyTexture(Texture *texture) = 0;
   virtual void DestoryUniformBuffer(UniformBuffer *uniformbuffer) = 0;
   virtual void DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) = 0;
   virtual void DestroyComputePipelineState(ComputePipelineState *pipeline) = 0;
   virtual void DestroyCommandBuffer(CommandBuffer *buffer) = 0;
+
+  virtual const tchar *API() const = 0;
 
   // Still Ongoing work.
   // TODO(): Setters for setting up the pipeline and rendering core.
 
   // Submit command buffers to the GPU for rendering. If OpenGL is being used, 
   // we go with CPU based rendering calls.
-  virtual void SubmitCommandBuffers(CommandBuffer *commandbuffers) = 0;
-
-  virtual const tchar *RenderAPIString() = 0;
-  
-  Type RenderAPI() { return api; }
-private:
-  Type api;
+  virtual void SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 buffers) = 0;
 };
 } // jkl

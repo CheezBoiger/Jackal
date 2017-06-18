@@ -13,7 +13,7 @@ set(VULKAN_PRIVATE_DIR        Private)
 set(VULKAN_FILES
   ${VULKAN_PUBLIC_DIR}/VulkanDevice.hpp
   ${VULKAN_PRIVATE_DIR}/VulkanDevice.cpp
-  ${VULKAN_PRIVATE_DIR}/VulkanConfigs.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanConfigs.hpp
 
   ${VULKAN_PUBLIC_DIR}/Vulkan.hpp
   ${VULKAN_PUBLIC_DIR}/VulkanCommandBuffer.hpp
@@ -50,7 +50,7 @@ set(VULKAN_FILES
 # If vulkan is found, add to the build configurations. Else, just ignore
 # Vulkan.
 if (Vulkan_FOUND)
-
+  message("Vulkan Found...")
   include_directories(
     ${JACKAL_INCLUDE_DIR}
     ${Vulkan_INCLUDE_DIRS}

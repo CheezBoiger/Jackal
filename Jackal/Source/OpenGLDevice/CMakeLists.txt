@@ -13,7 +13,7 @@ set(OPENGL_WIN32_PRIVATE_DIR     ${OPENGL_PRIVATE_DIR}/Win32)
 set(OPENGL_FILES
   ${OPENGL_PUBLIC_DIR}/OpenGLDevice.hpp
   ${OPENGL_PRIVATE_DIR}/OpenGLDevice.cpp
-  ${OPENGL_PRIVATE_DIR}/OpenGLConfigs.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLConfigs.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLCommandBuffer.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLComputePipelineState.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLGraphicsPipelineState.hpp

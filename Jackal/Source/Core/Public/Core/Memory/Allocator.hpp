@@ -27,7 +27,7 @@ public:
 
   // Allocator used to handle memory leaks that may occur as a result of 
   // no call to deconstruct our objects.
-  virtual ~Allocator();
+  virtual ~Allocator() { }
 
   // TODO(): Need to define the interface!
 

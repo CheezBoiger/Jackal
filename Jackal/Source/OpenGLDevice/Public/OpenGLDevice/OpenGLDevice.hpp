@@ -3,7 +3,7 @@
 
 
 #include "RenderDevice/RenderDevice.hpp"
-
+#include "OpenGLConfigs.hpp"
 
 namespace jkl {
 
@@ -19,7 +19,7 @@ public:
   // This must be called if you plan on using OpenGL.
   static bool8 InitOpenGL();
 
-  OpenGLDevice() : RenderDevice(Type::rOpenGL) { }
+  OpenGLDevice() { }
 
   Shader *CreateShader() override;
   FrameBuffer *CreateFrameBuffer() override;
@@ -34,23 +34,21 @@ public:
 
   void DestroyShader(Shader *shader) override;
   void DestroyFrameBuffer(FrameBuffer *framebuffer) override;
-  void Destroy(RenderPass *pass) override;
-  void Destroy(Texture *texture) override;
+  void DestroyRenderPass(RenderPass *pass) override;
+  void DestroyTexture(Texture *texture) override;
   void DestoryUniformBuffer(UniformBuffer *uniformbuffer) override;
   void DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
   void DestroyComputePipelineState(ComputePipelineState *pipeline) override;
   void DestroyCommandBuffer(CommandBuffer *buffer) override;
+
+  const tchar *API() const override { return renderAPI; }
 
   // Still Ongoing work.
   // TODO(): Setters for setting up the pipeline and rendering core.
 
   // Submit command buffers to the GPU for rendering. If OpenGL is being used, 
   // we go with CPU based rendering calls.
-  void SubmitCommandBuffers(CommandBuffer *commandbuffers) override;
-
-  const tchar *RenderAPIString() override {  
-    return renderAPI;
-  }
+  void SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 buffers) override;
 
 private:
 };
