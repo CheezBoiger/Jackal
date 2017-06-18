@@ -12,3 +12,20 @@ macro(set_cxx_standard Target Standard)
   set_property(TARGET ${Target} PROPERTY CXX_STANDARD ${Standard})
   set_property(TARGET ${Target} PROPERTY CXX_STANDARD_REQUIRED ${Standard}) 
 endmacro()
+
+
+# macro to set up x11 and xcb libraries.
+macro(xcb_and_x11_init Target)
+  if (UNIX)
+     # Should be unix based operating system.
+     find_package(X11 REQUIRED)
+     find_package(XCB REQUIRED)
+
+     include_directories(
+	${X11_INCLUDE_DIR}
+	${XCB_INCLUDE_DIRS}
+     )
+
+     target_link_libraries(${Target} ${X11_LIBRARIES} ${XCB_LIBRARIES})
+  endif()
+endmacro()

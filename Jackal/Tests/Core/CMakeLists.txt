@@ -5,6 +5,7 @@ project("JackalCoreTests")
 set(TEST_MATH_DIR       Math)
 set(TEST_MEMORY_DIR     Memory)
 set(TEST_WIN32_DIR      Win32)
+set(TEST_LINUX_DIR      Linux)
 set(TEST_STRUCTURE_DIR  Structure)
 
 
@@ -39,8 +40,15 @@ if (WIN32)
     ${TEST_WIN32_DIR}/Win32WindowTest.cpp
     ${TEST_WIN32_DIR}/Win32WindowTest.hpp
 )
+  set(OS_TESTS ${WIN32_TESTS})
+elseif(UNIX)
+  set(LINUX_TESTS
+    ${TEST_LINUX_DIR}/LinuxWindowTest.hpp
+    ${TEST_LINUX_DIR}/LinuxWindowTest.cpp
+  )
+  set(OS_TESTS ${LINUX_TESTS})
 else()
-  set(WIN32_TESTS)
+  set(OS_TESTS)
 endif()
 
 # Include core directory.
@@ -58,7 +66,7 @@ include_directories(SYSTEM
 add_library(${JACKAL_CORE_TESTS} STATIC
   ${MATH_TESTS}
   ${MEMORY_TESTS}
-  ${WIN32_TESTS}
+  ${OS_TESTS}
   ${STRUCTURE_TESTS}
 )
 
@@ -73,4 +81,5 @@ endif()
 
 include(Macros)
 
+xcb_and_x11_init(${JACKAL_CORE_TESTS})
 set_cxx_standard(${JACKAL_CORE_TESTS} 14)

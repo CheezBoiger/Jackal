@@ -8,7 +8,8 @@
  #include "Core/Win32/Win32ThreadTest.hpp"
  #include "Core/Win32/Win32WindowTest.hpp"
 #elif defined(__linux__)
-
+ #define TEST_LINUX
+ #include "Core/Linux/LinuxWindowTest.hpp"
 #elif defined(__APPLE__) && defined(__MACH__)
 
 #endif
@@ -32,8 +33,7 @@ int main(int c, char *argv[]) {
   win32test::Run();
   win32test::WindowTest();
 #elif defined(TEST_LINUX)
-
-
+  linuxtest::RunWindowsTest();
 #elif defined(TEST_APPLE)
 
 

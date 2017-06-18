@@ -236,9 +236,10 @@ if (UNIX)
  # xlib may already have linked it.
  find_package(X11 REQUIRED)
  find_package(XCB REQUIRED)
+ find_package(X11_XCB REQUIRED)
  
- target_link_libraries(${JACKAL_CORE_NAME} ${X11_LIBRARIES} ${XCB_LIBRARIES})
- include_directories(${X11_INCLUDE_DIR} ${XCB_INCLUDE_DIRS})
+ target_link_libraries(${JACKAL_CORE_NAME} ${X11_LIBRARIES} ${XCB_LIBRARIES} ${X11_XCB_LIBRARIES})
+ include_directories(${X11_INCLUDE_DIR} ${XCB_INCLUDE_DIRS} ${X11_XCB_INCLUDE_DIR})
 endif()
 # Link glfw for testing and implementation. This is used temporarily.
 target_link_libraries(${JACKAL_CORE_NAME} glfw)
