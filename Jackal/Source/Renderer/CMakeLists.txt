@@ -35,3 +35,7 @@ if (WIN32 AND ${CMAKE_CXX_COMPILER_ID})
   # Set this library into the jackal engine directory.
   set_property(TARGET ${JACKAL_RENDERER_NAME} PROPERTY FOLDER ${JACKAL_ENGINE_DIRECTORY})
 endif()
+
+include(Macros)
+
+set_cxx_standard(${JACKAL_RENDERER_NAME} 14)
