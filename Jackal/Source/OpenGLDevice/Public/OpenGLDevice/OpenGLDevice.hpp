@@ -51,5 +51,11 @@ public:
   void SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 buffers) override;
 
 private:
+
+  GraphicsPipelineState *mCurrentGraphicsPipelineState;
+  ComputePipelineState *mCurrentComputePipelineState;
+  
+
+  
 };
 } // jackal

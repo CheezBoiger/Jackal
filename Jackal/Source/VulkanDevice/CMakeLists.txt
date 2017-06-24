@@ -9,6 +9,8 @@ find_package(Vulkan)
 set(JACKAL_VULKAN_RENDEV_NAME "VulkanDevice")
 set(VULKAN_PUBLIC_DIR         Public/VulkanDevice)
 set(VULKAN_PRIVATE_DIR        Private)
+set(VULKAN_WIN32_PUBLIC_DIR   ${VULKAN_PUBLIC_DIR}/Win32)
+set(VULKAN_WIN32_PRIVATE_DIR  ${VULKAN_PRIVATE_DIR}/Win32)
 
 set(VULKAN_FILES
   ${VULKAN_PUBLIC_DIR}/VulkanDevice.hpp
@@ -46,6 +48,16 @@ set(VULKAN_FILES
   ${VULKAN_PRIVATE_DIR}/VulkanUniformBuffer.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanVertexBuffer.cpp
 )
+
+if (WIN32)
+  set(VULKAN_FILES 
+    ${VULKAN_FILES}
+    ${VULKAN_WIN32_PUBLIC_DIR}/Win32VulkanSurface.hpp
+    ${VULKAN_WIN32_PRIVATE_DIR}/Win32VulkanSurface.cpp
+  )
+elseif(UNIX)
+
+endif()
 
 # If vulkan is found, add to the build configurations. Else, just ignore
 # Vulkan.
