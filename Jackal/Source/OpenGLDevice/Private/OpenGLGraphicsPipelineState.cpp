@@ -212,25 +212,28 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline()
   }
 }
 
+#define CHANGE_PIPELINE(cmp1, cmp2) if (cmp1 != cmp2) dirty = true; \
+  cmp1 = cmp2;
 
 void OpenGLGraphicsPipelineState::CopyPipelineInfo(const GraphicsPipelineInfoT *info)
 {
-  mPipelineInfo.BlendEnable = info->BlendEnable;
-  mPipelineInfo.BlendOp = info->BlendOp;
-  mPipelineInfo.CullFaceEnable = info->CullFaceEnable;
-  mPipelineInfo.CullMode = info->CullMode;
-  mPipelineInfo.DepthTestCompare = info->DepthTestCompare;
-  mPipelineInfo.DstBlendMode = info->DstBlendMode;
-  mPipelineInfo.SrcBlendMode = info->SrcBlendMode;
-  mPipelineInfo.FrontFace = info->FrontFace;
-  mPipelineInfo.ZBufferEnable = info->ZBufferEnable;
-  mPipelineInfo.StencilEnable = info->StencilEnable;
+  CHANGE_PIPELINE(mPipelineInfo.BlendEnable, info->BlendEnable);
+  CHANGE_PIPELINE(mPipelineInfo.BlendEnable, info->BlendEnable);
+  CHANGE_PIPELINE(mPipelineInfo.BlendOp, info->BlendOp);
+  CHANGE_PIPELINE(mPipelineInfo.CullFaceEnable, info->CullFaceEnable);
+  CHANGE_PIPELINE(mPipelineInfo.CullMode, info->CullMode);
+  CHANGE_PIPELINE(mPipelineInfo.DepthTestCompare, info->DepthTestCompare);
+  CHANGE_PIPELINE(mPipelineInfo.DstBlendMode, info->DstBlendMode);
+  CHANGE_PIPELINE(mPipelineInfo.SrcBlendMode, info->SrcBlendMode);
+  CHANGE_PIPELINE(mPipelineInfo.FrontFace, info->FrontFace);
+  CHANGE_PIPELINE(mPipelineInfo.ZBufferEnable, info->ZBufferEnable);
+  CHANGE_PIPELINE(mPipelineInfo.StencilEnable, info->StencilEnable);
   
-  mPipelineInfo.VertexShader = info->VertexShader;
-  mPipelineInfo.PixelShader = info->PixelShader;
-  mPipelineInfo.HullShader = info->HullShader;
-  mPipelineInfo.DomainShader = info->DomainShader;
-  mPipelineInfo.GeometryShader = info->GeometryShader;
+  CHANGE_PIPELINE(mPipelineInfo.VertexShader, info->VertexShader);
+  CHANGE_PIPELINE(mPipelineInfo.PixelShader, info->PixelShader);
+  CHANGE_PIPELINE(mPipelineInfo.HullShader, info->HullShader);
+  CHANGE_PIPELINE(mPipelineInfo.DomainShader, info->DomainShader);
+  CHANGE_PIPELINE(mPipelineInfo.GeometryShader, info->GeometryShader);
 }
 
 
