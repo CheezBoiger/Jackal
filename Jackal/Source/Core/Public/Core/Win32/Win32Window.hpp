@@ -22,6 +22,7 @@ struct Win32Window : public Window {
   HINSTANCE   wInstance;
   HMENU       wMenu;
   LPCWSTR     wWindowName;
+  int32       mouseX, mouseY;
 
   bool8       requestClose    : 1;
   bool8       requestMinimize : 1;

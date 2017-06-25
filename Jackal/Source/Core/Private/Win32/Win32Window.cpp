@@ -121,6 +121,26 @@ static LRESULT CALLBACK WindowProc(HWND hWnd,
       window->width = LOWORD(lParam);
       window->height = HIWORD(lParam); 
     } break;
+    // TODO(): Need to get input from keyboard and mouse.
+    case WM_MOUSEMOVE:
+    {
+
+      // Get Input from the mouse. Store into This client window's 
+      // data. This will then be converted to coordinates relative to the 
+      // client window.
+      POINT cursorPoint;
+      if (GetCursorPos(&cursorPoint)) {
+        ScreenToClient(window->handle, &cursorPoint);
+        window->mouseX = cursorPoint.x;
+        window->mouseY = cursorPoint.y;
+      } 
+    } break;
+    case WM_MOVE:
+    {
+      // Update the window position.
+      window->x = (int) (short) LOWORD(lParam);
+      window->y = (int) (short) HIWORD(lParam);
+    } break;
   }
   return DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
