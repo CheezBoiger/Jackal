@@ -30,6 +30,15 @@ typedef enum {
 } BlendT;
 
 
+typedef enum {
+  BLEND_OPERATION_ADD,
+  BLEND_OPERATION_SUBTRACT,
+  BLEND_OPERATION_REVERSE_SUBTRACT,
+  BLEND_OPERATION_MIN,
+  BLEND_OPERATION_MAX
+} BlendOperationT;
+
+
 // Culling mode type. Used to determine which side to cull on a mesh object.
 typedef enum {
   CULL_MODE_FRONT,
@@ -77,6 +86,7 @@ typedef enum {
   RENDER_ERROR_PIPELINE_NULL_VERTEX_SHADER,
   RENDER_ERROR_PIPELINE_NULL_PIXEL_SHADER,
   RENDER_ERROR_PIPELINE_BAD_INFORMATION_SET,
+  RENDER_ERROR_PIPELINE_SHADER_LINK_ERROR,
   RENDER_ERROR_PIPELINE_FAIL
 } RenderErrorT;
 

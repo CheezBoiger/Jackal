@@ -16,7 +16,6 @@ public:
   OpenGLGraphicsPipelineState(JString name = JTEXT("Default-GraphicsPipeline"))
     : mProgramId(0)
     , dirty(false)
-    , mOpenGLLastError(OPENGL_ERROR_NONE)
     , mNativeError(0)
     , GraphicsPipelineState(name) 
   {
@@ -27,14 +26,18 @@ public:
   
   // Update the pipeline.
   void Update() override;
-
-  OpenGLErrorT  GetOpenGLLastError() { return mOpenGLLastError; }
   GLenum        GetNativeError() { return mNativeError; }
 private:
 
+  static GLenum GetOpenGLBlendT(BlendT blend);
+
+  // TODO(): Work on this later. Needs a definition.
+  void RegisterNativeError();
+  void CopyPipelineInfo(const GraphicsPipelineInfoT *info);
+  void SetUpShaderPipeline();
+
   // Program id of this pipeline state object.
   GLuint mProgramId;
-  OpenGLErrorT mOpenGLLastError;
   GLenum mNativeError;
   bool8 dirty;
 };

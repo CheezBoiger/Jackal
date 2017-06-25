@@ -38,12 +38,15 @@ typedef struct {
   // Best to leave this null if not in use.
   Shader     *PixelShader;
 
-  BlendT      BlendMode;
-  CullModeT   CullMode;
-  FrontFaceT  FrontFace;
-  CompareT    DepthTestCompare;
+  BlendT          SrcBlendMode;
+  BlendT          DstBlendMode;
+  BlendOperationT BlendOp;
+  CullModeT       CullMode;
+  FrontFaceT      FrontFace;
+  CompareT        DepthTestCompare;
   
   bool8       ZBufferEnable   : 1,
+              StencilEnable   : 1,
               BlendEnable     : 1,
               CullFaceEnable  : 1;
 } GraphicsPipelineInfoT;
