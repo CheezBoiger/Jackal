@@ -4,12 +4,20 @@
 #include "Core/Platform/Platform.hpp"
 #include "Core/Structure/JString.hpp"
 
+#include <vector>
+
+
 namespace jackal {
 
 
 // Shader configuration. Abstract Shader. Used overall throughout the
 // implmentation of the Rendering Device.
 class Shader {
+protected:
+  // Shader constructor.
+  Shader(const JString name = JTEXT("Default"),
+    const JString filepath = JTEXT(""));
+
 public:
   enum Type {
     None,
@@ -26,23 +34,22 @@ public:
 
   virtual ~Shader() { }
 
-  Shader(const JString name = JTEXT("Default"),
-        const JString filepath = JTEXT(""));
-
   // Compiles the shader. This is dependent on the rendering api. 
-  virtual bool8 Compile(const JString filepath) = 0;  
+  virtual bool8 Compile(const JString filepath, 
+    const std::vector<JString> includes = std::vector<JString>(),
+    const std::vector<JString> defines = std::vector<JString>()) = 0;
+
+  // Get the shader language type of this shader object.
   virtual const tchar *ShaderLanguage() const = 0;
 
-  JString &SourceCode() const;
-
-  Type ShaderType() const { return shaderType; }
-  JString Name() const { return shaderName; }
+  Type ShaderType() const { return mShaderType; }
+  JString &Name() { return mShaderName; }
   bool8 Compiled() const { return compiled; }
 
   
 protected:
-  JString shaderName;
-  Type    shaderType;
+  JString mShaderName;
+  Type    mShaderType;
   bool8   compiled;
 };
 } // jackal

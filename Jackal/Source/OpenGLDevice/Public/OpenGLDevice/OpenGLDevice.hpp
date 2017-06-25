@@ -8,6 +8,18 @@
 namespace jackal {
 
 
+class OpenGLShader;
+class OpenGLCommandBuffer;
+class OpenGLTexture;
+class OpenGLGraphicsPipelineState;
+class OpenGLComputePipelineState;
+class OpenGLRenderTarget;
+class OpenGLRenderPass;
+class OpenGLFrameBuffer;
+class OpenGLMaterial;
+class OpenGLVertexBuffer;
+class OpenGLResources;
+
 // OpenGL Rendering Device. This Device handles all 
 // Rendering calls, creation, and modification of OpenGL 
 // Rendering functionality. It should act as a RHI, or 
@@ -21,6 +33,7 @@ public:
 
   OpenGLDevice() { }
 
+  Resources *GetResources() override;
   Shader *CreateShader() override;
   FrameBuffer *CreateFrameBuffer() override;
   RenderPass *CreateRenderPass() override;
@@ -32,6 +45,7 @@ public:
   VertexBuffer *CreateVertexBuffer() override;
   CommandBuffer *CreateCommandBuffer() override;
 
+  void SetResourceHandler(Resources *resources) override;
   void DestroyShader(Shader *shader) override;
   void DestroyFrameBuffer(FrameBuffer *framebuffer) override;
   void DestroyRenderPass(RenderPass *pass) override;
@@ -51,11 +65,18 @@ public:
   void SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 buffers) override;
 
 private:
+  // OpenGL Graphics Pipeline State object currently being used by this rendering 
+  // device.
+  OpenGLGraphicsPipelineState   *mCurrentGraphicsPipelineState;
 
-  GraphicsPipelineState *mCurrentGraphicsPipelineState;
-  ComputePipelineState *mCurrentComputePipelineState;
-  
+  // OpenGL Compute Pipeline State object currently being used by this rendering
+  // device.
+  OpenGLComputePipelineState    *mCurrentComputePipelineState;
 
-  
+  // OpenGL Vertex Buffer object currently being used by this rendering device.
+  OpenGLVertexBuffer            *mCurrentVertexBuffer;
+
+  // OpenGL Material object currently being used by this rendering device.
+  OpenGLMaterial                *mCurrentMaterial;
 };
 } // jackal
