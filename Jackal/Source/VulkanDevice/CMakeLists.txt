@@ -52,8 +52,8 @@ set(VULKAN_FILES
 if (WIN32)
   set(VULKAN_FILES 
     ${VULKAN_FILES}
-    ${VULKAN_WIN32_PUBLIC_DIR}/Win32VulkanSurface.hpp
-    ${VULKAN_WIN32_PRIVATE_DIR}/Win32VulkanSurface.cpp
+    ${VULKAN_WIN32_PUBLIC_DIR}/Win32Vulkan.hpp
+    ${VULKAN_WIN32_PRIVATE_DIR}/Win32Vulkan.cpp
   )
 elseif(UNIX)
 

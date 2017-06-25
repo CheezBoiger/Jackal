@@ -239,6 +239,6 @@ void OpenGLGraphicsPipelineState::CopyPipelineInfo(const GraphicsPipelineInfoT *
 
 void OpenGLGraphicsPipelineState::RegisterNativeError()
 {
-  
+  // TODO(): Do something here!! Need to register native errors.
 }
 } // jackal

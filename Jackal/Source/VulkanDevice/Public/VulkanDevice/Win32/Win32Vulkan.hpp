@@ -9,7 +9,8 @@ namespace jackal {
 // Win32 Vulkan Surface KHR extension.
 // Used for linking windows winding system to 
 // Vulkan, in order to see any rendering.
-class Win32VulkanSurfaceKHR {
+class Win32VulkanKHR {
 public:
+  static VkSurfaceKHR CreateSurface(VkInstance vkInstance, HWND hwnd, HINSTANCE hinstance);
 };
 } // jackal
