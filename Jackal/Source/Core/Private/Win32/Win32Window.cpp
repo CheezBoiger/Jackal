@@ -234,4 +234,18 @@ void Win32Window::RequestClose()
 {
   requestClose = true;
 }
+
+
+void Win32Window::SetToCenter()
+{
+  RECT rect;
+  GetWindowRect(handle, &rect);
+
+  int32 xPos = (GetSystemMetrics(SM_CXSCREEN) - rect.right) / 2;
+  int32 yPos = (GetSystemMetrics(SM_CYSCREEN) - rect.bottom) / 2;
+  x = xPos;
+  y = yPos;
+
+  SetWindowPos(handle, 0, xPos, yPos, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
+}
 } // jackal

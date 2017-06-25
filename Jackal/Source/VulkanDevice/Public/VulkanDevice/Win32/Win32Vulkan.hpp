@@ -11,6 +11,9 @@ namespace jackal {
 // Vulkan, in order to see any rendering.
 class Win32VulkanKHR {
 public:
+  // Create a Surface for win32.
   static VkSurfaceKHR CreateSurface(VkInstance vkInstance, HWND hwnd, HINSTANCE hinstance);
+
+  static const char **GetRequiredExtensions(uint32 *count);
 };
 } // jackal

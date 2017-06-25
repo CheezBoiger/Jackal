@@ -11,6 +11,9 @@ namespace jackal {
 // whatnot. Use this device to handle drawing on the screen.
 class VulkanDevice : public RenderDevice {
 public:
+  // TODO(): Need to figure out how to pass window handle to vulkan.
+  void Init() override;
+
   Resources *GetResources() override;
   Shader *CreateShader() override;
   FrameBuffer *CreateFrameBuffer() override;
@@ -34,8 +37,20 @@ public:
   void DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
   void DestroyComputePipelineState(ComputePipelineState *pipeline) override;
   void DestroyCommandBuffer(CommandBuffer *buffer) override;
+
+  // Submit command buffers to the Vulkan Rendering API.
+  void SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 numBuffers) override;
+
+protected:
+  // Check for support for extensions in the instance.
+  void CheckExtensionSupport();
+
 private:
+  VkInstance        mInstance;
   VkDevice          mLogicalDevice;
   VkPhysicalDevice  mPhyicalDevice;
+
+  // Window surface for vulkan to render onto.
+  VkSurfaceKHR      mSurface;
 };
 } // jackal

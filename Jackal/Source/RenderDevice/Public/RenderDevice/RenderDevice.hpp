@@ -37,6 +37,8 @@ public:
   // Resources handler.
   virtual Resources *GetResources() = 0;
   virtual void SetResourceHandler(Resources *resources) = 0;
+  
+  virtual void Init() = 0;
 
   virtual Shader *CreateShader() = 0;
   virtual FrameBuffer *CreateFrameBuffer() = 0;

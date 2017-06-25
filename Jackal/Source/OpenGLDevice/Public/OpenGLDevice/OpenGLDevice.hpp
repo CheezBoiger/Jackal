@@ -33,6 +33,7 @@ public:
 
   OpenGLDevice() { }
 
+  void Init() override;
   Resources *GetResources() override;
   Shader *CreateShader() override;
   FrameBuffer *CreateFrameBuffer() override;
@@ -44,6 +45,7 @@ public:
   RenderTarget *CreateRenderTarget() override;
   VertexBuffer *CreateVertexBuffer() override;
   CommandBuffer *CreateCommandBuffer() override;
+  Material *CreateMaterial() override;
 
   void SetResourceHandler(Resources *resources) override;
   void DestroyShader(Shader *shader) override;
@@ -54,6 +56,7 @@ public:
   void DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
   void DestroyComputePipelineState(ComputePipelineState *pipeline) override;
   void DestroyCommandBuffer(CommandBuffer *buffer) override;
+  void DestroyMaterial(Material *material) override;
 
   const tchar *API() const override { return renderAPI; }
 

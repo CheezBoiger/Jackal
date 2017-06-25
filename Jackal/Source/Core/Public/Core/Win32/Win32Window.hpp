@@ -35,6 +35,9 @@ struct Win32Window : public Window {
   bool8 Destroy();
 
   void RequestClose();
+  
+  // Set the window to the center of the screen.
+  void SetToCenter();
 
   bool8 ShouldClose() {
     return requestClose;

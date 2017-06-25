@@ -4,6 +4,14 @@
 namespace jackal {
 
 
+const size_t EXT_LENGTH = 2;
+
+const char *win32Extensions[EXT_LENGTH] = {
+  VK_KHR_SURFACE_EXTENSION_NAME,
+  VK_KHR_WIN32_SURFACE_EXTENSION_NAME
+};
+
+
 
 VkSurfaceKHR Win32VulkanKHR::CreateSurface(VkInstance vkInstance, HWND hwnd, HINSTANCE hinstance)
 {
@@ -24,5 +32,12 @@ VkSurfaceKHR Win32VulkanKHR::CreateSurface(VkInstance vkInstance, HWND hwnd, HIN
   }
 
   return surface;
+}
+
+
+const char **Win32VulkanKHR::GetRequiredExtensions(uint32 *count)
+{
+  *count = EXT_LENGTH;
+  return win32Extensions;
 }
 } // jackal
