@@ -8,10 +8,10 @@
 #include "Vector3.hpp"
 
 
-namespace jackal { 
+namespace jackal {
 
 
-// Ray class defines a Ray object in 3D space that defines 
+// Ray class defines a Ray object in 3D space that defines
 // a start point, and a direction. Such an object theoretically
 // extends infinitely, as we can assume. The importance simply allows
 // for raycasting, ray tracing, and many other useful tools for our arsenal.

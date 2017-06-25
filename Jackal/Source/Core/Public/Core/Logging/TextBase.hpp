@@ -15,14 +15,16 @@
 namespace jackal {
 
 // The Log type of the message to be worked with.
+// Each message type verbose reserves one bit on a 
+// 16 bit value.
 enum LogVerbosity {
-  LOG_NORMAL = 0x1,
-  LOG_WARNING = 0x2,
-  LOG_ERROR = 0x4,
+  LOG_NORMAL        = 0x1,
+  LOG_WARNING       = 0x2,
+  LOG_ERROR         = 0x4,
   LOG_RUNTIME_DEBUG = 0x8,
-  LOG_NOTIFY = 0x10,
-  LOG_HIDDEN = 0x20,
-  LOG_ALL = 0xFFFF
+  LOG_NOTIFY        = 0x10,
+  LOG_HIDDEN        = 0x20,
+  LOG_ALL           = 0xFFFF
 };
 
 
@@ -37,11 +39,11 @@ enum LogVerbosity {
 // TODO(): Remove strings from this message and replace with JString.
 struct Message {
   LogVerbosity  verbose;
-  JString   timeStamp;
-  JString   tag;
-  JString   msg;
+  JString       timeStamp;
+  JString       tag;
+  JString       msg;
 
-  Message(LogVerbosity verbosity = LogVerbosity::LOG_NORMAL, 
+  Message(LogVerbosity verbosity = LogVerbosity::LOG_NORMAL,
     JString msg = JTEXT(""), JString tag = JTEXT(""), JString timestamp = JTEXT(""))
     : verbose(verbosity)
     , timeStamp(timestamp)

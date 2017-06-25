@@ -40,12 +40,14 @@ set(CORE_MATH
   ${CORE_PUBLIC_MATH_DIR}/Matrix2.hpp
   ${CORE_PUBLIC_MATH_DIR}/Quaternion.hpp
   ${CORE_PUBLIC_MATH_DIR}/Ray.hpp
+  ${CORE_PUBLIC_MATH_DIR}/Color4.hpp
   ${CORE_PUBLIC_MATH_DIR}/Vector4.hpp
   ${CORE_PUBLIC_MATH_DIR}/Vector3.hpp
   ${CORE_PUBLIC_MATH_DIR}/Vector2.hpp
   ${CORE_PUBLIC_MATH_DIR}/MatrixMath.hpp
   ${CORE_PUBLIC_MATH_DIR}/VectorMath.hpp
   ${CORE_PUBLIC_MATH_DIR}/QuaternionMath.hpp
+  ${CORE_PRIVATE_MATH_DIR}/Color4.cpp
   ${CORE_PRIVATE_MATH_DIR}/Matrix4.cpp
   ${CORE_PRIVATE_MATH_DIR}/Matrix3.cpp
   ${CORE_PRIVATE_MATH_DIR}/Matrix2.cpp
