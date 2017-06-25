@@ -16,12 +16,14 @@ TEST(Win32, Win32WindowTest)
 
   jackal::Win32Window *window = jackal::Win32Window::Create(width, height,
     JTEXT("これは簡単なテストです。"), NULL);
+  window->SetToCenter();
 
   jackal::Win32OpenGL::SetOpenGLContext(window);
   jackal::Win32OpenGL::MakeContextCurrent(window);
 
   jackal::OpenGLDevice::InitOpenGL();
-
+  // This device is used to render. Will be used by the 
+  // renderer.
   //jackal::OpenGLDevice device;
 
   ASSERT_EQ(window->width, width);
