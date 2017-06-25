@@ -30,15 +30,34 @@ typedef enum {
 } BlendT;
 
 
-// Culling mode type.
+// Culling mode type. Used to determine which side to cull on a mesh object.
 typedef enum {
+  CULL_MODE_FRONT,
+  CULL_MODE_BACK,
+  CULL_MODE_FRONT_AND_BACK
 } CullModeT;
 
 
+// Front face culling mode types. These are used to determine the
+// front face order of an object to show, while culling the opposite 
+// side.
 typedef enum {
   FRONT_FACE_COUNTER_CLOCKWISE,
   FRONT_FACE_CLOCKWISE
 } FrontFaceT;
+
+
+// Compare operations. Used for Depth testing functionality.
+typedef enum {
+  COMPARE_NEVER,
+  COMPARE_LESS,
+  COMPARE_EQUAL,
+  COMPARE_LESS_OR_EQUAL,
+  COMPARE_GREATER,
+  COMPARE_NOT_EQUAL,
+  COMPARE_GREATER_OR_EQUAL,
+  COMPARE_ALWAYS
+} CompareT;
 
 
 // RenderDevice error types.
@@ -57,7 +76,8 @@ typedef enum {
   RENDER_ERROR_BAD_COMMAND_BUFFER_ALLOC,
   RENDER_ERROR_PIPELINE_NULL_VERTEX_SHADER,
   RENDER_ERROR_PIPELINE_NULL_PIXEL_SHADER,
-  RENDER_ERROR_PIPELINE_BAD_INFORMATION_SET
+  RENDER_ERROR_PIPELINE_BAD_INFORMATION_SET,
+  RENDER_ERROR_PIPELINE_FAIL
 } RenderErrorT;
 
 

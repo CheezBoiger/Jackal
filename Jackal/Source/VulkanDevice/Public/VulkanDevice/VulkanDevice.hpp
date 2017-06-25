@@ -25,7 +25,6 @@ public:
   Material *CreateMaterial() override;
   void SetResourceHandler(Resources *resources) override;
 
-
   void DestroyShader(Shader *shader) override;
   void DestroyMaterial(Material *material) override;
   void DestroyFrameBuffer(FrameBuffer *framebuffer) override;

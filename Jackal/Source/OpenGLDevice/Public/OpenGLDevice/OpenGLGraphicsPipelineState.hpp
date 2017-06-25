@@ -14,21 +14,28 @@ namespace jackal {
 class OpenGLGraphicsPipelineState : public GraphicsPipelineState {
 public:
   OpenGLGraphicsPipelineState(JString name = JTEXT("Default-GraphicsPipeline"))
-    : GraphicsPipelineState(name) { }
+    : mProgramId(0)
+    , dirty(false)
+    , mOpenGLLastError(OPENGL_ERROR_NONE)
+    , mNativeError(0)
+    , GraphicsPipelineState(name) 
+  {
+    mProgramId = glCreateProgram(); 
+  }
 
   void SetPipelineState(const GraphicsPipelineInfoT *info) override;
   
   // Update the pipeline.
   void Update() override;
 
-  // Checks if this pipeline state is dirty.
-  bool8 Dirty() override { return dirty; }
-
+  OpenGLErrorT  GetOpenGLLastError() { return mOpenGLLastError; }
+  GLenum        GetNativeError() { return mNativeError; }
 private:
 
   // Program id of this pipeline state object.
   GLuint mProgramId;
-
+  OpenGLErrorT mOpenGLLastError;
+  GLenum mNativeError;
   bool8 dirty;
 };
 } // jackal

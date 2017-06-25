@@ -38,9 +38,10 @@ typedef struct {
   // Best to leave this null if not in use.
   Shader     *PixelShader;
 
-  BlendT      BlendType;
+  BlendT      BlendMode;
   CullModeT   CullMode;
   FrontFaceT  FrontFace;
+  CompareT    DepthTestCompare;
   
   bool8       ZBufferEnable   : 1,
               BlendEnable     : 1,
@@ -65,15 +66,14 @@ public:
   // Update the Graphics Pipeline if need be.
   virtual void Update() = 0;
 
-  // Check if this graphics pipeline is dirty, and must be 
-  // updated.
-  virtual bool8 Dirty() = 0;
-
   void SetName(JString name) { mName = name; }
   JString &Name() { return mName; }
+
+  RenderErrorT GetLastError() { return mLastError; }
 
 protected:
   GraphicsPipelineInfoT mPipelineInfo;
   JString mName;
+  RenderErrorT mLastError;
 };
 } // jackal
