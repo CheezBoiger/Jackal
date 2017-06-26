@@ -3,6 +3,7 @@
 #include "Core/Math/QuaternionMath.hpp"
 #include "Core/Math/Quaternion.hpp"
 #include "Core/Logging/Logger.hpp"
+#include "Core/Utility/TextureLoader.hpp"
 
 #include "g-truc/glm/glm/gtc/quaternion.hpp"
 #include "g-truc/glm/glm/gtx/quaternion.hpp"
@@ -78,6 +79,10 @@ TEST(QuaternionTesting, QuatTest)
   EXPECT_GE(sum + TOLERANCE, product);
   EXPECT_LE(sum - TOLERANCE, product);
   // Passing this test, means these float values are equal.
+
+  jackal::TextureHandle handle = jackal::TextureLoader::LoadFile("Hello.png");
+
+  EXPECT_EQ(handle.data, nullptr);
 } 
 
 

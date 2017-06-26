@@ -193,6 +193,8 @@ set(CORE_STRUCTURE
 set(CORE_UTILITY
   ${CORE_PUBLIC_UTILITY_DIR}/JStringUtils.hpp
   ${CORE_PRIVATE_UTILITY_DIR}/JStringUtils.cpp
+  ${CORE_PUBLIC_UTILITY_DIR}/TextureLoader.hpp
+  ${CORE_PRIVATE_UTILITY_DIR}/TextureLoader.cpp
 )
 
 
