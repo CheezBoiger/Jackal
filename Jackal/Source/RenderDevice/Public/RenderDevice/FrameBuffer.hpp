@@ -7,6 +7,12 @@
 namespace jackal {
 
 
+class RenderPass;
+
+
+// FrameBuffers are objects that contain surfaces to write/render onto.
+// They hold color buffers, depth buffers, and stencil buffers for which 
+// are used to display onto the screen.
 class FrameBuffer {
 protected:
   FrameBuffer() { }
@@ -14,5 +20,12 @@ protected:
 public:
 
   virtual ~FrameBuffer() { }
+
+  // Get the render pass reference.
+  RenderPass *GetRenderPassReference() { return mRenderPassReference; }
+
+
+protected:
+  RenderPass *mRenderPassReference;
 };
 } // jackal

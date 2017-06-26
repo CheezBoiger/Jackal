@@ -1,7 +1,7 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #pragma once
 #include "Core/Platform/JTypes.hpp"
-
+#include "ViewPort.hpp"
 
 namespace jackal {
 
@@ -21,13 +21,14 @@ public:
 
   virtual void Record() = 0;
   virtual void EndRecord() = 0;
-
   virtual void DrawElements(uint32 count) = 0;
-  virtual void SetVertexBuffer(const VertexBuffer *vb) = 0;
-  virtual void SetRenderPass(const RenderPass *pass) = 0;
-  virtual void SetGraphicsPipelineState(const GraphicsPipelineState *pipeline) = 0;
-  virtual void SetComputePipelineState(const ComputePipelineState *pipeline) = 0;
-  virtual void SetMaterial(const Material *material) = 0;
+  virtual void BindVertexBuffer(const VertexBuffer *vb) = 0;
+  virtual void BeginRenderPass(const RenderPass *pass) = 0;
+  virtual void BindGraphicsPipelineState(const GraphicsPipelineState *pipeline) = 0;
+  virtual void BindComputePipelineState(const ComputePipelineState *pipeline) = 0;
+  virtual void BindMaterial(const Material *material) = 0;
+  virtual void SetViewPort(ViewPort *viewport) = 0;
+  virtual void SetScissor(ScissorRect *scissor) = 0;
 
   bool8 IsRecording() { return recording; }
 

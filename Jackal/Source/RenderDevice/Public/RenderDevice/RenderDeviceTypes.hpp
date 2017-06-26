@@ -69,6 +69,21 @@ typedef enum {
 } CompareT;
 
 
+// Wrap Mode for texture samplers.
+typedef enum {
+  WRAP_MODE_REPEAT,
+  WRAP_MODE_MIRRORED_REPEAT,
+  WRAP_MODE_CLAMP_TO_EDGE,
+  WRAP_MODE_CLAMP_TO_BORDER
+} WrapModeT;
+
+// FilterMode for texture samplers.
+typedef enum {
+  FILTER_MODE_NEAREST,
+  FILTER_MODE_LINEAR
+} FilterModeT;
+
+
 // RenderDevice error types.
 typedef enum {
   RENDER_ERROR_NONE,
