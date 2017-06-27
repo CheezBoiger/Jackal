@@ -20,24 +20,23 @@ typedef struct {
   // Add a Vertex Shader to the rendering pipeline. This is 
   // MANDATORY or else the pipeline state will not function,
   // or even build.
-  Shader     *VertexShader;
+  Shader         *VertexShader;
 
   // Add a Hull Shader to the rendering pipeline. This is optional.
   // Best to leave this null if not in use.
-  Shader     *HullShader;
+  Shader         *HullShader;
 
   // Add a Domain Shader to the rendering pipeline. This is optional.
   // Best to leave this null if not in use.
-  Shader     *DomainShader;
+  Shader         *DomainShader;
 
   // Add a Geometry Shader to the rendering pipeline. This is optional.
   // Best to leave this null if not in use.
-  Shader     *GeometryShader;
+  Shader         *GeometryShader;
 
   // Add a Pixel Shader to the rendering pipeline. This is optional.
   // Best to leave this null if not in use.
-  Shader     *PixelShader;
-
+  Shader         *PixelShader;
   BlendT          SrcBlendMode;
   BlendT          DstBlendMode;
   BlendOperationT BlendOp;
@@ -45,10 +44,10 @@ typedef struct {
   FrontFaceT      FrontFace;
   CompareT        DepthTestCompare;
   
-  bool8       ZBufferEnable   : 1,
-              StencilEnable   : 1,
-              BlendEnable     : 1,
-              CullFaceEnable  : 1;
+  bool8           ZBufferEnable   : 1,
+                  StencilEnable   : 1,
+                  BlendEnable     : 1,
+                  CullFaceEnable  : 1;
 } GraphicsPipelineInfoT;
 
 
@@ -60,14 +59,13 @@ protected:
 public:
   virtual ~GraphicsPipelineState() { }
 
-  // Set the pipeline state of this rendering pipe.
-  virtual void SetPipelineState(const GraphicsPipelineInfoT *info) = 0;
+  // Set the pipeline state of this rendering pipe. This function will
+  // bake the info provided to this pipeline, can not reverse this once
+  // done!
+  virtual void Bake(const GraphicsPipelineInfoT &info) = 0;
 
   // Get the information of this pipeline state.
   GraphicsPipelineInfoT *GetPipelineInformation() { return &mPipelineInfo; }
-
-  // Update the Graphics Pipeline if need be.
-  virtual void Update() = 0;
 
   void SetName(JString name) { mName = name; }
   JString &Name() { return mName; }

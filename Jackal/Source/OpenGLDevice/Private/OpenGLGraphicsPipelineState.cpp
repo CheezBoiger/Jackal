@@ -41,10 +41,11 @@ GLenum OpenGLGraphicsPipelineState::GetOpenGLBlendT(BlendT blend)
 }
 
 
-void OpenGLGraphicsPipelineState::SetPipelineState(const 
-  GraphicsPipelineInfoT *info)
+void OpenGLGraphicsPipelineState::Bake(const 
+  GraphicsPipelineInfoT &info)
 {
-  CopyPipelineInfo(info);
+  CopyPipelineInfo(&info);
+  Update();
 }
 
 

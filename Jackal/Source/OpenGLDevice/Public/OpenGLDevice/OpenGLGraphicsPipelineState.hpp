@@ -22,10 +22,12 @@ public:
     mProgramId = glCreateProgram(); 
   }
 
-  void SetPipelineState(const GraphicsPipelineInfoT *info) override;
+  void Bake(const GraphicsPipelineInfoT &info) override;
   
-  // Update the pipeline.
-  void Update() override;
+  // Update the pipeline. This can be done with OpenGL, since it is
+  // a dynamic pipeline.
+  void Update();
+;
   GLenum        GetNativeError() { return mNativeError; }
 private:
 
