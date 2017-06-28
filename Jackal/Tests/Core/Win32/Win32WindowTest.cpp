@@ -15,7 +15,7 @@ TEST(Win32, Win32WindowTest)
   jackal::int32 height = 800;
 
   jackal::Win32Window *window = jackal::Win32Window::Create(width, height,
-    JTEXT("これは簡単なテストです。"), NULL);
+    JTEXT(L"これは簡単なテストです。"), NULL);
   window->SetToCenter();
 
   jackal::Win32OpenGL::SetOpenGLContext(window);

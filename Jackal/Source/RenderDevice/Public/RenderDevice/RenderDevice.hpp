@@ -5,6 +5,7 @@
 #include "Core/Platform/Platform.hpp"
 
 #include "RenderDeviceTypes.hpp"
+#include "RenderObject.hpp"
 
 namespace jackal {
 
@@ -20,7 +21,7 @@ class ComputePipelineState;
 class CommandBuffer;
 class Material;
 class Resources;
-
+class Sampler;
 
 // RenderDevice interface, used for the rendering system of the 
 // Jackal Game Engine. This is the Rendering Hardware Interface used
@@ -51,7 +52,7 @@ public:
   virtual VertexBuffer *CreateVertexBuffer() = 0;
   virtual CommandBuffer *CreateCommandBuffer() = 0;
   virtual Material *CreateMaterial() = 0;
-
+  virtual Sampler *CreateSampler() = 0;
 
   virtual void DestroyShader(Shader *shader) = 0;
   virtual void DestroyMaterial(Material *material) = 0;
@@ -62,7 +63,7 @@ public:
   virtual void DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) = 0;
   virtual void DestroyComputePipelineState(ComputePipelineState *pipeline) = 0;
   virtual void DestroyCommandBuffer(CommandBuffer *buffer) = 0;
-
+  virtual void DestroySampler(Sampler *sampler) = 0;
   virtual const tchar *API() const = 0;
 
   RenderErrorT GetLastError() { return mLastError; }

@@ -30,14 +30,6 @@ typedef char        byte;
 typedef const char *jstring;
 
 
-// Windows based systems love wide characters as unicode.
-// Unfortunately, this is ridiculous of them to do so, now
-// we need to compensate on win32 machines.
-#if JACKAL_PLATFORM == JACKAL_WINDOWS
- typedef wchar_t    tchar;
- #define JTEXT(text) L##text
-#else
- typedef char        tchar;
- #define JTEXT(text) text
-#endif
+typedef char         tchar;
+#define JTEXT(text)  text
 } // jackal

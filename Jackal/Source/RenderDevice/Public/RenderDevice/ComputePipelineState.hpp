@@ -4,12 +4,12 @@
 
 #include "Core/Platform/JTypes.hpp"
 #include "RenderDeviceTypes.hpp"
-
+#include "RenderObject.hpp"
 
 namespace jackal {
 
 
-class ComputePipelineState {
+class ComputePipelineState : public RenderObject {
 public:
   virtual ~ComputePipelineState() { }
 

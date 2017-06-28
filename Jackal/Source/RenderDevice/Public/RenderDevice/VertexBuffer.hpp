@@ -3,12 +3,13 @@
 
 #include "Core/Platform/JTypes.hpp"
 #include "Vertex.hpp"
+#include "RenderObject.hpp"
 
 namespace jackal {
 
 
 // Vertex Buffer object, used for rendering vertex data onto a surface.
-class VertexBuffer {
+class VertexBuffer : public RenderObject {
 protected:
   VertexBuffer() { }
 

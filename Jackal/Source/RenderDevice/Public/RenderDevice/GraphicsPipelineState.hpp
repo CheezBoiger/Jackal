@@ -7,6 +7,7 @@
 #include "Core/Structure/JString.hpp"
 
 #include "RenderDeviceTypes.hpp"
+#include "RenderObject.hpp"
 
 namespace jackal {
 
@@ -53,7 +54,7 @@ typedef struct {
 
 // Graphics pipeline state object. Used to set up the rendering
 // pipeline of the render device.
-class GraphicsPipelineState {
+class GraphicsPipelineState : public RenderObject {
 protected:
   GraphicsPipelineState(JString name = JTEXT("Default-GraphicsPipeline")) { }
 public:

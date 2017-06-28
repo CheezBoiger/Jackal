@@ -40,7 +40,7 @@ void Win32OpenGL::SetOpenGLContext(Win32Window *window)
  
     if (pf == 0) {
       MessageBoxW(window->handle, 
-        JTEXT("Failed to choose proper pixel format."), JTEXT("Failed"), MB_OK);
+        JTEXT(L"Failed to choose proper pixel format."), JTEXT(L"Failed"), MB_OK);
       return;
     }
     JDEBUG("Set Pixel Format\n");

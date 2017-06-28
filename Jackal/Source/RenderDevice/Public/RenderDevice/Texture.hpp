@@ -4,13 +4,14 @@
 #include "Core/Platform/JTypes.hpp"
 #include "Core/Structure/JString.hpp"
 #include "RenderDeviceTypes.hpp"
+#include "RenderObject.hpp"
 
 
 namespace jackal {
 
 
 // Sampler Object.
-class Sampler {
+class Sampler : public RenderObject {
 protected:
   WrapModeT WrapS;
   WrapModeT WrapT;
@@ -20,12 +21,13 @@ protected:
 
 public:
   virtual ~Sampler() { }
-  virtual void Init() = 0;
+  virtual void Bake() = 0;
+  virtual JString GetName() = 0;
 };
 
 
 // Texture object.
-class Texture {
+class Texture : public RenderObject {
 protected:
   Texture() : mMipmapped(false) { }
 
@@ -37,10 +39,13 @@ public:
   // Load a file with the valid format.
   virtual void LoadTextureFile(const JString filepath, FormatT format) = 0;
 
+  void SetName(JString n) { name = n; }
+
   // Check if this texture is mipmapped.
   bool8 Mipmapped() { return mMipmapped; }
 
 protected:
+  JString name;
   bool8 mMipmapped;
 };
 } // jackal

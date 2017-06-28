@@ -21,11 +21,7 @@ void JStringUtils::UTF16To8(const uint16 *input, uint8 *output)
 
 size_t JStringUtils::GetStringSize(const tchar *src)
 {
-#if defined(_WIN32)
-  return wcslen(src);
-#else
   return strlen(src);
-#endif
 }
 
 
@@ -37,11 +33,7 @@ tchar *JStringUtils::AllocateStringSize(size_t size)
 
 void JStringUtils::StringCopy(tchar *dest, const tchar *src)
 {
-#if defined (_WIN32)
-  wcscpy(dest, src);
-#else
   strcpy(dest, src);
-#endif
 }
 
 

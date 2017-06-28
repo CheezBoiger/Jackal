@@ -3,6 +3,7 @@
 
 
 #include "Core/Platform/JTypes.hpp"
+#include "RenderObject.hpp"
 
 
 namespace jackal {
@@ -15,7 +16,7 @@ class FrameBuffer;
 // serve as how these buffers will be handled throughout the rendering
 // operation. They are mainly descriptions that are used to determine 
 // how to use the buffers that are set in FrameBuffers.
-class RenderPass {
+class RenderPass : public RenderObject {
 protected:
   RenderPass() { }
 

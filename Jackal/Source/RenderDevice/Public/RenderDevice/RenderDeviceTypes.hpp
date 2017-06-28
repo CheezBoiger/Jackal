@@ -5,6 +5,12 @@
 namespace jackal {
 
 
+typedef enum {
+  DATA_DYNAMIC,
+  DATA_STATIC
+} DataT;
+
+
 // Enum types based on Vulkan Blend Factors.
 // OpenGL Will need to be a bit picky about few of these.
 typedef enum {

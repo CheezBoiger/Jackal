@@ -13,11 +13,11 @@ namespace jackal {
 
 
 #if JACKAL_PLATFORM == JACKAL_WINDOWS
-typedef std::wstring JString;
+typedef std::string JString;
 
- #define JCOUT() std::wcout
- #define jcout std::wcout
- #define TO_JSTRING(str) std::to_wstring(str)
+ #define JCOUT() std::cout
+ #define jcout std::cout
+ #define TO_JSTRING(str) std::to_string(str)
 #else
 typedef std::string JString;
 

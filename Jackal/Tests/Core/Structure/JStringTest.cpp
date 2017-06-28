@@ -8,9 +8,10 @@
 #include <gtest/gtest.h>
 #include <string>
 
+
+// TODO(): Need to encode to UTF8 on windows.
 TEST(StructureTests, JStringTesting)
 {
-  jackal::Locale::SetLanguage(jackal::L_JAPANESE);
   jackal::Log::MessageToStdOutput(jackal::LOG_NORMAL, 
     JTEXT("If you can not see the below texts, change your terminal font!"), 
     false, JTEXT("String Testing"));

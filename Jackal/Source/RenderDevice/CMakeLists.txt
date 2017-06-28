@@ -31,6 +31,8 @@ set(RENDEV_FILES
   ${RENDEV_PUBLIC_DIR}/ComputePipelineState.hpp
   ${RENDEV_PUBLIC_DIR}/Vertex.hpp
   ${RENDEV_PUBLIC_DIR}/ViewPort.hpp
+  ${RENDEV_PUBLIC_DIR}/RenderObject.hpp
+  ${RENDEV_PRIVATE_DIR}/RenderObject.cpp
 )
 
 add_library(${JACKAL_RENDEV_NAME} STATIC

@@ -15,7 +15,7 @@
 namespace jackal {
 
 
-std::map<JString, Win32Window *> windows;
+std::map<LPCWSTR, Win32Window *> windows;
 
 void StartWindow(Win32Window *window)
 {
@@ -226,8 +226,14 @@ void Win32Window::PrintToStdConsole(HANDLE consoleHandle, JString str)
   SetConsoleOutputCP(CP_UTF8);
 
   LPDWORD written = nullptr;
-  WriteConsoleW(consoleHandle, str.c_str(),
+
+  int32 size = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, NULL, 0);
+  wchar_t *wstr = new wchar_t[size];
+  MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, wstr, size);
+  WriteConsoleW(consoleHandle, wstr,
     (DWORD )str.size(), written, NULL);
+
+  delete[] wstr;
 }
 
 
