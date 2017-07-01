@@ -38,12 +38,14 @@ typedef struct {
   // Add a Pixel Shader to the rendering pipeline. This is optional.
   // Best to leave this null if not in use.
   Shader         *PixelShader;
+
   BlendT          SrcBlendMode;
   BlendT          DstBlendMode;
   BlendOperationT BlendOp;
   CullModeT       CullMode;
   FrontFaceT      FrontFace;
   CompareT        DepthTestCompare;
+  TopologyT       Topology;
   
   bool8           ZBufferEnable   : 1,
                   StencilEnable   : 1,
@@ -74,8 +76,8 @@ public:
   RenderErrorT GetLastError() { return mLastError; }
 
 protected:
-  GraphicsPipelineInfoT mPipelineInfo;
-  JString mName;
-  RenderErrorT mLastError;
+  GraphicsPipelineInfoT   mPipelineInfo;
+  JString                 mName;
+  RenderErrorT            mLastError;
 };
 } // jackal

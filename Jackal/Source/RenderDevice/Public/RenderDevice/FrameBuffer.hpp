@@ -8,6 +8,7 @@ namespace jackal {
 
 
 class RenderPass;
+class RenderTarget;
 
 
 // FrameBuffers are objects that contain surfaces to write/render onto.
@@ -24,6 +25,9 @@ public:
   // Get the render pass reference.
   RenderPass *GetRenderPassReference() { return mRenderPassReference; }
 
+  virtual void StoreRenderTarget(RenderTarget *target, uint32 index) = 0;
+  virtual RenderTarget *GetRenderTarget(uint32 index) = 0;
+  virtual bool8 RemoveRenderTarget(uint32 index) = 0;
 
 protected:
   RenderPass *mRenderPassReference;

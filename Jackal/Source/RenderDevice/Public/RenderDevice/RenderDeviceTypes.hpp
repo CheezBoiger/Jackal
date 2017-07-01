@@ -11,6 +11,20 @@ typedef enum {
 } DataT;
 
 
+typedef enum {
+  TOPOLOGY_POINT_LIST,
+  TOPOLOGY_LINE_LIST,
+  TOPOLOGY_LINE_STRIP,
+  TOPOLOGY_TRIANGLE_LIST,
+  TOPOLOGY_TRIANGLE_STRIP,
+  TOPOLOGY_TRIANGLE_FAN,
+  TOPOLOGY_LINE_LIST_WITH_ADJACENCY,
+  TOPOLOGY_LINE_STRIP_WITH_ADJACENCY,
+  TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY,
+  TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY,
+} TopologyT;
+
+
 // Enum types based on Vulkan Blend Factors.
 // OpenGL Will need to be a bit picky about few of these.
 typedef enum {

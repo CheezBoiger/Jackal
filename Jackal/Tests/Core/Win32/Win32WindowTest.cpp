@@ -20,7 +20,6 @@ TEST(Win32, Win32WindowTest)
 
   jackal::Win32OpenGL::SetOpenGLContext(window);
   jackal::Win32OpenGL::MakeContextCurrent(window);
-
   jackal::OpenGLDevice::InitOpenGL();
   // This device is used to render. Will be used by the 
   // renderer.

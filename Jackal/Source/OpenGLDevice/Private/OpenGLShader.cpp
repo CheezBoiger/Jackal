@@ -14,7 +14,7 @@ bool8 OpenGLShader::Compile(const JString filepath,
   std::vector<JString> includes,
   std::vector<JString> defines)
 {
-  
+
   return false;
 }
 } // jackal

@@ -2,6 +2,8 @@
 #pragma once
 #include "Core/Platform/JTypes.hpp"
 #include "ViewPort.hpp"
+#include "RenderDeviceTypes.hpp"
+
 
 namespace jackal {
 
@@ -10,11 +12,11 @@ class VertexBuffer;
 class GraphicsPipelineState;
 class ComputePipelineState;
 class RenderPass;
-class Material;
+class UniformBuffer;
 
 
 // CommandBuffer is an object that records all commands for use in rendering.
-// Once done recording, it will be cool.
+// Once done recording, it will be sent over to the GPU for rendering.
 class CommandBuffer {
 public:
   virtual ~CommandBuffer() { }
@@ -22,17 +24,23 @@ public:
   virtual void Record() = 0;
   virtual void EndRecord() = 0;
   virtual void DrawElements(uint32 count) = 0;
+  virtual void DrawInstanced(uint32 count, uint32 instances) = 0;
   virtual void BindVertexBuffer(const VertexBuffer *vb) = 0;
   virtual void BeginRenderPass(const RenderPass *pass) = 0;
   virtual void BindGraphicsPipelineState(const GraphicsPipelineState *pipeline) = 0;
   virtual void BindComputePipelineState(const ComputePipelineState *pipeline) = 0;
-  virtual void BindMaterial(const Material *material) = 0;
+  virtual void BindUniformBuffer(const UniformBuffer *ub) = 0;
   virtual void SetViewPort(ViewPort *viewport) = 0;
   virtual void SetScissor(ScissorRect *scissor) = 0;
+  virtual void SetDispatchCompute(uint32 x, uint32 y, uint32 z) = 0;
 
-  bool8 IsRecording() { return recording; }
-
+  bool8     Recording() const { return mRecording; }
+  uint32    NumberOfDrawCalls() const { return mNumDrawCalls; }
+  uint32    NumberOfRenderCalls() const { return mNumRenderCalls; }
+  
 protected:
-  bool8 recording;
+  bool8       mRecording;
+  uint32      mNumRenderCalls;
+  uint32      mNumDrawCalls;
 };
 } // jackal
