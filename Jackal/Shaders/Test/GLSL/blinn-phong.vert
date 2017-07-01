@@ -19,5 +19,13 @@ layout (binding = 0) uniform UBO {
 
 void main() 
 {
+  vec4 worldPosition = ubo.model * vec4(position, 1.0f);
+  
+  gl_Position = ubo.projection * ubo.view * worldPosition;
 
+  mat3 NormalMat = transpose(inverse(mat3(ubo.model)));
+  
+  FragPosition = worldPosition.xyz;
+  FragNormal = NormalMat * normal;
+  FragTexCoord = texcoord;
 }
