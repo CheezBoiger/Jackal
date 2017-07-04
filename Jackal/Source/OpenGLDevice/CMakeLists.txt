@@ -34,6 +34,7 @@ set(OPENGL_FILES
   ${OPENGL_PRIVATE_DIR}/OpenGLMaterial.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLRenderPass.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLRenderTarget.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLCommandBuffer.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLShader.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLTexture.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLUniformBuffer.cpp

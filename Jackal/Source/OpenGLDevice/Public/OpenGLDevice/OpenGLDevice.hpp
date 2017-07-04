@@ -4,6 +4,7 @@
 
 #include "RenderDevice/RenderDevice.hpp"
 #include "OpenGLConfigs.hpp"
+#include "Core/Math/Vector4.hpp"
 
 namespace jackal {
 
@@ -16,8 +17,8 @@ class OpenGLComputePipelineState;
 class OpenGLRenderTarget;
 class OpenGLRenderPass;
 class OpenGLFrameBuffer;
-class OpenGLMaterial;
 class OpenGLVertexBuffer;
+class OpenGLUniformBuffer;
 class OpenGLResources;
 
 // OpenGL Rendering Device. This Device handles all 
@@ -45,7 +46,6 @@ public:
   RenderTarget *CreateRenderTarget() override;
   VertexBuffer *CreateVertexBuffer() override;
   CommandBuffer *CreateCommandBuffer() override;
-  Material *CreateMaterial() override;
 
   void SetResourceHandler(Resources *resources) override;
   void DestroyShader(Shader *shader) override;
@@ -56,7 +56,6 @@ public:
   void DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
   void DestroyComputePipelineState(ComputePipelineState *pipeline) override;
   void DestroyCommandBuffer(CommandBuffer *buffer) override;
-  void DestroyMaterial(Material *material) override;
 
   const tchar *API() const override { return renderAPI; }
 
@@ -80,6 +79,8 @@ private:
   OpenGLVertexBuffer            *mCurrentVertexBuffer;
 
   // OpenGL Material object currently being used by this rendering device.
-  OpenGLMaterial                *mCurrentMaterial;
+  OpenGLUniformBuffer           *mCurrentUniformBuffer;
+
+  Colorf                        mClearColor;
 };
 } // jackal

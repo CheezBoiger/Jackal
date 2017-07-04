@@ -25,11 +25,9 @@ public:
   RenderTarget *CreateRenderTarget() override;
   VertexBuffer *CreateVertexBuffer() override;
   CommandBuffer *CreateCommandBuffer() override;
-  Material *CreateMaterial() override;
   void SetResourceHandler(Resources *resources) override;
 
   void DestroyShader(Shader *shader) override;
-  void DestroyMaterial(Material *material) override;
   void DestroyFrameBuffer(FrameBuffer *framebuffer) override;
   void DestroyRenderPass(RenderPass *pass) override;
   void DestroyTexture(Texture *texture) override;
