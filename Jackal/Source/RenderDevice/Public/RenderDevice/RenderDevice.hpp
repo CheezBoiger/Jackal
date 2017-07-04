@@ -66,6 +66,8 @@ public:
   // Retrieve the last error that was dispatched from this render device.
   RenderErrorT GetLastError() { return mLastError; }
 
+  void SubmitLastError(RenderErrorT error) { mLastError = error; }
+
   // Still Ongoing work.
   // TODO(): Setters for setting up the pipeline and rendering core.
 

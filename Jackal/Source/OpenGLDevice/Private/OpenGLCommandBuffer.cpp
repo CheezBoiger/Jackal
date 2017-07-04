@@ -1,5 +1,4 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
-#pragma once
 
 #include "OpenGLDevice/OpenGLCommandBuffer.hpp"
 #include "OpenGLDevice/OpenGLComputePipelineState.hpp"
@@ -38,8 +37,8 @@ void OpenGLCommandBuffer::ClearRecord()
 
 void OpenGLCommandBuffer::ClearColor(Colorf color)
 {
-  auto execute = [=] (Colorf color) -> void {
-    glClearColor(color.r, color.g, color.b, color.a);
+  auto execute = [=] (Colorf colorf) -> void {
+    glClearColor(colorf.r, colorf.g, color.b, colorf.a);
   };
   ++mNumRenderCalls;
   mCommandList.push_back([=] () -> void { execute(color); });
@@ -54,4 +53,41 @@ void OpenGLCommandBuffer::Clear()
   ++mNumRenderCalls;
   mCommandList.push_back([=] () -> void { execute(); });
 }
+
+
+void OpenGLCommandBuffer::BindGraphicsPipelineState(GraphicsPipelineState *pipeline)
+{ 
+  auto execute = [=] (GraphicsPipelineState *pipe) -> void {
+    OpenGLGraphicsPipelineState *oglPipe = 
+      static_cast<OpenGLGraphicsPipelineState *>(pipe);  
+    
+    // No need to update the pipeline, when it is already being used.
+    if (oglPipe == mRenderDevice->mCurrentGraphicsPipelineState) return;
+
+    mRenderDevice->mCurrentGraphicsPipelineState = oglPipe;
+    mRenderDevice->mCurrentGraphicsPipelineState->UpdateOGLPipeline();
+  };
+  ++mNumRenderCalls;
+  mCommandList.push_back([=] () -> void { execute(pipeline); });
 }
+
+
+void OpenGLCommandBuffer::BindVertexBuffer(VertexBuffer *vb)
+{
+  auto execute = [=] (VertexBuffer *vertexbuffer) -> void {
+    mRenderDevice->mCurrentVertexBuffer = 
+      static_cast<OpenGLVertexBuffer *>(vertexbuffer);
+
+    // Null vertex buffer.
+    if (!mRenderDevice->mCurrentVertexBuffer) {
+      mRenderDevice->SubmitLastError(RENDER_ERROR_NULL_VERTEX_BUFFER);
+      return;
+    }
+
+    glBindVertexArray(mRenderDevice->mCurrentVertexBuffer->vao);
+    
+  };
+  ++mNumRenderCalls;
+  mCommandList.push_back([=] () -> void { execute(vb); });
+}
+} // jackal

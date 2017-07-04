@@ -25,8 +25,8 @@ public:
   void Bake(const GraphicsPipelineInfoT &info) override;
   
   // Update the pipeline. This can be done with OpenGL, since it is
-  // a dynamic pipeline.
-  void Update();
+  // a dynamic pipeline, and we can only update that pipeline.
+  void UpdateOGLPipeline();
 ;
   GLenum        GetNativeError() { return mNativeError; }
 private:

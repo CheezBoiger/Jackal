@@ -66,7 +66,6 @@ public:
   // we go with CPU based rendering calls.
   void SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 buffers) override;
 
-private:
   // OpenGL Graphics Pipeline State object currently being used by this rendering 
   // device.
   OpenGLGraphicsPipelineState   *mCurrentGraphicsPipelineState;

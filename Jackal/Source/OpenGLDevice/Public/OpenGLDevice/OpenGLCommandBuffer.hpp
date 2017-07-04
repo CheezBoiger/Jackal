@@ -32,11 +32,11 @@ public:
   void ClearColor(Colorf color) override;
   void DrawElements(uint32 count) override;
   void DrawInstanced(uint32 count, uint32 instances) override;
-  void BindVertexBuffer(const VertexBuffer *vb) override;
-  void BeginRenderPass(const RenderPass *pass) override;
-  void BindGraphicsPipelineState(const GraphicsPipelineState *pipeline) override;
-  void BindComputePipelineState(const ComputePipelineState *pipeline) override;
-  void BindUniformBuffer(const UniformBuffer *ub) override;
+  void BindVertexBuffer(VertexBuffer *vb) override;
+  void BeginRenderPass(RenderPass *pass) override;
+  void BindGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
+  void BindComputePipelineState(ComputePipelineState *pipeline) override;
+  void BindUniformBuffer(UniformBuffer *ub) override;
   void SetViewPort(ViewPort *viewport) override;  
   void SetScissor(ScissorRect *scissor) override;
   void SetDispatchCompute(uint32 x, uint32 y, uint32 z) override;

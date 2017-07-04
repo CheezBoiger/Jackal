@@ -31,11 +31,11 @@ public:
   virtual void ClearColor(Colorf color) = 0;
   virtual void DrawElements(uint32 count) = 0;
   virtual void DrawInstanced(uint32 count, uint32 instances) = 0;
-  virtual void BindVertexBuffer(const VertexBuffer *vb) = 0;
-  virtual void BeginRenderPass(const RenderPass *pass) = 0;
-  virtual void BindGraphicsPipelineState(const GraphicsPipelineState *pipeline) = 0;
-  virtual void BindComputePipelineState(const ComputePipelineState *pipeline) = 0;
-  virtual void BindUniformBuffer(const UniformBuffer *ub) = 0;
+  virtual void BindVertexBuffer(VertexBuffer *vb) = 0;
+  virtual void BeginRenderPass(RenderPass *pass) = 0;
+  virtual void BindGraphicsPipelineState(GraphicsPipelineState *pipeline) = 0;
+  virtual void BindComputePipelineState(ComputePipelineState *pipeline) = 0;
+  virtual void BindUniformBuffer(UniformBuffer *ub) = 0;
   virtual void SetViewPort(ViewPort *viewport) = 0;
   virtual void SetScissor(ScissorRect *scissor) = 0;
   virtual void SetDispatchCompute(uint32 x, uint32 y, uint32 z) = 0;

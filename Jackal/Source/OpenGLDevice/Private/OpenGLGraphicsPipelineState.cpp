@@ -45,20 +45,16 @@ void OpenGLGraphicsPipelineState::Bake(const
   GraphicsPipelineInfoT &info)
 {
   CopyPipelineInfo(&info);
-  Update();
+  SetUpShaderPipeline();
 }
 
 
-void OpenGLGraphicsPipelineState::Update()
+void OpenGLGraphicsPipelineState::UpdateOGLPipeline()
 {
-  SetUpShaderPipeline();
-
   // No program id? Return with errors.
   if (!mProgramId) {
     return;
   }
-
-  if (!dirty) return;
 
   // Set the depth test for the pipeline.
   if (mPipelineInfo.ZBufferEnable) {
@@ -101,11 +97,6 @@ void OpenGLGraphicsPipelineState::Update()
     
     REGISTER_OPENGL_ERROR();
 
-    if (mNativeError) {
-      RegisterNativeError();
-      return;  
-    }
-
   } else {
     glDisable(GL_BLEND);
   }
@@ -121,11 +112,6 @@ void OpenGLGraphicsPipelineState::Update()
     }
     
     REGISTER_OPENGL_ERROR();
-    
-    if (mNativeError) {
-      RegisterNativeError();
-      return;
-    }
 
     switch (mPipelineInfo.FrontFace) {
       case FRONT_FACE_CLOCKWISE:          glFrontFace(GL_CW);   break;
@@ -149,6 +135,11 @@ void OpenGLGraphicsPipelineState::Update()
   } else {
     glDisable(GL_STENCIL);
   }
+
+  // Use the program.
+  glUseProgram(mProgramId);
+
+  dirty = false;
 }
 
 
