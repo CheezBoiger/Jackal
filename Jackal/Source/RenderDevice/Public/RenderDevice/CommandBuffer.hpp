@@ -30,6 +30,7 @@ public:
   virtual void Clear() = 0;
   virtual void ClearColor(Colorf color) = 0;
   virtual void DrawElements(uint32 count) = 0;
+  virtual void Draw(uint32 count) = 0;
   virtual void DrawInstanced(uint32 count, uint32 instances) = 0;
   virtual void BindVertexBuffer(VertexBuffer *vb) = 0;
   virtual void BeginRenderPass(RenderPass *pass) = 0;

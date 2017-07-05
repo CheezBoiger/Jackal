@@ -12,7 +12,7 @@
 namespace jackal {
 
 
-void VulkanDevice::Init()
+void VulkanDevice::Initialize()
 {
   VkApplicationInfo appInfo =  { };
   appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;

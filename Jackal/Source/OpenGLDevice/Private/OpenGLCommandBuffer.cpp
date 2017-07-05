@@ -90,4 +90,65 @@ void OpenGLCommandBuffer::BindVertexBuffer(VertexBuffer *vb)
   ++mNumRenderCalls;
   mCommandList.push_back([=] () -> void { execute(vb); });
 }
+
+
+void OpenGLCommandBuffer::DrawElements(uint32 count)
+{
+  auto execute = [=] (uint32 c) -> void {
+
+    if (!mRenderDevice->mCurrentVertexBuffer) {
+      mRenderDevice->SubmitLastError(RENDER_ERROR_NULL_VERTEX_BUFFER);
+      return;
+    }
+
+    glDrawElements(mRenderDevice->mCurrentGraphicsPipelineState->
+      GetNativeTopology(), c, GL_UNSIGNED_INT, nullptr);
+  };
+  ++mNumDrawCalls;
+  mCommandList.push_back([=] () -> void { execute(count); });
+}
+
+
+void OpenGLCommandBuffer::Draw(uint32 count)
+{
+  auto execute = [=] (uint32 c) -> void {
+    if (!mRenderDevice->mCurrentVertexBuffer) {
+      mRenderDevice->SubmitLastError(RENDER_ERROR_NULL_VERTEX_BUFFER);
+      return;
+    }
+    glDrawArrays(mRenderDevice->mCurrentGraphicsPipelineState->
+      GetNativeTopology(), 0, c);
+  };
+  ++mNumDrawCalls;
+  mCommandList.push_back([=] () -> void { execute(count); });
+}
+
+
+void OpenGLCommandBuffer::SetViewPort(ViewPort *viewport)
+{
+  auto execute = [=] (ViewPort *vp) -> void {
+    glViewport( 
+      static_cast<GLint>(vp->X),
+      static_cast<GLint>(vp->Y),
+      static_cast<GLsizei>(vp->Width),
+      static_cast<GLsizei>(vp->Height)
+    );
+  };
+  ++mNumRenderCalls;
+  mCommandList.push_back([=] () -> void { execute(viewport); });
+}
+
+
+void OpenGLCommandBuffer::SetScissor(ScissorRect *scissor)
+{
+  auto execute = [=] (ScissorRect *sr) -> void {
+    glScissor(sr->Offset.x,
+              sr->Offset.y,
+              sr->Extent.Width,
+              sr->Extent.Height
+    );
+  };
+  ++mNumRenderCalls;
+  mCommandList.push_back([=] () -> void { execute(scissor); });
+}
 } // jackal

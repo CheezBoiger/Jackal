@@ -31,6 +31,7 @@ public:
   void Clear() override;
   void ClearColor(Colorf color) override;
   void DrawElements(uint32 count) override;
+  void Draw(uint32 count) override;
   void DrawInstanced(uint32 count, uint32 instances) override;
   void BindVertexBuffer(VertexBuffer *vb) override;
   void BeginRenderPass(RenderPass *pass) override;
@@ -40,6 +41,8 @@ public:
   void SetViewPort(ViewPort *viewport) override;  
   void SetScissor(ScissorRect *scissor) override;
   void SetDispatchCompute(uint32 x, uint32 y, uint32 z) override;
+
+  std::list<OGLCommandFunction> &GetCommandList() { return mCommandList; }
 
   RenderDevice *GetRenderDevice() override { return mRenderDevice; }
 

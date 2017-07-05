@@ -20,6 +20,7 @@ class OpenGLFrameBuffer;
 class OpenGLVertexBuffer;
 class OpenGLUniformBuffer;
 class OpenGLResources;
+class OpenGLMaterialLayout;
 
 // OpenGL Rendering Device. This Device handles all 
 // Rendering calls, creation, and modification of OpenGL 
@@ -32,9 +33,14 @@ public:
   // This must be called if you plan on using OpenGL.
   static bool8 InitOpenGL();
 
-  OpenGLDevice() { }
+  OpenGLDevice()
+    : mCurrentComputePipelineState(nullptr)
+    , mCurrentGraphicsPipelineState(nullptr)
+    , mCurrentVertexBuffer(nullptr)
+    , mCurrentUniformBuffer(nullptr)
+    , mClearColor(Colorf(0.0f, 0.0f, 0.0f, 1.0f)) { }
 
-  void Init() override;
+  void Initialize() override;
   Resources *GetResources() override;
   Shader *CreateShader() override;
   FrameBuffer *CreateFrameBuffer() override;
@@ -46,6 +52,7 @@ public:
   RenderTarget *CreateRenderTarget() override;
   VertexBuffer *CreateVertexBuffer() override;
   CommandBuffer *CreateCommandBuffer() override;
+  MaterialLayout *CreateMaterialLayout() override;
 
   void SetResourceHandler(Resources *resources) override;
   void DestroyShader(Shader *shader) override;
@@ -56,6 +63,7 @@ public:
   void DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
   void DestroyComputePipelineState(ComputePipelineState *pipeline) override;
   void DestroyCommandBuffer(CommandBuffer *buffer) override;
+  void DestroyMaterialLayout(MaterialLayout *material) override;
 
   const tchar *API() const override { return renderAPI; }
 
@@ -77,8 +85,11 @@ public:
   // OpenGL Vertex Buffer object currently being used by this rendering device.
   OpenGLVertexBuffer            *mCurrentVertexBuffer;
 
-  // OpenGL Material object currently being used by this rendering device.
+  // OpenGL Uniform Buffer object currently being used by this rendering device.
   OpenGLUniformBuffer           *mCurrentUniformBuffer;
+  
+  // OpenGL Material object currently being use by this rendering device.
+  OpenGLMaterialLayout          *mCurrentMaterialLayout;
 
   Colorf                        mClearColor;
 };

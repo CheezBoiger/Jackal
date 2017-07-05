@@ -4,7 +4,7 @@
 
 namespace jackal {
 
-
+// TODO(): These objects need to be 
 class Mesh;
 class Material;
 class RenderCommand;

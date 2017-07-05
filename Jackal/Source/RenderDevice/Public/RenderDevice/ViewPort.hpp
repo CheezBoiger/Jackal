@@ -21,6 +21,7 @@ struct ViewPort {
 
 
 struct ScissorRect {
-  struct { uint32 x, y; } Offset;
+  struct { uint32 Width,  Height; } Extent;
+  struct { uint32 x,      y;      } Offset;
 };
 } // jackal

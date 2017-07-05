@@ -25,11 +25,6 @@ protected:
 public:
   virtual ~UniformBuffer() { }
 
-  // Add a texture to this material, as well as the sampler that will be
-  // used to sample it. Must also provide the index of which to attach the
-  // texture onto in rendering unit.
-  virtual void SetTexture(Texture *texture, Sampler *sampler, int32 binding) = 0;
-
   // TODO(): Figure out how to properly add in model matrices to these,
   // Vulkan is not dynamic, so everything must be done before actual rendering,
   // this leaves little room to add multiple model matrices in the form of an array.

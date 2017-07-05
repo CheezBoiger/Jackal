@@ -24,7 +24,7 @@ set(RENDEV_FILES
   ${RENDEV_PUBLIC_DIR}/TextureConfig.hpp
   ${RENDEV_PUBLIC_DIR}/UniformBuffer.hpp
   ${RENDEV_PUBLIC_DIR}/VertexBuffer.hpp
-  ${RENDEV_PUBLIC_DIR}/Material.hpp
+  ${RENDEV_PUBLIC_DIR}/MaterialLayout.hpp
   ${RENDEV_PRIVATE_DIR}/GPUQuery.cpp
   ${RENDEV_PUBLIC_DIR}/RenderDeviceTypes.hpp
   ${RENDEV_PUBLIC_DIR}/GraphicsPipelineState.hpp
@@ -33,6 +33,7 @@ set(RENDEV_FILES
   ${RENDEV_PUBLIC_DIR}/ViewPort.hpp
   ${RENDEV_PUBLIC_DIR}/RenderObject.hpp
   ${RENDEV_PRIVATE_DIR}/RenderObject.cpp
+  ${RENDEV_PUBLIC_DIR}/CubeMap.hpp
 )
 
 add_library(${JACKAL_RENDEV_NAME} STATIC

@@ -12,7 +12,7 @@ namespace jackal {
 class VulkanDevice : public RenderDevice {
 public:
   // TODO(): Need to figure out how to pass window handle to vulkan.
-  void Init() override;
+  void Initialize() override;
 
   Resources *GetResources() override;
   Shader *CreateShader() override;

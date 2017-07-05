@@ -29,9 +29,11 @@ public:
   void UpdateOGLPipeline();
 ;
   GLenum        GetNativeError() { return mNativeError; }
+  GLenum        GetNativeTopology() { return mNativeTopology; }
 private:
 
   static GLenum GetOpenGLBlendT(BlendT blend);
+  static GLenum GetOpenGLTopology(TopologyT topology);
 
   // TODO(): Work on this later. Needs a definition.
   void RegisterNativeError();
@@ -42,5 +44,6 @@ private:
   GLuint mProgramId;
   GLenum mNativeError;
   bool8 dirty;
+  GLenum mNativeTopology;
 };
 } // jackal

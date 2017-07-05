@@ -21,6 +21,7 @@ class ComputePipelineState;
 class CommandBuffer;
 class Resources;
 class Sampler;
+class MaterialLayout;
 
 // RenderDevice interface, used for the rendering system of the 
 // Jackal Game Engine. This is the Rendering Hardware Interface used
@@ -38,7 +39,7 @@ public:
   virtual Resources             *GetResources() = 0;
   virtual void                  SetResourceHandler(Resources *resources) = 0;
   
-  virtual void                  Init() = 0;
+  virtual void                  Initialize() = 0;
 
   virtual Shader                *CreateShader() = 0;
   virtual FrameBuffer           *CreateFrameBuffer() = 0;
@@ -51,6 +52,7 @@ public:
   virtual VertexBuffer          *CreateVertexBuffer() = 0;
   virtual CommandBuffer         *CreateCommandBuffer() = 0;
   virtual Sampler               *CreateSampler() = 0;
+  virtual MaterialLayout        *CreateMaterialLayout() = 0;
 
   virtual void                  DestroyShader(Shader *shader) = 0;
   virtual void                  DestroyFrameBuffer(FrameBuffer *framebuffer) = 0;
@@ -61,10 +63,16 @@ public:
   virtual void                  DestroyComputePipelineState(ComputePipelineState *pipeline) = 0;
   virtual void                  DestroyCommandBuffer(CommandBuffer *buffer) = 0;
   virtual void                  DestroySampler(Sampler *sampler) = 0;
+  virtual void                  DestroyMaterialLayout(MaterialLayout *mlayout) = 0;
+
   virtual const tchar           *API() const = 0;
 
   // Retrieve the last error that was dispatched from this render device.
-  RenderErrorT GetLastError() { return mLastError; }
+  RenderErrorT GetLastError() {
+    RenderErrorT error = mLastError;
+    mLastError = RENDER_ERROR_NONE; 
+    return error; 
+  }
 
   void SubmitLastError(RenderErrorT error) { mLastError = error; }
 

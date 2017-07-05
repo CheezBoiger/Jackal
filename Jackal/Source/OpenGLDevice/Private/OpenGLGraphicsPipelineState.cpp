@@ -41,11 +41,30 @@ GLenum OpenGLGraphicsPipelineState::GetOpenGLBlendT(BlendT blend)
 }
 
 
+GLenum OpenGLGraphicsPipelineState::GetOpenGLTopology(TopologyT topology)
+{
+  switch (topology) {
+    case TOPOLOGY_POINT_LIST: return GL_POINTS;
+    case TOPOLOGY_LINE_LIST: return GL_LINES;
+    case TOPOLOGY_LINE_STRIP: return GL_LINE_STRIP;
+    case TOPOLOGY_TRIANGLE_LIST: return GL_TRIANGLES;
+    case TOPOLOGY_TRIANGLE_STRIP: return GL_TRIANGLE_STRIP;
+    case TOPOLOGY_TRIANGLE_FAN: return GL_TRIANGLE_FAN;
+    case TOPOLOGY_LINE_LIST_WITH_ADJACENCY: return GL_LINES_ADJACENCY;
+    case TOPOLOGY_LINE_STRIP_WITH_ADJACENCY: return GL_LINE_STRIP_ADJACENCY;
+    case TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY: return GL_TRIANGLES_ADJACENCY;
+    case TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY: return GL_TRIANGLE_STRIP_ADJACENCY;
+    default: return GL_TRIANGLES;
+  }
+}
+
+
 void OpenGLGraphicsPipelineState::Bake(const 
   GraphicsPipelineInfoT &info)
 {
   CopyPipelineInfo(&info);
   SetUpShaderPipeline();
+  mNativeTopology = GetOpenGLTopology(mPipelineInfo.Topology);
 }
 
 
@@ -220,6 +239,7 @@ void OpenGLGraphicsPipelineState::CopyPipelineInfo(const GraphicsPipelineInfoT *
   CHANGE_PIPELINE(mPipelineInfo.FrontFace, info->FrontFace);
   CHANGE_PIPELINE(mPipelineInfo.ZBufferEnable, info->ZBufferEnable);
   CHANGE_PIPELINE(mPipelineInfo.StencilEnable, info->StencilEnable);
+  CHANGE_PIPELINE(mPipelineInfo.Topology, info->Topology);
   
   CHANGE_PIPELINE(mPipelineInfo.VertexShader, info->VertexShader);
   CHANGE_PIPELINE(mPipelineInfo.PixelShader, info->PixelShader);

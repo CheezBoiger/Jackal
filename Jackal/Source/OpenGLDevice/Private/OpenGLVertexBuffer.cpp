@@ -21,9 +21,10 @@ void OpenGLVertexBuffer::Initialize(const Vertex *data,
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize * sizeof(uint32),
     indices, type == DATA_DYNAMIC ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW);
+      
   }
 
-  size_t stride   = 3 * sizeof(real32);   // position
+  GLsizei stride   = 3 * sizeof(real32);   // position
   stride          += 3 * sizeof(real32);  // normal
   stride          += 2 * sizeof(real32);  // uv/texcoord
   stride          += 3 * sizeof(real32);  // base color.
