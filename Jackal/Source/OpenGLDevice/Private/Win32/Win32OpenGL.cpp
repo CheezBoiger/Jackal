@@ -70,6 +70,9 @@ void Win32OpenGL::SetOpenGLContext(Win32Window *window)
       return;
     }
 
+    // TODO(): Need to handle our render context in a structure.
+    // Currently relying on wgl to hold our current context, which
+    // may cause leaks in the future.
     wglMakeCurrent(hDC, rctx);
   }
 }
