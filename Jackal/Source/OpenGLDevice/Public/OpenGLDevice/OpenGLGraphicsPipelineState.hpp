@@ -30,6 +30,11 @@ public:
 ;
   GLenum        GetNativeError() { return mNativeError; }
   GLenum        GetNativeTopology() { return mNativeTopology; }
+
+  GLuint GetProgramId() { return mProgramId; }
+  bool8 Dirty() { return dirty; }
+  
+
 private:
 
   static GLenum GetOpenGLBlendT(BlendT blend);

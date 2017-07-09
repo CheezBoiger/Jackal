@@ -4,6 +4,7 @@
 #include "Core/Math/Quaternion.hpp"
 #include "Core/Logging/Logger.hpp"
 #include "Core/Utility/TextureLoader.hpp"
+#include "Core/Utility/JStringUtils.hpp"
 
 #include "g-truc/glm/glm/gtc/quaternion.hpp"
 #include "g-truc/glm/glm/gtx/quaternion.hpp"
@@ -17,8 +18,15 @@ namespace coretest {
 #define TOLERANCE 0.00001f
 
 
+struct {
+  jackal::Matrix4 matrix;
+} SimpleStruct;
+
+
 TEST(QuaternionTesting, QuatTest)
 {
+  void *s = &SimpleStruct;
+  jackal::PrintToConsole("struct size: " + jackal::JStringUtils::ToString(sizeof(SimpleStruct)) + "\n");
   jackal::Quat a(5.0f, 12.0f, 3.0f, 3.0f);
   jackal::Quat b;
 

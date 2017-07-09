@@ -5,6 +5,7 @@
 #include "OpenGLDevice/OpenGLCommandBuffer.hpp"
 #include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
 #include "OpenGLDevice/OpenGLFrameBuffer.hpp"
+#include "OpenGLDevice/OpenGLUniformBuffer.hpp"
 
 #include "Core/Logging/Debugging.hpp"
 
@@ -21,8 +22,20 @@ bool8 OpenGLDevice::InitOpenGL()
 }
 
 
+UniformBuffer *OpenGLDevice::CreateUniformBuffer()
+{
+  OpenGLUniformBuffer *ubo = new OpenGLUniformBuffer();
+  return ubo;
+}
 
 
+void OpenGLDevice::DestoryUniformBuffer(UniformBuffer *ubo)
+{
+  OpenGLUniformBuffer *oglUbo = static_cast<OpenGLUniformBuffer *>(ubo);
+  delete oglUbo;
+  
+  ubo = nullptr;
+}
 
 void OpenGLDevice::SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 buffers)
 {

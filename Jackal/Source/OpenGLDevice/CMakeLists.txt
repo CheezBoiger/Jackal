@@ -63,6 +63,8 @@ if (OPENGL_FOUND)
     ${OPENGL_FILES}
   )
 
+  target_link_libraries(${JACKAL_OPENGL_RENDEV_NAME} RenderDevice)
+
   target_link_libraries(${JACKAL_OPENGL_RENDEV_NAME} ${OPENGL_LIBRARIES})
   if (${CMAKE_CXX_COMPILER_ID})
     # Doing some stuff for organization.

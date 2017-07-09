@@ -5,6 +5,7 @@
 // OpenGL Testing as well.
 #include "OpenGLDevice/OpenGLDevice.hpp"
 #include "OpenGLDevice/Win32/Win32OpenGL.hpp"
+#include "OpenGLDevice/OpenGLUniformBuffer.hpp"
 
 #include <gtest/gtest.h>
 
@@ -35,7 +36,11 @@ TEST(Win32, Win32WindowTest)
   // This device is used to render. Will be used by the 
   // renderer.
   //jackal::OpenGLDevice device;
-
+  {
+    jackal::OpenGLUniformBuffer buffer;
+    buffer.SetMat4("model", jackal::Matrix4());
+    buffer.SetMat4("model", jackal::Matrix4(2.0f));
+  }
   ASSERT_EQ(window->width, width);
   ASSERT_EQ(window->height, height);
 

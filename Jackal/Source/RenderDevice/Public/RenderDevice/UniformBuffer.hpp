@@ -10,19 +10,26 @@
 
 #include "Texture.hpp"
 #include "RenderObject.hpp"
+#include "GraphicsPipelineState.hpp"
 
 
 namespace jackal {
 
+
+class GraphicsPipelineState;
 
 // Uniform Buffer object, which allows the manipulation of 
 // information to be passed to uniform buffers, or uniform values 
 // in shaders.
 class UniformBuffer : public RenderObject {
 protected:
-  UniformBuffer(DataT dataType) { }
+  UniformBuffer() 
+    : mBinding(0) 
+    , mDataType(DataT::DATA_STATIC)
+    , mMemSize(0) { }
 
 public:
+  typedef uint32 mem_offset_t;
   virtual ~UniformBuffer() { }
 
   // TODO(): Figure out how to properly add in model matrices to these,
@@ -33,22 +40,41 @@ public:
   // stored depending on data type. If two values of the same data type are stored,
   // will add into a list. OpenGL will read the binding description, as well as
   // vulkan.
-  virtual void SetMat4(JString name, Matrix4 mat, uint32 binding) = 0;
-  virtual void SetMat3(JString name, Matrix3 mat, uint32 binding) = 0;
-  virtual void SetMat2(JString name, Matrix2 mat, uint32 binding) = 0;
-  virtual void SetVec4(JString name, Vector4 vec, uint32 binding) = 0;
-  virtual void SetVec3(JString name, Vector3 vec, uint32 binding) = 0;
-  virtual void SetVec2(JString name, Vector2 vec, uint32 binding) = 0;
 
-  virtual void SetBool(JString name, bool8 b, uint32 binding) = 0;
-  virtual void SetInt32(JString name, int32 i, uint32 binding) = 0;
-  virtual void SetUInt32(JString name, uint32 ui, uint32 binding) = 0;
-  virtual void SetFloat(JString name, real32 f, uint32 binding) = 0;
-  virtual void SetDouble(JString name, real64 d, uint32 binding) = 0;
+  // Set a matrix variable in the uniform buffer, with the provided offset from
+  // 0 of the struct. Returns the current offset after setting the variable. You
+  // can use the value returned as the parameter for these functions in order to
+  // store them sequentially.
+  virtual void SetMat4(const char *name, Matrix4 mat) = 0;
+  virtual void SetMat3(const char *name, Matrix3 mat) = 0;
+  virtual void SetMat2(const char *name, Matrix2 mat) = 0;
+  virtual void SetVec4(const char *name, Vector4 vec) = 0;
+  virtual void SetVec3(const char *name, Vector3 vec) = 0;
+  virtual void SetVec2(const char *name, Vector2 vec) = 0;
 
+  virtual void SetBool(const char *name, bool8 b) = 0;
+  virtual void SetInt32(const char *name, int32 i) = 0;
+  virtual void SetUInt32(const char *name, uint32 ui) = 0;
+  virtual void SetFloat(const char *name, real32 f) = 0;
+  virtual void SetDouble(const char *name, real64 d) = 0;
+
+  uint32 GetBindingIndex() { return mBinding; }
+
+  void SetDataType(DataT d) { mDataType = d; }
+  DataT GetDataType() { return mDataType; }
+  const char *GetName() { return mName; }
+
+  // Initialize this object. Must provide it with the name given from the shader
+  // file, along with the graphics pipeline state that it resides in.
+  virtual void Initialize(GraphicsPipelineState *pipe, uint32 bind, const char *name) = 0;
+
+  virtual uint32 GetTotalSize() { return mMemSize; }
   virtual void Update() = 0;
 
 protected:
   DataT       mDataType;
+  uint32      mBinding;
+  const char  *mName;
+  uint32      mMemSize;
 };
 } // jackal

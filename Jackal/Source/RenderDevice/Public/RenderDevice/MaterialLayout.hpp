@@ -9,13 +9,15 @@
 
 #include "Texture.hpp"
 #include "CubeMap.hpp"
+#include "UniformBuffer.hpp"
 
 
 namespace jackal {
 
-
 // Material Object, which specifies descriptor sets for 
-// some given context on the rendering pipeline.
+// some given context on the rendering pipeline. We need
+// to set our material inside this layout structure in order to
+// to render textures, or update uniform layouts.
 class MaterialLayout {
 public:
   virtual ~MaterialLayout() { }
@@ -23,8 +25,8 @@ public:
   // Add a texture to this material, as well as the sampler that will be
   // used to sample it. Must also provide the index of which to attach the
   // texture onto in rendering unit.
-  virtual void SetTexture(Texture *texture, Sampler *sampler, int32 binding) = 0;
-
-  virtual void SetCubeMap(CubeMap *cubemap, int32 binding) = 0;
+  virtual void SetTexture(Texture *texture, Sampler *sampler, uint32 binding) = 0;
+  virtual void SetCubeMap(CubeMap *cubemap, uint32 binding) = 0;
+  virtual void SetUniformBuffer(UniformBuffer *buffer) = 0;
 };
 } // jackal

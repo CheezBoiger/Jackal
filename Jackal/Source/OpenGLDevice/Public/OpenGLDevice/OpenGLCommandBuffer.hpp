@@ -37,7 +37,7 @@ public:
   void BeginRenderPass(RenderPass *pass) override;
   void BindGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
   void BindComputePipelineState(ComputePipelineState *pipeline) override;
-  void BindUniformBuffer(UniformBuffer *ub) override;
+  void BindMaterialLayout(MaterialLayout *layout) override;
   void SetViewPort(ViewPort *viewport) override;  
   void SetScissor(ScissorRect *scissor) override;
   void SetDispatchCompute(uint32 x, uint32 y, uint32 z) override;
