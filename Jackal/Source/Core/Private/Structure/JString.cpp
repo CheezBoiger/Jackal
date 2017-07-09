@@ -8,7 +8,7 @@
 
 namespace jackal {
 
-void PrintToStdConsole(JString str)
+void PrintToConsole(JString str)
 {
   Win32Window::PrintToStdConsole(GetStdHandle(STD_OUTPUT_HANDLE), str);
 }
@@ -20,7 +20,7 @@ void PrintToStdConsole(JString str)
 
 namespace jackal {
 
-void PrintToStdConsole(JString str)
+void PrintToConsole(JString str)
 {
   std::cout << str;
 }

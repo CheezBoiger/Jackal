@@ -27,5 +27,5 @@ typedef std::string JString;
 #endif
 
 
-void PrintToStdConsole(JString str);
+void PrintToConsole(JString str);
 } // jackal

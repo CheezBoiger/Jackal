@@ -46,8 +46,6 @@ void StartWindow(Win32Window *window)
   AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, GetMenu(window->handle) != NULL);
   MoveWindow(window->handle, window->x, window->y, 
     windowRect.right - windowRect.left, windowRect.bottom - windowRect.top, FALSE);
-
-  ShowWindow(window->handle, SW_SHOW);
   UpdateWindow(window->handle);
 }
 
@@ -157,6 +155,7 @@ Win32Window *Win32Window::Create(int32 width,
     return nullptr;
   }
 
+  // Need to use smart pointer?
   Win32Window *window = new Win32Window();
 
   WCHAR *wTitle = nullptr;
@@ -179,7 +178,7 @@ Win32Window *Win32Window::Create(int32 width,
 }
 
 
-bool8 Win32Window::Destroy()
+bool8 Win32Window::CleanUp()
 {
 
   auto it = windows.find(wWindowName);
@@ -195,28 +194,34 @@ bool8 Win32Window::Destroy()
 
 void Win32Window::RegisterWin32Class()
 {
-  WNDCLASSEXW wc;
-  ZeroMemory(&wc, sizeof(wc));
-  HINSTANCE instance = GetModuleHandle(NULL);
+  static bool registered = false;
 
-  wc.cbSize = sizeof(wc);
-  wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-  wc.hCursor = LoadCursorW(NULL, (LPCWSTR)IDC_ARROW);
-  wc.lpszClassName = JWIN32_CLASSNAME;
-  wc.lpfnWndProc = WindowProc;
-  wc.hInstance = instance;
-  wc.hIcon = (HICON)LoadImageW(instance, L"JIcon",
-    IMAGE_ICON, 0, 0, LR_DEFAULTSIZE | LR_SHARED);
-  // Set to default if no user defined icon exists.
-  if (!wc.hIcon) {
-    wc.hIcon = (HICON)LoadImageW(NULL, (LPCWSTR)IDI_APPLICATION,
+  if (!registered) {
+    WNDCLASSEXW wc;
+    ZeroMemory(&wc, sizeof(wc));
+    HINSTANCE instance = GetModuleHandle(NULL);
+
+    wc.cbSize = sizeof(wc);
+    wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
+    wc.hCursor = LoadCursorW(NULL, (LPCWSTR)IDC_ARROW);
+    wc.lpszClassName = JWIN32_CLASSNAME;
+    wc.lpfnWndProc = WindowProc;
+    wc.hInstance = instance;
+    wc.hIcon = (HICON)LoadImageW(instance, L"JIcon",
       IMAGE_ICON, 0, 0, LR_DEFAULTSIZE | LR_SHARED);
-  }
+    // Set to default if no user defined icon exists.
+    if (!wc.hIcon) {
+      wc.hIcon = (HICON)LoadImageW(NULL, (LPCWSTR)IDI_APPLICATION,
+        IMAGE_ICON, 0, 0, LR_DEFAULTSIZE | LR_SHARED);
+    }
 
-  if (!RegisterClassExW(&wc)) {
-    Log::MessageToStdOutput(LOG_ERROR, JTEXT(R"(
-      Unable to register Win32 window class!
-    )"), true, TARGET_OS_NAME);
+    if (!RegisterClassExW(&wc)) {
+      Log::MessageToStdOutput(LOG_ERROR, JTEXT(R"(
+        Unable to register Win32 window class!
+      )"), true, TARGET_OS_NAME);
+      JDEBUG("%d\n", GetLastError());
+    }
+    registered = true;
   }
 }
 
@@ -273,5 +278,18 @@ void Win32Window::SetToCenter()
   y = yPos;
 
   SetWindowPos(handle, 0, xPos, yPos, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
+}
+
+void Win32Window::Hide()
+{
+  ShowWindow(handle, SW_HIDE);
+  UpdateWindow(handle);
+}
+
+
+void Win32Window::Show()
+{
+  ShowWindow(handle, SW_SHOW);
+  UpdateWindow(handle);
 }
 } // jackal

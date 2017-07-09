@@ -3,9 +3,13 @@
 
 #include "Core/Win32/Win32Window.hpp"
 
+// wgl extensions and support.
+#include <gl/GL.h>
+#include "wglext.hpp"
 
 
 
+  
 
 namespace jackal {
 
@@ -14,6 +18,7 @@ namespace jackal {
 // For Win32 windows. 
 class Win32OpenGL {
 public:
+
   // Set the window Context to OpenGL. This will link OpenGL
   // To the win32 window application.
   static void SetOpenGLContext(Win32Window *window);
@@ -25,7 +30,7 @@ public:
 
 
   // Initialize WGL library.
-  static void InitWGL();
+  static void InitWGLExtensions();
 
   // Delete the OpenGL Context.
   static void DeleteOpenGLContext(Win32Window *window);
@@ -33,5 +38,16 @@ public:
   // Make the Context generated to the current window that is being
   // rendered.
   static void MakeContextCurrent(Win32Window *window);
+
+
+  static void Initialize();
+  static void CleanUp();
+
+private:
+
+  // Dummy window handle.
+  static Win32Window *mDummy;
+  static HGLRC renderContext;
+  static HDC mDummyHDC;
 };
 } // jackal

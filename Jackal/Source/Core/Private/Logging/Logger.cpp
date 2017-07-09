@@ -19,16 +19,16 @@ void Log::MessageToStdOutput(LogVerbosity type, JString msg, bool8 store,
 {
   if (!(suppressed & type)) {
     switch (type) {
-      case LOG_WARNING: PrintToStdConsole(JTEXT("Warning: ")); break;
-      case LOG_ERROR: PrintToStdConsole(JTEXT("Error: ")); break;
-      case LOG_RUNTIME_DEBUG: PrintToStdConsole(JTEXT("Debug: ")); break;
-      case LOG_NOTIFY: PrintToStdConsole(JTEXT("Notice: ")); break;
-      case LOG_HIDDEN: PrintToStdConsole(JTEXT("Hidden: ")); break;
+      case LOG_WARNING: PrintToConsole(JTEXT("Warning: ")); break;
+      case LOG_ERROR: PrintToConsole(JTEXT("Error: ")); break;
+      case LOG_RUNTIME_DEBUG: PrintToConsole(JTEXT("Debug: ")); break;
+      case LOG_NOTIFY: PrintToConsole(JTEXT("Notice: ")); break;
+      case LOG_HIDDEN: PrintToConsole(JTEXT("Hidden: ")); break;
       default: break;
     }
-    PrintToStdConsole(msg + JTEXT("\n"));
+    PrintToConsole(msg + JTEXT("\n"));
     if (!nameTag.empty()) {
-      PrintToStdConsole(JTEXT("Tag: ") + nameTag + JTEXT("\n\n"));
+      PrintToConsole(JTEXT("Tag: ") + nameTag + JTEXT("\n\n"));
     }
   }
   if (store) {

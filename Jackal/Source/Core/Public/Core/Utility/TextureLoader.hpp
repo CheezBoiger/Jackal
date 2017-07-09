@@ -30,7 +30,7 @@ public:
   // if file was not loaded successfully.
   static TextureHandle LoadFile(const char *filepath);
 
-  // Destroy a texture handle of the file loader. Makes 
+  // CleanUp a texture handle of the file loader. Makes 
   // the texture data null and 0'd when successful.
   static void DestroyHandle(TextureHandle &handle);
 };

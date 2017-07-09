@@ -27,15 +27,18 @@ struct Win32Window : public Window {
   bool8       requestClose    : 1;
   bool8       requestMinimize : 1;
   bool8       isFullScreen    : 1;
+    
 
   static Win32Window *Create(int32 width,
     int32 height, LPCWSTR wWindowName, HWND parent);
   
   Win32Window *GetParent();
 
-  bool8 Destroy();
+  bool8 CleanUp();
 
   void RequestClose();
+  void Hide();
+  void Show();
   
   // Set the window to the center of the screen.
   void SetToCenter();
