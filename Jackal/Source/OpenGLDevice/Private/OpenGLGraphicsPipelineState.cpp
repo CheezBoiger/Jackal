@@ -180,32 +180,32 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline()
 
   OpenGLShader *shader = static_cast<OpenGLShader *>(mPipelineInfo.VertexShader);
   if (shader->Compiled()) {
-    glAttachShader(mProgramId, shader->GetUID());
+    glAttachShader(mProgramId, shader->GetHandle());
   }
 
   shader = static_cast<OpenGLShader *>(mPipelineInfo.PixelShader);
   if (shader->Compiled()) {
-    glAttachShader(mProgramId, shader->GetUID());
+    glAttachShader(mProgramId, shader->GetHandle());
   }
 
   if (mPipelineInfo.HullShader) {
     shader = static_cast<OpenGLShader *>(mPipelineInfo.HullShader);
     if (shader->Compiled()) {
-      glAttachShader(mProgramId, shader->GetUID());
+      glAttachShader(mProgramId, shader->GetHandle());
     }
   }
 
   if (mPipelineInfo.DomainShader) {
     shader = static_cast<OpenGLShader *>(mPipelineInfo.DomainShader);
     if (shader->Compiled()) {
-      glAttachShader(mProgramId, shader->GetUID());
+      glAttachShader(mProgramId, shader->GetHandle());
     }
   }
 
   if (mPipelineInfo.GeometryShader) {
     shader = static_cast<OpenGLShader *>(mPipelineInfo.GeometryShader);
     if (shader->Compiled()) {
-      glAttachShader(mProgramId, shader->GetUID());
+      glAttachShader(mProgramId, shader->GetHandle());
     }
   }
 

@@ -12,23 +12,34 @@ namespace jackal {
 class OpenGLShader : public Shader {
   static const tchar *shaderLanguage;
 public:
-  OpenGLShader(const JString name = JTEXT("Default-OpenGLShader"),
-    const JString filepath = JTEXT(""));
+  static GLenum GetNativeShaderType(ShaderType type);
+
+  OpenGLShader()
+    : mNativeShaderType(GL_NONE)
+    , handle(0) { }
   
   // Get the UID of this opengl object.
-  GLuint GetUID() const { return id; }
+  GLuint GetHandle() const { return handle; }
+
+  GLenum GetNativeType() const { return mNativeShaderType; }
 
   // Shader language type of this object.
   const tchar *ShaderLanguage() const override { return shaderLanguage; }
     
   // Compile the shader script for GLSL.
-  bool8 Compile(const JString filepath,
-    std::vector<JString> includes = std::vector<JString>(),
-    std::vector<JString> defines = std::vector<JString>()
+  bool8 Compile(ShaderType type, const JString filepath,
+    const std::vector<JString> includes = std::vector<JString>(),
+    const std::vector<JString> defines = std::vector<JString>()
   ) override;
 
-private:
+  void CleanUp() override;
 
-  GLuint id;
+private:
+  // Parse the source code from the filepath.
+  JString ParseSource(JString filepath, std::vector<JString> includes,
+    std::vector<JString> defines);
+
+  GLenum mNativeShaderType;
+  GLuint handle;
 };
 } // jackal

@@ -1,6 +1,7 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #pragma once
 
+#include "Core/Win32/Win32Config.hpp"
 #include "Core/Win32/Win32Window.hpp"
 
 // wgl extensions and support.
@@ -26,7 +27,7 @@ public:
   // Call Swap Buffers to swap the back buffer with the front,
   // in order to avoid drawing on the screen directly and looking
   // visually unpleasing.
-  static void SwapWindowBuffers(Win32Window *window);
+  static void SwapBuffers(Win32Window *window);
 
 
   // Initialize WGL library.
@@ -47,7 +48,5 @@ private:
 
   // Dummy window handle.
   static Win32Window *mDummy;
-  static HGLRC renderContext;
-  static HDC mDummyHDC;
 };
 } // jackal

@@ -28,7 +28,22 @@ class OpenGLMaterialLayout;
 // Rendering Hardware Interface implementation of OpenGL.
 class OpenGLDevice : public RenderDevice {
   static const tchar *renderAPI;
+
+  // Keep Track of the number of opengl objects allocated by OpenGLDevice.
+  static uint32       OGLShaders;
+  static uint32       OGLFrameBuffers;
+  static uint32       OGLRenderPasses;
+  static uint32       OGLTextures;
+  static uint32       OGLUniformBuffers;
+  static uint32       OGLGraphicsPipelineStates;
+  static uint32       OGLComputePipelineStates;
+  static uint32       OGLRenderTargets;
+  static uint32       OGLVertexBuffers;
+  static uint32       OGLCommandBuffers;
+  static uint32       OGLMaterialLayouts;
+
 public:
+
   // Initialize OpenGL library for first time.
   // This must be called if you plan on using OpenGL.
   static bool8 InitOpenGL();

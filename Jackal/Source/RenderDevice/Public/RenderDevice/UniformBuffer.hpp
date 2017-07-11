@@ -60,12 +60,17 @@ public:
 
   uint32 GetBindingIndex() { return mBinding; }
 
+  // Set Data type, determine whether or not it is going to be updated
+  // frequently or not.
   void SetDataType(DataT d) { mDataType = d; }
+
   DataT GetDataType() { return mDataType; }
   const char *GetName() { return mName; }
 
   // Initialize this object. Must provide it with the name given from the shader
-  // file, along with the graphics pipeline state that it resides in.
+  // file, along with the graphics pipeline state that it resides in. Be Sure to 
+  // set your variables before initializing, otherwise this buffer won't know the 
+  // size of the data to store!
   virtual void Initialize(GraphicsPipelineState *pipe, uint32 bind, const char *name) = 0;
 
   virtual uint32 GetTotalSize() { return mMemSize; }

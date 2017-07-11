@@ -1,6 +1,5 @@
 // Copyright (c) 2017 Jackal Engine, MIT License
 #include "OpenGLDevice/Win32/Win32OpenGL.hpp"
-#include "Core/Win32/Win32Config.hpp"
 
 #include "Core/Platform/Api.hpp"
 #include "Core/Logging/Debugging.hpp"
@@ -25,9 +24,6 @@ namespace jackal {
 
 
 Win32Window *Win32OpenGL::mDummy = nullptr;
-HGLRC       Win32OpenGL::renderContext;
-HDC         Win32OpenGL::mDummyHDC;
-
 
 
 void Win32OpenGL::SetOpenGLContext(Win32Window *window)
@@ -78,11 +74,11 @@ void Win32OpenGL::SetOpenGLContext(Win32Window *window)
 }
 
 
-void Win32OpenGL::SwapWindowBuffers(Win32Window *window)
+void Win32OpenGL::SwapBuffers(Win32Window *window)
 {
   if (window) {
     HDC hDC = GetDC(window->handle);
-    SwapBuffers(hDC);
+    ::SwapBuffers(hDC);
   }
 }
 
@@ -114,21 +110,19 @@ void Win32OpenGL::Initialize()
   mDummy = Win32Window::Create(1, 1, L"dummy", nullptr);
   PIXELFORMATDESCRIPTOR pfd;
   int pf;
-  // TODO(): Need to set this on a seperate call, in order to avoid calling
-  // ChoosePixelFormat, as it is slow.
+  // NOTE(): Dummy window is set in order to query our native wgl
+  // functions, for modern initialization of OpenGL windows.
   JDEBUG("DC\n");
-  mDummyHDC = GetDC(mDummy->handle);
+  HDC mDummyHDC = GetDC(mDummy->handle);
 
-  memset(&pfd, 0, sizeof(pfd));
+  ZeroMemory(&pfd, sizeof(pfd));
   pfd.nSize = sizeof(pfd);
   pfd.nVersion = 1;
   pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
   pfd.iPixelType = PFD_TYPE_RGBA;
-  pfd.cColorBits = 32;
-  pfd.cAlphaBits = 8;
-  pfd.cDepthBits = 24;
+  pfd.cColorBits = 24;
   JDEBUG("PixelFormat choose\n");
-  pf = ChoosePixelFormat(mDummyHDC, &pfd);
+  pf = 1; //ChoosePixelFormat(mDummyHDC, &pfd);
 
   if (pf == 0) {
     MessageBoxW(mDummy->handle,
@@ -136,23 +130,23 @@ void Win32OpenGL::Initialize()
     return;
   }
   JDEBUG("Set Pixel Format\n");
-  SetPixelFormat(mDummyHDC, pf, &pfd);
-
-  HGLRC renderContext = wglCreateContext(mDummyHDC);
+  SetPixelFormat(mDummyHDC, pf, 0);
   JDEBUG("%d\n", GetLastError());
+  HGLRC renderContext = wglCreateContext(mDummyHDC);
 
   // Create dummy context.
   wglMakeCurrent(mDummyHDC, renderContext);
   InitWGLExtensions();
-  JDEBUG("Finished OpenGL init for Windows...\n");
+  JDEBUG("Finished OpenGL init for Windows... Cleaning up dummy context.\n");
+
+  wglMakeCurrent(mDummyHDC, NULL);
+  wglDeleteContext(renderContext);
+  ReleaseDC(mDummy->handle, mDummyHDC);
 }
 
 
 void Win32OpenGL::CleanUp()
 {
-  wglDeleteContext(renderContext);
-  ReleaseDC(mDummy->handle, mDummyHDC);
-
   mDummy->CleanUp();
   delete mDummy;
 }

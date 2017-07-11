@@ -42,7 +42,7 @@ layout (binding = 3) uniform sampler2D Specular;
 struct Material {
   vec4 ambient;
   vec4 diffuse;
-  vec4 Specular;
+  vec4 specular;
 };
 
 // Material handle.
@@ -64,7 +64,7 @@ vec3 BlinnPhongPointLight(PointLight light, vec3 FragPos, vec3 N,
   // Blinn's implementation of calculating our half vector.
   vec3 H = normalize(L + V);
   
-  kS = pow(max(dot(N, H), 0.0) 32.0);
+  kS = pow(max(dot(N, H), 0.0), 32.0);
   
   vec3 ambient = vec3(0.1f);
   vec3 diffuse = light.color * kD * vec3(material.diffuse);
@@ -97,9 +97,9 @@ void main()
   vec3 ViewDirection = ubo.camPosition - FragPosition;
   
   // Set Mesh material to this object mat.
-  material.ambient = texture(Ambient, FragTexCoord).rgb;
-  material.diffuse = texture(Diffuse, FragTexCoord).rgb;
-  material.Specular = texture(Specular, FragTexCoord).rgb;
+  material.ambient = texture(Ambient, FragTexCoord);
+  material.diffuse = texture(Diffuse, FragTexCoord);
+  material.specular = texture(Specular, FragTexCoord);
   
   // Perform light calculations!
   
