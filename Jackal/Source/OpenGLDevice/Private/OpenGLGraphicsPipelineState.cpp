@@ -176,16 +176,23 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline()
 
   if (!mPipelineInfo.PixelShader) {
     mLastError = RENDER_ERROR_PIPELINE_NULL_PIXEL_SHADER;
+    return;
   }
 
   OpenGLShader *shader = static_cast<OpenGLShader *>(mPipelineInfo.VertexShader);
   if (shader->Compiled()) {
     glAttachShader(mProgramId, shader->GetHandle());
+  } else {
+    mLastError = RENDER_ERROR_PIPELINE_UNCOMPILED_SHADER;
+    return;
   }
 
   shader = static_cast<OpenGLShader *>(mPipelineInfo.PixelShader);
   if (shader->Compiled()) {
     glAttachShader(mProgramId, shader->GetHandle());
+  } else {
+    mLastError = RENDER_ERROR_PIPELINE_UNCOMPILED_SHADER;
+    return;
   }
 
   if (mPipelineInfo.HullShader) {

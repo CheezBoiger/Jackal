@@ -32,6 +32,19 @@ public:
   void SetFloat(const char *name, real32 f) override;
   void SetDouble(const char *name, real64 d) override;
 
+  Matrix4 GetMat4(const char *name) override;
+  Matrix3 GetMat3(const char *name) override;
+  Matrix2 GetMat2(const char *name) override;
+  Vector4 GetVec4(const char *name) override;
+  Vector3 GetVec3(const char *name) override;
+  Vector2 GetVec2(const char *name) override;
+
+  bool8 GetBool(const char *name) override;
+  int32 GetInt32(const char *name) override;
+  uint32 GetUInt32(const char *name) override;
+  real32 GetFloat(const char *name) override;
+  real64 GetDouble(const char *name) override;
+
   void Initialize(GraphicsPipelineState *pipe, uint32 bind, const char *name) override;
   void Update() override;
 

@@ -58,6 +58,19 @@ public:
   virtual void SetFloat(const char *name, real32 f) = 0;
   virtual void SetDouble(const char *name, real64 d) = 0;
 
+  virtual Matrix4 GetMat4(const char *name) = 0;
+  virtual Matrix3 GetMat3(const char *name) = 0;
+  virtual Matrix2 GetMat2(const char *name) = 0;
+  virtual Vector4 GetVec4(const char *name) = 0;
+  virtual Vector3 GetVec3(const char *name) = 0;
+  virtual Vector2 GetVec2(const char *name) = 0;
+
+  virtual bool8 GetBool(const char *name) = 0;
+  virtual int32 GetInt32(const char *name) = 0;
+  virtual uint32 GetUInt32(const char *name) = 0;
+  virtual real32 GetFloat(const char *name) = 0;
+  virtual real64 GetDouble(const char *name) = 0;
+
   uint32 GetBindingIndex() { return mBinding; }
 
   // Set Data type, determine whether or not it is going to be updated
@@ -73,7 +86,11 @@ public:
   // size of the data to store!
   virtual void Initialize(GraphicsPipelineState *pipe, uint32 bind, const char *name) = 0;
 
+  // Get the total size of the uniform buffer object in memory.
   virtual uint32 GetTotalSize() { return mMemSize; }
+
+  // Update the uniform buffer, should update information on the gpu, along provided
+  // binding points inside a program.
   virtual void Update() = 0;
 
 protected:

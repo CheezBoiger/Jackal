@@ -68,10 +68,20 @@ TEST(Win32, Win32WindowTest)
 
 
     jackal::OpenGLUniformBuffer buffer;
-      buffer.SetMat4("model",       jackal::Matrix4());
+      buffer.SetMat4("model",       jackal::Matrix4(5.0));
       buffer.SetMat4("view",        jackal::Matrix4());
       buffer.SetMat4("projection",  jackal::Matrix4());
       buffer.SetVec3("camPosition", jackal::Vec3());
+
+    jackal::Matrix4 model = buffer.GetMat4("model");
+
+    for (jackal::uint32 i = 0; i < 4; ++i) {
+      for (jackal::uint32 j = 0; j < 4; ++j) {
+        std::cout << model[i][j] << " ";
+      }
+      std::cout << "\n";
+    }
+    std::cout << "\n";
     // initialize ubo here. You need an active pipeline state in order to
     // initialize a uniform buffer.
       buffer.Initialize(&pipe, 0, "UBO");

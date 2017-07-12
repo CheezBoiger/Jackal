@@ -13,6 +13,11 @@ OpenGLUniformBuffer::~OpenGLUniformBuffer()
 
 void OpenGLUniformBuffer::Initialize(GraphicsPipelineState *pipe, uint32 bind, const char *name)
 {
+  // Need to figure out a way to get this error more globally.
+  if (!pipe) { 
+    return; 
+  }
+
   mBinding = bind;
   mName = name;
   // Reference the pipe.
@@ -117,6 +122,14 @@ void OpenGLUniformBuffer::SetInt32(const char *name, int32 i)
 
 void OpenGLUniformBuffer::SetUInt32(const char *name, uint32 ui)
 {
+  class UInt32Data : public OGLData {
+  public:
+    UInt32Data(uint32 ui) : i(ui) { }
+    void *GetData() override { return &i; }
+    GLintptr GetSize() override { return sizeof(uint32); }
+    void Store(void *data) override { i = *static_cast<uint32 *>(data); }
+    uint32 i;
+  };
 }
 
 
@@ -128,6 +141,83 @@ void OpenGLUniformBuffer::SetFloat(const char *name, real32 f)
 void OpenGLUniformBuffer::SetDouble(const char *name, real64 d)
 {
 }
+
+
+Matrix4 OpenGLUniformBuffer::GetMat4(const char *name)
+{
+  auto it = mData.find(name);
+  if (it != mData.end()) {
+    return *static_cast<Matrix4 *>(it->second->GetData());
+  } else {
+    return Matrix4::Identity();
+  }
+}
+
+
+Matrix3 OpenGLUniformBuffer::GetMat3(const char *name)
+{
+  auto it = mData.find(name);
+  if (it != mData.end()) {
+    return *static_cast<Matrix3 *>(it->second->GetData());
+  } else {
+    return Matrix3::Identity();
+  }
+}
+
+
+Matrix2 OpenGLUniformBuffer::GetMat2(const char *name)
+{
+  return Matrix2();
+}
+
+
+Vector4 OpenGLUniformBuffer::GetVec4(const char *name)
+{
+  return Vector4();
+}
+
+
+Vector3 OpenGLUniformBuffer::GetVec3(const char *name)
+{
+  return Vector3();
+}
+
+
+Vector2 OpenGLUniformBuffer::GetVec2(const char *name)
+{
+  return Vector2();
+}
+
+
+bool8 OpenGLUniformBuffer::GetBool(const char *name)
+{
+  return false;
+}
+
+
+int32 OpenGLUniformBuffer::GetInt32(const char *name)
+{
+  return 0;
+}
+
+
+uint32 OpenGLUniformBuffer::GetUInt32(const char *name)
+{
+  return 0;
+}
+
+
+real32 OpenGLUniformBuffer::GetFloat(const char *name)
+{
+  return 0.0f;
+}
+
+
+real64 OpenGLUniformBuffer::GetDouble(const char *name)
+{
+  return 0.0;
+}
+
 
 void OpenGLUniformBuffer::Update()
 {
