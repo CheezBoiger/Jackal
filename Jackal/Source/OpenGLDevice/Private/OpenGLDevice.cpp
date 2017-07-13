@@ -4,11 +4,17 @@
 #include "OpenGLDevice/OpenGLDevice.hpp"
 #include "OpenGLDevice/OpenGLCommandBuffer.hpp"
 #include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
+#include "OpenGLDevice/OpenGLComputePipelineState.hpp"
 #include "OpenGLDevice/OpenGLFrameBuffer.hpp"
+#include "OpenGLDevice/OpenGLRenderPass.hpp"
+#include "OpenGLDevice/OpenGLMaterialLayout.hpp"
+#include "OpenGLDevice/OpenGLRenderTarget.hpp"
 #include "OpenGLDevice/OpenGLUniformBuffer.hpp"
+#include "OpenGLDevice/OpenGLTexture.hpp"
 #include "OpenGLDevice/OpenGLShader.hpp"
 
 #include "Core/Logging/Debugging.hpp"
+
 
 namespace jackal {
 
@@ -99,6 +105,41 @@ void OpenGLDevice::DestroyShader(Shader *shader)
 }
 
 
+void OpenGLDevice::Initialize()
+{
+}
+
+
+CommandBuffer *OpenGLDevice::CreateCommandBuffer()
+{
+  OpenGLCommandBuffer *cmdBuffer = new OpenGLCommandBuffer(this);
+  OGLCommandBuffers += 1;
+  return cmdBuffer;
+}
+
+
+void OpenGLDevice::DestroyCommandBuffer(CommandBuffer *buffer)
+{
+  OpenGLCommandBuffer *oglBuffer = static_cast<OpenGLCommandBuffer *>(buffer);
+  delete oglBuffer;
+
+  OGLCommandBuffers -= 1;
+  buffer = nullptr;
+}
+
+
+FrameBuffer *OpenGLDevice::CreateFrameBuffer()
+{
+  return nullptr;
+}
+
+
+RenderPass *OpenGLDevice::CreateRenderPass()
+{
+  return nullptr;
+}
+
+
 void OpenGLDevice::SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 buffers)
 {
   if (!commandbuffers || !buffers) {
@@ -106,14 +147,26 @@ void OpenGLDevice::SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 bu
     return;
   }
 
+  mRendering = true;
+
   // Run the Commands in the command list.
   for (uint32 i = 0; i < buffers; ++i) {
     OpenGLCommandBuffer *oglCommandList = 
       static_cast<OpenGLCommandBuffer *>(&commandbuffers[i]);
     auto &commandList = oglCommandList->GetCommandList();
+
     for (auto &command : commandList) {
+
       command();
+
+      // Issue has occured, which must cause the device to stop
+      // rendering. Should an error occur, must take action to 
+      // clean up resources bound to the rendering pipeline.
+      if (mLastError != RENDER_ERROR_NONE) break;
     }
   }
+
+  // Signal end of rendering.
+  mRendering = false;
 }
 } // jackal

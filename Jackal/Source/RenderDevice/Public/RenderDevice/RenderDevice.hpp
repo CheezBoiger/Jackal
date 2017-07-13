@@ -30,7 +30,9 @@ class MaterialLayout;
 class RenderDevice {
 protected:
   // Protected constructor.
-  RenderDevice() { }
+  RenderDevice() 
+    : mLastError(RENDER_ERROR_NONE)
+    , mRendering(false) { }
 
 public:
   virtual ~RenderDevice() { }
@@ -76,6 +78,10 @@ public:
 
   void SubmitLastError(RenderErrorT error) { mLastError = error; }
 
+
+  // Check if this device is currently performing rendering.
+  bool8 Rendering() { return mRendering; }
+
   // Still Ongoing work.
   // TODO(): Setters for setting up the pipeline and rendering core.
 
@@ -89,5 +95,7 @@ public:
 protected:
   // Last error that was conducted in this render device.
   RenderErrorT mLastError;
+
+  bool8        mRendering;
 };
 } // jackal

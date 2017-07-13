@@ -151,4 +151,29 @@ void OpenGLCommandBuffer::SetScissor(ScissorRect *scissor)
   ++mNumRenderCalls;
   mCommandList.push_back([=] () -> void { execute(scissor); });
 }
+
+
+void OpenGLCommandBuffer::DrawInstanced(uint32 count, uint32 instances)
+{
+}
+
+
+void OpenGLCommandBuffer::BeginRenderPass(RenderPass *pass)
+{
+}
+
+
+void OpenGLCommandBuffer::BindComputePipelineState(ComputePipelineState *compute)
+{
+}
+
+
+void OpenGLCommandBuffer::BindMaterialLayout(MaterialLayout *layout)
+{
+}
+
+
+void OpenGLCommandBuffer::SetDispatchCompute(uint32 x, uint32 y, uint32 z)
+{
+}
 } // jackal

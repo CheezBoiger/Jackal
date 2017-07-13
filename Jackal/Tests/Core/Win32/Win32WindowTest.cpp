@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2017 Jackal Engine, MIT License.
 #include "Win32WindowTest.hpp"
 #include "Core/Win32/Win32Window.hpp"
+#include "Core/Win32/Win32Filesystem.hpp"
 
 // OpenGL Testing as well.
 #include "OpenGLDevice/OpenGLDevice.hpp"
@@ -8,6 +9,7 @@
 #include "OpenGLDevice/OpenGLUniformBuffer.hpp"
 #include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
 #include "OpenGLDevice/OpenGLShader.hpp"
+#include "OpenGLDevice/OpenGLCommandBuffer.hpp"
 
 #include <gtest/gtest.h>
 
@@ -17,10 +19,9 @@ TEST(Win32, Win32WindowTest)
 {
 #if JACKAL_PLATFORM == JACKAL_WINDOWS
   jackal::Win32OpenGL::Initialize();
-
   jackal::int32 width = 1440;
   jackal::int32 height = 800;
-  
+ 
   jackal::PrintToConsole(JTEXT("Creating window.\n"));
   jackal::Win32Window *window = jackal::Win32Window::Create(width, height,
     JTEXT(L"これは簡単なテストです。"), NULL);
@@ -36,16 +37,20 @@ TEST(Win32, Win32WindowTest)
   jackal::OpenGLDevice::InitOpenGL();
   // This device is used to render. Will be used by the 
   // renderer.
-  //jackal::OpenGLDevice device;
+  jackal::OpenGLDevice device;
 
   {
+    jackal::JString fSource = jackal::Win32Filesystem::ReadFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.frag");
+    jackal::JString vSource = jackal::Win32Filesystem::ReadFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.vert");
+    jackal::PrintToConsole(vSource);
+
     // Creat e shaders for our pipeline.
     jackal::OpenGLShader vShader;
     jackal::OpenGLShader pShader;
 
     // TODO(): Need to set the current directory look up with test shaders.
-    vShader.Compile(jackal::Shader::Vertex, "blinn-phong.vert");
-    pShader.Compile(jackal::Shader::Pixel, "blinn-phong.frag");
+    vShader.Compile(jackal::Shader::Vertex, vSource);
+    pShader.Compile(jackal::Shader::Pixel, fSource);
 
     jackal::OpenGLGraphicsPipelineState pipe;
     pipe.SetName(JTEXT("Blinn-Phong Pipe."));
@@ -88,6 +93,13 @@ TEST(Win32, Win32WindowTest)
 
       vShader.CleanUp();
       pShader.CleanUp();
+
+      jackal::OpenGLCommandBuffer cmd(&device);
+      cmd.Record();
+        cmd.BindGraphicsPipelineState(&pipe);
+        cmd.Clear();
+        cmd.ClearColor(jackal::Colorf(1.0f, 0.0f, 0.0f, 1.0f));
+      cmd.EndRecord();
   }
   ASSERT_EQ(window->width, width);
   ASSERT_EQ(window->height, height);

@@ -38,7 +38,7 @@ public:
   virtual ~Shader() { }
 
   // Compiles the shader. This is dependent on the rendering api. 
-  virtual bool8 Compile(ShaderType type, const JString filepath, 
+  virtual bool8 Compile(ShaderType type, const JString sourceCode, 
     const std::vector<JString> includes,
     const std::vector<JString> defines) = 0;
 

@@ -27,7 +27,7 @@ public:
   const tchar *ShaderLanguage() const override { return shaderLanguage; }
     
   // Compile the shader script for GLSL.
-  bool8 Compile(ShaderType type, const JString filepath,
+  bool8 Compile(ShaderType type, const JString sourceCode,
     const std::vector<JString> includes = std::vector<JString>(),
     const std::vector<JString> defines = std::vector<JString>()
   ) override;
@@ -36,7 +36,7 @@ public:
 
 private:
   // Parse the source code from the filepath.
-  JString ParseSource(JString filepath, std::vector<JString> includes,
+  JString ParseSource(JString source, std::vector<JString> includes,
     std::vector<JString> defines);
 
   GLenum mNativeShaderType;

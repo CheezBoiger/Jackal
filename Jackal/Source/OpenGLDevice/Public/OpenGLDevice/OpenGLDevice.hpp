@@ -68,6 +68,7 @@ public:
   VertexBuffer *CreateVertexBuffer() override;
   CommandBuffer *CreateCommandBuffer() override;
   MaterialLayout *CreateMaterialLayout() override;
+  Sampler *CreateSampler() override;
 
   void SetResourceHandler(Resources *resources) override;
   void DestroyShader(Shader *shader) override;
@@ -79,6 +80,7 @@ public:
   void DestroyComputePipelineState(ComputePipelineState *pipeline) override;
   void DestroyCommandBuffer(CommandBuffer *buffer) override;
   void DestroyMaterialLayout(MaterialLayout *material) override;
+  void DestroySampler(Sampler *sampler) override;
 
   const tchar *API() const override { return renderAPI; }
 

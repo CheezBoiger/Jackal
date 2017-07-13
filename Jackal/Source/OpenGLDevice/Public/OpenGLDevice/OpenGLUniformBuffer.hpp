@@ -15,6 +15,7 @@
 namespace jackal {
 
 
+// OpenGL Native Uniform Buffer.
 class OpenGLUniformBuffer : public UniformBuffer { 
 public:
   ~OpenGLUniformBuffer();
@@ -70,8 +71,13 @@ private:
     virtual ~OGLData() { }
   };  
 
+  // Shader Program reference.
   GLuint mProgramRef;
+
+  // OpenGL native buffer object handle.
   GLuint ubo;
+
+  // Map to data that is stored in this uniform buffer object.
   std::map<std::string, std::unique_ptr<OGLData> > mData;
 };
 } // jackal
