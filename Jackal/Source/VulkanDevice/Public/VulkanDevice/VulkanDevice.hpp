@@ -31,7 +31,7 @@ public:
   void DestroyFrameBuffer(FrameBuffer *framebuffer) override;
   void DestroyRenderPass(RenderPass *pass) override;
   void DestroyTexture(Texture *texture) override;
-  void DestoryUniformBuffer(UniformBuffer *uniformbuffer) override;
+  void DestroyUniformBuffer(UniformBuffer *uniformbuffer) override;
   void DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
   void DestroyComputePipelineState(ComputePipelineState *pipeline) override;
   void DestroyCommandBuffer(CommandBuffer *buffer) override;

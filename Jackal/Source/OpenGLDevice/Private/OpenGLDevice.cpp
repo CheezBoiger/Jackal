@@ -50,9 +50,10 @@ UniformBuffer *OpenGLDevice::CreateUniformBuffer()
 }
 
 
-void OpenGLDevice::DestoryUniformBuffer(UniformBuffer *ubo)
+void OpenGLDevice::DestroyUniformBuffer(UniformBuffer *ubo)
 {
   if (!ubo) return;
+  ubo->CleanUp();
 
   OpenGLUniformBuffer *oglUbo = static_cast<OpenGLUniformBuffer *>(ubo);
   delete oglUbo;
@@ -96,6 +97,7 @@ Shader *OpenGLDevice::CreateShader()
 void OpenGLDevice::DestroyShader(Shader *shader)
 {
   if (!shader) return;
+  shader->CleanUp();
 
   OpenGLShader *oglShader = static_cast<OpenGLShader *>(shader);
   delete oglShader;
@@ -120,6 +122,7 @@ CommandBuffer *OpenGLDevice::CreateCommandBuffer()
 
 void OpenGLDevice::DestroyCommandBuffer(CommandBuffer *buffer)
 {
+  buffer->ClearRecord();
   OpenGLCommandBuffer *oglBuffer = static_cast<OpenGLCommandBuffer *>(buffer);
   delete oglBuffer;
 
@@ -140,6 +143,126 @@ RenderPass *OpenGLDevice::CreateRenderPass()
 }
 
 
+Resources *OpenGLDevice::GetResources()
+{
+  return nullptr;
+}
+
+
+Texture *OpenGLDevice::CreateTexture()
+{
+  return nullptr;
+}
+
+
+ComputePipelineState *OpenGLDevice::CreateComputePipelineState()
+{
+  return nullptr;
+}
+
+
+RenderTarget *OpenGLDevice::CreateRenderTarget()
+{
+  return nullptr;
+}
+
+
+VertexBuffer *OpenGLDevice::CreateVertexBuffer()
+{
+  return nullptr;
+}
+
+
+MaterialLayout *OpenGLDevice::CreateMaterialLayout()
+{
+  return nullptr;
+}
+
+
+Sampler *OpenGLDevice::CreateSampler()
+{
+  return nullptr;
+}
+
+
+Texture2D *OpenGLDevice::CreateTexture2D()
+{
+  return nullptr;
+}
+
+
+Texture3D *OpenGLDevice::CreateTexture3D()
+{
+  return nullptr;
+}
+
+
+CubeMap *OpenGLDevice::CreateCubeMap()
+{
+  return nullptr;
+}
+
+
+void OpenGLDevice::SetResourceHandler(Resources *resources)
+{
+}
+
+
+void OpenGLDevice::DestroyFrameBuffer(FrameBuffer *framebuffer)
+{
+}
+
+
+void OpenGLDevice::DestroyRenderPass(RenderPass *renderpass)
+{
+}
+
+
+void OpenGLDevice::DestroyTexture(Texture *texture)
+{
+}
+
+
+void OpenGLDevice::DestroyComputePipelineState(ComputePipelineState *compute)
+{
+}
+
+
+void OpenGLDevice::DestroyRenderTarget(RenderTarget *target)
+{
+}
+
+
+void OpenGLDevice::DestroyMaterialLayout(MaterialLayout *layout)
+{
+}
+
+
+void OpenGLDevice::DestroyVertexBuffer(VertexBuffer *vb)
+{
+}
+
+
+void OpenGLDevice::DestroySampler(Sampler *sampler)
+{
+}
+
+
+void OpenGLDevice::DestroyTexture2D(Texture2D *texture)
+{
+}
+
+
+void OpenGLDevice::DestroyTexture3D(Texture3D *texture)
+{
+}
+
+
+void OpenGLDevice::DestroyCubeMap(CubeMap *cube)
+{
+}
+
+
 void OpenGLDevice::SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 buffers)
 {
   if (!commandbuffers || !buffers) {
@@ -157,6 +280,7 @@ void OpenGLDevice::SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 bu
 
     for (auto &command : commandList) {
 
+      // Run the recorded command.
       command();
 
       // Issue has occured, which must cause the device to stop

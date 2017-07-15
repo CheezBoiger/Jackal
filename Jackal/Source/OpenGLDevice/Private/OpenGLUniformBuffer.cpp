@@ -38,6 +38,17 @@ void OpenGLUniformBuffer::Initialize(GraphicsPipelineState *pipe, uint32 bind, c
 }
 
 
+void OpenGLUniformBuffer::CleanUp()
+{
+  if (!ubo) {
+    return;
+  }
+  
+  glDeleteBuffers(1, &ubo);
+  ubo = -1;
+}
+
+
 void OpenGLUniformBuffer::SetMat4(const char *name, Matrix4 mat)
 {
   struct Mat4Data : public OGLData {

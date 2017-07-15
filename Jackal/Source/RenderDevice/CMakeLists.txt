@@ -34,6 +34,8 @@ set(RENDEV_FILES
   ${RENDEV_PUBLIC_DIR}/RenderObject.hpp
   ${RENDEV_PRIVATE_DIR}/RenderObject.cpp
   ${RENDEV_PUBLIC_DIR}/CubeMap.hpp
+  ${RENDEV_PUBLIC_DIR}/Texture2D.hpp
+  ${RENDEV_PUBLIC_DIR}/Texture3D.hpp
 )
 
 add_library(${JACKAL_RENDEV_NAME} STATIC

@@ -16,7 +16,5 @@ struct Vertex {
   Vector3f Normal;
   Vector2f TexCoords;
   Vector4f BaseColor;
-
-  // Tangent will be added in later.  
 };
 } // jackal

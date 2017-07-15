@@ -93,6 +93,8 @@ public:
   // binding points inside a program.
   virtual void Update() = 0;
 
+  virtual void CleanUp() = 0;
+
 protected:
   DataT       mDataType;
   uint32      mBinding;

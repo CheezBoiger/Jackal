@@ -97,6 +97,7 @@ TEST(Win32, Win32WindowTest)
       jackal::OpenGLCommandBuffer cmd(&device);
       cmd.Record();
         cmd.BindGraphicsPipelineState(&pipe);
+
         cmd.Clear();
         cmd.ClearColor(jackal::Colorf(1.0f, 0.0f, 0.0f, 1.0f));
       cmd.EndRecord();

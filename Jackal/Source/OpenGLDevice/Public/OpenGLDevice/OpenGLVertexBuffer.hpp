@@ -15,7 +15,7 @@ public:
     , ibo(0) { }
 
   void Initialize(const Vertex *data, const size_t size, DataT type,
-    const uint32 *indices = nullptr, const size_t indicesSize = 0) override;
+    const uint32 *indices = nullptr, size_t indicesSize = 0) override;
 
 
   void CleanUp() override;

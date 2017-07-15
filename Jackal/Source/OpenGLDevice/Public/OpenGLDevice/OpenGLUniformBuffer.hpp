@@ -48,6 +48,7 @@ public:
 
   void Initialize(GraphicsPipelineState *pipe, uint32 bind, const char *name) override;
   void Update() override;
+  void CleanUp() override;
 
 private:
   // The type of data we are storing.

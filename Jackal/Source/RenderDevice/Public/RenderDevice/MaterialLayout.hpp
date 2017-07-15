@@ -8,11 +8,19 @@
 #include "Core/Math/Matrix2.hpp"
 
 #include "Texture.hpp"
+#include "Texture2D.hpp"
+#include "Texture3D.hpp"
+
 #include "CubeMap.hpp"
 #include "UniformBuffer.hpp"
 
 
 namespace jackal {
+
+
+class Texture2D;
+class Texture3D;
+class CubeMap;
 
 // Material Object, which specifies descriptor sets for 
 // some given context on the rendering pipeline. We need
@@ -26,6 +34,9 @@ public:
   // used to sample it. Must also provide the index of which to attach the
   // texture onto in rendering unit.
   virtual void SetTexture(Texture *texture, Sampler *sampler, uint32 binding) = 0;
+  virtual void SetTexture2D(Texture2D *texture, Sampler *sampler, uint32 binding) = 0;
+  virtual void SetTexture3D(Texture3D *texture, Sampler *sampler, uint32 binding) = 0;
+
   virtual void SetCubeMap(CubeMap *cubemap, uint32 binding) = 0;
   virtual void SetUniformBuffer(UniformBuffer *buffer) = 0;
 };

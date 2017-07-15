@@ -55,32 +55,40 @@ public:
     , mCurrentUniformBuffer(nullptr)
     , mClearColor(Colorf(0.0f, 0.0f, 0.0f, 1.0f)) { }
 
-  void Initialize() override;
-  Resources *GetResources() override;
-  Shader *CreateShader() override;
-  FrameBuffer *CreateFrameBuffer() override;
-  RenderPass *CreateRenderPass() override;
-  Texture *CreateTexture() override;
-  UniformBuffer *CreateUniformBuffer() override;
-  GraphicsPipelineState *CreateGraphicsPipelineState() override;
-  ComputePipelineState *CreateComputePipelineState() override;
-  RenderTarget *CreateRenderTarget() override;
-  VertexBuffer *CreateVertexBuffer() override;
-  CommandBuffer *CreateCommandBuffer() override;
-  MaterialLayout *CreateMaterialLayout() override;
-  Sampler *CreateSampler() override;
+  void                            Initialize() override;
+  Resources*                      GetResources() override;
+  Shader*                         CreateShader() override;
+  FrameBuffer*                    CreateFrameBuffer() override;
+  RenderPass*                     CreateRenderPass() override;
+  Texture*                        CreateTexture() override;
+  UniformBuffer*                  CreateUniformBuffer() override;
+  GraphicsPipelineState*          CreateGraphicsPipelineState() override;
+  ComputePipelineState*           CreateComputePipelineState() override;
+  RenderTarget*                   CreateRenderTarget() override;
+  VertexBuffer*                   CreateVertexBuffer() override;
+  CommandBuffer*                  CreateCommandBuffer() override;
+  MaterialLayout*                 CreateMaterialLayout() override;
+  Sampler*                        CreateSampler() override;
+  Texture2D*                      CreateTexture2D() override;
+  Texture3D*                      CreateTexture3D() override;
+  CubeMap*                        CreateCubeMap() override;
 
-  void SetResourceHandler(Resources *resources) override;
-  void DestroyShader(Shader *shader) override;
-  void DestroyFrameBuffer(FrameBuffer *framebuffer) override;
-  void DestroyRenderPass(RenderPass *pass) override;
-  void DestroyTexture(Texture *texture) override;
-  void DestoryUniformBuffer(UniformBuffer *uniformbuffer) override;
-  void DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
-  void DestroyComputePipelineState(ComputePipelineState *pipeline) override;
-  void DestroyCommandBuffer(CommandBuffer *buffer) override;
-  void DestroyMaterialLayout(MaterialLayout *material) override;
-  void DestroySampler(Sampler *sampler) override;
+  void                            SetResourceHandler(Resources *resources) override;
+  void                            DestroyShader(Shader *shader) override;
+  void                            DestroyFrameBuffer(FrameBuffer *framebuffer) override;
+  void                            DestroyRenderPass(RenderPass *pass) override;
+  void                            DestroyTexture(Texture *texture) override;
+  void                            DestroyUniformBuffer(UniformBuffer *uniformbuffer) override;
+  void                            DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
+  void                            DestroyComputePipelineState(ComputePipelineState *pipeline) override;
+  void                            DestroyRenderTarget(RenderTarget *target) override;
+  void                            DestroyCommandBuffer(CommandBuffer *buffer) override;
+  void                            DestroyMaterialLayout(MaterialLayout *material) override;
+  void                            DestroyVertexBuffer(VertexBuffer *vb) override;
+  void                            DestroySampler(Sampler *sampler) override;
+  void                            DestroyTexture2D(Texture2D *texture) override;
+  void                            DestroyTexture3D(Texture3D *texture) override;
+  void                            DestroyCubeMap(CubeMap *cube) override;
 
   const tchar *API() const override { return renderAPI; }
 

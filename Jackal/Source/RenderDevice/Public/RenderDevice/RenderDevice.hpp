@@ -15,6 +15,9 @@ class RenderTarget;
 class FrameBuffer;
 class VertexBuffer;
 class Texture;
+class Texture2D;
+class Texture3D;
+class CubeMap;
 class UniformBuffer;
 class GraphicsPipelineState;
 class ComputePipelineState;
@@ -38,36 +41,43 @@ public:
   virtual ~RenderDevice() { }
 
   // Resources handler.
-  virtual Resources             *GetResources() = 0;
-  virtual void                  SetResourceHandler(Resources *resources) = 0;
+  virtual Resources*              GetResources() = 0;
+  virtual void                    SetResourceHandler(Resources *resources) = 0;
   
-  virtual void                  Initialize() = 0;
+  virtual void                    Initialize() = 0;
+  virtual Shader*                 CreateShader() = 0;
+  virtual FrameBuffer*            CreateFrameBuffer() = 0;
+  virtual RenderPass*             CreateRenderPass() = 0;
+  virtual Texture*                CreateTexture() = 0;
+  virtual Texture2D*              CreateTexture2D() = 0;
+  virtual Texture3D*              CreateTexture3D() = 0;
+  virtual CubeMap*                CreateCubeMap() = 0;
+  virtual UniformBuffer*          CreateUniformBuffer() = 0;
+  virtual GraphicsPipelineState*  CreateGraphicsPipelineState() = 0;
+  virtual ComputePipelineState*   CreateComputePipelineState() = 0;
+  virtual RenderTarget*           CreateRenderTarget() = 0;
+  virtual VertexBuffer*           CreateVertexBuffer() = 0;
+  virtual CommandBuffer*          CreateCommandBuffer() = 0;
+  virtual Sampler*                CreateSampler() = 0;
+  virtual MaterialLayout*         CreateMaterialLayout() = 0;
 
-  virtual Shader                *CreateShader() = 0;
-  virtual FrameBuffer           *CreateFrameBuffer() = 0;
-  virtual RenderPass            *CreateRenderPass() = 0;
-  virtual Texture               *CreateTexture() = 0;  
-  virtual UniformBuffer         *CreateUniformBuffer() = 0;
-  virtual GraphicsPipelineState *CreateGraphicsPipelineState() = 0;
-  virtual ComputePipelineState  *CreateComputePipelineState() = 0;
-  virtual RenderTarget          *CreateRenderTarget() = 0;
-  virtual VertexBuffer          *CreateVertexBuffer() = 0;
-  virtual CommandBuffer         *CreateCommandBuffer() = 0;
-  virtual Sampler               *CreateSampler() = 0;
-  virtual MaterialLayout        *CreateMaterialLayout() = 0;
+  virtual void                    DestroyShader(Shader *shader) = 0;
+  virtual void                    DestroyFrameBuffer(FrameBuffer *framebuffer) = 0;
+  virtual void                    DestroyRenderPass(RenderPass *pass) = 0;
+  virtual void                    DestroyRenderTarget(RenderTarget *target) = 0;
+  virtual void                    DestroyVertexBuffer(VertexBuffer *vb) = 0;
+  virtual void                    DestroyTexture(Texture *texture) = 0;
+  virtual void                    DestroyUniformBuffer(UniformBuffer *uniformbuffer) = 0;
+  virtual void                    DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) = 0;
+  virtual void                    DestroyComputePipelineState(ComputePipelineState *pipeline) = 0;
+  virtual void                    DestroyCommandBuffer(CommandBuffer *buffer) = 0;
+  virtual void                    DestroySampler(Sampler *sampler) = 0;
+  virtual void                    DestroyMaterialLayout(MaterialLayout *mlayout) = 0;
+  virtual void                    DestroyTexture2D(Texture2D *texture) = 0;
+  virtual void                    DestroyTexture3D(Texture3D *texture) = 0;
+  virtual void                    DestroyCubeMap(CubeMap *cube) = 0;
 
-  virtual void                  DestroyShader(Shader *shader) = 0;
-  virtual void                  DestroyFrameBuffer(FrameBuffer *framebuffer) = 0;
-  virtual void                  DestroyRenderPass(RenderPass *pass) = 0;
-  virtual void                  DestroyTexture(Texture *texture) = 0;
-  virtual void                  DestoryUniformBuffer(UniformBuffer *uniformbuffer) = 0;
-  virtual void                  DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) = 0;
-  virtual void                  DestroyComputePipelineState(ComputePipelineState *pipeline) = 0;
-  virtual void                  DestroyCommandBuffer(CommandBuffer *buffer) = 0;
-  virtual void                  DestroySampler(Sampler *sampler) = 0;
-  virtual void                  DestroyMaterialLayout(MaterialLayout *mlayout) = 0;
-
-  virtual const tchar           *API() const = 0;
+  virtual const tchar*            API() const = 0;
 
   // Retrieve the last error that was dispatched from this render device.
   RenderErrorT GetLastError() {
