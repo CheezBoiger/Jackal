@@ -18,8 +18,6 @@ namespace jackal {
 void OpenGLCommandBuffer::Record()
 {
   mRecording = true;
-  mNumDrawCalls = 0;
-  mNumRenderCalls = 0;
 }
 
 void OpenGLCommandBuffer::EndRecord()

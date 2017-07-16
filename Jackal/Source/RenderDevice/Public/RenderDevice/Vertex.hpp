@@ -16,5 +16,8 @@ struct Vertex {
   Vector3f Normal;
   Vector2f TexCoords;
   Vector4f BaseColor;
+
+  // TODO(): Tangent and bone vertices need to be added 
+  // later.
 };
 } // jackal

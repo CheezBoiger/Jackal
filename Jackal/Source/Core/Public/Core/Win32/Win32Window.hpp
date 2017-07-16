@@ -7,8 +7,6 @@
 #include "Core/Win32/Win32Config.hpp"
 #include "Core/Structure/JString.hpp"
 
-#define JWIN32_CLASSNAME L"JACKALWINDOW"
-
 namespace jackal {
 
 
@@ -36,13 +34,19 @@ struct Win32Window : public Window {
 
   bool8 CleanUp();
 
-  void RequestClose();
+  // Close the window.
+  void Close();
+
+  // Hide this window.
   void Hide();
+
+  // Show this window.
   void Show();
   
   // Set the window to the center of the screen.
   void SetToCenter();
 
+  // Check if this window should close.
   bool8 ShouldClose() {
     return requestClose;
   }

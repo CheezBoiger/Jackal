@@ -10,6 +10,7 @@
 
 // Standard template library temp.
 #include <map>
+#define JWIN32_CLASSNAME L"JACKALWINDOW"
 
 
 namespace jackal {
@@ -139,6 +140,16 @@ static LRESULT CALLBACK WindowProc(HWND hWnd,
       window->x = (int) (short) LOWORD(lParam);
       window->y = (int) (short) HIWORD(lParam);
     } break;
+    case WM_KEYDOWN:
+    {
+      // Get Key down.
+    }
+    break;
+    case WM_KEYUP:
+    {
+      // Get Key up.
+    }
+    break;
   }
   return DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
@@ -261,7 +272,7 @@ void Win32CleanUpWindowLibs()
 }
 
 
-void Win32Window::RequestClose()
+void Win32Window::Close()
 {
   requestClose = true;
 }

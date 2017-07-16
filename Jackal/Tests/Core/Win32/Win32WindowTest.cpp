@@ -39,69 +39,68 @@ TEST(Win32, Win32WindowTest)
   // renderer.
   jackal::OpenGLDevice device;
 
-  {
-    jackal::JString fSource = jackal::Win32Filesystem::ReadFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.frag");
-    jackal::JString vSource = jackal::Win32Filesystem::ReadFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.vert");
-    jackal::PrintToConsole(vSource);
+  jackal::JString fSource = jackal::Win32Filesystem::ReadFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.frag");
+  jackal::JString vSource = jackal::Win32Filesystem::ReadFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.vert");
+  jackal::PrintToConsole(vSource);
 
-    // Creat e shaders for our pipeline.
-    jackal::OpenGLShader vShader;
-    jackal::OpenGLShader pShader;
+  // Creat e shaders for our pipeline.
+  jackal::OpenGLShader vShader;
+  jackal::OpenGLShader pShader;
 
-    // TODO(): Need to set the current directory look up with test shaders.
-    vShader.Compile(jackal::Shader::Vertex, vSource);
-    pShader.Compile(jackal::Shader::Pixel, fSource);
+  // TODO(): Need to set the current directory look up with test shaders.
+  vShader.Compile(jackal::Shader::Vertex, vSource);
+  pShader.Compile(jackal::Shader::Pixel, fSource);
 
-    jackal::OpenGLGraphicsPipelineState pipe;
-    pipe.SetName(JTEXT("Blinn-Phong Pipe."));
-    // Set up information about the pipeline.
-    jackal::GraphicsPipelineInfoT information;
-    information.Topology = jackal::TOPOLOGY_TRIANGLE_LIST;
-    information.BlendEnable = false;
-    information.BlendOp = jackal::BlendOperationT::BLEND_OPERATION_ADD;
-    information.CullFaceEnable = true;
-    information.CullMode = jackal::CULL_MODE_BACK;
-    information.DepthTestCompare = jackal::CompareT::COMPARE_LESS;
-    information.FrontFace = jackal::FrontFaceT::FRONT_FACE_COUNTER_CLOCKWISE;
-    information.VertexShader = &vShader;
-    information.PixelShader = &pShader;
-    information.HullShader = nullptr;
-    information.DomainShader = nullptr;
-    information.GeometryShader = nullptr;
+  jackal::OpenGLGraphicsPipelineState pipe;
+  pipe.SetName(JTEXT("Blinn-Phong Pipe."));
+  // Set up information about the pipeline.
+  jackal::GraphicsPipelineInfoT information;
+  information.Topology = jackal::TOPOLOGY_TRIANGLE_LIST;
+  information.BlendEnable = false;
+  information.BlendOp = jackal::BlendOperationT::BLEND_OPERATION_ADD;
+  information.CullFaceEnable = true;
+  information.CullMode = jackal::CULL_MODE_BACK;
+  information.DepthTestCompare = jackal::CompareT::COMPARE_LESS;
+  information.FrontFace = jackal::FrontFaceT::FRONT_FACE_COUNTER_CLOCKWISE;
+  information.VertexShader = &vShader;
+  information.PixelShader = &pShader;
+  information.HullShader = nullptr;
+  information.DomainShader = nullptr;
+  information.GeometryShader = nullptr;
 
-    pipe.Bake(information);
+  pipe.Bake(information);
 
 
-    jackal::OpenGLUniformBuffer buffer;
-      buffer.SetMat4("model",       jackal::Matrix4(5.0));
-      buffer.SetMat4("view",        jackal::Matrix4());
-      buffer.SetMat4("projection",  jackal::Matrix4());
-      buffer.SetVec3("camPosition", jackal::Vec3());
+  jackal::OpenGLUniformBuffer buffer;
+  buffer.SetMat4("model",       jackal::Matrix4(5.0));
+  buffer.SetMat4("view",        jackal::Matrix4());
+  buffer.SetMat4("projection",  jackal::Matrix4());
+  buffer.SetVec3("camPosition", jackal::Vec3());
 
-    jackal::Matrix4 model = buffer.GetMat4("model");
+  jackal::Matrix4 model = buffer.GetMat4("model");
 
-    for (jackal::uint32 i = 0; i < 4; ++i) {
-      for (jackal::uint32 j = 0; j < 4; ++j) {
-        std::cout << model[i][j] << " ";
-      }
-      std::cout << "\n";
+  for (jackal::uint32 i = 0; i < 4; ++i) {
+    for (jackal::uint32 j = 0; j < 4; ++j) {
+      std::cout << model[i][j] << " ";
     }
     std::cout << "\n";
-    // initialize ubo here. You need an active pipeline state in order to
-    // initialize a uniform buffer.
-      buffer.Initialize(&pipe, 0, "UBO");
-
-      vShader.CleanUp();
-      pShader.CleanUp();
-
-      jackal::OpenGLCommandBuffer cmd(&device);
-      cmd.Record();
-        cmd.BindGraphicsPipelineState(&pipe);
-
-        cmd.Clear();
-        cmd.ClearColor(jackal::Colorf(1.0f, 0.0f, 0.0f, 1.0f));
-      cmd.EndRecord();
   }
+  std::cout << "\n";
+  // initialize ubo here. You need an active pipeline state in order to
+  // initialize a uniform buffer.
+  buffer.Initialize(&pipe, 0, "UBO");
+
+  vShader.CleanUp();
+  pShader.CleanUp();
+
+  jackal::OpenGLCommandBuffer cmd(&device);
+  // Record buffer.
+  cmd.Record();
+    cmd.BindGraphicsPipelineState(&pipe);
+
+    cmd.Clear();
+    cmd.ClearColor(jackal::Colorf(0.1f, 0.1f, 0.1f, 1.0f));
+  cmd.EndRecord();
   ASSERT_EQ(window->width, width);
   ASSERT_EQ(window->height, height);
 
@@ -116,16 +115,13 @@ TEST(Win32, Win32WindowTest)
     // virtual cameras for both eyes and rendering in their perspective.
     jackal::Win32OpenGL::MakeContextCurrent(window);
 
-    // Render here...
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+    device.SubmitCommandBuffers(&cmd, 1);
 
     jackal::Win32OpenGL::SwapBuffers(window);
 
     jackal::Win32OpenGL::MakeContextCurrent(window2);
-    // Render here...
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+    
+    device.SubmitCommandBuffers(&cmd, 1);
 
     jackal::Win32OpenGL::SwapBuffers(window2);
 

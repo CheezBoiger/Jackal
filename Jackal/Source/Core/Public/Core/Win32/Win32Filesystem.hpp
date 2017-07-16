@@ -24,6 +24,10 @@ public:
 
   static JString SetNewCurrentDirectory(JString path);
 
+  static JString CreateADirectory(JString name);
+
+  static JString CreateAFile(JString name);
+
   static bool8 DirectoryExists(JString path);
 
   static bool8 FileExists(JString file);

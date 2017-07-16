@@ -23,6 +23,11 @@ class MaterialLayout;
 // Once done recording, it will be sent over to the GPU for rendering.
 class CommandBuffer {
 public:
+  CommandBuffer()
+    : mNumRenderCalls(0)
+    , mNumDrawCalls(0)
+    , mRecording(false) { }
+
   virtual ~CommandBuffer() { }
 
   virtual void Record() = 0;
