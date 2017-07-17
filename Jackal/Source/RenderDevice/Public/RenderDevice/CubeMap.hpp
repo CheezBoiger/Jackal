@@ -8,6 +8,11 @@
 namespace jackal {
 
 
+class SamplerCube {
+public:
+};
+
+
 class CubeMap {
 public:
   virtual ~CubeMap() { }

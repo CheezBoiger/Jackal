@@ -10,6 +10,14 @@
 namespace jackal {
 
 
+struct ShaderInfoT {
+  WrapModeT   WrapS;
+  WrapModeT   WrapT;
+  WrapModeT   WrapR;
+  FilterModeT FilterMode;
+};
+
+
 // Sampler Object.
 class Sampler : public RenderObject {
 protected:

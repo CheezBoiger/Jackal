@@ -41,8 +41,6 @@ TEST(Win32, Win32WindowTest)
 
   jackal::JString fSource = jackal::Win32Filesystem::ReadFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.frag");
   jackal::JString vSource = jackal::Win32Filesystem::ReadFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.vert");
-  jackal::PrintToConsole(vSource);
-
   // Creat e shaders for our pipeline.
   jackal::OpenGLShader vShader;
   jackal::OpenGLShader pShader;
@@ -51,8 +49,10 @@ TEST(Win32, Win32WindowTest)
   vShader.Compile(jackal::Shader::Vertex, vSource);
   pShader.Compile(jackal::Shader::Pixel, fSource);
 
-  jackal::OpenGLGraphicsPipelineState pipe;
-  pipe.SetName(JTEXT("Blinn-Phong Pipe."));
+  jackal::GraphicsPipelineState *pipe =
+    device.CreateGraphicsPipelineState();
+
+  pipe->SetName(JTEXT("Blinn-Phong Pipe."));
   // Set up information about the pipeline.
   jackal::GraphicsPipelineInfoT information;
   information.Topology = jackal::TOPOLOGY_TRIANGLE_LIST;
@@ -68,39 +68,41 @@ TEST(Win32, Win32WindowTest)
   information.DomainShader = nullptr;
   information.GeometryShader = nullptr;
 
-  pipe.Bake(information);
+  pipe->Bake(information);
 
 
-  jackal::OpenGLUniformBuffer buffer;
-  buffer.SetMat4("model",       jackal::Matrix4(5.0));
-  buffer.SetMat4("view",        jackal::Matrix4());
-  buffer.SetMat4("projection",  jackal::Matrix4());
-  buffer.SetVec3("camPosition", jackal::Vec3());
+  jackal::UniformBuffer *buffer = device.CreateUniformBuffer();
+  jackal::Matrix4 model[5];
+  model[4][0][0] = 4.0f;
+  jackal::Matrix4 view;
+  jackal::Matrix4 projection;
+  jackal::Vector3 camPosition;
+  buffer->SetDataType(jackal::DATA_DYNAMIC);
 
-  jackal::Matrix4 model = buffer.GetMat4("model");
+  // Needs to be initialized in the same order as our ubo layout in glsl.
+  buffer->SetMat4("model",       model, 5, true);
+  buffer->SetMat4("view",        &view);
+  buffer->SetMat4("projection",  &projection);
+  buffer->SetVec3("camPosition", &camPosition);
 
-  for (jackal::uint32 i = 0; i < 4; ++i) {
-    for (jackal::uint32 j = 0; j < 4; ++j) {
-      std::cout << model[i][j] << " ";
-    }
-    std::cout << "\n";
-  }
-  std::cout << "\n";
   // initialize ubo here. You need an active pipeline state in order to
   // initialize a uniform buffer.
-  buffer.Initialize(&pipe, 0, "UBO");
+  buffer->Initialize(pipe, 0, "UBO");
+
+  jackal::uint32 offset = sizeof(jackal::Matrix4) * 4;
+  buffer->Update(&offset, 1);
 
   vShader.CleanUp();
   pShader.CleanUp();
 
-  jackal::OpenGLCommandBuffer cmd(&device);
+  jackal::CommandBuffer *cmd = device.CreateCommandBuffer();
   // Record buffer.
-  cmd.Record();
-    cmd.BindGraphicsPipelineState(&pipe);
+  cmd->Record();
+    cmd->BindGraphicsPipelineState(pipe);
 
-    cmd.Clear();
-    cmd.ClearColor(jackal::Colorf(0.1f, 0.1f, 0.1f, 1.0f));
-  cmd.EndRecord();
+    cmd->Clear();
+    cmd->ClearColor(jackal::Colorf(0.1f, 0.1f, 0.1f, 1.0f));
+  cmd->EndRecord();
   ASSERT_EQ(window->width, width);
   ASSERT_EQ(window->height, height);
 
@@ -114,19 +116,19 @@ TEST(Win32, Win32WindowTest)
     // with warped texture stereoscopic view, or two windows using
     // virtual cameras for both eyes and rendering in their perspective.
     jackal::Win32OpenGL::MakeContextCurrent(window);
-
-    device.SubmitCommandBuffers(&cmd, 1);
-
+    device.SubmitCommandBuffers(cmd, 1);
     jackal::Win32OpenGL::SwapBuffers(window);
 
-    jackal::Win32OpenGL::MakeContextCurrent(window2);
-    
-    device.SubmitCommandBuffers(&cmd, 1);
-
+    jackal::Win32OpenGL::MakeContextCurrent(window2);    
+    device.SubmitCommandBuffers(cmd, 1);
     jackal::Win32OpenGL::SwapBuffers(window2);
 
     jackal::Win32Window::PollEvents();
   }
+
+  device.DestroyCommandBuffer(cmd);
+  device.DestroyGraphicsPipelineState(pipe);
+  device.DestroyUniformBuffer(buffer);
 
   jackal::Win32OpenGL::MakeContextCurrent(nullptr);
   window->CleanUp();

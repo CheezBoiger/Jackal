@@ -45,31 +45,18 @@ public:
   // 0 of the struct. Returns the current offset after setting the variable. You
   // can use the value returned as the parameter for these functions in order to
   // store them sequentially.
-  virtual void SetMat4(const char *name, Matrix4 mat) = 0;
-  virtual void SetMat3(const char *name, Matrix3 mat) = 0;
-  virtual void SetMat2(const char *name, Matrix2 mat) = 0;
-  virtual void SetVec4(const char *name, Vector4 vec) = 0;
-  virtual void SetVec3(const char *name, Vector3 vec) = 0;
-  virtual void SetVec2(const char *name, Vector2 vec) = 0;
+  virtual void SetMat4(const char *name, Matrix4 *mat, uint32 count = 1, bool8 dynamic = false) = 0;
+  virtual void SetMat3(const char *name, Matrix3 *mat, uint32 count = 1, bool8 dynamic = false) = 0;
+  virtual void SetMat2(const char *name, Matrix2 *mat, uint32 count = 1, bool8 dynamic = false) = 0;
+  virtual void SetVec4(const char *name, Vector4 *vec, uint32 count = 1, bool8 dynamic = false) = 0;
+  virtual void SetVec3(const char *name, Vector3 *vec, uint32 count = 1, bool8 dynamic = false) = 0;
+  virtual void SetVec2(const char *name, Vector2 *vec, uint32 count = 1, bool8 dynamic = false) = 0;
 
-  virtual void SetBool(const char *name, bool8 b) = 0;
-  virtual void SetInt32(const char *name, int32 i) = 0;
-  virtual void SetUInt32(const char *name, uint32 ui) = 0;
-  virtual void SetFloat(const char *name, real32 f) = 0;
-  virtual void SetDouble(const char *name, real64 d) = 0;
-
-  virtual Matrix4 GetMat4(const char *name) = 0;
-  virtual Matrix3 GetMat3(const char *name) = 0;
-  virtual Matrix2 GetMat2(const char *name) = 0;
-  virtual Vector4 GetVec4(const char *name) = 0;
-  virtual Vector3 GetVec3(const char *name) = 0;
-  virtual Vector2 GetVec2(const char *name) = 0;
-
-  virtual bool8 GetBool(const char *name) = 0;
-  virtual int32 GetInt32(const char *name) = 0;
-  virtual uint32 GetUInt32(const char *name) = 0;
-  virtual real32 GetFloat(const char *name) = 0;
-  virtual real64 GetDouble(const char *name) = 0;
+  virtual void SetBool(const char *name, bool8 *b, uint32 count = 1, bool8 dynamic = false) = 0;
+  virtual void SetInt32(const char *name, int32 *i, uint32 count = 1, bool8 dynamic = false) = 0;
+  virtual void SetUInt32(const char *name, uint32 *ui, uint32 count = 1, bool8 dynamic = false) = 0;
+  virtual void SetFloat(const char *name, real32 *f, uint32 count = 1, bool8 dynamic = false) = 0;
+  virtual void SetDouble(const char *name, real64 *d, uint32 count = 1, bool8 dynamic = false) = 0;
 
   uint32 GetBindingIndex() { return mBinding; }
 
@@ -90,8 +77,11 @@ public:
   virtual uint32 GetTotalSize() { return mMemSize; }
 
   // Update the uniform buffer, should update information on the gpu, along provided
-  // binding points inside a program.
-  virtual void Update() = 0;
+  // binding points inside a program. Offsets depend on whether this UBO is dynamic,
+  // to which we need to specify offsets that are prevalent in our ubo data. This 
+  // can be ignored if ubo is static. Offsets are laid out according to the order of 
+  // how data was stored inside this ubo.
+  virtual void Update(uint32 *offsets = nullptr, uint32 count = 0) = 0;
 
   virtual void CleanUp() = 0;
 

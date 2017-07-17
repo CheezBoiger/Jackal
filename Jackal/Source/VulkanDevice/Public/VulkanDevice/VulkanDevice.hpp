@@ -14,27 +14,27 @@ public:
   // TODO(): Need to figure out how to pass window handle to vulkan.
   void Initialize() override;
 
-  Resources *GetResources() override;
-  Shader *CreateShader() override;
-  FrameBuffer *CreateFrameBuffer() override;
-  RenderPass *CreateRenderPass() override;
-  Texture *CreateTexture() override;
-  UniformBuffer *CreateUniformBuffer() override;
-  GraphicsPipelineState *CreateGraphicsPipelineState() override;
-  ComputePipelineState *CreateComputePipelineState() override;
-  RenderTarget *CreateRenderTarget() override;
-  VertexBuffer *CreateVertexBuffer() override;
-  CommandBuffer *CreateCommandBuffer() override;
-  void SetResourceHandler(Resources *resources) override;
+  Resources*                        GetResources() override;
+  Shader*                           CreateShader() override;
+  FrameBuffer*                      CreateFrameBuffer() override;
+  RenderPass*                       CreateRenderPass() override;
+  Texture*                          CreateTexture() override;
+  UniformBuffer*                    CreateUniformBuffer() override;
+  GraphicsPipelineState*            CreateGraphicsPipelineState() override;
+  ComputePipelineState*             CreateComputePipelineState() override;
+  RenderTarget*                     CreateRenderTarget() override;
+  VertexBuffer*                     CreateVertexBuffer() override;
+  CommandBuffer*                    CreateCommandBuffer() override;
+  void                              SetResourceHandler(Resources *resources) override;
 
-  void DestroyShader(Shader *shader) override;
-  void DestroyFrameBuffer(FrameBuffer *framebuffer) override;
-  void DestroyRenderPass(RenderPass *pass) override;
-  void DestroyTexture(Texture *texture) override;
-  void DestroyUniformBuffer(UniformBuffer *uniformbuffer) override;
-  void DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
-  void DestroyComputePipelineState(ComputePipelineState *pipeline) override;
-  void DestroyCommandBuffer(CommandBuffer *buffer) override;
+  void                              DestroyShader(Shader *shader) override;
+  void                              DestroyFrameBuffer(FrameBuffer *framebuffer) override;
+  void                              DestroyRenderPass(RenderPass *pass) override;
+  void                              DestroyTexture(Texture *texture) override;
+  void                              DestroyUniformBuffer(UniformBuffer *uniformbuffer) override;
+  void                              DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
+  void                              DestroyComputePipelineState(ComputePipelineState *pipeline) override;
+  void                              DestroyCommandBuffer(CommandBuffer *buffer) override;
 
   // Submit command buffers to the Vulkan Rendering API.
   void SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 numBuffers) override;

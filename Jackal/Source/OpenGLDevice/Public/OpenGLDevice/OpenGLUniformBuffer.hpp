@@ -7,7 +7,7 @@
 
 #include "OpenGLConfigs.hpp"
 
-#include <map>
+#include <list>
 #include <string>
 #include <memory>
 
@@ -18,37 +18,26 @@ namespace jackal {
 // OpenGL Native Uniform Buffer.
 class OpenGLUniformBuffer : public UniformBuffer { 
 public:
-  ~OpenGLUniformBuffer();
   
-  void SetMat4(const char *name, Matrix4 mat) override;
-  void SetMat3(const char *name, Matrix3 mat) override;
-  void SetMat2(const char *name, Matrix2 mat) override;
-  void SetVec4(const char *name, Vector4 vec) override;
-  void SetVec3(const char *name, Vector3 vec) override;
-  void SetVec2(const char *name, Vector2 vec) override;
+  void SetMat4(const char *name, Matrix4 *mat, uint32 count, bool8 dynamic = false) override;
+  void SetMat3(const char *name, Matrix3 *mat, uint32 count, bool8 dynamic = false) override;
+  void SetMat2(const char *name, Matrix2 *mat, uint32 count, bool8 dynamic = false) override;
+  void SetVec4(const char *name, Vector4 *vec, uint32 count, bool8 dynamic = false) override;
+  void SetVec3(const char *name, Vector3 *vec, uint32 count, bool8 dynamic = false) override;
+  void SetVec2(const char *name, Vector2 *vec, uint32 count, bool8 dynamic = false) override;
 
-  void SetBool(const char *name, bool8 b) override;
-  void SetInt32(const char *name, int32 i) override;
-  void SetUInt32(const char *name, uint32 ui) override;
-  void SetFloat(const char *name, real32 f) override;
-  void SetDouble(const char *name, real64 d) override;
-
-  Matrix4 GetMat4(const char *name) override;
-  Matrix3 GetMat3(const char *name) override;
-  Matrix2 GetMat2(const char *name) override;
-  Vector4 GetVec4(const char *name) override;
-  Vector3 GetVec3(const char *name) override;
-  Vector2 GetVec2(const char *name) override;
-
-  bool8 GetBool(const char *name) override;
-  int32 GetInt32(const char *name) override;
-  uint32 GetUInt32(const char *name) override;
-  real32 GetFloat(const char *name) override;
-  real64 GetDouble(const char *name) override;
+  void SetBool(const char *name, bool8 *b, uint32 count, bool8 dynamic = false) override;
+  void SetInt32(const char *name, int32 *i, uint32 count, bool8 dynamic = false) override;
+  void SetUInt32(const char *name, uint32 *ui, uint32 count, bool8 dynamic = false) override;
+  void SetFloat(const char *name, real32 *f, uint32 count, bool8 dynamic = false) override;
+  void SetDouble(const char *name, real64 *d, uint32 count, bool8 dynamic = false) override;
 
   void Initialize(GraphicsPipelineState *pipe, uint32 bind, const char *name) override;
-  void Update() override;
+  void Update(uint32 *offsets = nullptr, uint32 count = 0) override;
   void CleanUp() override;
+
+  GLuint GetProgramRef() const { return mProgramRef; }
+  GLuint Handle() const { return ubo; }
 
 private:
   // The type of data we are storing.
@@ -60,16 +49,14 @@ private:
   };
 
   // Data object to store in the buffer.
+  // TODO(): Need to figure out a way to prevent constant updating of data when it is not 
+  // needed for updating.
   struct OGLData {
-    Type type;
+    Type          type;
     mem_offset_t  offset;
-    bool8         dirty; 
-
-    virtual GLintptr GetSize() = 0;
-    virtual void *GetData() = 0;
-    virtual void Store(void *data) = 0;
-    OGLData() { }
-    virtual ~OGLData() { }
+    uint32        size;
+    void *        data;
+    bool8         dynamic;
   };  
 
   // Shader Program reference.
@@ -79,6 +66,6 @@ private:
   GLuint ubo;
 
   // Map to data that is stored in this uniform buffer object.
-  std::map<std::string, std::unique_ptr<OGLData> > mData;
+  std::list<std::pair<std::string, OGLData> > mData;
 };
 } // jackal

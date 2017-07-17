@@ -20,7 +20,10 @@ namespace jackal {
 
 class Texture2D;
 class Texture3D;
+class Sampler2D;
+class Sampler3D;
 class CubeMap;
+class SamplerCube;
 
 // Material Object, which specifies descriptor sets for 
 // some given context on the rendering pipeline. We need
@@ -34,10 +37,9 @@ public:
   // used to sample it. Must also provide the index of which to attach the
   // texture onto in rendering unit.
   virtual void SetTexture(Texture *texture, Sampler *sampler, uint32 binding) = 0;
-  virtual void SetTexture2D(Texture2D *texture, Sampler *sampler, uint32 binding) = 0;
-  virtual void SetTexture3D(Texture3D *texture, Sampler *sampler, uint32 binding) = 0;
-
-  virtual void SetCubeMap(CubeMap *cubemap, uint32 binding) = 0;
+  virtual void SetTexture2D(Texture2D *texture, Sampler2D *sampler, uint32 binding) = 0;
+  virtual void SetTexture3D(Texture3D *texture, Sampler3D *sampler, uint32 binding) = 0;
+  virtual void SetCubeMap(CubeMap *cubemap, SamplerCube *sampler, uint32 binding) = 0;
   virtual void SetUniformBuffer(UniformBuffer *buffer) = 0;
 };
 } // jackal
