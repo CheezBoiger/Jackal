@@ -3,7 +3,6 @@
 #include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
 
 #include "Core/Logging/Debugging.hpp"
-#include <glfw\include\GLFW\glfw3.h>
 
 namespace jackal {
 
