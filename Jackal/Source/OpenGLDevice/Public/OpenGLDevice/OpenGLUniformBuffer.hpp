@@ -52,11 +52,11 @@ private:
   // TODO(): Need to figure out a way to prevent constant updating of data when it is not 
   // needed for updating.
   struct OGLData {
-    Type          type;
-    mem_offset_t  offset;
-    uint32        size;
-    void *        data;
-    bool8         dynamic;
+    Type          type; // data type of this value.
+    mem_offset_t  offset; // offset value within the uniform buffer.
+    uint32        dataSize; // This is the size of each object in our data, not the size of the array.
+    void *        data; // the actual data. 
+    bool8         dynamic; // whether the data is dynamic.
   };  
 
   // Shader Program reference.

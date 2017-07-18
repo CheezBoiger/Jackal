@@ -3,6 +3,7 @@
 #include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
 
 #include "Core/Logging/Debugging.hpp"
+#include <glfw\include\GLFW\glfw3.h>
 
 namespace jackal {
 
@@ -50,10 +51,10 @@ void OpenGLUniformBuffer::SetMat4(const char *name, Matrix4 *mat, uint32 count, 
   OGLData ogl;
   ogl.data = mat;
   ogl.type = MATRIX4;
-  ogl.size = sizeof(Matrix4);
+  ogl.dataSize = sizeof(Matrix4);
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
-  mMemSize += ogl.size;
+  mMemSize += ogl.dataSize;
 
   mData.push_back(std::pair<std::string, OGLData>(name, ogl));
 }
@@ -64,10 +65,10 @@ void OpenGLUniformBuffer::SetMat3(const char *name, Matrix3 *mat, uint32 count, 
   OGLData ogl;
   ogl.data = mat;
   ogl.type = MATRIX3;
-  ogl.size = sizeof(Matrix3);
+  ogl.dataSize = sizeof(Matrix3);
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
-  mMemSize += ogl.size;
+  mMemSize += ogl.dataSize;
 
   mData.push_back(std::pair<std::string, OGLData>(name, ogl));
 }
@@ -78,10 +79,10 @@ void OpenGLUniformBuffer::SetMat2(const char *name, Matrix2 *mat, uint32 count, 
   OGLData ogl;
   ogl.data = mat;
   ogl.type = MATRIX2;
-  ogl.size = sizeof(Matrix2);
+  ogl.dataSize = sizeof(Matrix2);
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
-  mMemSize += ogl.size;
+  mMemSize += ogl.dataSize;
 
   mData.push_back(std::pair<std::string, OGLData>(name, ogl));
 }
@@ -92,10 +93,10 @@ void OpenGLUniformBuffer::SetVec4(const char *name, Vector4 *vec, uint32 count, 
   OGLData ogl;
   ogl.data = vec;
   ogl.type = VEC4;
-  ogl.size = sizeof(Vector4);
+  ogl.dataSize = sizeof(Vector4);
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
-  mMemSize += ogl.size;
+  mMemSize += ogl.dataSize;
 
   mData.push_back(std::pair<std::string, OGLData>(name, ogl));
 }
@@ -106,10 +107,10 @@ void OpenGLUniformBuffer::SetVec3(const char *name, Vector3 *vec, uint32 count, 
   OGLData ogl;
   ogl.data = vec;
   ogl.type = VEC3;
-  ogl.size = sizeof(Vector3);
+  ogl.dataSize = sizeof(Vector3);
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
-  mMemSize += ogl.size;
+  mMemSize += ogl.dataSize;
 
   mData.push_back(std::pair<std::string, OGLData>(name, ogl));
 }
@@ -120,10 +121,10 @@ void OpenGLUniformBuffer::SetVec2(const char *name, Vector2 *vec, uint32 count, 
   OGLData ogl;
   ogl.data = vec;
   ogl.type = VEC2;
-  ogl.size = sizeof(Vector2);
+  ogl.dataSize = sizeof(Vector2);
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
-  mMemSize += ogl.size;
+  mMemSize += ogl.dataSize;
 
   mData.push_back(std::pair<std::string, OGLData>(name, ogl));
 }
@@ -134,10 +135,10 @@ void OpenGLUniformBuffer::SetBool(const char *name, bool8 *b, uint32 count, bool
   OGLData ogl;
   ogl.data = b;
   ogl.type = BOOL;
-  ogl.size = sizeof(bool8);
+  ogl.dataSize = sizeof(bool8);
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
-  mMemSize += ogl.size;
+  mMemSize += ogl.dataSize;
 
   mData.push_back(std::pair<std::string, OGLData>(name, ogl));
 }
@@ -148,10 +149,10 @@ void OpenGLUniformBuffer::SetInt32(const char *name, int32 *i, uint32 count, boo
   OGLData ogl;
   ogl.data = i;
   ogl.type = INT;
-  ogl.size = sizeof(int32);
+  ogl.dataSize = sizeof(int32);
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
-  mMemSize += ogl.size;
+  mMemSize += ogl.dataSize;
 
   mData.push_back(std::pair<std::string, OGLData>(name, ogl));
 }
@@ -162,10 +163,10 @@ void OpenGLUniformBuffer::SetUInt32(const char *name, uint32 *ui, uint32 count, 
   OGLData ogl;
   ogl.data = ui;
   ogl.type = UINT;
-  ogl.size = sizeof(uint32);
+  ogl.dataSize = sizeof(uint32);
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
-  mMemSize += ogl.size;
+  mMemSize += ogl.dataSize;
 
   mData.push_back(std::pair<std::string, OGLData>(name, ogl));
 }
@@ -176,10 +177,10 @@ void OpenGLUniformBuffer::SetFloat(const char *name, real32 *f, uint32 count, bo
   OGLData ogl;
   ogl.data = f;
   ogl.type = FLOAT;
-  ogl.size = sizeof(real32);
+  ogl.dataSize = sizeof(real32);
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
-  mMemSize += ogl.size;
+  mMemSize += ogl.dataSize;
 
   mData.push_back(std::pair<std::string, OGLData>(name, ogl));
 }
@@ -190,10 +191,10 @@ void OpenGLUniformBuffer::SetDouble(const char *name, real64 *d, uint32 count, b
   OGLData ogl;
   ogl.data = d;
   ogl.type = DOUBLE;
-  ogl.size = sizeof(real64);
+  ogl.dataSize = sizeof(real64);
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
-  mMemSize += ogl.size;
+  mMemSize += ogl.dataSize;
 
   mData.push_back(std::pair<std::string, OGLData>(name, ogl));
 }
@@ -210,11 +211,12 @@ void OpenGLUniformBuffer::Update(uint32 *offsets)
       // NOTE(): Possible memory leak? We don't have 
       // a limit for offsets.
       glBufferSubData(GL_UNIFORM_BUFFER, 
-        data.second.offset, data.second.size, ((bool8 *)data.second.data + offsets[next]));
+        data.second.offset, data.second.dataSize, 
+        ((bool8 *)data.second.data + offsets[next]));
         next += 1;
     } else {
       glBufferSubData(GL_UNIFORM_BUFFER,
-        data.second.offset, data.second.size, data.second.data);
+        data.second.offset, data.second.dataSize, data.second.data);
     }
 
     uint32 err;
