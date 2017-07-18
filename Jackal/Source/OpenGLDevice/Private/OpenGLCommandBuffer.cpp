@@ -166,8 +166,15 @@ void OpenGLCommandBuffer::BindComputePipelineState(ComputePipelineState *compute
 }
 
 
-void OpenGLCommandBuffer::BindMaterialLayout(MaterialLayout *layout)
+void OpenGLCommandBuffer::BindMaterialLayout(MaterialLayout *layout,
+  uint32 dynamicOffsetCount, const uint32 *dynamicOffsets)
 {
+  auto execute = [=] (MaterialLayout *ml, uint32 dyOffCnt, const uint32 *dynOff) -> void {
+    // TODO(): We have our dynamic offsets and our material layout, we need to bind them 
+    // to the pipeline now.
+  };
+  ++mNumRenderCalls;
+  mCommandList.push_back([=] () -> void { execute(layout, dynamicOffsetCount, dynamicOffsets); });
 }
 
 

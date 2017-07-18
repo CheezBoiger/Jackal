@@ -15,8 +15,10 @@ include_directories(
 set(RENDERER_FILES
   ${JACKAL_RENDERER_PUBLIC_DIR}/IRenderer.hpp
   ${JACKAL_RENDERER_PUBLIC_DIR}/Renderer.hpp  
+  ${JACKAL_RENDERER_PUBLIC_DIR}/JCommandList.hpp
 
   ${JACKAL_RENDERER_PRIVATE_DIR}/Renderer.cpp
+  ${JACKAL_RENDERER_PRIVATE_DIR}/JCommandList.cpp
 )
 
 

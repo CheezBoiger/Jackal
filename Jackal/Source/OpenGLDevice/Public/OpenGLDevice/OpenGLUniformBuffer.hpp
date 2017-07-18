@@ -33,7 +33,7 @@ public:
   void SetDouble(const char *name, real64 *d, uint32 count, bool8 dynamic = false) override;
 
   void Initialize(GraphicsPipelineState *pipe, uint32 bind, const char *name) override;
-  void Update(uint32 *offsets = nullptr, uint32 count = 0) override;
+  void Update(uint32 *offsets = nullptr) override;
   void CleanUp() override;
 
   GLuint GetProgramRef() const { return mProgramRef; }

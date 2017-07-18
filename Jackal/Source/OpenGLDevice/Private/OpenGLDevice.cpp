@@ -314,7 +314,7 @@ void OpenGLDevice::SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 bu
   for (uint32 i = 0; i < buffers; ++i) {
     OpenGLCommandBuffer *oglCommandList = 
       static_cast<OpenGLCommandBuffer *>(&commandbuffers[i]);
-    auto &commandList = oglCommandList->GetCommandList();
+    auto &commandList = oglCommandList->GetNativeCommandList();
 
     for (auto &command : commandList) {
 

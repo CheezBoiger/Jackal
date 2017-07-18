@@ -208,20 +208,18 @@ void OpenGLUniformBuffer::SetDouble(const char *name, real64 *d, uint32 count, b
 }
 
 
-void OpenGLUniformBuffer::Update(uint32 *offsets, uint32 count)
+void OpenGLUniformBuffer::Update(uint32 *offsets)
 {
   glBindBuffer(GL_UNIFORM_BUFFER, ubo);
   uint32 next = 0;
   for (auto &data : mData) {
 
     if (data.second.dynamic) {
+      // NOTE(): Possible memory leak? We don't have 
+      // a limit for offsets.
       glBufferSubData(GL_UNIFORM_BUFFER, 
         offsets[next], data.second.size, data.second.data);
         next += 1;
-
-        // Ensure that we have read through our entire user provided offsets,
-        // no need to go overboard and read uninitialized data.
-        if (next >= count) next = count - 1;
     } else {
       glBufferSubData(GL_UNIFORM_BUFFER,
         data.second.offset, data.second.size, data.second.data);

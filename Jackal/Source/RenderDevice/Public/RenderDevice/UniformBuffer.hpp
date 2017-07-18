@@ -81,7 +81,7 @@ public:
   // to which we need to specify offsets that are prevalent in our ubo data. This 
   // can be ignored if ubo is static. Offsets are laid out according to the order of 
   // how data was stored inside this ubo.
-  virtual void Update(uint32 *offsets = nullptr, uint32 count = 0) = 0;
+  virtual void Update(uint32 *offsets = nullptr) = 0;
 
   virtual void CleanUp() = 0;
 

@@ -37,12 +37,13 @@ public:
   void BeginRenderPass(RenderPass *pass) override;
   void BindGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
   void BindComputePipelineState(ComputePipelineState *pipeline) override;
-  void BindMaterialLayout(MaterialLayout *layout) override;
+  void BindMaterialLayout(MaterialLayout *layout, 
+    uint32 dynamicOffsetCount = 0, const uint32 *dynamicOffsets = nullptr) override;
   void SetViewPort(ViewPort *viewport) override;  
   void SetScissor(ScissorRect *scissor) override;
   void SetDispatchCompute(uint32 x, uint32 y, uint32 z) override;
 
-  std::list<OGLCommandFunction> &GetCommandList() { return mCommandList; }
+  std::list<OGLCommandFunction> &GetNativeCommandList() { return mCommandList; }
 
   RenderDevice *GetRenderDevice() override { return mRenderDevice; }
 

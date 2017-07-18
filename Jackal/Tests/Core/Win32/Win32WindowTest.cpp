@@ -90,7 +90,7 @@ TEST(Win32, Win32WindowTest)
   buffer->Initialize(pipe, 0, "UBO");
 
   jackal::uint32 offset = sizeof(jackal::Matrix4) * 4;
-  buffer->Update(&offset, 1);
+  buffer->Update(&offset);
 
   vShader.CleanUp();
   pShader.CleanUp();

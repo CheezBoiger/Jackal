@@ -40,6 +40,6 @@ public:
   virtual void SetTexture2D(Texture2D *texture, Sampler2D *sampler, uint32 binding) = 0;
   virtual void SetTexture3D(Texture3D *texture, Sampler3D *sampler, uint32 binding) = 0;
   virtual void SetCubeMap(CubeMap *cubemap, SamplerCube *sampler, uint32 binding) = 0;
-  virtual void SetUniformBuffer(UniformBuffer *buffer) = 0;
+  virtual void SetUniformBuffer(UniformBuffer *buffer, uint32 binding) = 0;
 };
 } // jackal

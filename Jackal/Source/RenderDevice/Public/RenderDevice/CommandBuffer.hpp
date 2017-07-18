@@ -42,7 +42,8 @@ public:
   virtual void BeginRenderPass(RenderPass *pass) = 0;
   virtual void BindGraphicsPipelineState(GraphicsPipelineState *pipeline) = 0;
   virtual void BindComputePipelineState(ComputePipelineState *pipeline) = 0;
-  virtual void BindMaterialLayout(MaterialLayout *layout) = 0;
+  virtual void BindMaterialLayout(MaterialLayout *layout, 
+    uint32 dynamicOffsetCount = 0, const uint32 *dynamicOffsets = nullptr) = 0;
   virtual void SetViewPort(ViewPort *viewport) = 0;
   virtual void SetScissor(ScissorRect *scissor) = 0;
   virtual void SetDispatchCompute(uint32 x, uint32 y, uint32 z) = 0;
