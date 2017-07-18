@@ -52,6 +52,7 @@ void OpenGLUniformBuffer::SetMat4(const char *name, Matrix4 *mat, uint32 count, 
   ogl.data = mat;
   ogl.type = MATRIX4;
   ogl.dataSize = sizeof(Matrix4);
+  if (!dynamic) ogl.dataSize *= count;
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
   mMemSize += ogl.dataSize;
@@ -66,6 +67,7 @@ void OpenGLUniformBuffer::SetMat3(const char *name, Matrix3 *mat, uint32 count, 
   ogl.data = mat;
   ogl.type = MATRIX3;
   ogl.dataSize = sizeof(Matrix3);
+  if (!dynamic) ogl.dataSize *= count;
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
   mMemSize += ogl.dataSize;
@@ -80,6 +82,7 @@ void OpenGLUniformBuffer::SetMat2(const char *name, Matrix2 *mat, uint32 count, 
   ogl.data = mat;
   ogl.type = MATRIX2;
   ogl.dataSize = sizeof(Matrix2);
+  if (!dynamic) ogl.dataSize *= count;
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
   mMemSize += ogl.dataSize;
@@ -94,6 +97,7 @@ void OpenGLUniformBuffer::SetVec4(const char *name, Vector4 *vec, uint32 count, 
   ogl.data = vec;
   ogl.type = VEC4;
   ogl.dataSize = sizeof(Vector4);
+  if (!dynamic) ogl.dataSize *= count;
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
   mMemSize += ogl.dataSize;
@@ -108,6 +112,7 @@ void OpenGLUniformBuffer::SetVec3(const char *name, Vector3 *vec, uint32 count, 
   ogl.data = vec;
   ogl.type = VEC3;
   ogl.dataSize = sizeof(Vector3);
+  if (!dynamic) ogl.dataSize *= count;
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
   mMemSize += ogl.dataSize;
@@ -122,6 +127,7 @@ void OpenGLUniformBuffer::SetVec2(const char *name, Vector2 *vec, uint32 count, 
   ogl.data = vec;
   ogl.type = VEC2;
   ogl.dataSize = sizeof(Vector2);
+  if (!dynamic) ogl.dataSize *= count;
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
   mMemSize += ogl.dataSize;
@@ -136,6 +142,7 @@ void OpenGLUniformBuffer::SetBool(const char *name, bool8 *b, uint32 count, bool
   ogl.data = b;
   ogl.type = BOOL;
   ogl.dataSize = sizeof(bool8);
+  if (!dynamic) ogl.dataSize *= count;
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
   mMemSize += ogl.dataSize;
@@ -150,6 +157,7 @@ void OpenGLUniformBuffer::SetInt32(const char *name, int32 *i, uint32 count, boo
   ogl.data = i;
   ogl.type = INT;
   ogl.dataSize = sizeof(int32);
+  if (!dynamic) ogl.dataSize *= count;
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
   mMemSize += ogl.dataSize;
@@ -164,6 +172,7 @@ void OpenGLUniformBuffer::SetUInt32(const char *name, uint32 *ui, uint32 count, 
   ogl.data = ui;
   ogl.type = UINT;
   ogl.dataSize = sizeof(uint32);
+  if (!dynamic) ogl.dataSize *= count;
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
   mMemSize += ogl.dataSize;
@@ -178,6 +187,7 @@ void OpenGLUniformBuffer::SetFloat(const char *name, real32 *f, uint32 count, bo
   ogl.data = f;
   ogl.type = FLOAT;
   ogl.dataSize = sizeof(real32);
+  if (!dynamic) ogl.dataSize *= count;
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
   mMemSize += ogl.dataSize;
@@ -192,6 +202,7 @@ void OpenGLUniformBuffer::SetDouble(const char *name, real64 *d, uint32 count, b
   ogl.data = d;
   ogl.type = DOUBLE;
   ogl.dataSize = sizeof(real64);
+  if (!dynamic) ogl.dataSize *= count;
   ogl.dynamic = dynamic;
   ogl.offset = mMemSize;
   mMemSize += ogl.dataSize;

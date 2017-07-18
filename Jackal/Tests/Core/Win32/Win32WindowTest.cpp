@@ -80,7 +80,7 @@ TEST(Win32, Win32WindowTest)
   buffer->SetDataType(jackal::DATA_DYNAMIC);
 
   // Needs to be initialized in the same order as our ubo layout in glsl.
-  buffer->SetMat4("model",       model, 5, true);
+  buffer->SetMat4("model",       model, 5);
   buffer->SetMat4("view",        &view);
   buffer->SetMat4("projection",  &projection);
   buffer->SetVec3("camPosition", &camPosition);
