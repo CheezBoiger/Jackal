@@ -2,7 +2,7 @@
 
 #include "OpenGLDevice/OpenGLCommandBuffer.hpp"
 #include "OpenGLDevice/OpenGLComputePipelineState.hpp"
-#include "OpenGLDevice/OpenGLTextureCubemap.hpp"
+#include "OpenGLDevice/OpenGLTextureCubeMap.hpp"
 #include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
 #include "OpenGLDevice/OpenGLFrameBuffer.hpp"
 #include "OpenGLDevice/OpenGLRenderTarget.hpp"
