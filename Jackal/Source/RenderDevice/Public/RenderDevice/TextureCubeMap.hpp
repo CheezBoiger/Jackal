@@ -12,25 +12,28 @@
 namespace jackal {
 
 
-// 2D Texture object.
-class Texture2D : public RenderObject {
+// CubeMap Texture object.
+class CubeMap : public RenderObject {
 protected:
-  Texture2D()
+  CubeMap()
     : mName("Default_Texture") { }
 
 public:
 
-  virtual ~Texture2D() { }
+  virtual ~CubeMap() { }
+
 
   TextureT TextureType() {
-    static const TextureT type = TEXTURE_2D;
+    static const TextureT type = TEXTURE_CUBE;
     return type;
   }
 
 
   // Load textures into this texture object, for use in the rendering
-  // api.
-  virtual void Load(TextureInfoT &info, TextureHandle *texture) = 0;
+  // api. Must load 6 faces, or texture handles.
+  // The order of the handles must be:
+  //
+  virtual void Load(TextureInfoT &info, TextureHandle *textures) = 0;
 
   void SetName(JString n) { mName = n; }
   TextureInfoT *GetInfomation() { return &mInformation; }

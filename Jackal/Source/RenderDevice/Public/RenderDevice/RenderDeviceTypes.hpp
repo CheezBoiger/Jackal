@@ -11,6 +11,14 @@ typedef enum {
 } DataT;
 
 
+enum TextureT {
+  TEXTURE_1D,
+  TEXTURE_2D,
+  TEXTURE_3D,
+  TEXTURE_CUBE
+};
+
+
 typedef enum {
   TOPOLOGY_POINT_LIST,
   TOPOLOGY_LINE_LIST,
@@ -321,4 +329,11 @@ typedef enum {
   FORMAT_ASTC_12x12_UNORM_BLOCK = 183,
   FORMAT_ASTC_12x12_SRGB_BLOCK = 184,
 } FormatT;
+
+
+struct TextureInfoT {
+  bool8         Mipmapped;
+  uint32        Mipmaps;
+  FormatT       Format;
+};
 } // jackal

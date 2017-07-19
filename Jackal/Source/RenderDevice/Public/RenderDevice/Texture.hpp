@@ -3,6 +3,8 @@
 
 #include "Core/Platform/JTypes.hpp"
 #include "Core/Structure/JString.hpp"
+#include "Core/Utility/TextureLoader.hpp"
+
 #include "RenderDeviceTypes.hpp"
 #include "RenderObject.hpp"
 
@@ -10,50 +12,30 @@
 namespace jackal {
 
 
-struct ShaderInfoT {
-  WrapModeT   WrapS;
-  WrapModeT   WrapT;
-  WrapModeT   WrapR;
-  FilterModeT FilterMode;
-};
-
-
-// Sampler Object.
-class Sampler : public RenderObject {
-protected:
-  WrapModeT WrapS;
-  WrapModeT WrapT;
-  FilterModeT FilterMode;
-
-  Sampler() { }
-
-public:
-  virtual ~Sampler() { }
-  virtual void Bake() = 0;
-  virtual JString GetName() = 0;
-};
-
-
-// Texture object.
+// 1D Texture Object.
 class Texture : public RenderObject {
 protected:
-  Texture() : mMipmapped(false) { }
+  Texture()
+    : mName("Default_Texture") { }
 
 public:
 
   virtual ~Texture() { }
 
+  TextureT TextureType() { 
+    static const TextureT type = TEXTURE_1D;
+    return type;
+  }
 
-  // Load a file with the valid format.
-  virtual void LoadTextureFile(const JString filepath, FormatT format) = 0;
+  // Load textures into this texture object, for use in the rendering
+  // api.
+  virtual void Load(TextureInfoT &info, TextureHandle *texture) = 0;
 
-  void SetName(JString n) { name = n; }
-
-  // Check if this texture is mipmapped.
-  bool8 Mipmapped() { return mMipmapped; }
+  void SetName(JString n) { mName = n; }
+  TextureInfoT *GetInfomation() { return &mInformation; }
 
 protected:
-  JString name;
-  bool8 mMipmapped;
+  JString      mName;
+  TextureInfoT mInformation;
 };
 } // jackal

@@ -2,7 +2,7 @@
 
 #include "OpenGLDevice/OpenGLCommandBuffer.hpp"
 #include "OpenGLDevice/OpenGLComputePipelineState.hpp"
-#include "OpenGLDevice/OpenGLCubemap.hpp"
+#include "OpenGLDevice/OpenGLTextureCubemap.hpp"
 #include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
 #include "OpenGLDevice/OpenGLFrameBuffer.hpp"
 #include "OpenGLDevice/OpenGLRenderTarget.hpp"
@@ -98,7 +98,7 @@ void OpenGLCommandBuffer::DrawElements(uint32 count)
       mRenderDevice->SubmitLastError(RENDER_ERROR_NULL_VERTEX_BUFFER);
       return;
     }
-
+    
     glDrawElements(mRenderDevice->mCurrentGraphicsPipelineState->
       GetNativeTopology(), c, GL_UNSIGNED_INT, nullptr);
   };
@@ -125,6 +125,10 @@ void OpenGLCommandBuffer::Draw(uint32 count)
 void OpenGLCommandBuffer::SetViewPort(ViewPort *viewport)
 {
   auto execute = [=] (ViewPort *vp) -> void {
+    if (!mRenderDevice->mCurrentGraphicsPipelineState) {
+      mRenderDevice->SubmitLastError(RENDER_ERROR_NULL_GRAPHICS_PIPELINE_STATE);
+      return;
+    }
     glViewport( 
       static_cast<GLint>(vp->X),
       static_cast<GLint>(vp->Y),
@@ -140,6 +144,10 @@ void OpenGLCommandBuffer::SetViewPort(ViewPort *viewport)
 void OpenGLCommandBuffer::SetScissor(ScissorRect *scissor)
 {
   auto execute = [=] (ScissorRect *sr) -> void {
+    if (!mRenderDevice->mCurrentGraphicsPipelineState) {
+      mRenderDevice->SubmitLastError(RENDER_ERROR_NULL_GRAPHICS_PIPELINE_STATE);
+      return;
+    }
     glScissor(sr->Offset.x,
               sr->Offset.y,
               sr->Extent.Width,

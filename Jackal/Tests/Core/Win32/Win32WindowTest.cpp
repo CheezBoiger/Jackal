@@ -10,7 +10,6 @@
 #include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
 #include "OpenGLDevice/OpenGLShader.hpp"
 #include "OpenGLDevice/OpenGLCommandBuffer.hpp"
-
 #include <gtest/gtest.h>
 
 

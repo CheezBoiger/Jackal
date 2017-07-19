@@ -7,21 +7,10 @@
 namespace jackal {
 
 
-class OpenGLSampler : public Sampler {
-public:
-  
-
-private:
-  
-  // Handle to the OpenGL sampler.
-  GLuint handle;
-};
-
-
 class OpenGLTexture : public Texture {
 public:
   OpenGLTexture();
-  void LoadTextureFile(const JString filepath, FormatT format) override;
+  void Load(TextureInfoT &info, TextureHandle *texture) override;
 
 
 private:
