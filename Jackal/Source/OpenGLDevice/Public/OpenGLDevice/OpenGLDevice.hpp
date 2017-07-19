@@ -80,9 +80,6 @@ public:
   Texture2D*                      CreateTexture2D() override;
   Texture3D*                      CreateTexture3D() override;
   CubeMap*                        CreateCubeMap() override;
-  Sampler2D*                      CreateSampler2D() override;
-  Sampler3D*                      CreateSampler3D() override;
-  SamplerCube*                    CreateSamplerCube() override;
 
   void                            SetResourceHandler(Resources *resources) override;
   void                            DestroyShader(Shader *shader) override;
@@ -100,9 +97,6 @@ public:
   void                            DestroyTexture2D(Texture2D *texture) override;
   void                            DestroyTexture3D(Texture3D *texture) override;
   void                            DestroyCubeMap(CubeMap *cube) override;
-  void                            DestroySampler2D(Sampler2D *sampler) override;
-  void                            DestroySampler3D(Sampler3D *sampler) override;
-  void                            DestroySamplerCube(SamplerCube *sampler) override;
 
   const tchar *API() const override { return renderAPI; }
 

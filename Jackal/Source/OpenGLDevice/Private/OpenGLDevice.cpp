@@ -208,24 +208,6 @@ CubeMap *OpenGLDevice::CreateCubeMap()
 }
 
 
-Sampler2D *OpenGLDevice::CreateSampler2D()
-{
-  return nullptr;
-}
-
-
-Sampler3D *OpenGLDevice::CreateSampler3D()
-{
-  return nullptr;
-}
-
-
-SamplerCube *OpenGLDevice::CreateSamplerCube()
-{
-  return nullptr;
-}
-
-
 void OpenGLDevice::SetResourceHandler(Resources *resources)
 {
 }
@@ -282,21 +264,6 @@ void OpenGLDevice::DestroyTexture3D(Texture3D *texture)
 
 
 void OpenGLDevice::DestroyCubeMap(CubeMap *cube)
-{
-}
-
-
-void OpenGLDevice::DestroySampler2D(Sampler2D *sampler)
-{
-}
-
-
-void OpenGLDevice::DestroySampler3D(Sampler3D *sampler)
-{
-}
-
-
-void OpenGLDevice::DestroySamplerCube(SamplerCube *sampler)
 {
 }
 

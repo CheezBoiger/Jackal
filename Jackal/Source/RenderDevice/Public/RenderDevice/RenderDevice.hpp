@@ -24,9 +24,6 @@ class ComputePipelineState;
 class CommandBuffer;
 class Resources;
 class Sampler;
-class Sampler2D;
-class Sampler3D;
-class SamplerCube;
 class MaterialLayout;
 
 // RenderDevice interface, used for the rendering system of the 
@@ -65,9 +62,6 @@ public:
   virtual CommandBuffer*          CreateCommandBuffer() = 0;
   virtual Sampler*                CreateSampler() = 0;
   virtual MaterialLayout*         CreateMaterialLayout() = 0;
-  virtual Sampler2D*              CreateSampler2D() = 0;
-  virtual Sampler3D*              CreateSampler3D() = 0;
-  virtual SamplerCube*            CreateSamplerCube() = 0;
 
   virtual void                    DestroyShader(Shader *shader) = 0;
   virtual void                    DestroyFrameBuffer(FrameBuffer *framebuffer) = 0;
@@ -84,9 +78,6 @@ public:
   virtual void                    DestroyTexture2D(Texture2D *texture) = 0;
   virtual void                    DestroyTexture3D(Texture3D *texture) = 0;
   virtual void                    DestroyCubeMap(CubeMap *cube) = 0;
-  virtual void                    DestroySampler2D(Sampler2D *sampler) = 0;
-  virtual void                    DestroySampler3D(Sampler3D *sampler) = 0;
-  virtual void                    DestroySamplerCube(SamplerCube *sampler) = 0;
 
   virtual const tchar*            API() const = 0;
 
