@@ -36,7 +36,7 @@ uint32 OpenGLDevice::OGLMaterialLayouts = 0;
 bool8 OpenGLDevice::InitOpenGL()
 {
   bool8 success = gladLoadGL();
-  JDEBUG("OpenGL init: %d\n", success);
+  JDEBUG("OpenGL init: %d\n", success); 
   return success;
 }
 

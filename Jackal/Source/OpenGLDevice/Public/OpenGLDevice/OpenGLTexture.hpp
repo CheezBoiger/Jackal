@@ -3,6 +3,8 @@
 
 #include "RenderDevice/Texture.hpp"
 
+#include "OpenGLConfigs.hpp"
+
 
 namespace jackal {
 

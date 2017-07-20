@@ -53,7 +53,7 @@ Material material;
 vec3 BlinnPhongPointLight(PointLight light, vec3 FragPos, vec3 N, 
   vec3 V, Material material)
 {
-  vec3 L = light.position - FragPos;
+  vec3 L = normalize(light.position - FragPos);
   
   float kD = 0.0;
   float kS = 0.0;
@@ -94,7 +94,7 @@ vec3 BlinnPhongDirectionalLight(DirectionalLight light, vec3 FragPos,
 
 void main() 
 {
-  vec3 ViewDirection = ubo.camPosition - FragPosition;
+  vec3 ViewDirection = normalize(ubo.camPosition - FragPosition);
   
   // Set Mesh material to this object mat.
   material.ambient = texture(Ambient, FragTexCoord);
