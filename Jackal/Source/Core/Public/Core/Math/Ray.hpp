@@ -18,5 +18,9 @@ namespace jackal {
 struct Ray {
   Vector3 point;
   Vector3 direction;
+
+
+  // Obtain a point along this ray at time t, in seconds.
+  Vector3 Point(real32 t);
 };
 } // jackal

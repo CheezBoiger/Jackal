@@ -8,7 +8,6 @@
 namespace jackal {
 
 
-
 TextureHandle TextureLoader::LoadFile(const char *filepath)
 {
   TextureHandle handle = { 0, 0, 0, nullptr };

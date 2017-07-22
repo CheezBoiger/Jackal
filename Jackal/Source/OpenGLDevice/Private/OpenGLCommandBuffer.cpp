@@ -6,7 +6,6 @@
 #include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
 #include "OpenGLDevice/OpenGLFrameBuffer.hpp"
 #include "OpenGLDevice/OpenGLRenderTarget.hpp"
-#include "OpenGLDevice/OpenGLRenderTarget.hpp"
 #include "OpenGLDevice/OpenGLTexture.hpp"
 #include "OpenGLDevice/OpenGLVertexBuffer.hpp"
 #include "OpenGLDevice/OpenGLUniformBuffer.hpp"
@@ -161,6 +160,17 @@ void OpenGLCommandBuffer::SetScissor(ScissorRect *scissor)
 
 void OpenGLCommandBuffer::DrawInstanced(uint32 count, uint32 instances)
 {
+  auto execute = [=] (uint32 c, uint32 i) -> void {
+    if (!mRenderDevice->mCurrentGraphicsPipelineState) {
+      mRenderDevice->SubmitLastError(RENDER_ERROR_NULL_GRAPHICS_PIPELINE_STATE);
+      return;
+    }
+    glDrawElementsInstanced(mRenderDevice->mCurrentGraphicsPipelineState->GetNativeTopology(),
+      c, GL_UNSIGNED_INT, nullptr, i);
+  };
+
+  ++mNumDrawCalls;
+  mCommandList.push_back([=] () -> void { execute(count, instances); });
 }
 
 

@@ -29,6 +29,8 @@ public:
   virtual RenderTarget *GetRenderTarget(uint32 index) = 0;
   virtual bool8 RemoveRenderTarget(uint32 index) = 0;
 
+  virtual void Bake(RenderPass *renderpass) = 0;
+
 protected:
   RenderPass *mRenderPassReference;
 };

@@ -12,7 +12,7 @@
 namespace jackal {
 
 
-struct ShaderInfoT {
+struct SamplerInfoT {
   WrapModeT   WrapS;
   WrapModeT   WrapT;
   WrapModeT   WrapR;
@@ -23,17 +23,19 @@ struct ShaderInfoT {
 };
 
 
-// Sampler Object.
+// Sampler Object. Required in order to render out texture objects.
 class Sampler : public RenderObject {
 protected:
-  ShaderInfoT mInformation;
+  SamplerInfoT mInformation;
 
   Sampler() { }
 
 public:
   virtual ~Sampler() { }
-  virtual void Bake() = 0;
+  
+  // Bake provided information into this sampler.
+  virtual void Bake(SamplerInfoT &info) = 0;
 
-  ShaderInfoT *GetInformation() { return &mInformation; }
+  SamplerInfoT *GetInformation() { return &mInformation; }
 };
 } // jackal
