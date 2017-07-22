@@ -82,15 +82,10 @@ if (OPENGL_FOUND)
         source_group("${source_path_msvc}" FILES "${source}")
       endforeach()
     endif()
-
-  # Visual Studio organization. For Good purposes.
-  if (WIN32)
-    set_property(TARGET ${JACKAL_OPENGL_RENDEV_NAME} 
-      PROPERTY 
-      FOLDER ${JACKAL_ENGINE_DIRECTORY})
-    endif()
   endif()
   include (Macros)
+  # For Good Purposes of visual studio.
+  visual_studio_to_folder(${JACKAL_OPENGL_RENDEV_NAME} ${JACKAL_ENGINE_DIRECTORY})
 
   set_cxx_standard(${JACKAL_OPENGL_RENDEV_NAME} 14)
 else()

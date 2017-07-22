@@ -7,5 +7,9 @@ add_subdirectory(Core)
 add_subdirectory(RenderDevice)
 add_subdirectory(OpenGLDevice)
 add_subdirectory(VulkanDevice)
-add_subdirectory(Dx3D12Device)
+
+if (WIN32)
+  add_subdirectory(Dx3D12Device)
+endif()
+
 add_subdirectory(Renderer)

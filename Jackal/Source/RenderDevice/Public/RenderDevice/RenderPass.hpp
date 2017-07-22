@@ -5,7 +5,6 @@
 #include "Core/Platform/JTypes.hpp"
 #include "RenderObject.hpp"
 
-
 namespace jackal {
 
 

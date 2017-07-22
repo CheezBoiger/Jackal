@@ -29,3 +29,13 @@ macro(xcb_and_x11_init Target)
      target_link_libraries(${Target} ${X11_LIBRARIES} ${XCB_LIBRARIES})
   endif()
 endmacro()
+
+
+macro(visual_studio_to_folder Target Folder)
+  if (WIN32)
+    set_property(TARGET ${Target}
+      PROPERTY
+      FOLDER ${Folder}
+    )
+  endif()
+endmacro()
