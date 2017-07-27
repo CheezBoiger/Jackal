@@ -24,15 +24,28 @@ void StartWindow(Win32Window *window)
 
   window->wInstance = GetModuleHandle(NULL);
 
+  if (window->isFullScreen) {
+    MONITORINFO mi = { sizeof(mi) };
+    HMONITOR monitor = MonitorFromWindow(window->handle, MONITOR_DEFAULTTONEAREST);
+    if (GetMonitorInfo(monitor, &mi)) {
+      window->wParent = window->handle;
+      window->x = mi.rcMonitor.left;
+      window->y = mi.rcMonitor.top;
+      window->width = mi.rcMonitor.right - mi.rcMonitor.left;
+      window->height = mi.rcMonitor.bottom - mi.rcMonitor.top;
+    }
+  }
+  
   HWND handle = CreateWindowW(
     JWIN32_CLASSNAME,
     window->wWindowName,
-    WS_OVERLAPPEDWINDOW,
+    window->isFullScreen ? 
+      (WS_POPUP | WS_VISIBLE) : (WS_OVERLAPPEDWINDOW),
     window->x,
     window->y,
     window->width,
     window->height,
-    NULL,
+    window->wParent,
     NULL,
     window->wInstance,
     NULL);
@@ -45,7 +58,7 @@ void StartWindow(Win32Window *window)
   // the the screen size want is EXACTLY what we told the program to make.
   RECT windowRect = { window->x, window->y, window->width, window->height };
   AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, GetMenu(window->handle) != NULL);
-  MoveWindow(window->handle, window->x, window->y, 
+  MoveWindow(window->handle, window->x, window->y,
     windowRect.right - windowRect.left, windowRect.bottom - windowRect.top, FALSE);
   UpdateWindow(window->handle);
 }
@@ -117,8 +130,10 @@ static LRESULT CALLBACK WindowProc(HWND hWnd,
     } break;
     case WM_SIZE:
     {
-      window->width = LOWORD(lParam);
-      window->height = HIWORD(lParam); 
+      if (window) {
+        window->width = LOWORD(lParam);
+        window->height = HIWORD(lParam);
+      }
     } break;
     // TODO(): Need to get input from keyboard and mouse.
     case WM_MOUSEMOVE:
@@ -128,7 +143,7 @@ static LRESULT CALLBACK WindowProc(HWND hWnd,
       // data. This will then be converted to coordinates relative to the 
       // client window.
       POINT cursorPoint;
-      if (GetCursorPos(&cursorPoint)) {
+      if (window && GetCursorPos(&cursorPoint)) {
         ScreenToClient(window->handle, &cursorPoint);
         window->mouseX = cursorPoint.x;
         window->mouseY = cursorPoint.y;
@@ -137,8 +152,10 @@ static LRESULT CALLBACK WindowProc(HWND hWnd,
     case WM_MOVE:
     {
       // Update the window position.
-      window->x = (int) (short) LOWORD(lParam);
-      window->y = (int) (short) HIWORD(lParam);
+      if (window) {
+        window->x = (int) (short) LOWORD(lParam);
+        window->y = (int) (short) HIWORD(lParam);
+      }
     } break;
     case WM_KEYDOWN:
     {
@@ -156,7 +173,7 @@ static LRESULT CALLBACK WindowProc(HWND hWnd,
 
 
 Win32Window *Win32Window::Create(int32 width,
-  int32 height, LPCWSTR wWindowName, HWND parent)
+  int32 height, LPCWSTR wWindowName, HWND parent, bool8 fullscreen)
 {
   if (width <= 0 || height <= 0) {
     Log::MessageToStdOutput(LOG_ERROR, JTEXT(R"(
@@ -173,8 +190,9 @@ Win32Window *Win32Window::Create(int32 width,
 
   window->handle = nullptr;
   window->wWindowName = wWindowName;
+  window->wParent = parent;
   window->requestClose = false;
-  window->isFullScreen = false;
+  window->isFullScreen = fullscreen;
   window->x = 0;
   window->y = 0;
   window->width = width;
@@ -199,6 +217,10 @@ bool8 Win32Window::CleanUp()
 
   RemovePropW(handle, L"JWin32Window");
   DestroyWindow(handle);
+  if (wParent) {
+    RemovePropW(wParent, L"JWin32Window");
+    DestroyWindow(wParent);
+  }
   return true;
 }
 

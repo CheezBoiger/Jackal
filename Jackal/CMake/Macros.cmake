@@ -30,7 +30,7 @@ macro(xcb_and_x11_init Target)
   endif()
 endmacro()
 
-
+# Organize projects to the jackal directory within visual studio.
 macro(visual_studio_to_folder Target Folder)
   if (WIN32)
     set_property(TARGET ${Target}
@@ -38,4 +38,17 @@ macro(visual_studio_to_folder Target Folder)
       FOLDER ${Folder}
     )
   endif()
+endmacro()
+
+
+# Organize project files in visual studio
+# Target is the file glob to organize.
+macro(visual_studio_organize_project Target)
+if (MSVC)
+  foreach(source IN LISTS Target)
+    get_filename_component(source_path "${source}" PATH)
+    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+    source_group("${source_path_msvc}" FILES "${source}")
+  endforeach()
+endif()
 endmacro()

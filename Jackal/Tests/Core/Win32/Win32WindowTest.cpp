@@ -2,7 +2,7 @@
 #include "Win32WindowTest.hpp"
 #include "Core/Win32/Win32Window.hpp"
 #include "Core/Win32/Win32Filesystem.hpp"
-
+#include "Core/Utility/JStringUtils.hpp"
 // OpenGL Testing as well.
 #include "OpenGLDevice/OpenGLDevice.hpp"
 #include "OpenGLDevice/Win32/Win32OpenGL.hpp"
@@ -25,10 +25,10 @@ TEST(Win32, Win32WindowTest)
   jackal::Win32Window *window = jackal::Win32Window::Create(width, height,
     JTEXT(L"これは簡単なテストです。"), NULL);
   jackal::Win32Window *window2 = jackal::Win32Window::Create(width, height,
-    JTEXT(L"Nope"), NULL);
+    JTEXT(L"Nope"), NULL, true);
   window->SetToCenter();
   window->Show();
-  window2->Show();
+  //window2->Show();
 
   jackal::Win32OpenGL::SetOpenGLContext(window);
   jackal::Win32OpenGL::SetOpenGLContext(window2);
@@ -97,15 +97,17 @@ TEST(Win32, Win32WindowTest)
   jackal::CommandBuffer *cmd = device.CreateCommandBuffer();
   // Record buffer.
   cmd->Record();
+    cmd->BeginRenderPass(nullptr);
     cmd->BindGraphicsPipelineState(pipe);
 
     cmd->Clear();
     cmd->ClearColor(jackal::Colorf(0.1f, 0.1f, 0.1f, 1.0f));
   cmd->EndRecord();
-  ASSERT_EQ(window->width, width);
-  ASSERT_EQ(window->height, height);
 
-  jackal::PrintToConsole(JTEXT("Press close to continue through."));
+  //ASSERT_EQ(window->width, width);
+  //ASSERT_EQ(window->height, height);
+
+  jackal::PrintToConsole(JTEXT("Press close to continue through.\n"));
 
   // Game loop.
   while (!window->ShouldClose()) {

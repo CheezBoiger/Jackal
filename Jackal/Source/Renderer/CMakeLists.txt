@@ -29,7 +29,7 @@ add_library(${JACKAL_RENDERER_NAME} STATIC
 
 
 if (WIN32 AND ${CMAKE_CXX_COMPILER_ID})
-  foreach(source IN LISTS FILE_GLOB)
+  foreach(source IN LISTS RENDERER_FILES)
     get_filename_component(source_path "${source}" PATH)
     string(REPLACE "/" "\\" source_path_msvc "${source_path}")
     source_group("${source_path_msvc}" FILES "${source}")

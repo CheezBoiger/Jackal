@@ -25,6 +25,13 @@ add_library(${JACKAL_DX12_RENDEV_NAME} STATIC
 
 
 # NOTE(): Need to figure out how to find directX libraries for programmers not using visual studio
+if (MSVC)
+  foreach(source IN LISTS DX12_FILES)
+    get_filename_component(source_path "${source}" PATH)
+    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+    source_group("${source_path_msvc}" FILES "${source}")
+  endforeach()
+endif()
 
 include (Macros)
 visual_studio_to_folder(${JACKAL_DX12_RENDEV_NAME} ${JACKAL_ENGINE_DIRECTORY})

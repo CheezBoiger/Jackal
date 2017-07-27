@@ -28,9 +28,9 @@ struct Win32Window : public Window {
     
 
   static Win32Window *Create(int32 width,
-    int32 height, LPCWSTR wWindowName, HWND parent);
+    int32 height, LPCWSTR wWindowName, HWND parent, bool8 fullscreen = false);
   
-  Win32Window *GetParent();
+  Win32Window *Parent();
 
   bool8 CleanUp();
 
