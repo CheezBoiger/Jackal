@@ -27,6 +27,9 @@ public:
   // Get the frame buffer reference.
   FrameBuffer *GetFrameBufferReference() { return mFrameBufferReference; }
 
+  virtual void Initialize() = 0;
+  virtual void CleanUp() = 0;
+
 protected:
   FrameBuffer *mFrameBufferReference;
 };

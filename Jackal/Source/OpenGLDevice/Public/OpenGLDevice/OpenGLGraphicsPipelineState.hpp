@@ -23,6 +23,7 @@ public:
   }
 
   void Bake(const GraphicsPipelineInfoT &info) override;
+  void CleanUp() override;
   
   // Update the pipeline. This can be done with OpenGL, since it is
   // a dynamic pipeline, and we can only update that pipeline.

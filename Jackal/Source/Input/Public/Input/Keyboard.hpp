@@ -9,6 +9,5 @@ namespace jackal {
 
 class Keyboard {
 public:
-
 };
 } // jackal

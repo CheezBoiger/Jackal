@@ -66,6 +66,7 @@ public:
   // bake the info provided to this pipeline, can not reverse this once
   // done!
   virtual void Bake(const GraphicsPipelineInfoT &info) = 0;
+  virtual void CleanUp() = 0;
 
   // Get the information of this pipeline state.
   GraphicsPipelineInfoT *GetPipelineInformation() { return &mPipelineInfo; }

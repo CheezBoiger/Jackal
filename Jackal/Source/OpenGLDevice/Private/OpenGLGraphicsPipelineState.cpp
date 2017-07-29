@@ -75,6 +75,9 @@ void OpenGLGraphicsPipelineState::UpdateOGLPipeline()
     return;
   }
 
+  // Use the program.
+  glUseProgram(mProgramId);
+
   // Set the depth test for the pipeline.
   if (mPipelineInfo.ZBufferEnable) {
     glEnable(GL_DEPTH_TEST);
@@ -154,9 +157,6 @@ void OpenGLGraphicsPipelineState::UpdateOGLPipeline()
   } else {
     glDisable(GL_STENCIL);
   }
-
-  // Use the program.
-  glUseProgram(mProgramId);
 
   dirty = false;
 }
@@ -253,6 +253,15 @@ void OpenGLGraphicsPipelineState::CopyPipelineInfo(const GraphicsPipelineInfoT *
   CHANGE_PIPELINE(mPipelineInfo.HullShader, info->HullShader);
   CHANGE_PIPELINE(mPipelineInfo.DomainShader, info->DomainShader);
   CHANGE_PIPELINE(mPipelineInfo.GeometryShader, info->GeometryShader);
+}
+
+
+void OpenGLGraphicsPipelineState::CleanUp()
+{
+  if (mProgramId) {
+    glDeleteProgram(mProgramId);
+    mProgramId = 0;
+  }
 }
 
 

@@ -36,6 +36,8 @@ public:
   // Bake provided information into this sampler.
   virtual void Bake(SamplerInfoT &info) = 0;
 
+  virtual void CleanUp() = 0;
+
   SamplerInfoT *GetInformation() { return &mInformation; }
 };
 } // jackal

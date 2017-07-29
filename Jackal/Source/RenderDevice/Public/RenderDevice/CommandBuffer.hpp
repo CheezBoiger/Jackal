@@ -33,6 +33,7 @@ public:
   virtual void Record() = 0;
   virtual void EndRecord() = 0;
   virtual void ClearRecord() = 0;
+
   virtual void Clear() = 0;
   virtual void ClearColor(Colorf color) = 0;
   virtual void DrawElements(uint32 count) = 0;

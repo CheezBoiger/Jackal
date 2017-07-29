@@ -23,6 +23,7 @@ public:
 
 
   virtual void Bake(ComputePipelineInfoT &info) = 0;
+  virtual void CleanUp() = 0;
 
 
   ComputePipelineInfoT *GetPipelineInformation() { return &mInformation; }

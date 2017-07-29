@@ -30,6 +30,8 @@ public:
   // Load textures into this texture object, for use in the rendering
   // api.
   virtual void Load(TextureInfoT &info, TextureHandle *texture) = 0;
+  
+  virtual void CleanUp() = 0;
 
   void SetName(JString n) { mName = n; }
   TextureInfoT *GetInfomation() { return &mInformation; }

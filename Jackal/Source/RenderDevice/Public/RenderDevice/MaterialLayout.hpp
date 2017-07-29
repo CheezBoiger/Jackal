@@ -39,5 +39,8 @@ public:
   virtual void BindTexture3D(Sampler *sampler, Texture3D *texture, uint32 binding) = 0;
   virtual void BindCubeMap(Sampler *sampler, CubeMap *cube, uint32 binding) = 0;
   virtual void BindUniformBuffer(UniformBuffer *buffer, uint32 binding) = 0;
+
+  virtual void Initialize() = 0;
+  virtual void CleanUp() = 0;
 };
 } // jackal

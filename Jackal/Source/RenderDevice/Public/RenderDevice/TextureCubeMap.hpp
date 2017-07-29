@@ -34,6 +34,7 @@ public:
   // The order of the handles must be:
   //
   virtual void Load(TextureInfoT &info, TextureHandle *textures) = 0;
+  virtual void CleanUp() = 0;
 
   void SetName(JString n) { mName = n; }
   TextureInfoT *GetInfomation() { return &mInformation; }

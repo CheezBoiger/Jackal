@@ -31,6 +31,8 @@ public:
 
   virtual void Bake(RenderPass *renderpass) = 0;
 
+  virtual void CleanUp() = 0;
+
 protected:
   RenderPass *mRenderPassReference;
 };

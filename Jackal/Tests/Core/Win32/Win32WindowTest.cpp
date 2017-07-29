@@ -99,7 +99,16 @@ TEST(Win32, Win32WindowTest)
   cmd->Record();
     cmd->BeginRenderPass(nullptr);
     cmd->BindGraphicsPipelineState(pipe);
+#if 0
+    // NOTE(): Once we get out material layout set up, we will enable this.
+    cmd->BindMaterialLayout(nullptr, 1, nullptr);
+    cmd->BindVertexBuffer(nullptr);
+    cmd->DrawElements(0);
 
+    cmd->BindMaterialLayout(nullptr, 1, nullptr);
+    cmd->BindVertexBuffer(nullptr);
+    cmd->DrawElements(0);
+#endif
     cmd->Clear();
     cmd->ClearColor(jackal::Colorf(0.1f, 0.1f, 0.1f, 1.0f));
   cmd->EndRecord();
