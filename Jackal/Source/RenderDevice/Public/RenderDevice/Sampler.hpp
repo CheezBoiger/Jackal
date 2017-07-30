@@ -18,8 +18,8 @@ struct SamplerInfoT {
   WrapModeT   WrapR;
   FilterModeT MagFilter;
   FilterModeT MinFilter;
-  uint32      MinLod;
-  uint32      MaxLod;
+  real32      MinLod;
+  real32      MaxLod;
 };
 
 

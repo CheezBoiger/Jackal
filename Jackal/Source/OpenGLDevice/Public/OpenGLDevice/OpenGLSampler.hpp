@@ -14,14 +14,18 @@ namespace jackal {
 
 class OpenGLSampler : public Sampler {
 public:
+  OpenGLSampler()
+    : mHandle(0) { }
  
   void Bake(SamplerInfoT &info) override;
 
   // Get the native handle of this sampler.
   GLint Handle() const { return mHandle; }
 
+  void CleanUp() override;
+
 
 private:
-  GLint mHandle;
+  GLuint mHandle;
 };
 } // jackal
