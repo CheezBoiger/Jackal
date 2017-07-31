@@ -10,6 +10,7 @@
 #include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
 #include "OpenGLDevice/OpenGLShader.hpp"
 #include "OpenGLDevice/OpenGLCommandBuffer.hpp"
+#include "OpenGLDevice/OpenGLSampler.hpp"
 #include <gtest/gtest.h>
 
 
@@ -93,6 +94,17 @@ TEST(Win32, Win32WindowTest)
 
   vShader.CleanUp();
   pShader.CleanUp();
+
+  jackal::SamplerInfoT sinfo;
+  sinfo.MagFilter = jackal::FILTER_MODE_NEAREST;
+  sinfo.MinFilter = jackal::FILTER_MODE_NEAREST;
+  sinfo.WrapS = jackal::WRAP_MODE_CLAMP_TO_BORDER;
+  sinfo.WrapT = jackal::WRAP_MODE_CLAMP_TO_BORDER;
+  sinfo.WrapR = jackal::WRAP_MODE_CLAMP_TO_BORDER;
+  sinfo.MinLod = 1.0f;
+  sinfo.MaxLod = 2.0f;
+  jackal::OpenGLSampler sampler;
+  sampler.Bake(sinfo);
 
   jackal::CommandBuffer *cmd = device.CreateCommandBuffer();
   // Record buffer.

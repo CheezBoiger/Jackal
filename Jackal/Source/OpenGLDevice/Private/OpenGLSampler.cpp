@@ -47,6 +47,13 @@ void OpenGLSampler::Bake(SamplerInfoT &info)
 
   glSamplerParameterf(mHandle, GL_TEXTURE_MIN_LOD, mInformation.MinLod);
   glSamplerParameterf(mHandle, GL_TEXTURE_MAX_LOD, mInformation.MaxLod);
+
+  
+  OPENGL_CHECK_ERROR(GLenum err);
+
+  if (err != GL_NO_ERROR) {
+    JDEBUG("Sampler Error!");
+  }
 }
 
 

@@ -30,6 +30,7 @@ set(OPENGL_FILES
   ${OPENGL_PUBLIC_DIR}/OpenGLUniformBuffer.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLVertexBuffer.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLSampler.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLNative.hpp
 
   ${OPENGL_PRIVATE_DIR}/OpenGLComputePipelineState.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLGraphicsPipelineState.cpp
@@ -46,6 +47,7 @@ set(OPENGL_FILES
   ${OPENGL_PRIVATE_DIR}/OpenGLTextureCubeMap.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLTexture2D.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLTexture3D.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLNative.cpp
 
   ${JACKAL_THIRD_PARTY_DIR}/opengl/glad/glad.c
 )
