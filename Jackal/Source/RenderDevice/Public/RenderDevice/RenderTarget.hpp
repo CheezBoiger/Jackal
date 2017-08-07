@@ -21,6 +21,11 @@ class RenderTarget {
 public:
   virtual ~RenderTarget() { }
 
-  virtual void Init(RenderTargetCreateInfoT &info) = 0;
+  virtual void Bake(RenderTargetCreateInfoT &info) = 0;
+
+  RenderTargetCreateInfoT Information() const { return mInformation; }
+
+protected:
+  RenderTargetCreateInfoT mInformation;
 };
 } // jackal
