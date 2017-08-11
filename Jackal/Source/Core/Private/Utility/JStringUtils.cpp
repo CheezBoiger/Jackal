@@ -25,7 +25,15 @@ tchar *JStringUtils::AllocateStringSize(size_t size)
 }
 
 
+#if JACKAL_PLATFORM == JACKAL_WINDOWS
+JString ToString(char *n) {
+  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+  std::wstring wide = converter.from_bytes(n);
+  return wide;
+}
+#else
 JString ToString(char* n) {
   return std::string(n);
 }
+#endif
 } // jackal

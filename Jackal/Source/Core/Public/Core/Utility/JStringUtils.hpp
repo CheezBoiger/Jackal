@@ -42,15 +42,5 @@ JString ToString(Type n) {
   return str;
 }
 
-#if JACKAL_PLATFORM == JACKAL_WINDOWS
-template<>
-JString ToString(char *n) {
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-  std::wstring wide = converter.from_bytes(n);
-  return wide;
-}
-#endif
-
-
 JString ToString(char* n);
 } // jackal
