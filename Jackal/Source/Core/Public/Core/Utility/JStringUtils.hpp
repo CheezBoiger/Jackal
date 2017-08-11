@@ -47,6 +47,11 @@ public:
     std::wstring wide = converter.from_bytes(n);
     return wide;
   }
+#else
+  template<>
+  static JString ToString(char* n) {
+    return std::string(n);
+  }
 #endif
 };
 } // jackal
