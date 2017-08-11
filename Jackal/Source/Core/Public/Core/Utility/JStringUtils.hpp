@@ -8,6 +8,13 @@
 #include <string>
 #include <type_traits>
 
+// TODO(): Figure out a better way than to include unecessary headers
+// just for windows.
+#if JACKAL_PLATFORM == JACKAL_WINDOWS
+ #include <locale>
+ #include <codecvt>
+#endif
+
 namespace jackal {
 
 
@@ -32,5 +39,14 @@ public:
     JString str = TO_JSTRING(n);
     return str;
   }
+
+#if JACKAL_PLATFORM == JACKAL_WINDOWS
+  template<>
+  static JString ToString(char *n) {
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+    std::wstring wide = converter.from_bytes(n);
+    return wide;
+  }
+#endif
 };
 } // jackal

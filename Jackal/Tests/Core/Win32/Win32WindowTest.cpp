@@ -24,9 +24,9 @@ TEST(Win32, Win32WindowTest)
  
   jackal::PrintToConsole(JTEXT("Creating window.\n"));
   jackal::Win32Window *window = jackal::Win32Window::Create(width, height,
-    JTEXT(L"これは簡単なテストです。"), NULL);
+    JTEXT("これは簡単なテストです。"), NULL);
   jackal::Win32Window *window2 = jackal::Win32Window::Create(width, height,
-    JTEXT(L"Nope"), NULL, true);
+    JTEXT("Nope"), NULL, true);
   window->SetToCenter();
   window->Show();
   //window2->Show();
@@ -39,8 +39,8 @@ TEST(Win32, Win32WindowTest)
   // renderer.
   jackal::OpenGLDevice device;
 
-  jackal::JString fSource = jackal::Win32Filesystem::ReadFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.frag");
-  jackal::JString vSource = jackal::Win32Filesystem::ReadFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.vert");
+  jackal::NativeString fSource = jackal::Shader::ParseFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.frag");
+  jackal::NativeString vSource = jackal::Shader::ParseFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.vert");
   // Creat e shaders for our pipeline.
   jackal::OpenGLShader vShader;
   jackal::OpenGLShader pShader;
@@ -49,10 +49,9 @@ TEST(Win32, Win32WindowTest)
   vShader.Compile(jackal::Shader::Vertex, vSource);
   pShader.Compile(jackal::Shader::Pixel, fSource);
 
-  jackal::GraphicsPipelineState *pipe =
+  jackal::GraphicsPipelineState *BlinnPhongPipe =
     device.CreateGraphicsPipelineState();
 
-  pipe->SetName(JTEXT("Blinn-Phong Pipe."));
   // Set up information about the pipeline.
   jackal::GraphicsPipelineInfoT information;
   information.Topology = jackal::TOPOLOGY_TRIANGLE_LIST;
@@ -68,7 +67,7 @@ TEST(Win32, Win32WindowTest)
   information.DomainShader = nullptr;
   information.GeometryShader = nullptr;
 
-  pipe->Bake(information);
+  BlinnPhongPipe->Bake(information);
 
 
   jackal::UniformBuffer *buffer = device.CreateUniformBuffer();
@@ -87,7 +86,7 @@ TEST(Win32, Win32WindowTest)
 
   // initialize ubo here. You need an active pipeline state in order to
   // initialize a uniform buffer.
-  buffer->Initialize(pipe, 0, "UBO");
+  buffer->Initialize(BlinnPhongPipe, 0, "UBO");
 
   jackal::uint32 offset = sizeof(jackal::Matrix4) * 4;
   buffer->Update(&offset);
@@ -110,7 +109,7 @@ TEST(Win32, Win32WindowTest)
   // Record buffer.
   cmd->Record();
     cmd->BeginRenderPass(nullptr);
-    cmd->BindGraphicsPipelineState(pipe);
+    cmd->BindGraphicsPipelineState(BlinnPhongPipe);
 #if 0
     // NOTE(): Once we get out material layout set up, we will enable this.
     cmd->BindMaterialLayout(nullptr, 1, nullptr);
@@ -149,7 +148,7 @@ TEST(Win32, Win32WindowTest)
   }
 
   device.DestroyCommandBuffer(cmd);
-  device.DestroyGraphicsPipelineState(pipe);
+  device.DestroyGraphicsPipelineState(BlinnPhongPipe);
   device.DestroyUniformBuffer(buffer);
 
   jackal::Win32OpenGL::MakeContextCurrent(nullptr);

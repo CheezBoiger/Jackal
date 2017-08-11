@@ -1,5 +1,5 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
-#include "Core/Logging/Logger.hpp"
+#include "Logging/Logger.hpp"
 #include "LogData.hpp"
 #include <iostream>
 #include <iomanip>

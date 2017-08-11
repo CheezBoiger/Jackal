@@ -20,6 +20,7 @@ set(RENDEV_FILES
   ${RENDEV_PUBLIC_DIR}/RenderPass.hpp
   ${RENDEV_PUBLIC_DIR}/RenderTarget.hpp
   ${RENDEV_PUBLIC_DIR}/Shader.hpp
+  ${RENDEV_PRIVATE_DIR}/Shader.cpp
   ${RENDEV_PUBLIC_DIR}/Texture.hpp
   ${RENDEV_PUBLIC_DIR}/TextureConfig.hpp
   ${RENDEV_PUBLIC_DIR}/UniformBuffer.hpp

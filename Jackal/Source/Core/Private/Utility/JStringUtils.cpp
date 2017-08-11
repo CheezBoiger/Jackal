@@ -19,21 +19,9 @@ void JStringUtils::UTF16To8(const uint16 *input, uint8 *output)
 }
 
 
-size_t JStringUtils::GetStringSize(const tchar *src)
-{
-  return strlen(src);
-}
-
-
 tchar *JStringUtils::AllocateStringSize(size_t size)
 {
   return new tchar[size];
-}
-
-
-void JStringUtils::StringCopy(tchar *dest, const tchar *src)
-{
-  strcpy(dest, src);
 }
 
 

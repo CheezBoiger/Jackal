@@ -126,7 +126,7 @@ void Win32OpenGL::Initialize()
 
   if (pf == 0) {
     MessageBoxW(mDummy->handle,
-      JTEXT(L"Failed to choose proper pixel format."), JTEXT(L"Failed"), MB_OK);
+      JTEXT("Failed to choose proper pixel format."), JTEXT("Failed"), MB_OK);
     return;
   }
   JDEBUG("Set Pixel Format\n");

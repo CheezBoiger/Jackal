@@ -30,7 +30,7 @@ class OpenGLMaterialLayout;
 // Rendering functionality. It should act as a RHI, or 
 // Rendering Hardware Interface implementation of OpenGL.
 class OpenGLDevice : public RenderDevice {
-  static const tchar *renderAPI;
+  static const char *renderAPI;
 
   // Keep Track of the number of opengl objects allocated by OpenGLDevice.
   static uint32       OGLShaders;
@@ -95,7 +95,7 @@ public:
   void                            DestroyTexture3D(Texture3D *texture) override;
   void                            DestroyCubeMap(CubeMap *cube) override;
 
-  const tchar *API() const override { return renderAPI; }
+  const char *API() const override { return renderAPI; }
 
   // Still Ongoing work.
   // TODO(): Setters for setting up the pipeline and rendering core.

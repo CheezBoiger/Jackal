@@ -259,6 +259,7 @@ endif()
 include_directories(SYSTEM
   ${JACKAL_THIRD_PARTY_DIR}/glfw/include
   ${JACKAL_INCLUDE_DIR}
+  Public/Core/
 )
 
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)

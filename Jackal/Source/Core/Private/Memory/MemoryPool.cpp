@@ -1,9 +1,9 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
-#include "Core/Memory/MemoryPool.hpp"
+#include "Memory/MemoryPool.hpp"
 #include "MemLeakDetection.hpp"
-#include "Core/Logging/Logger.hpp"
-#include "Core/Logging/Debugging.hpp"
-#include "Core/Utility/JStringUtils.hpp"
+#include "Logging/Logger.hpp"
+#include "Logging/Debugging.hpp"
+#include "Utility/JStringUtils.hpp"
 
 #include <new>
 

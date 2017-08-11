@@ -16,11 +16,20 @@ namespace jackal {
 // extends infinitely, as we can assume. The importance simply allows
 // for raycasting, ray tracing, and many other useful tools for our arsenal.
 struct Ray {
-  Vector3 point;
-  Vector3 direction;
-
+  Ray(Vector3 origin, Vector3 direction)
+    : Origin(origin)
+    , Direction(direction) { }
 
   // Obtain a point along this ray at time t, in seconds.
-  Vector3 Point(real32 t);
+  // Equation of a ray at t. 
+  Vector3 Point(real32 t) {
+    return Origin + (Direction * t);
+  }
+
+  // The P0 origin of this ray, otherwise known as the starting point.
+  Vector3 Origin;
+  
+  // The Direction of where this ray is pointing. This value MUST be normalized.
+  Vector3 Direction;
 };
 } // jackal

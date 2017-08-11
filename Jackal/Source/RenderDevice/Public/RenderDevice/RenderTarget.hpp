@@ -21,7 +21,7 @@ class RenderTarget {
 public:
   virtual ~RenderTarget() { }
 
-  virtual void Bake(RenderTargetCreateInfoT &info) = 0;
+  virtual void Bake(RenderTargetCreateInfoT &info) { mInformation = info; }
 
   RenderTargetCreateInfoT Information() const { return mInformation; }
 

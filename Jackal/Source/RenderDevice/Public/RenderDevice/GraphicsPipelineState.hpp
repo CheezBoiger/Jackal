@@ -71,14 +71,10 @@ public:
   // Get the information of this pipeline state.
   GraphicsPipelineInfoT *GetPipelineInformation() { return &mPipelineInfo; }
 
-  void SetName(JString name) { mName = name; }
-  JString &Name() { return mName; }
-
   RenderErrorT GetLastError() { return mLastError; }
 
 protected:
   GraphicsPipelineInfoT   mPipelineInfo;
-  JString                 mName;
   RenderErrorT            mLastError;
 };
 } // jackal

@@ -20,37 +20,37 @@ namespace jackal {
 class Win32Filesystem {
 public:
 
-  static JString CurrentDirectory();
+  static NativeString CurrentDirectory();
 
-  static JString SetNewCurrentDirectory(JString path);
+  static NativeString SetNewCurrentDirectory(NativeString path);
 
-  static JString CreateADirectory(JString name);
+  static NativeString CreateADirectory(NativeString name);
 
-  static JString CreateAFile(JString name);
+  static NativeString CreateAFile(NativeString name);
 
-  static bool8 DirectoryExists(JString path);
+  static bool8 DirectoryExists(NativeString path);
 
-  static bool8 FileExists(JString file);
+  static bool8 FileExists(NativeString file);
 
-  static bool8 RemoveADirectory(JString path);
+  static bool8 RemoveADirectory(NativeString path);
 
-  static bool8 AddSearchPath(JString path);
+  static bool8 AddSearchPath(NativeString path);
 
-  static std::vector<JString> GetSearchPaths() { return mSearchPath; }
+  static std::vector<NativeString> GetSearchPaths() { return mSearchPath; }
 
-  static bool8 RemoveSearchPath(JString path);
+  static bool8 RemoveSearchPath(NativeString path);
 
-  static JString SetAbsolutePath(JString relative);
+  static NativeString SetAbsolutePath(NativeString relative);
 
-  static JString GetAbsolutePath(JString file);
+  static NativeString GetAbsolutePath(NativeString file);
 
-  static JString ReadFile(JString file);
+  static NativeString ReadFile(NativeString file);
 
-  static JString AsyncReadFile(JString file);
+  static NativeString AsyncReadFile(NativeString file);
 
 private:
 
   // Search path for this filesystem.
-  static std::vector<JString>      mSearchPath;
+  static std::vector<NativeString>      mSearchPath;
 };
 } // jackal 

@@ -1,6 +1,6 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
-#include "OpenGLDevice/OpenGLTexture.hpp"
-#include "OpenGLDevice/OpenGLNative.hpp"
+#include "OpenGLTexture.hpp"
+#include "OpenGLNative.hpp"
 
 #include "Core/Logging/Debugging.hpp"
 #include "Core/Logging/Assertions.hpp"

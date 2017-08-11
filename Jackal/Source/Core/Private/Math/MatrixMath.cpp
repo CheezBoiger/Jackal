@@ -25,7 +25,7 @@ Matrix4 Translate(const Matrix4 &original, const Vector3 &v)
     0,      0,      1,      0,
     v.x,    v.y,    v.z,    1
   );
-  return original * t;
+  return t * original;
 }
 
 

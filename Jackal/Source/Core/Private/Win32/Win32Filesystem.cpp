@@ -1,5 +1,5 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
-#include "Core/Win32/Win32Filesystem.hpp"
+#include "Win32/Win32Filesystem.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -9,9 +9,9 @@
 namespace jackal {
 
 
-JString Win32Filesystem::CurrentDirectory()
+NativeString Win32Filesystem::CurrentDirectory()
 {
-  JString directoryPath;
+  NativeString directoryPath;
 
   DWORD length = 0;
   length = GetCurrentDirectory(0, NULL) + 1;
@@ -24,7 +24,7 @@ JString Win32Filesystem::CurrentDirectory()
 
 
 // We can use the standard library to read our files lulz.
-JString Win32Filesystem::ReadFile(JString file)
+NativeString Win32Filesystem::ReadFile(NativeString file)
 {
   std::ifstream fil;
   fil.open(file);
@@ -40,7 +40,7 @@ JString Win32Filesystem::ReadFile(JString file)
 }
 
 
-JString Win32Filesystem::AsyncReadFile(JString file)
+NativeString Win32Filesystem::AsyncReadFile(NativeString file)
 {
   // TODO():
   return "";

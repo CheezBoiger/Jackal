@@ -1,15 +1,17 @@
 // Copyright (c) 2017 Jackal Engine. MIT License.
 
 
-#include "OpenGLDevice/OpenGLShader.hpp"
+#include "OpenGLShader.hpp"
 #include "Core/Logging/Logger.hpp"
+
+#include "Core/Utility/JStringUtils.hpp"
 
 #include <array>
 
 namespace jackal {
 
 
-const tchar *OpenGLShader::shaderLanguage = JTEXT("glsl");
+const char *OpenGLShader::shaderLanguage = "glsl";
 
 
 GLenum OpenGLShader::GetNativeShaderType(ShaderType type)
@@ -27,9 +29,9 @@ GLenum OpenGLShader::GetNativeShaderType(ShaderType type)
 
 
 bool8 OpenGLShader::Compile(ShaderType type, 
-  const JString sourceCode,
-  std::vector<JString> includes,
-  std::vector<JString> defines)
+  const NativeString sourceCode,
+  std::vector<NativeString> includes,
+  std::vector<NativeString> defines)
 {
   mShaderType = type;
   mNativeShaderType = GetNativeShaderType(type);
@@ -40,7 +42,7 @@ bool8 OpenGLShader::Compile(ShaderType type,
   handle = glCreateShader(mNativeShaderType);
   
   GLint length = 0;
-  JString Source = ParseSource(sourceCode, includes, defines);
+  NativeString Source = ParseSource(sourceCode, includes, defines);
 
   // Document this error, empty source code.
   if (Source.empty()) {
@@ -59,7 +61,7 @@ bool8 OpenGLShader::Compile(ShaderType type,
 
   if (!success) {
     glGetShaderInfoLog(handle, (GLsizei )log.size(), nullptr, log.data());
-    Log::MessageToStdOutput(LOG_ERROR, JString(log.data()));
+    Log::MessageToStdOutput(LOG_ERROR, JStringUtils::ToString(log.data()));
     CleanUp();
     compiled = false;
     return false;
@@ -79,8 +81,8 @@ void OpenGLShader::CleanUp()
 }
 
 
-JString OpenGLShader::ParseSource(JString source, std::vector<JString> includes,
-  std::vector<JString> defines)
+NativeString OpenGLShader::ParseSource(NativeString source, std::vector<NativeString> includes,
+  std::vector<NativeString> defines)
 {
   // TODO(): Add preprocessor into here, to parse include files, and 
   // defines.

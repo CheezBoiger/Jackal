@@ -19,7 +19,7 @@
 namespace jackal {
 
 
-const tchar *OpenGLDevice::renderAPI = JTEXT("OpenGL");
+const char *OpenGLDevice::renderAPI = "OpenGL";
 
 uint32 OpenGLDevice::OGLShaders = 0;
 uint32 OpenGLDevice::OGLFrameBuffers = 0;

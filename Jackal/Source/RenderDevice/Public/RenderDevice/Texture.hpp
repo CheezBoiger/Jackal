@@ -15,8 +15,7 @@ namespace jackal {
 // 1D Texture Object.
 class Texture : public RenderObject {
 protected:
-  Texture()
-    : mName("Default_Texture") { }
+  Texture() { }
 
 public:
 
@@ -33,11 +32,9 @@ public:
   
   virtual void CleanUp() = 0;
 
-  void SetName(JString n) { mName = n; }
   TextureInfoT *GetInfomation() { return &mInformation; }
 
 protected:
-  JString      mName;
   TextureInfoT mInformation;
 };
 } // jackal

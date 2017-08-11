@@ -79,7 +79,7 @@ public:
   virtual void                    DestroyTexture3D(Texture3D *texture) = 0;
   virtual void                    DestroyCubeMap(CubeMap *cube) = 0;
 
-  virtual const tchar*            API() const = 0;
+  virtual const char*            API() const = 0;
 
   // Retrieve the last error that was dispatched from this render device.
   RenderErrorT GetLastError() {

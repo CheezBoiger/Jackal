@@ -1,7 +1,7 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 
-#include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
-#include "OpenGLDevice/OpenGLShader.hpp"
+#include "OpenGLGraphicsPipelineState.hpp"
+#include "OpenGLShader.hpp"
 
 // Registers an opengl error.
 #define REGISTER_OPENGL_ERROR() OPENGL_CHECK_ERROR(mNativeError); \
@@ -199,6 +199,9 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline()
     shader = static_cast<OpenGLShader *>(mPipelineInfo.HullShader);
     if (shader->Compiled()) {
       glAttachShader(mProgramId, shader->GetHandle());
+    } else {
+      mLastError = RENDER_ERROR_PIPELINE_UNCOMPILED_SHADER;
+      return;
     }
   }
 
@@ -206,6 +209,9 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline()
     shader = static_cast<OpenGLShader *>(mPipelineInfo.DomainShader);
     if (shader->Compiled()) {
       glAttachShader(mProgramId, shader->GetHandle());
+    } else {
+      mLastError = RENDER_ERROR_PIPELINE_UNCOMPILED_SHADER;
+      return;
     }
   }
 
@@ -213,6 +219,9 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline()
     shader = static_cast<OpenGLShader *>(mPipelineInfo.GeometryShader);
     if (shader->Compiled()) {
       glAttachShader(mProgramId, shader->GetHandle());
+    } else {
+      mLastError = RENDER_ERROR_PIPELINE_UNCOMPILED_SHADER; 
+      return;
     }
   }
 

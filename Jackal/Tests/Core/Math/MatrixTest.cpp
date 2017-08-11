@@ -53,20 +53,20 @@ TEST(MathTesting, MatrixTesting) {
   // perform about the same optimal time, average.
 
   auto start = std::chrono::high_resolution_clock::now();
-  glm::mat4 glmT = glm::orthoRH(0.0f, 800.0f, 600.0f, 0.0f, 0.1f, 1000.0f);
+  glm::mat4 glmT = //glm::orthoRH(0.0f, 800.0f, 600.0f, 0.0f, 0.1f, 1000.0f);
   //glm::lookAtLH(glm::vec3(1.0f, 16.0f, -123.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-  //glm::translate(glm::mat4(), glm::vec3(12.0f, -12.4f, 1.0f));
-  //glmT = glm::rotate(glmT, glm::radians(-74.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+  glm::translate(glm::mat4(), glm::vec3(12.0f, -12.4f, 1.0f));
+  glmT = glm::rotate(glmT, glm::radians(-74.0f), glm::vec3(0.0f, 1.0f, 0.0f));
   //glmT = glm::rotate(glmT, glm::radians(50.0f), glm::vec3(1.0f, 0.0f, 0.0f));
   //glmT = glm::scale(glmT, glm::vec3(5.0f, 5.0f, 5.0f));
   auto end = std::chrono::high_resolution_clock::now();
   long long tG = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
   start = std::chrono::high_resolution_clock::now();
-  jackal::Mat4f T = jackal::OrthographicRH(0.0f, 800.0f, 600.0f, 0.0f, 0.1f, 1000.0f);
+  jackal::Mat4f T = //jackal::OrthographicRH(0.0f, 800.0f, 600.0f, 0.0f, 0.1f, 1000.0f);
            //jackal::LookAtLH(jackal::Vec3(1.0f, 16.0f, -123.0f), jackal::Vec3(0.0f, 0.0f, 0.0f), jackal::Vec3(0.0f, 1.0f, 0.0f));
-  //  jackal::Translate(jackal::Mat4f(), jackal::Vec3f(12.0f, -12.4f, 1.0f));
-  //T = jackal::Rotate(T, jackal::ToRadians(-74.0f), jackal::Vec3f(0.0f, 1.0f, 0.0f));
+    jackal::Translate(jackal::Mat4f(), jackal::Vec3f(12.0f, -12.4f, 1.0f));
+  T = jackal::Rotate(T, jackal::ToRadians(-74.0f), jackal::Vec3f(0.0f, 1.0f, 0.0f));
   //T = jackal::Rotate(T, jackal::ToRadians(50.0f), jackal::Vec3f(1.0f, 0.0f, 0.0f));
   //T = jackal::Scale(T, jackal::Vec3f(5.0f, 5.0f, 5.0f));
   end = std::chrono::high_resolution_clock::now();
