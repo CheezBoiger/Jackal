@@ -3,8 +3,10 @@
 #include <string.h>
 #include <string>
 
-#if defined(_WIN32)
- #include "Core/Win32/Win32Config.hpp"
+#if JACKAL_PLATFORM == JACKAL_WINDOWS
+#include "Win32/Win32Config.hpp"
+#include <locale>
+#include <codecvt>
 #endif
 
 namespace jackal {

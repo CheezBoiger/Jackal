@@ -10,10 +10,6 @@
 
 // TODO(): Figure out a better way than to include unecessary headers
 // just for windows.
-#if JACKAL_PLATFORM == JACKAL_WINDOWS
- #include <locale>
- #include <codecvt>
-#endif
 
 namespace jackal {
 
