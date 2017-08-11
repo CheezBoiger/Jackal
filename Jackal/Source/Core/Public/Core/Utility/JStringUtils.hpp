@@ -36,7 +36,7 @@ public:
 
 
 template<typename Type>
-static JString ToString(Type n) {
+JString ToString(Type n) {
   //static_assert<std::is_same<decltype(Type), tchar>::value, "No need to convert tchar");
   JString str = TO_JSTRING(n);
   return str;
@@ -44,15 +44,13 @@ static JString ToString(Type n) {
 
 #if JACKAL_PLATFORM == JACKAL_WINDOWS
 template<>
-static JString ToString(char *n) {
+JString ToString(char *n) {
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
   std::wstring wide = converter.from_bytes(n);
   return wide;
 }
-#else
-template<>
-static JString ToString(char* n) {
-  return std::string(n);
-}
 #endif
+
+
+JString ToString(char* n);
 } // jackal

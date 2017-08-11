@@ -25,5 +25,7 @@ tchar *JStringUtils::AllocateStringSize(size_t size)
 }
 
 
-
+JString ToString(char* n) {
+  return std::string(n);
+}
 } // jackal
