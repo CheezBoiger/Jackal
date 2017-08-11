@@ -35,6 +35,6 @@ typedef const char *jstring;
  #define JTEXT(text)   L ## text
 #else
  typedef char          tchar;
- #define JTEXT(text)   text;
+ #define JTEXT(text)   text
 #endif 
 } // jackal
