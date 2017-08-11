@@ -26,7 +26,7 @@ struct {
 TEST(QuaternionTesting, QuatTest)
 {
   void *s = &SimpleStruct;
-  jackal::PrintToConsole(JTEXT("struct size: ") + jackal::JStringUtils::ToString(sizeof(SimpleStruct)) + JTEXT("\n"));
+  jackal::PrintToConsole(JTEXT("struct size: ") + jackal::ToString(sizeof(SimpleStruct)) + JTEXT("\n"));
   jackal::Quat a(5.0f, 12.0f, 3.0f, 3.0f);
   jackal::Quat b;
 

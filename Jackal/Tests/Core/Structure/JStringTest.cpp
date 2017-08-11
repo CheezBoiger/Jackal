@@ -38,7 +38,7 @@ TEST(StructureTests, JStringTesting)
   jackal::Log::MessageToStdOutput(jackal::LOG_NORMAL,
     JTEXT("La rápida caja marrón salta sobre un perro perezoso."), false, JTEXT("Spanish"));
  
-  jackal::Log::MessageToStdOutput(jackal::LogVerbosity::LOG_NORMAL, jackal::JStringUtils::ToString(str.empty())); 
+  jackal::Log::MessageToStdOutput(jackal::LogVerbosity::LOG_NORMAL, jackal::ToString(str.empty())); 
 
   jackal::Message *message = jackal::Log::GetStoredMessage(jackal::LOG_NORMAL, 0);
 

@@ -25,7 +25,7 @@ TEST(MemoryTesting, AllocateMemory) {
   auto t = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 
   jackal::Log::MessageToStdOutput(jackal::LOG_NOTIFY, JTEXT("MemPool alloc time ") 
-    + jackal::JStringUtils::ToString(t) + JTEXT(" ns"));
+    + jackal::ToString(t) + JTEXT(" ns"));
 
   start = std::chrono::high_resolution_clock::now();
   long long *mptr = (long long *)std::malloc(sizeof(long long) * 2000);
@@ -33,9 +33,9 @@ TEST(MemoryTesting, AllocateMemory) {
 
   t = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
   jackal::Log::MessageToStdOutput(jackal::LOG_NOTIFY, JTEXT("Malloc alloc time ")
-    + jackal::JStringUtils::ToString(t) + JTEXT(" ns"));
+    + jackal::ToString(t) + JTEXT(" ns"));
   jackal::Log::MessageToStdOutput(jackal::LOG_NOTIFY, JTEXT("MemoryPool memory left: ")
-    + jackal::JStringUtils::ToString(pool.GetMemorySizeLeft() * sizeof(size_t))
+    + jackal::ToString(pool.GetMemorySizeLeft() * sizeof(size_t))
     + JTEXT(" bytes"));
 
   size_t allocSize = (pool.GetTotalMemoryPoolSize() * sizeof(size_t))
@@ -49,7 +49,7 @@ TEST(MemoryTesting, AllocateMemory) {
   EXPECT_EQ(pool.GetMemorySizeLeft(), pool.GetTotalMemoryPoolSize());
 
   jackal::Log::MessageToStdOutput(jackal::LOG_NOTIFY, JTEXT("MemoryPool memory left after clearing: ")
-    + jackal::JStringUtils::ToString(pool.GetMemorySizeLeft() * sizeof(size_t))
+    + jackal::ToString(pool.GetMemorySizeLeft() * sizeof(size_t))
     + JTEXT(" bytes"));
 }
 

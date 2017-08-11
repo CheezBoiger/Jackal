@@ -61,7 +61,7 @@ bool8 OpenGLShader::Compile(ShaderType type,
 
   if (!success) {
     glGetShaderInfoLog(handle, (GLsizei )log.size(), nullptr, log.data());
-    Log::MessageToStdOutput(LOG_ERROR, JStringUtils::ToString(log.data()));
+    Log::MessageToStdOutput(LOG_ERROR, ToString(log.data()));
     CleanUp();
     compiled = false;
     return false;
