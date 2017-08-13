@@ -364,7 +364,7 @@ enum ImageLayout {
 };
 
 
-enum SampleCount {
+enum SampleCount : uint8 {
   SAMPLE_COUNT_1_BIT,
   SAMPLE_COUNT_2_BIT,
   SAMPLE_COUNT_4_BIT,

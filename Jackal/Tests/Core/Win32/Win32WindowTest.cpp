@@ -129,7 +129,7 @@ TEST(Win32, Win32WindowTest)
   jackal::RenderTargetCreateInfoT ri;
   ri.Format = jackal::FORMAT_R32G32B32A32_SFLOAT;
   ri.HardwareMSAA = false;
-  ri.MSAA = 0;
+  ri.MSAA = jackal::SAMPLE_COUNT_1_BIT;
   ri.Width = 1920;
   ri.Height = 1080;
   jackal::OpenGLRenderTarget renderTarget;

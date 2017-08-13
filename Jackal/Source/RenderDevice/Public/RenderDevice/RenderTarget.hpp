@@ -10,11 +10,11 @@ namespace jackal {
 
 
 struct RenderTargetCreateInfoT {
-  int32   Width;
-  int32   Height;
-  FormatT Format;  
-  bool8   HardwareMSAA;
-  uint8_t MSAA;
+  int32       Width;
+  int32       Height;
+  FormatT     Format;  
+  bool8       HardwareMSAA;
+  SampleCount MSAA;
 };
 
 
