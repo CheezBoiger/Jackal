@@ -15,8 +15,11 @@ namespace jackal {
 
 class OpenGLRenderTarget : public RenderTarget {
 public:
+  OpenGLRenderTarget()
+    : mHandle(0) { }
 
   void Bake(RenderTargetCreateInfoT &information) override;
+  void CleanUp() override;
 
   GLuint Handle() const { return mHandle; }
 

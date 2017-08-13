@@ -13,7 +13,8 @@ public:
 
 
 
-
+  
   VkPipeline mPipeline;
+  VkPipelineLayout mLayout;
 };
 } // jackal

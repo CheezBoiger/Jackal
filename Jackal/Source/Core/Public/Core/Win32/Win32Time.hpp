@@ -9,9 +9,8 @@
 namespace jackal {
 
 
-class Win32Clock {
+class Win32Time {
 public:
   static SYSTEMTIME GetSystemTime();
-  
 };
 } // jackal

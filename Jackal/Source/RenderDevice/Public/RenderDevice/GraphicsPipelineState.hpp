@@ -7,6 +7,7 @@
 #include "Core/Structure/JString.hpp"
 
 #include "RenderDeviceTypes.hpp"
+#include "MaterialLayout.hpp"
 #include "RenderObject.hpp"
 
 namespace jackal {
@@ -46,6 +47,12 @@ typedef struct {
   FrontFaceT      FrontFace;
   CompareT        DepthTestCompare;
   TopologyT       Topology;
+
+  // This is the layout of the Graphics Pipeline shaders, in terms of how 
+  // samplers, uniforms, and data is laid out in shader code. Pipeline needs 
+  // reference to the material layout that defines how data given it will be
+  // used.
+  MaterialLayout* Layout;
   
   bool8           ZBufferEnable   : 1,
                   StencilEnable   : 1,

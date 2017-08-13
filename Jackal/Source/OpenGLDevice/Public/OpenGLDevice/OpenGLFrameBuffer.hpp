@@ -17,11 +17,7 @@ class OpenGLFrameBuffer : public FrameBuffer {
 public:
   
 
-  void StoreRenderTarget(RenderTarget *target, uint32 index) override;
-  RenderTarget *GetRenderTarget(uint32 index) override;
-  bool8 RemoveRenderTarget(uint32 index) override;
-
-  void Bake(RenderPass *renderpass) override;
+  void Bake(FrameBufferCreateInfoT& info) override;
 
   GLint Handle() const { return mHandle; }
 

@@ -7,20 +7,11 @@
 namespace jackal {
 
 
-void OpenGLUniformBuffer::Initialize(GraphicsPipelineState *pipe, uint32 bind, const char *name)
+void OpenGLUniformBuffer::Initialize(uint32 bind, const char *name)
 {
-  // Need to figure out a way to get this error more globally.
-  if (!pipe) { 
-    return; 
-  }
 
   mBinding = bind;
   mName = name;
-  // Reference the pipe.
-  OpenGLGraphicsPipelineState *oglPipeRef = 
-    static_cast<OpenGLGraphicsPipelineState *>(pipe);
-  mProgramRef = oglPipeRef->GetProgramId();
-
 
   // OpenGL Stuff.
   glGenBuffers(1, &ubo);

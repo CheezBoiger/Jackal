@@ -74,7 +74,7 @@ set(CORE_MATH
 
 # Platform Work.
 set(CORE_WIN32
-  ${CORE_PUBLIC_WIN32_DIR}/Win32Clock.hpp
+  ${CORE_PUBLIC_WIN32_DIR}/Win32Time.hpp
   ${CORE_PUBLIC_WIN32_DIR}/Win32Config.hpp
   ${CORE_PRIVATE_WIN32_DIR}/Win32File.cpp
   ${CORE_PUBLIC_WIN32_DIR}/Win32File.hpp
@@ -89,7 +89,7 @@ set(CORE_WIN32
   ${CORE_PUBLIC_WIN32_DIR}/Win32Window.hpp
   ${CORE_PUBLIC_WIN32_DIR}/Win32Mouse.hpp
   ${CORE_PRIVATE_WIN32_DIR}/Win32Mouse.cpp
-  ${CORE_PRIVATE_WIN32_DIR}/Win32Clock.cpp
+  ${CORE_PRIVATE_WIN32_DIR}/Win32Time.cpp
 )
 
 set(CORE_LINUX
@@ -116,7 +116,7 @@ set(CORE_APPLE
 )
 
 set(CORE_PLATFORM
-  ${CORE_PUBLIC_PLATFORM_DIR}/Clock.hpp
+  ${CORE_PUBLIC_PLATFORM_DIR}/Time.hpp
   ${CORE_PUBLIC_PLATFORM_DIR}/File.hpp
   ${CORE_PUBLIC_PLATFORM_DIR}/Filesystem.hpp
   ${CORE_PUBLIC_PLATFORM_DIR}/Hardware.hpp

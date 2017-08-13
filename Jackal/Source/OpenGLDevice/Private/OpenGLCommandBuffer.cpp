@@ -57,12 +57,14 @@ void OpenGLCommandBuffer::BindGraphicsPipelineState(GraphicsPipelineState *pipel
   auto execute = [=] (GraphicsPipelineState *pipe) -> void {
     OpenGLGraphicsPipelineState *oglPipe = 
       static_cast<OpenGLGraphicsPipelineState *>(pipe);  
+    OpenGLDevice* renderDevice = 
+      static_cast<OpenGLDevice* >(mOwner);
     
     // No need to update the pipeline, when it is already being used.
-    if (oglPipe == mRenderDevice->mCurrentGraphicsPipelineState) return;
+    if (oglPipe == renderDevice->mCurrentGraphicsPipelineState) return;
 
-    mRenderDevice->mCurrentGraphicsPipelineState = oglPipe;
-    mRenderDevice->mCurrentGraphicsPipelineState->UpdateOGLPipeline();
+    renderDevice->mCurrentGraphicsPipelineState = oglPipe;
+    renderDevice->mCurrentGraphicsPipelineState->UpdateOGLPipeline();
   };
   ++mNumRenderCalls;
   mCommandList.push_back([=] () -> void { execute(pipeline); });
@@ -72,16 +74,19 @@ void OpenGLCommandBuffer::BindGraphicsPipelineState(GraphicsPipelineState *pipel
 void OpenGLCommandBuffer::BindVertexBuffer(VertexBuffer *vb)
 {
   auto execute = [=] (VertexBuffer *vertexbuffer) -> void {
-    mRenderDevice->mCurrentVertexBuffer = 
+    OpenGLDevice* renderDevice =
+      static_cast<OpenGLDevice* >(mOwner);
+
+    renderDevice->mCurrentVertexBuffer = 
       static_cast<OpenGLVertexBuffer *>(vertexbuffer);
 
     // Null vertex buffer.
-    if (!mRenderDevice->mCurrentVertexBuffer) {
-      mRenderDevice->SubmitLastError(RENDER_ERROR_NULL_VERTEX_BUFFER);
+    if (!renderDevice->mCurrentVertexBuffer) {
+      renderDevice->SubmitLastError(RENDER_ERROR_NULL_VERTEX_BUFFER);
       return;
     }
 
-    glBindVertexArray(mRenderDevice->mCurrentVertexBuffer->vao);
+    glBindVertexArray(renderDevice->mCurrentVertexBuffer->vao);
     
   };
   ++mNumRenderCalls;
@@ -92,13 +97,15 @@ void OpenGLCommandBuffer::BindVertexBuffer(VertexBuffer *vb)
 void OpenGLCommandBuffer::DrawElements(uint32 count)
 {
   auto execute = [=] (uint32 c) -> void {
+    OpenGLDevice* renderDevice =
+      static_cast<OpenGLDevice* >(mOwner);
 
-    if (!mRenderDevice->mCurrentVertexBuffer) {
-      mRenderDevice->SubmitLastError(RENDER_ERROR_NULL_VERTEX_BUFFER);
+    if (!renderDevice->mCurrentVertexBuffer) {
+      renderDevice->SubmitLastError(RENDER_ERROR_NULL_VERTEX_BUFFER);
       return;
     }
     
-    glDrawElements(mRenderDevice->mCurrentGraphicsPipelineState->
+    glDrawElements(renderDevice->mCurrentGraphicsPipelineState->
       GetNativeTopology(), c, GL_UNSIGNED_INT, nullptr);
   };
   ++mNumDrawCalls;
@@ -109,11 +116,14 @@ void OpenGLCommandBuffer::DrawElements(uint32 count)
 void OpenGLCommandBuffer::Draw(uint32 count)
 {
   auto execute = [=] (uint32 c) -> void {
-    if (!mRenderDevice->mCurrentVertexBuffer) {
-      mRenderDevice->SubmitLastError(RENDER_ERROR_NULL_VERTEX_BUFFER);
+    OpenGLDevice* renderDevice =
+      static_cast<OpenGLDevice* >(mOwner);
+
+    if (!renderDevice->mCurrentVertexBuffer) {
+      renderDevice->SubmitLastError(RENDER_ERROR_NULL_VERTEX_BUFFER);
       return;
     }
-    glDrawArrays(mRenderDevice->mCurrentGraphicsPipelineState->
+    glDrawArrays(renderDevice->mCurrentGraphicsPipelineState->
       GetNativeTopology(), 0, c);
   };
   ++mNumDrawCalls;
@@ -124,8 +134,11 @@ void OpenGLCommandBuffer::Draw(uint32 count)
 void OpenGLCommandBuffer::SetViewPort(ViewPort *viewport)
 {
   auto execute = [=] (ViewPort *vp) -> void {
-    if (!mRenderDevice->mCurrentGraphicsPipelineState) {
-      mRenderDevice->SubmitLastError(RENDER_ERROR_NULL_GRAPHICS_PIPELINE_STATE);
+    OpenGLDevice* renderDevice =
+      static_cast<OpenGLDevice* >(mOwner);
+
+    if (!renderDevice->mCurrentGraphicsPipelineState) {
+      renderDevice->SubmitLastError(RENDER_ERROR_NULL_GRAPHICS_PIPELINE_STATE);
       return;
     }
     glViewport( 
@@ -143,8 +156,11 @@ void OpenGLCommandBuffer::SetViewPort(ViewPort *viewport)
 void OpenGLCommandBuffer::SetScissor(ScissorRect *scissor)
 {
   auto execute = [=] (ScissorRect *sr) -> void {
-    if (!mRenderDevice->mCurrentGraphicsPipelineState) {
-      mRenderDevice->SubmitLastError(RENDER_ERROR_NULL_GRAPHICS_PIPELINE_STATE);
+    OpenGLDevice* renderDevice =
+      static_cast<OpenGLDevice* >(mOwner);
+
+    if (!renderDevice->mCurrentGraphicsPipelineState) {
+      renderDevice->SubmitLastError(RENDER_ERROR_NULL_GRAPHICS_PIPELINE_STATE);
       return;
     }
     glScissor(sr->Offset.x,
@@ -161,11 +177,14 @@ void OpenGLCommandBuffer::SetScissor(ScissorRect *scissor)
 void OpenGLCommandBuffer::DrawInstanced(uint32 count, uint32 instances)
 {
   auto execute = [=] (uint32 c, uint32 i) -> void {
-    if (!mRenderDevice->mCurrentGraphicsPipelineState) {
-      mRenderDevice->SubmitLastError(RENDER_ERROR_NULL_GRAPHICS_PIPELINE_STATE);
+    OpenGLDevice* renderDevice =
+      static_cast<OpenGLDevice* >(mOwner);
+
+    if (!renderDevice->mCurrentGraphicsPipelineState) {
+      renderDevice->SubmitLastError(RENDER_ERROR_NULL_GRAPHICS_PIPELINE_STATE);
       return;
     }
-    glDrawElementsInstanced(mRenderDevice->mCurrentGraphicsPipelineState->GetNativeTopology(),
+    glDrawElementsInstanced(renderDevice->mCurrentGraphicsPipelineState->GetNativeTopology(),
       c, GL_UNSIGNED_INT, nullptr, i);
   };
 

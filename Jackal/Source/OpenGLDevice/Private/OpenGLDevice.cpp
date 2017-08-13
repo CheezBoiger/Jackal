@@ -14,6 +14,7 @@
 #include "OpenGLDevice/OpenGLShader.hpp"
 
 #include "Core/Logging/Debugging.hpp"
+#include "Core/Memory/MemoryPool.hpp"
 
 
 namespace jackal {
@@ -44,6 +45,7 @@ bool8 OpenGLDevice::InitOpenGL()
 UniformBuffer *OpenGLDevice::CreateUniformBuffer()
 {
   OpenGLUniformBuffer *ubo = new OpenGLUniformBuffer();
+  ubo->SetOwner(this);
 
   OGLUniformBuffers += 1;
   return ubo;
@@ -66,7 +68,7 @@ void OpenGLDevice::DestroyUniformBuffer(UniformBuffer *ubo)
 GraphicsPipelineState *OpenGLDevice::CreateGraphicsPipelineState()
 {
   OpenGLGraphicsPipelineState *pipe = new OpenGLGraphicsPipelineState();
-
+  pipe->SetOwner(this);
   OGLGraphicsPipelineStates += 1;
   return pipe;
 }
@@ -119,7 +121,8 @@ void OpenGLDevice::CleanUp()
 
 CommandBuffer *OpenGLDevice::CreateCommandBuffer()
 {
-  OpenGLCommandBuffer *cmdBuffer = new OpenGLCommandBuffer(this);
+  OpenGLCommandBuffer *cmdBuffer = new OpenGLCommandBuffer();
+  cmdBuffer->SetOwner(this);
   OGLCommandBuffers += 1;
   return cmdBuffer;
 }

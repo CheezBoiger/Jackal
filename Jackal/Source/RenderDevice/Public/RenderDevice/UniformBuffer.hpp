@@ -71,7 +71,7 @@ public:
   // file, along with the graphics pipeline state that it resides in. Be Sure to 
   // set your variables before initializing, otherwise this buffer won't know the 
   // size of the data to store!
-  virtual void Initialize(GraphicsPipelineState *pipe, uint32 bind, const char *name) = 0;
+  virtual void Initialize(uint32 bind, const char *name) = 0;
 
   // Get the total size of the uniform buffer object in memory.
   virtual uint32 GetTotalSize() { return mMemSize; }

@@ -8,6 +8,9 @@
 namespace jackal {
 
 
+class RenderDevice;
+
+
 // Render unique id.
 typedef uint64 ruid;
 
@@ -17,14 +20,18 @@ class RenderObject {
 protected:
   RenderObject() 
     : uid (++numRenderObjects) 
+    , mOwner(nullptr)
   { }
 
 public:
   virtual ~RenderObject() { }
 
   ruid GetUid() { return uid; }
+  RenderDevice* Owner() { return mOwner; }
+  void SetOwner(RenderDevice* device) { mOwner = device; }
 
 protected:
   const ruid    uid;
+  RenderDevice* mOwner;
 };
 } // jackal

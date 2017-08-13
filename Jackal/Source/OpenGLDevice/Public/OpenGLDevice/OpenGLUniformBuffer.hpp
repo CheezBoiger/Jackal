@@ -1,4 +1,5 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
+#pragma once
 
 #include "Core/Platform/JTypes.hpp"
 #include "Core/Platform/Api.hpp"
@@ -32,11 +33,10 @@ public:
   void SetFloat(const char *name, real32 *f, uint32 count, bool8 dynamic = false) override;
   void SetDouble(const char *name, real64 *d, uint32 count, bool8 dynamic = false) override;
 
-  void Initialize(GraphicsPipelineState *pipe, uint32 bind, const char *name) override;
+  void Initialize(uint32 bind, const char *name) override;
   void Update(uint32 *offsets = nullptr) override;
   void CleanUp() override;
 
-  GLuint GetProgramRef() const { return mProgramRef; }
   GLuint Handle() const { return ubo; }
 
 private:
@@ -58,9 +58,6 @@ private:
     void *        data; // the actual data. 
     bool8         dynamic; // whether the data is dynamic.
   };  
-
-  // Shader Program reference.
-  GLuint mProgramRef;
 
   // OpenGL native buffer object handle.
   GLuint ubo;

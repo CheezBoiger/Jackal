@@ -11,14 +11,16 @@
 #include "OpenGLDevice/OpenGLShader.hpp"
 #include "OpenGLDevice/OpenGLCommandBuffer.hpp"
 #include "OpenGLDevice/OpenGLSampler.hpp"
+#include "OpenGLDevice/OpenGLRenderTarget.hpp"
 #include <gtest/gtest.h>
-
+#include "Core/Platform/Time.hpp"
 
 
 TEST(Win32, Win32WindowTest)
 {
 #if JACKAL_PLATFORM == JACKAL_WINDOWS
   jackal::Win32OpenGL::Initialize();
+  jackal::Time::StartTime();
   jackal::int32 width = 1440;
   jackal::int32 height = 800;
  
@@ -38,6 +40,24 @@ TEST(Win32, Win32WindowTest)
   // This device is used to render. Will be used by the 
   // renderer.
   jackal::OpenGLDevice device;
+
+  jackal::UniformBuffer *buffer = device.CreateUniformBuffer();
+  jackal::Matrix4 model[5];
+  model[4][0][0] = 4.0f;
+  jackal::Matrix4 view;
+  jackal::Matrix4 projection;
+  jackal::Vector3 camPosition;
+  buffer->SetDataType(jackal::DATA_DYNAMIC);
+
+  // Needs to be initialized in the same order as our ubo layout in glsl.
+  buffer->SetMat4("model", model, 5);
+  buffer->SetMat4("view", &view);
+  buffer->SetMat4("projection", &projection);
+  buffer->SetVec3("camPosition", &camPosition);
+
+  // initialize ubo here. You need an active pipeline state in order to
+  // initialize a uniform buffer.
+  buffer->Initialize(0, "UBO");
 
   jackal::NativeString fSource = jackal::Shader::ParseFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.frag");
   jackal::NativeString vSource = jackal::Shader::ParseFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.vert");
@@ -66,27 +86,9 @@ TEST(Win32, Win32WindowTest)
   information.HullShader = nullptr;
   information.DomainShader = nullptr;
   information.GeometryShader = nullptr;
+  information.Layout = nullptr;
 
   BlinnPhongPipe->Bake(information);
-
-
-  jackal::UniformBuffer *buffer = device.CreateUniformBuffer();
-  jackal::Matrix4 model[5];
-  model[4][0][0] = 4.0f;
-  jackal::Matrix4 view;
-  jackal::Matrix4 projection;
-  jackal::Vector3 camPosition;
-  buffer->SetDataType(jackal::DATA_DYNAMIC);
-
-  // Needs to be initialized in the same order as our ubo layout in glsl.
-  buffer->SetMat4("model",       model, 5);
-  buffer->SetMat4("view",        &view);
-  buffer->SetMat4("projection",  &projection);
-  buffer->SetVec3("camPosition", &camPosition);
-
-  // initialize ubo here. You need an active pipeline state in order to
-  // initialize a uniform buffer.
-  buffer->Initialize(BlinnPhongPipe, 0, "UBO");
 
   jackal::uint32 offset = sizeof(jackal::Matrix4) * 4;
   buffer->Update(&offset);
@@ -124,14 +126,22 @@ TEST(Win32, Win32WindowTest)
     cmd->ClearColor(jackal::Colorf(0.1f, 0.1f, 0.1f, 1.0f));
   cmd->EndRecord();
 
-  //ASSERT_EQ(window->width, width);
+  jackal::RenderTargetCreateInfoT ri;
+  ri.Format = jackal::FORMAT_R32G32B32A32_SFLOAT;
+  ri.HardwareMSAA = false;
+  ri.MSAA = 0;
+  ri.Width = 1920;
+  ri.Height = 1080;
+  jackal::OpenGLRenderTarget renderTarget;
+  renderTarget.Bake(ri);
+  ASSERT_EQ(window->width, width);
   //ASSERT_EQ(window->height, height);
 
   jackal::PrintToConsole(JTEXT("Press close to continue through.\n"));
 
   // Game loop.
   while (!window->ShouldClose()) {
-
+    jackal::Time::UpdateDelta();
     // VR Demands two texture quads for each eye. In doing so,
     // we can either create one window, and render onto two quads
     // with warped texture stereoscopic view, or two windows using
@@ -143,7 +153,6 @@ TEST(Win32, Win32WindowTest)
     jackal::Win32OpenGL::MakeContextCurrent(window2);    
     device.SubmitCommandBuffers(cmd, 1);
     jackal::Win32OpenGL::SwapBuffers(window2);
-
     jackal::Win32Window::PollEvents();
   }
 

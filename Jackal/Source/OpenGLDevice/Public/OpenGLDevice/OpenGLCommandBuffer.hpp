@@ -21,8 +21,7 @@ typedef std::function<void()> OGLCommandFunction;
 // be easily monitored this way however.
 class OpenGLCommandBuffer : public CommandBuffer {
 public:
-  OpenGLCommandBuffer(OpenGLDevice *device) 
-    : mRenderDevice(device) { }
+  OpenGLCommandBuffer() { }
   
   void Record() override;
   void EndRecord() override;
@@ -45,11 +44,7 @@ public:
 
   std::list<OGLCommandFunction> &GetNativeCommandList() { return mCommandList; }
 
-  RenderDevice *GetRenderDevice() override { return mRenderDevice; }
-
 private:
-
-  OpenGLDevice                           *mRenderDevice;
   std::list<OGLCommandFunction>           mCommandList;
 };
 } // jackal

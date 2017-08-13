@@ -13,7 +13,7 @@
 #include "Texture3D.hpp"
 
 #include "TextureCubeMap.hpp"
-#include "UniformBuffer.hpp"
+#include "RenderObject.hpp"
 
 
 namespace jackal {
@@ -22,12 +22,13 @@ namespace jackal {
 class Texture2D;
 class Texture3D;
 class CubeMap;
+class UniformBuffer;
 
 // Material Object, which specifies descriptor sets for 
 // some given context on the rendering pipeline. We need
 // to set our material inside this layout structure in order to
 // to render textures, or update uniform layouts.
-class MaterialLayout {
+class MaterialLayout : public RenderObject {
 public:
   virtual ~MaterialLayout() { }
 
@@ -38,9 +39,11 @@ public:
   virtual void BindTexture2D(Sampler *sampler, Texture2D *texture, uint32 binding) = 0;
   virtual void BindTexture3D(Sampler *sampler, Texture3D *texture, uint32 binding) = 0;
   virtual void BindCubeMap(Sampler *sampler, CubeMap *cube, uint32 binding) = 0;
-  virtual void BindUniformBuffer(UniformBuffer *buffer, uint32 binding) = 0;
+  virtual void BindUniformBuffer(UniformBuffer* buffer, uint32 binding) = 0;
 
+  // Inialize our binding points into the pipeline.
   virtual void Initialize() = 0;
+  virtual void Update() = 0;
   virtual void CleanUp() = 0;
 };
 } // jackal

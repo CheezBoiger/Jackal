@@ -4,6 +4,7 @@
 #include "ViewPort.hpp"
 
 #include "RenderDeviceTypes.hpp"
+#include "RenderObject.hpp"
 #include "Core/Math/Vector4.hpp"
 
 
@@ -21,7 +22,7 @@ class MaterialLayout;
 
 // CommandBuffer is an object that records all commands for use in rendering.
 // Once done recording, it will be sent over to the GPU for rendering.
-class CommandBuffer {
+class CommandBuffer : public RenderObject {
 public:
   CommandBuffer()
     : mNumRenderCalls(0)
@@ -43,6 +44,11 @@ public:
   virtual void BeginRenderPass(RenderPass *pass) = 0;
   virtual void BindGraphicsPipelineState(GraphicsPipelineState *pipeline) = 0;
   virtual void BindComputePipelineState(ComputePipelineState *pipeline) = 0;
+
+  // Even if we already bound the graphics pipeline state to this material layout,
+  // We still call this function in order to bind and update the current state of the
+  // Material data inside. If not, we stick with the same data as previous, so be sure
+  // to call the material layout for each mesh call.
   virtual void BindMaterialLayout(MaterialLayout *layout, 
     uint32 dynamicOffsetCount = 0, const uint32 *dynamicOffsets = nullptr) = 0;
   virtual void SetViewPort(ViewPort *viewport) = 0;
@@ -52,8 +58,6 @@ public:
   bool8         Recording() const { return mRecording; }
   uint32        NumberOfDrawCalls() const { return mNumDrawCalls; }
   uint32        NumberOfRenderCalls() const { return mNumRenderCalls; }
-  
-  virtual RenderDevice *GetRenderDevice() = 0;  
 
 protected:
   bool8         mRecording;
