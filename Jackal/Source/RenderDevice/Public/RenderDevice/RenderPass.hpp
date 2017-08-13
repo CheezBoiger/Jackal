@@ -36,7 +36,7 @@ struct RenderPassAttachmentReference {
 // Subpasses act as references that are provided by the previous pass, should
 // any dependency be needed, such as post processing and whatnot.
 struct SubPass {
-  PipelineBindPoint               PipelineBindPoint;
+  PipelineBindPoint               BindPoint;
   uint32                          ColorAttachmentCount;
   RenderPassAttachmentReference*  PColorAttachments;
   uint32                          DepthStencilAttachmentCount;
