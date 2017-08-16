@@ -7,17 +7,20 @@ set(JACKAL_DX12_RENDEV_NAME "Dx12Device")
 set(DX12_PUBLIC_DIR         Public/Dx3D12Device)
 set(DX12_PRIVATE_DIR        Private)
 
+include_directories(
+  ${JACKAL_INCLUDE_DIR}
+  ${DX12_PUBLIC_DIR}
+)
 
 set(DX12_FILES
   ${DX12_PUBLIC_DIR}/Dx12Device.hpp
-
+  ${DX12_PUBLIC_DIR}/Dx12Config.hpp
 
 
 
 
   ${DX12_PRIVATE_DIR}/Dx12Device.cpp
 )
-
 
 add_library(${JACKAL_DX12_RENDEV_NAME} STATIC
   ${DX12_FILES}

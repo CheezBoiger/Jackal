@@ -18,7 +18,16 @@ void OpenGLTexture::Load(TextureInfoT &info, TextureHandle *texture)
   glGenTextures(1, &handle);
 
   GLNativeTextureFormat dF = OpenGLNative::GetNativeTextureFormat(info.Format);
-  glTexImage2D(GL_TEXTURE_2D, 0, dF.internalFormat, texture->width, 
-    texture->height, texture->channels, dF.format, dF.dataType, texture->data);
+  glTexImage1D(GL_TEXTURE_1D, 0, dF.internalFormat, texture->width,
+    0, dF.format, dF.dataType, texture->data);
+}
+
+
+void OpenGLTexture::CleanUp()
+{
+  if (handle) {
+    glDeleteTextures(1, &handle);
+    handle = 0;
+  }
 }
 } // jackal

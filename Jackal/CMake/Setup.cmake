@@ -11,6 +11,9 @@ add_subdirectory(Input)
 
 if (WIN32)
   add_subdirectory(Dx3D12Device)
+  add_subdirectory(Dx3D11Device)
+else()
+
 endif()
 
 add_subdirectory(Renderer)

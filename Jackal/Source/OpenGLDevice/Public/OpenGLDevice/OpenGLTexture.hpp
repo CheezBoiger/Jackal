@@ -13,6 +13,7 @@ class OpenGLTexture : public Texture {
 public:
   OpenGLTexture();
   void Load(TextureInfoT &info, TextureHandle *texture) override;
+  void CleanUp() override;
 
 
 private:
