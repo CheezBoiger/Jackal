@@ -26,32 +26,12 @@ Vector3 Vector3::operator-(const Vector3 &v) const
 }
 
 
-Vector3 Vector3::operator*(const Vector3 &v) const 
-{
-  return Vector3(
-    x * v.x,
-    y * v.y,
-    z * v.z
-  );
-}
-
-
 Vector3 Vector3::operator*(const real32 scale) const 
 {
   return Vector3(
     x * scale,
     y * scale,
     z * scale
-  );
-}
-
-
-Vector3 Vector3::operator/(const Vector3 &v) const 
-{
-  return Vector3(
-    x / v.x,
-    y / v.y,
-    z / v.z
   );
 }
 
@@ -82,27 +62,11 @@ void Vector3::operator-=(const Vector3 &v)
 }
 
 
-void Vector3::operator*=(const Vector3 &v)
-{
-  x *= v.x;
-  y *= v.y;
-  z *= v.z;
-}
-
-
 void Vector3::operator*=(const real32 scale)
 {
   x *= scale;
   y *= scale;
   z *= scale;
-}
-
-
-void Vector3::operator/=(const Vector3 &v)
-{
-  x /= v.x;
-  y /= v.y;
-  z /= v.z;
 }
 
 

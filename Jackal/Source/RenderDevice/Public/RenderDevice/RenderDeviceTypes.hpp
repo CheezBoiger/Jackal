@@ -365,19 +365,27 @@ enum ImageLayout {
 
 
 enum SampleCount : uint8 {
-  SAMPLE_COUNT_1_BIT,
-  SAMPLE_COUNT_2_BIT,
-  SAMPLE_COUNT_4_BIT,
-  SAMPLE_COUNT_8_BIT,
-  SAMPLE_COUNT_16_BIT,
-  SAMPLE_COUNT_32_BIT,
-  SAMPLE_COUNT_64_BIT
+  SAMPLE_COUNT_1_BIT  = (1 << 0),
+  SAMPLE_COUNT_2_BIT  = (1 << 1),
+  SAMPLE_COUNT_4_BIT  = (1 << 2),
+  SAMPLE_COUNT_8_BIT  = (1 << 3),
+  SAMPLE_COUNT_16_BIT = (1 << 4),
+  SAMPLE_COUNT_32_BIT = (1 << 5),
+  SAMPLE_COUNT_64_BIT = (1 << 6)
+};
+
+
+enum VertexInputRate {
+  VERTEX_INPUT_RATE_VERTEX,
+  VERTEX_INPUT_RATE_INSTANCE
 };
 
 
 struct TextureInfoT {
-  bool8         Mipmapped;
   uint32        Mipmaps;
   FormatT       Format;
+  bool8         Mipmapped;
+  bool8         Multisampled;
+  SampleCount   Samples;
 };
 } // jackal

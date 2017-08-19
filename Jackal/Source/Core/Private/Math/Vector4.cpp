@@ -28,17 +28,6 @@ Vector4 Vector4::operator-(const Vector4 &v) const
 }
 
 
-Vector4 Vector4::operator*(const Vector4 &v) const 
-{
-  return Vector4(
-    x * v.x,
-    y * v.y,
-    z * v.z,
-    w * v.w
-  );
-}
-
-
 Vector4 Vector4::operator*(const real32 scale) const 
 {
   return Vector4(
@@ -46,17 +35,6 @@ Vector4 Vector4::operator*(const real32 scale) const
     y * scale,
     z * scale,
     w * scale
-  );
-}
-
-
-Vector4 Vector4::operator/(const Vector4 &v) const 
-{
-  return Vector4(
-    x / v.x,
-    y / v.y,
-    z / v.z,
-    w / v.w
   );
 }
 
@@ -90,30 +68,12 @@ void Vector4::operator-=(const Vector4 &v)
 }
 
 
-void Vector4::operator*=(const Vector4 &v)
-{
-  x *= v.x;
-  y *= v.y;
-  z *= v.z;
-  w *= v.w;
-}
-
-
 void Vector4::operator*=(const real32 scale)
 {
   x *= scale;
   y *= scale;
   z *= scale;
   w *= scale;
-}
-
-
-void Vector4::operator/=(const Vector4 &v)
-{
-  x /= v.x;
-  y /= v.y;
-  z /= v.z;
-  w /= v.w;
 }
 
 

@@ -50,5 +50,6 @@ private:
 
   // Window surface for vulkan to render onto.
   VkSurfaceKHR      mSurface;
+  VkCommandPool     mCommandPool;
 };
 } // jackal

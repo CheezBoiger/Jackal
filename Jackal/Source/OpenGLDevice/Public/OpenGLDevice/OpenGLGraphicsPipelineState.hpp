@@ -44,7 +44,7 @@ private:
   // TODO(): Work on this later. Needs a definition.
   void RegisterNativeError();
   void CopyPipelineInfo(const GraphicsPipelineInfoT *info);
-  void SetUpShaderPipeline();
+  void SetUpShaderPipeline(const GraphicsPipelineInfoT& info);
 
   // Program id of this pipeline state object.
   GLuint mProgramId;

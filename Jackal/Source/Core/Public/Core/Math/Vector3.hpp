@@ -41,18 +41,10 @@ struct Vector3 {
   // Subtracts this vector to v, and returns a new
   // 3 component vector.
   Vector3 operator-(const Vector3 &v) const;
-  
-  // Multiplies this vector to v, and returns a new
-  // 3 component vector.
-  Vector3 operator*(const Vector3 &v) const;
 
   // Multiplies this vector to a scaler value, and 
   // returns a new 3 component vector.
   Vector3 operator*(const real32 scale) const;
-
-  // Performs division of this vector with vector v,
-  // and returns a resulting 3 component vector.
-  Vector3 operator/(const Vector3 &v) const;
 
   // Vector division. Divides this vector by the scaler
   // value, and returns a new, fresh copy of a 3-component 
@@ -69,20 +61,10 @@ struct Vector3 {
   // modify this vector.
   void operator-=(const Vector3 &v);
 
-  // Multiply a 3-component vector v into this vector.
-  // This will not create a new vector, it will instead
-  // modify this vector.
-  void operator*=(const Vector3 &v);
-
   // Multiply a scaler value into this vector.
   // This will not create a new vector, it will instead
   // modify this vector.
   void operator*=(const real32 scale);
-
-  // Divide a 3-component vector v into this vector.
-  // This will not create a new vector, it will instead
-  // modify this vector.
-  void operator/=(const Vector3 &v);
 
   // Divides this vector's 3 components with the provided
   // scaler value. Modifies this vector object.

@@ -7,11 +7,11 @@
 namespace jackal {
 
 
+// OpenGL Vertex Buffer object.
 class OpenGLVertexBuffer : public VertexBuffer {
 public:
   OpenGLVertexBuffer()
-    : vao(0)
-    , vbo(0)
+    : vbo(0)
     , ibo(0) { }
 
   void Initialize(const Vertex *data, const size_t size, DataT type,
@@ -19,10 +19,6 @@ public:
 
 
   void CleanUp() override;
-
-  // We use a Vertex Array Object to better handle overhead when rendering
-  // vertices onto the screen.
-  GLuint vao;
   
   // Vertex Buffer Object.
   GLuint vbo;

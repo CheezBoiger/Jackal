@@ -63,7 +63,7 @@ void OpenGLGraphicsPipelineState::Bake(const
   GraphicsPipelineInfoT &info)
 {
   CopyPipelineInfo(&info);
-  SetUpShaderPipeline();
+  SetUpShaderPipeline(info);
   mNativeTopology = GetOpenGLTopology(mPipelineInfo.Topology);
 }
 
@@ -162,24 +162,24 @@ void OpenGLGraphicsPipelineState::UpdateOGLPipeline()
 }
 
 
-void OpenGLGraphicsPipelineState::SetUpShaderPipeline()
+void OpenGLGraphicsPipelineState::SetUpShaderPipeline(const GraphicsPipelineInfoT& info)
 {
   if (mProgramId) {
     glDeleteProgram(mProgramId);
     mProgramId = glCreateProgram();
   }
 
-  if (!mPipelineInfo.VertexShader) {
+  if (!info.VertexShader) {
     mLastError = RENDER_ERROR_PIPELINE_NULL_VERTEX_SHADER;
     return;
   }
 
-  if (!mPipelineInfo.PixelShader) {
+  if (!info.PixelShader) {
     mLastError = RENDER_ERROR_PIPELINE_NULL_PIXEL_SHADER;
     return;
   }
 
-  OpenGLShader *shader = static_cast<OpenGLShader *>(mPipelineInfo.VertexShader);
+  OpenGLShader *shader = static_cast<OpenGLShader *>(info.VertexShader);
   if (shader->Compiled()) {
     glAttachShader(mProgramId, shader->GetHandle());
   } else {
@@ -187,7 +187,7 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline()
     return;
   }
 
-  shader = static_cast<OpenGLShader *>(mPipelineInfo.PixelShader);
+  shader = static_cast<OpenGLShader *>(info.PixelShader);
   if (shader->Compiled()) {
     glAttachShader(mProgramId, shader->GetHandle());
   } else {
@@ -195,8 +195,8 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline()
     return;
   }
 
-  if (mPipelineInfo.HullShader) {
-    shader = static_cast<OpenGLShader *>(mPipelineInfo.HullShader);
+  if (info.HullShader) {
+    shader = static_cast<OpenGLShader *>(info.HullShader);
     if (shader->Compiled()) {
       glAttachShader(mProgramId, shader->GetHandle());
     } else {
@@ -205,8 +205,8 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline()
     }
   }
 
-  if (mPipelineInfo.DomainShader) {
-    shader = static_cast<OpenGLShader *>(mPipelineInfo.DomainShader);
+  if (info.DomainShader) {
+    shader = static_cast<OpenGLShader *>(info.DomainShader);
     if (shader->Compiled()) {
       glAttachShader(mProgramId, shader->GetHandle());
     } else {
@@ -215,8 +215,8 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline()
     }
   }
 
-  if (mPipelineInfo.GeometryShader) {
-    shader = static_cast<OpenGLShader *>(mPipelineInfo.GeometryShader);
+  if (info.GeometryShader) {
+    shader = static_cast<OpenGLShader *>(info.GeometryShader);
     if (shader->Compiled()) {
       glAttachShader(mProgramId, shader->GetHandle());
     } else {
@@ -256,12 +256,30 @@ void OpenGLGraphicsPipelineState::CopyPipelineInfo(const GraphicsPipelineInfoT *
   CHANGE_PIPELINE(mPipelineInfo.ZBufferEnable, info->ZBufferEnable);
   CHANGE_PIPELINE(mPipelineInfo.StencilEnable, info->StencilEnable);
   CHANGE_PIPELINE(mPipelineInfo.Topology, info->Topology);
+
+  // TODO(): Need to update the vertex attributes in order for this opengl pipeline
+  // to know what that is.
+  if (!info->VertexBindingInfo.VertexAttributesCount) return;
+
+  VertexAttributeT* attributes = info->VertexBindingInfo.VertexAttribute;
+  if (mPipelineInfo.VertexBindingInfo.VertexAttribute) {
+    delete[] mPipelineInfo.VertexBindingInfo.VertexAttribute;
+  }
+
+  mPipelineInfo.VertexBindingInfo.VertexAttributesCount = info->VertexBindingInfo.VertexAttributesCount;
   
-  CHANGE_PIPELINE(mPipelineInfo.VertexShader, info->VertexShader);
-  CHANGE_PIPELINE(mPipelineInfo.PixelShader, info->PixelShader);
-  CHANGE_PIPELINE(mPipelineInfo.HullShader, info->HullShader);
-  CHANGE_PIPELINE(mPipelineInfo.DomainShader, info->DomainShader);
-  CHANGE_PIPELINE(mPipelineInfo.GeometryShader, info->GeometryShader);
+  mPipelineInfo.VertexBindingInfo.VertexAttribute = 
+    new VertexAttributeT[mPipelineInfo.VertexBindingInfo.VertexAttributesCount];
+
+  // Copy values into this pipeline info.
+  for (uint32 i = 0; i < info->VertexBindingInfo.VertexAttributesCount; ++i) {
+    VertexAttributeT& attribute = attributes[i];
+    VertexAttributeT& copyAttrib = mPipelineInfo.VertexBindingInfo.VertexAttribute[i];
+    copyAttrib.Binding = attribute.Binding;
+    copyAttrib.Format = attribute.Format;
+    copyAttrib.Location = attribute.Location;
+    copyAttrib.Offset = attribute.Offset;
+  }
 }
 
 
@@ -270,6 +288,10 @@ void OpenGLGraphicsPipelineState::CleanUp()
   if (mProgramId) {
     glDeleteProgram(mProgramId);
     mProgramId = 0;
+  }
+
+  if (mPipelineInfo.VertexBindingInfo.VertexAttributesCount) { 
+    delete[] mPipelineInfo.VertexBindingInfo.VertexAttribute;
   }
 }
 

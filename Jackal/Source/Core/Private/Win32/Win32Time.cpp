@@ -31,7 +31,7 @@ real64 Time::Current()
 void Time::StartTime()
 {
   LARGE_INTEGER li;
-  QueryPerformanceCounter(&li);
+  QueryPerformanceFrequency(&li);
   Frequency = real64(li.QuadPart) / 1000.0;
   QueryPerformanceCounter(&li);
   CStart = li.QuadPart;

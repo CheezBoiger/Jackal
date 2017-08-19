@@ -3,7 +3,7 @@ project("Dx12RenderDevice")
 
 
 
-set(JACKAL_DX12_RENDEV_NAME "Dx12Device")
+set(JACKAL_DX12_RENDEV_NAME "Dx3D12Device")
 set(DX12_PUBLIC_DIR         Public/Dx3D12Device)
 set(DX12_PRIVATE_DIR        Private)
 

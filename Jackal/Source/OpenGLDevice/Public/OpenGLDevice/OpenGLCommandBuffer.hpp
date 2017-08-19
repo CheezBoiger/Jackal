@@ -41,6 +41,7 @@ public:
   void SetViewPort(ViewPort *viewport) override;  
   void SetScissor(ScissorRect *scissor) override;
   void SetDispatchCompute(uint32 x, uint32 y, uint32 z) override;
+  void SetDispatchIndirect(uint32 x, uint32 y, uint32 z) override;
 
   std::list<OGLCommandFunction> &GetNativeCommandList() { return mCommandList; }
 

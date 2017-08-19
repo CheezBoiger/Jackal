@@ -45,18 +45,10 @@ struct Vector4 {
   // Subtracts this vector to v, and returns a new
   // 4 component vector.
   Vector4 operator-(const Vector4 &v) const;
-  
-  // Multiplies this vector to v, and returns a new
-  // 4 component vector.
-  Vector4 operator*(const Vector4 &v) const;
 
   // Multiplies this vector to a scaler value, and 
   // returns a new 4 component vector.
   Vector4 operator*(const real32 scale) const;
-
-  // Performs division of this vector with vector v,
-  // and returns a resulting 4 component vector.
-  Vector4 operator/(const Vector4 &v) const;
 
   // Vector division. Divides this vector by the scaler
   // value, and returns a new, fresh copy of a 4-component 
@@ -73,20 +65,10 @@ struct Vector4 {
   // this vector.
   void operator-=(const Vector4 &v);
 
-  // Multiply values of v into this vector. This will not
-  // create a new vector object, it will instead modify
-  // this vector.
-  void operator*=(const Vector4 &v);
-
   // Multiply a scaler value into this vector. Thise will 
   // not create a new vector object, it will instead modify
   // this vector.
   void operator*=(const real32 scale);
-
-  // Divide values of v into this vector. This will not 
-  // create a new vector object, it will instead modify 
-  // this vector.
-  void operator/=(const Vector4 &v);
 
   // Divides this vector's 4 components with the provided
   // scaler value. Modifies this vector object.

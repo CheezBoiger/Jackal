@@ -88,6 +88,11 @@ TEST(Win32, Win32WindowTest)
   information.GeometryShader = nullptr;
   information.Layout = nullptr;
 
+  information.VertexBindingInfo.VertexAttribute = nullptr;
+  information.VertexBindingInfo.VertexAttributesCount = 0;
+  information.VertexBindingInfo.Binding = 0;
+  information.VertexBindingInfo.InputRate;
+
   BlinnPhongPipe->Bake(information);
 
   jackal::uint32 offset = sizeof(jackal::Matrix4) * 4;
@@ -154,6 +159,7 @@ TEST(Win32, Win32WindowTest)
     device.SubmitCommandBuffers(cmd, 1);
     jackal::Win32OpenGL::SwapBuffers(window2);
     jackal::Win32Window::PollEvents();
+    std::cout << "Time: " << jackal::Time::Current() << " ms\r";
   }
 
   device.DestroyCommandBuffer(cmd);

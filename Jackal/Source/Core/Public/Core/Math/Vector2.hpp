@@ -25,17 +25,10 @@ struct Vector2 {
   // 2 component vector.
   Vector2 operator-(const Vector2 &v) const;
 
-  // Multiplies this vector to v, and returns a new
-  // 2 component vector.
-  Vector2 operator*(const Vector2 &v) const;
-
   // Multiplies this vector to a scaler value, and 
   // returns a new 2 component vector.
   Vector2 operator*(const real32 scale) const;
 
-  // Performs division of this vector with vector v,
-  // and returns a resulting 2 component vector.
-  Vector2 operator/(const Vector2 &v) const;
 
   // Vector division. Divides this vector by the scaler
   // value, and returns a new, fresh copy of a 2-component 
@@ -55,20 +48,10 @@ struct Vector2 {
   // this vector instead.
   void operator-=(const Vector2 &v);
 
-  // Multiply a 2-component vector v into this vector.
-  // It will not create a new vector, it will modify
-  // this vector instead.
-  void operator*=(const Vector2 &v);
-
   // Multiply a scaler value into this vector.
   // It will not create a new vector, it will modify 
   // this vector instead.
   void operator*=(const real32 scale);
-  
-  // Divide a 2-component vector v into this vector.
-  // It will not create a new vector, it will modify
-  // this vector instead.
-  void operator/=(const Vector2 &v);
 
   // Divides this vector's 2 components with the provided
   // scaler value. Modifies this vector object.

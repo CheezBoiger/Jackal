@@ -15,6 +15,21 @@ namespace jackal {
 
 class Shader;
 
+struct VertexAttributeT {
+  uint32  Binding;
+  uint32  Location;
+  FormatT Format;
+  uint32  Offset;
+};
+
+struct VertexBindingInfoT {
+  uint32            Binding;
+  uint32            Stride;
+  VertexInputRate   InputRate;
+  uint32            VertexAttributesCount;
+  VertexAttributeT* VertexAttribute;
+};
+
 // Graphics Pipeline information. This information is 
 // sent through the graphics pipeline state object to parse
 // and set values.
@@ -22,31 +37,32 @@ typedef struct {
   // Add a Vertex Shader to the rendering pipeline. This is 
   // MANDATORY or else the pipeline state will not function,
   // or even build.
-  Shader         *VertexShader;
+  Shader*         VertexShader;
 
   // Add a Hull Shader to the rendering pipeline. This is optional.
   // Best to leave this null if not in use.
-  Shader         *HullShader;
+  Shader*         HullShader;
 
   // Add a Domain Shader to the rendering pipeline. This is optional.
   // Best to leave this null if not in use.
-  Shader         *DomainShader;
+  Shader*         DomainShader;
 
   // Add a Geometry Shader to the rendering pipeline. This is optional.
   // Best to leave this null if not in use.
-  Shader         *GeometryShader;
+  Shader*         GeometryShader;
 
   // Add a Pixel Shader to the rendering pipeline. This is optional.
   // Best to leave this null if not in use.
-  Shader         *PixelShader;
+  Shader*         PixelShader;
 
-  BlendT          SrcBlendMode;
-  BlendT          DstBlendMode;
-  BlendOperationT BlendOp;
-  CullModeT       CullMode;
-  FrontFaceT      FrontFace;
-  CompareT        DepthTestCompare;
-  TopologyT       Topology;
+  BlendT              SrcBlendMode;
+  BlendT              DstBlendMode;
+  BlendOperationT     BlendOp;
+  CullModeT           CullMode;
+  FrontFaceT          FrontFace;
+  CompareT            DepthTestCompare;
+  TopologyT           Topology;
+  VertexBindingInfoT  VertexBindingInfo;
 
   // This is the layout of the Graphics Pipeline shaders, in terms of how 
   // samplers, uniforms, and data is laid out in shader code. Pipeline needs 
@@ -59,6 +75,29 @@ typedef struct {
                   BlendEnable     : 1,
                   CullFaceEnable  : 1;
 } GraphicsPipelineInfoT;
+
+
+struct GraphicsPipelineStateInfo {
+  BlendT              SrcBlendMode;
+  BlendT              DstBlendMode;
+  BlendOperationT     BlendOp;
+  CullModeT           CullMode;
+  FrontFaceT          FrontFace;
+  CompareT            DepthTestCompare;
+  TopologyT           Topology;
+  VertexBindingInfoT  VertexBindingInfo;
+
+  // This is the layout of the Graphics Pipeline shaders, in terms of how 
+  // samplers, uniforms, and data is laid out in shader code. Pipeline needs 
+  // reference to the material layout that defines how data given it will be
+  // used.
+  MaterialLayout* Layout;
+
+  bool8           ZBufferEnable : 1,
+                  StencilEnable : 1,
+                  BlendEnable : 1,
+                  CullFaceEnable : 1;
+};
 
 
 // Graphics pipeline state object. Used to set up the rendering
@@ -76,12 +115,12 @@ public:
   virtual void CleanUp() = 0;
 
   // Get the information of this pipeline state.
-  GraphicsPipelineInfoT *GetPipelineInformation() { return &mPipelineInfo; }
+  GraphicsPipelineStateInfo *GetPipelineInformation() { return &mPipelineInfo; }
 
   RenderErrorT GetLastError() { return mLastError; }
 
 protected:
-  GraphicsPipelineInfoT   mPipelineInfo;
+  GraphicsPipelineStateInfo   mPipelineInfo;
   RenderErrorT            mLastError;
 };
 } // jackal
