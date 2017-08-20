@@ -13,11 +13,10 @@ namespace jackal {
 // context.
 class OpenGLGraphicsPipelineState : public GraphicsPipelineState {
 public:
-  OpenGLGraphicsPipelineState(JString name = JTEXT("Default-GraphicsPipeline"))
+  OpenGLGraphicsPipelineState()
     : mProgramId(0)
     , dirty(false)
-    , mNativeError(0)
-    , GraphicsPipelineState(name) 
+    , mNativeError(0) 
   {
     mProgramId = glCreateProgram(); 
   }

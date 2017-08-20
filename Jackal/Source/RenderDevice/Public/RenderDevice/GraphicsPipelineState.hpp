@@ -104,7 +104,7 @@ struct GraphicsPipelineStateInfo {
 // pipeline of the render device.
 class GraphicsPipelineState : public RenderObject {
 protected:
-  GraphicsPipelineState(JString name = JTEXT("Default-GraphicsPipeline")) { }
+  GraphicsPipelineState() { }
 public:
   virtual ~GraphicsPipelineState() { }
 
@@ -121,6 +121,6 @@ public:
 
 protected:
   GraphicsPipelineStateInfo   mPipelineInfo;
-  RenderErrorT            mLastError;
+  RenderErrorT                mLastError;
 };
 } // jackal

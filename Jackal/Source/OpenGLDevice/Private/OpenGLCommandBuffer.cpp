@@ -92,31 +92,6 @@ void OpenGLCommandBuffer::BindVertexBuffer(VertexBuffer *vb)
     if (oglBuffer->ibo) {
       glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, oglBuffer->ibo);
     }
-
-    // TODO(): Bind the buffer according to the layout provided by the graphics pipeline state.
-    VertexBindingInfoT& vinfo = pipeline->GetPipelineInformation()->VertexBindingInfo;
-
-    for (uint32 i = 0; i < vinfo.VertexAttributesCount; ++i) {
-      VertexAttributeT& attribute = vinfo.VertexAttribute[i];
-      uint32 size = 0;
-      switch (attribute.Format) {
-        case FORMAT_R8G8B8A8_SINT:
-        case FORMAT_R16G16B16A16_SFLOAT:
-        case FORMAT_R32G32B32A32_SFLOAT: size = 4; break;
-
-        case FORMAT_R32G32B32_SFLOAT: size = 3; break;
-
-        case FORMAT_R32G32_SFLOAT:   size = 2; break;
-
-        case FORMAT_R32_SFLOAT: size = 1; break;
-
-        default: size = 3; break;
-      }
-
-      glEnableVertexAttribArray(attribute.Location);
-      glVertexAttribPointer(attribute.Location, size, GL_FLOAT, GL_FALSE, vinfo.Stride, 
-        (GLvoid*)&attribute.Offset); 
-    } 
   };
 
   mNumRenderCalls += 2;

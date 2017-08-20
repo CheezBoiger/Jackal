@@ -29,6 +29,8 @@ typedef int16       error16;
 typedef char        byte;
 typedef const char *jstring;
 
+typedef real64 high_precision_t;
+typedef real32 medium_preision_t;
 
 #if JACKAL_PLATFORM == JACKAL_WINDOWS
  typedef wchar_t       tchar;
