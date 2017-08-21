@@ -81,7 +81,7 @@ TEST(Win32, Win32WindowTest)
   attributes[1].Binding = 0;
   attributes[1].Location = 1;
   attributes[1].Format = jackal::FORMAT_R32G32B32_SFLOAT;
-  attributes[1].Offset = sizeof(jackal::real32);
+  attributes[1].Offset = sizeof(jackal::real32) * 3;
 
   // Set up information about the pipeline.
   jackal::GraphicsPipelineInfoT information;
