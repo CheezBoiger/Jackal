@@ -11,7 +11,7 @@
 namespace jackal {
 
 
-const char *OpenGLShader::shaderLanguage = "glsl";
+const char *OpenGLShader::shaderLanguage = "GLSL";
 
 
 GLenum OpenGLShader::GetNativeShaderType(ShaderType type)

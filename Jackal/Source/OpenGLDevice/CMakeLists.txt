@@ -34,6 +34,7 @@ set(OPENGL_FILES
 
   ${OPENGL_PRIVATE_DIR}/OpenGLComputePipelineState.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLGraphicsPipelineState.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLFrameBuffer.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLGPUQuery.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLMaterialLayout.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLRenderPass.cpp

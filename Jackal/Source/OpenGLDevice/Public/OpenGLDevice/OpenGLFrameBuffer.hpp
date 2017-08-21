@@ -15,13 +15,15 @@ namespace jackal {
 
 class OpenGLFrameBuffer : public FrameBuffer {
 public:
-  
+  OpenGLFrameBuffer()
+    : mHandle(0) { }
 
-  void Bake(FrameBufferCreateInfoT& info) override;
+  void Bake(const FrameBufferCreateInfoT& info) override;
+  void CleanUp() override;
 
   GLint Handle() const { return mHandle; }
 
 private:
-  GLint mHandle;
+  GLuint mHandle;
 };
 } // jackal

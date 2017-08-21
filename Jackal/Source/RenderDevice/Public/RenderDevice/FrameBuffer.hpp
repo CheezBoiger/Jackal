@@ -14,13 +14,13 @@ class RenderTarget;
 
 
 // FrameBuffer creation information.
-struct FrameBufferCreateInfoT {
+typedef struct FrameBufferCreateInfoT {
   RenderPass*         PRenderPass;
   uint32              RenderTargetCount;
   RenderTarget*       RenderTargets;
   uint32              Width;
   uint32              Height;  
-};
+} FrameBufferInfoT;
 
 
 // FrameBuffers are objects that contain surfaces to write/render onto.
@@ -34,14 +34,14 @@ public:
 
   virtual ~FrameBuffer() { }
 
-  // Get the render pass reference.
-  RenderPass *GetRenderPassReference() { return mRenderPassReference; }
+  // Get the information abot this framebuffer.
+  FrameBufferInfoT* Information() { return &mInformation; }
 
-  virtual void Bake(FrameBufferCreateInfoT& info) = 0;
+  virtual void Bake(const FrameBufferCreateInfoT& info) = 0;
 
   virtual void CleanUp() = 0;
 
 protected:
-  RenderPass *mRenderPassReference;
+  FrameBufferInfoT mInformation;
 };
 } // jackal

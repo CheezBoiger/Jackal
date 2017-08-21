@@ -48,14 +48,14 @@ struct SubPass {
 };
 
 
-struct RenderPassCreateInfoT {
+typedef struct RenderPassCreateInfoT {
   uint32                AttachmentCount;
   RenderPassAttachment* Attachments;
   uint32                SubPassCount;
   SubPass*              SubPasses;
 
   // TODO(): Will need to add in Dependencies, should we really need them...
-};
+} RenderPassInfoT;
 
 // Render Pass object. Specifies the color, depth, 
 // and stencil buffers that will be bound when rendering. They also
@@ -73,11 +73,13 @@ public:
   
   // Get the frame buffer reference.
   FrameBuffer *GetFrameBufferReference() { return mFrameBufferReference; }
+  RenderPassInfoT& Information() { return mRenderPassInformation; }
 
   virtual void Initialize(RenderPassCreateInfoT& info) = 0;
   virtual void CleanUp() = 0;
 
 protected:
-  FrameBuffer *mFrameBufferReference;
+  FrameBuffer*    mFrameBufferReference;
+  RenderPassInfoT mRenderPassInformation;
 };
 } // jackal

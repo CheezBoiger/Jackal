@@ -72,6 +72,17 @@ TEST(Win32, Win32WindowTest)
   jackal::GraphicsPipelineState *BlinnPhongPipe =
     device.CreateGraphicsPipelineState();
 
+  jackal::VertexAttributeT attributes[2];
+  attributes[0].Binding = 0;
+  attributes[0].Location = 0;
+  attributes[0].Format = jackal::FORMAT_R32G32B32_SFLOAT;
+  attributes[0].Offset = 0;
+
+  attributes[1].Binding = 0;
+  attributes[1].Location = 1;
+  attributes[1].Format = jackal::FORMAT_R32G32B32_SFLOAT;
+  attributes[1].Offset = sizeof(jackal::real32);
+
   // Set up information about the pipeline.
   jackal::GraphicsPipelineInfoT information;
   information.Topology = jackal::TOPOLOGY_TRIANGLE_LIST;
@@ -88,10 +99,11 @@ TEST(Win32, Win32WindowTest)
   information.GeometryShader = nullptr;
   information.Layout = nullptr;
 
-  information.VertexBindingInfo.VertexAttribute = nullptr;
-  information.VertexBindingInfo.VertexAttributesCount = 0;
+  information.VertexBindingInfo.VertexAttribute = attributes;
+  information.VertexBindingInfo.VertexAttributesCount = 2;
   information.VertexBindingInfo.Binding = 0;
   information.VertexBindingInfo.InputRate;
+  information.VertexBindingInfo.Stride = sizeof(jackal::real32) * 6;
 
   BlinnPhongPipe->Bake(information);
 

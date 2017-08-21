@@ -170,13 +170,9 @@ void OpenGLGraphicsPipelineState::UpdateOGLPipeline()
       case FORMAT_R8G8B8A8_SINT:
       case FORMAT_R16G16B16A16_SFLOAT:
       case FORMAT_R32G32B32A32_SFLOAT: size = 4; break;
-
       case FORMAT_R32G32B32_SFLOAT: size = 3; break;
-
       case FORMAT_R32G32_SFLOAT:   size = 2; break;
-
       case FORMAT_R32_SFLOAT: size = 1; break;
-
       default: size = 3; break;
     }
 
