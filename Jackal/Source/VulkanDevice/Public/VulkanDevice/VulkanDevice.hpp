@@ -3,6 +3,7 @@
 
 #include "RenderDevice/RenderDevice.hpp"
 #include "VulkanConfigs.hpp"
+#include "VulkanSwapChain.hpp"
 
 namespace jackal {
 
@@ -19,18 +20,28 @@ public:
   FrameBuffer*                      CreateFrameBuffer() override;
   RenderPass*                       CreateRenderPass() override;
   Texture*                          CreateTexture() override;
+  Texture2D*                        CreateTexture2D() override;
+  Texture3D*                        CreateTexture3D() override;
+  CubeMap*                          CreateCubeMap() override;
   UniformBuffer*                    CreateUniformBuffer() override;
   GraphicsPipelineState*            CreateGraphicsPipelineState() override;
   ComputePipelineState*             CreateComputePipelineState() override;
   RenderTarget*                     CreateRenderTarget() override;
   VertexBuffer*                     CreateVertexBuffer() override;
   CommandBuffer*                    CreateCommandBuffer() override;
+  Sampler*                          CreateSampler() override;
+  MaterialLayout*                   CreateMaterialLayout() override;
   void                              SetResourceHandler(Resources *resources) override;
 
   void                              DestroyShader(Shader *shader) override;
+  void                              DestroySampler(Sampler* sampler) override;
+  void                              DestroyMaterialLayout(MaterialLayout* layout) override;
   void                              DestroyFrameBuffer(FrameBuffer *framebuffer) override;
   void                              DestroyRenderPass(RenderPass *pass) override;
   void                              DestroyTexture(Texture *texture) override;
+  void                              DestroyTexture2D(Texture2D* texture) override;
+  void                              DestroyTexture3D(Texture3D* texture) override;
+  void                              DestroyCubeMap(CubeMap* cubemap) override;
   void                              DestroyUniformBuffer(UniformBuffer *uniformbuffer) override;
   void                              DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) override;
   void                              DestroyComputePipelineState(ComputePipelineState *pipeline) override;

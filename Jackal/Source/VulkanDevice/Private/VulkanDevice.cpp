@@ -1,12 +1,12 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 #pragma once
 
-#include "VulkanDevice/VulkanDevice.hpp"
+#include "VulkanDevice.hpp"
 
 #include <vector>
 
 #if JACKAL_PLATFORM == JACKAL_WINDOWS
-  #include "VulkanDevice/Win32/Win32Vulkan.hpp"
+  #include "Win32/Win32Vulkan.hpp"
 #endif
 
 namespace jackal {

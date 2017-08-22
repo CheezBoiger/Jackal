@@ -35,6 +35,7 @@ set(VULKAN_FILES
   ${VULKAN_PUBLIC_DIR}/VulkanTexture2D.hpp
   ${VULKAN_PUBLIC_DIR}/VulkanTexture3D.hpp
   ${VULKAN_PUBLIC_DIR}/VulkanTextureCubeMap.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanSwapChain.hpp
 
   ${VULKAN_PRIVATE_DIR}/Vulkan.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanCommandBuffer.cpp
@@ -43,6 +44,7 @@ set(VULKAN_FILES
   ${VULKAN_PRIVATE_DIR}/VulkanFrameBuffer.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanGraphicsPipelineState.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanMaterialLayout.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanSwapChain.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanPhysicalDevice.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanRenderPass.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanRenderTarget.cpp
@@ -72,6 +74,7 @@ endif()
 if (Vulkan_FOUND)
   message("Vulkan Found...")
   include_directories(
+    ${VULKAN_PUBLIC_DIR}
     ${JACKAL_INCLUDE_DIR}
     ${Vulkan_INCLUDE_DIRS}
     ${JACKAL_THIRD_PARTY_DIR}/glslang 

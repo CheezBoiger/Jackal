@@ -17,7 +17,7 @@ class RenderTarget;
 typedef struct FrameBufferCreateInfoT {
   RenderPass*         PRenderPass;
   uint32              RenderTargetCount;
-  RenderTarget*       RenderTargets;
+  RenderTarget**      RenderTargets;
   uint32              Width;
   uint32              Height;  
 } FrameBufferInfoT;
