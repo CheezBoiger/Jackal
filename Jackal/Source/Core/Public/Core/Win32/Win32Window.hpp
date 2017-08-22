@@ -45,6 +45,10 @@ struct Win32Window : public Window {
   
   // Set the window to the center of the screen.
   void SetToCenter();
+  void SetToLeft();
+  void SetToRight();
+  void SetUp();
+  void SetDown();
 
   // Check if this window should close.
   bool8 ShouldClose() {

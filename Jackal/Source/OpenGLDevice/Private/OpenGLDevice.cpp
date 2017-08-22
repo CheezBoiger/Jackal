@@ -111,6 +111,11 @@ void OpenGLDevice::DestroyShader(Shader *shader)
 
 void OpenGLDevice::Initialize()
 {
+  OPENGL_CHECK_ERROR(GLenum err);
+  if (err != GL_NO_ERROR) {
+    return;
+  }
+  mInitialized = true;
 }
 
 
@@ -275,6 +280,11 @@ void OpenGLDevice::SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 bu
 {
   if (!commandbuffers || !buffers) {
     mLastError = RENDER_ERROR_NULL_COMMAND_BUFFER_LIST;
+    return;
+  }
+
+  if (!mInitialized) {
+    mLastError = RENDER_ERROR_RENDER_DEVICE_UNINITIALIZED;
     return;
   }
 

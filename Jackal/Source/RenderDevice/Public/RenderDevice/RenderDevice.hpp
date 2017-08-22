@@ -35,7 +35,8 @@ protected:
   // Protected constructor.
   RenderDevice() 
     : mLastError(RENDER_ERROR_NONE)
-    , mRendering(false) { }
+    , mRendering(false)
+    , mInitialized(false) { }
 
 public:
   virtual ~RenderDevice() { }
@@ -79,7 +80,8 @@ public:
   virtual void                    DestroyTexture3D(Texture3D *texture) = 0;
   virtual void                    DestroyCubeMap(CubeMap *cube) = 0;
 
-  virtual const char*            API() const = 0;
+  virtual const char*             API() const = 0;
+  bool8                           Initialized() const { return mInitialized; }
 
   // Retrieve the last error that was dispatched from this render device.
   RenderErrorT GetLastError() {
@@ -107,7 +109,7 @@ public:
 protected:
   // Last error that was conducted in this render device.
   RenderErrorT mLastError;
-
+  bool8        mInitialized;
   bool8        mRendering;
 };
 } // jackal

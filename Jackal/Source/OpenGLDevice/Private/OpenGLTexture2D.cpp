@@ -22,6 +22,11 @@ void OpenGLTexture2D::Load(TextureInfoT& info, TextureHandle* texture)
   } else {
     glTexImage2D(GL_TEXTURE_2D, 0, format.internalFormat, texture->width, texture->height,
       0, format.format, format.dataType, texture->data);
+
+    if (info.Mipmapped) {
+      glGenerateMipmap(GL_TEXTURE_2D);
+      
+    }
   }
 
   OPENGL_CHECK_ERROR(GLenum err);

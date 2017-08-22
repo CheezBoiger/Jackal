@@ -40,6 +40,7 @@ TEST(Win32, Win32WindowTest)
   // This device is used to render. Will be used by the 
   // renderer.
   jackal::OpenGLDevice device;
+  device.Initialize();
 
   jackal::UniformBuffer *buffer = device.CreateUniformBuffer();
   jackal::Matrix4 model[5];
@@ -47,16 +48,15 @@ TEST(Win32, Win32WindowTest)
   jackal::Matrix4 view;
   jackal::Matrix4 projection;
   jackal::Vector3 camPosition;
-  buffer->SetDataType(jackal::DATA_DYNAMIC);
 
   // Needs to be initialized in the same order as our ubo layout in glsl.
+  buffer->SetDataType(jackal::DATA_DYNAMIC);
   buffer->SetMat4("model", model, 5);
   buffer->SetMat4("view", &view);
   buffer->SetMat4("projection", &projection);
   buffer->SetVec3("camPosition", &camPosition);
 
-  // initialize ubo here. You need an active pipeline state in order to
-  // initialize a uniform buffer.
+  // initialize ubo here.
   buffer->Initialize(0, "UBO");
 
   jackal::NativeString fSource = jackal::Shader::ParseFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.frag");
