@@ -11,7 +11,9 @@ namespace jackal {
 
 class OpenGLTexture : public Texture {
 public:
-  OpenGLTexture();
+  OpenGLTexture()
+    : handle(0) { }
+
   void Load(TextureInfoT &info, TextureHandle *texture) override;
   void CleanUp() override;
 
