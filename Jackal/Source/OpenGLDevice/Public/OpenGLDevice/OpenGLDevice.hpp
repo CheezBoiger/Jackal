@@ -37,6 +37,10 @@ class OpenGLDevice : public RenderDevice {
   static uint32       OGLFrameBuffers;
   static uint32       OGLRenderPasses;
   static uint32       OGLTextures;
+  static uint32       OGLTexture2Ds;
+  static uint32       OGLTexture3Ds;
+  static uint32       OGLCubeMaps;
+  static uint32       OGLSamplers;
   static uint32       OGLUniformBuffers;
   static uint32       OGLGraphicsPipelineStates;
   static uint32       OGLComputePipelineStates;

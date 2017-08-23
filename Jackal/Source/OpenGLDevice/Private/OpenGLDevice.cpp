@@ -1,17 +1,21 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 
 
-#include "OpenGLDevice/OpenGLDevice.hpp"
-#include "OpenGLDevice/OpenGLCommandBuffer.hpp"
-#include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
-#include "OpenGLDevice/OpenGLComputePipelineState.hpp"
-#include "OpenGLDevice/OpenGLFrameBuffer.hpp"
-#include "OpenGLDevice/OpenGLRenderPass.hpp"
-#include "OpenGLDevice/OpenGLMaterialLayout.hpp"
-#include "OpenGLDevice/OpenGLRenderTarget.hpp"
-#include "OpenGLDevice/OpenGLUniformBuffer.hpp"
-#include "OpenGLDevice/OpenGLTexture.hpp"
-#include "OpenGLDevice/OpenGLShader.hpp"
+#include "OpenGLDevice.hpp"
+#include "OpenGLCommandBuffer.hpp"
+#include "OpenGLGraphicsPipelineState.hpp"
+#include "OpenGLComputePipelineState.hpp"
+#include "OpenGLFrameBuffer.hpp"
+#include "OpenGLRenderPass.hpp"
+#include "OpenGLMaterialLayout.hpp"
+#include "OpenGLRenderTarget.hpp"
+#include "OpenGLUniformBuffer.hpp"
+#include "OpenGLSampler.hpp"
+#include "OpenGLTexture.hpp"
+#include "OpenGLTexture2D.hpp"
+#include "OpenGLTexture3D.hpp"
+#include "OpenGLShader.hpp"
+#include "OpenGLVertexBuffer.hpp"
 
 #include "Core/Logging/Debugging.hpp"
 #include "Core/Memory/MemoryPool.hpp"
@@ -26,13 +30,17 @@ uint32 OpenGLDevice::OGLShaders = 0;
 uint32 OpenGLDevice::OGLFrameBuffers = 0;
 uint32 OpenGLDevice::OGLRenderPasses = 0;
 uint32 OpenGLDevice::OGLTextures = 0;
+uint32 OpenGLDevice::OGLTexture2Ds = 0;
+uint32 OpenGLDevice::OGLTexture3Ds = 0;
+uint32 OpenGLDevice::OGLCubeMaps = 0;
+uint32 OpenGLDevice::OGLSamplers = 0;
 uint32 OpenGLDevice::OGLUniformBuffers = 0;
 uint32 OpenGLDevice::OGLGraphicsPipelineStates = 0;
 uint32 OpenGLDevice::OGLComputePipelineStates = 0;
 uint32 OpenGLDevice::OGLRenderTargets = 0;
 uint32 OpenGLDevice::OGLVertexBuffers = 0;
 uint32 OpenGLDevice::OGLCommandBuffers = 0;
-uint32 OpenGLDevice::OGLMaterialLayouts = 0;
+uint32 OpenGLDevice::OGLMaterialLayouts = 0;  
 
 bool8 OpenGLDevice::InitOpenGL()
 {
@@ -146,13 +154,19 @@ void OpenGLDevice::DestroyCommandBuffer(CommandBuffer *buffer)
 
 FrameBuffer *OpenGLDevice::CreateFrameBuffer()
 {
-  return nullptr;
+  OpenGLFrameBuffer* framebuffer = new OpenGLFrameBuffer();
+  framebuffer->SetOwner(this);
+  OGLFrameBuffers += 1;
+  return framebuffer;
 }
 
 
 RenderPass *OpenGLDevice::CreateRenderPass()
 {
-  return nullptr;
+  OpenGLRenderPass* renderpass = new OpenGLRenderPass();
+  renderpass->SetOwner(this);
+  OGLRenderPasses += 1;
+  return renderpass;
 }
 
 
@@ -164,7 +178,10 @@ Resources *OpenGLDevice::GetResources()
 
 Texture *OpenGLDevice::CreateTexture()
 {
-  return nullptr;
+  OpenGLTexture* texture = new OpenGLTexture();
+  texture->SetOwner(this);
+  OGLTextures += 1;
+  return texture;
 }
 
 
@@ -176,42 +193,61 @@ ComputePipelineState *OpenGLDevice::CreateComputePipelineState()
 
 RenderTarget *OpenGLDevice::CreateRenderTarget()
 {
-  return nullptr;
+  OpenGLRenderTarget* rendertarget = new OpenGLRenderTarget();
+  rendertarget->SetOwner(this);
+  OGLRenderTargets += 1;
+  return rendertarget;
 }
 
 
 VertexBuffer *OpenGLDevice::CreateVertexBuffer()
 {
-  return nullptr;
+  OpenGLVertexBuffer* vertexbuffer = new OpenGLVertexBuffer();
+  vertexbuffer->SetOwner(this);
+  OGLVertexBuffers += 1;
+  return vertexbuffer;
 }
 
 
 MaterialLayout *OpenGLDevice::CreateMaterialLayout()
 {
-  return nullptr;
+  OpenGLMaterialLayout* material = new OpenGLMaterialLayout();
+  material->SetOwner(this);
+  OGLMaterialLayouts += 1;
+  return material;
 }
 
 
 Sampler *OpenGLDevice::CreateSampler()
 {
-  return nullptr;
+  OpenGLSampler* sampler = new OpenGLSampler();
+  sampler->SetOwner(this);
+  OGLSamplers += 1;
+  return sampler;
 }
 
 
 Texture2D *OpenGLDevice::CreateTexture2D()
 {
-  return nullptr;
+  OpenGLTexture2D* texture = new OpenGLTexture2D();
+  texture->SetOwner(this);
+  OGLTexture2Ds += 1;
+  return texture;
 }
 
 
 Texture3D *OpenGLDevice::CreateTexture3D()
 {
-  return nullptr;
+  OpenGLTexture3D* texture = new OpenGLTexture3D();
+  texture->SetOwner(this);
+  OGLTexture3Ds += 1;
+  return texture;
 }
 
 
 CubeMap *OpenGLDevice::CreateCubeMap()
 {
+  OGLCubeMaps += 1;
   return nullptr;
 }
 

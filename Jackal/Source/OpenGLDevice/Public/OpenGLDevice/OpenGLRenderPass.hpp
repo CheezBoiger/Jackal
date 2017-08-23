@@ -10,6 +10,7 @@ namespace jackal {
 
 class OpenGLRenderPass : public RenderPass {
 public:
-
+  void Initialize(RenderPassCreateInfoT& info) override;
+  void CleanUp() override;
 }; 
 } // jackal

@@ -8,6 +8,7 @@ add_subdirectory(RenderDevice)
 add_subdirectory(OpenGLDevice)
 add_subdirectory(VulkanDevice)
 add_subdirectory(Input)
+add_subdirectory(Canis)
 
 if (WIN32)
   add_subdirectory(Dx3D12Device)
