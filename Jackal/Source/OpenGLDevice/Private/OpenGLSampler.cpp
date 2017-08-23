@@ -48,6 +48,14 @@ void OpenGLSampler::Bake(SamplerInfoT &info)
   glSamplerParameterf(mHandle, GL_TEXTURE_MIN_LOD, mInformation.MinLod);
   glSamplerParameterf(mHandle, GL_TEXTURE_MAX_LOD, mInformation.MaxLod);
 
+  if (info.AnisotropyEnable) {
+    glSamplerParameterf(mHandle, GL_TEXTURE_MAX_ANISOTROPY_EXT, info.MaxAnisotropy);
+    OPENGL_CHECK_ERROR(GLenum error);
+    if (error != GL_NO_ERROR) {
+      return;  
+    }
+  }
+
   
   OPENGL_CHECK_ERROR(GLenum err);
 

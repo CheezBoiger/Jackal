@@ -119,6 +119,9 @@ TEST(Win32, Win32WindowTest)
   sinfo.WrapS = jackal::WRAP_MODE_CLAMP_TO_BORDER;
   sinfo.WrapT = jackal::WRAP_MODE_CLAMP_TO_BORDER;
   sinfo.WrapR = jackal::WRAP_MODE_CLAMP_TO_BORDER;
+  sinfo.MaxAnisotropy = 1.0f;
+  sinfo.AnisotropyEnable = true;
+  sinfo.MipMapMode = jackal::SAMPLER_MIPMAP_MODE_LINEAR;
   sinfo.MinLod = 1.0f;
   sinfo.MaxLod = 2.0f;
   jackal::OpenGLSampler sampler;

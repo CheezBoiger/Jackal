@@ -13,13 +13,16 @@ namespace jackal {
 
 
 struct SamplerInfoT {
-  WrapModeT   WrapS;
-  WrapModeT   WrapT;
-  WrapModeT   WrapR;
-  FilterModeT MagFilter;
-  FilterModeT MinFilter;
-  real32      MinLod;
-  real32      MaxLod;
+  WrapModeT           WrapS;
+  WrapModeT           WrapT;
+  WrapModeT           WrapR;
+  FilterModeT         MagFilter;
+  FilterModeT         MinFilter;
+  SamplerMipMapMode   MipMapMode;
+  bool8               AnisotropyEnable;
+  real32              MaxAnisotropy;
+  real32              MinLod;
+  real32              MaxLod;
 };
 
 

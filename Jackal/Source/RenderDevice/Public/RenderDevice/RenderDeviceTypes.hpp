@@ -113,6 +113,13 @@ typedef enum {
 } FilterModeT;
 
 
+// Texel Filtering modes for mipmaps.
+typedef enum {
+  SAMPLER_MIPMAP_MODE_NEAREST,
+  SAMPLER_MIPMAP_MODE_LINEAR
+} SamplerMipMapMode;
+
+
 // RenderDevice error types.
 typedef enum {
   RENDER_ERROR_NONE,
