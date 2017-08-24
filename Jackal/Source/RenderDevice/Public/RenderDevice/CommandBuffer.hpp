@@ -53,6 +53,9 @@ public:
     uint32 dynamicOffsetCount = 0, const uint32 *dynamicOffsets = nullptr) = 0;
   virtual void SetViewPort(ViewPort *viewport) = 0;
   virtual void SetScissor(ScissorRect *scissor) = 0;
+
+  // For Compute Pipeline binding. Used to dispatch our threading in the compute
+  // shader.
   virtual void SetDispatchCompute(uint32 x, uint32 y, uint32 z) = 0;
   virtual void SetDispatchIndirect(uint32 x, uint32 y, uint32 z) = 0;
 

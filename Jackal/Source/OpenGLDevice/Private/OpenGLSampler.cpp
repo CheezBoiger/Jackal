@@ -29,6 +29,28 @@ GLenum GetNativeFilterMode(FilterModeT filter)
 }
 
 
+GLenum GetNativeFilterModeMin(FilterModeT filter, SamplerMipMapMode mode)
+{
+  switch (mode) {
+    case SAMPLER_MIPMAP_MODE_LINEAR:
+    {
+      if (filter == FILTER_MODE_LINEAR) return GL_LINEAR_MIPMAP_LINEAR;
+      else return GL_NEAREST_MIPMAP_LINEAR;
+    } break;
+    case SAMPLER_MIPMAP_MODE_NEAREST:
+    {
+      if (filter == FILTER_MODE_LINEAR) return GL_LINEAR_MIPMAP_NEAREST;
+      else return GL_NEAREST_MIPMAP_NEAREST;
+    } break;
+    default:
+    {
+      if (filter == FILTER_MODE_LINEAR) return GL_LINEAR;
+      else return GL_NEAREST;
+    }
+  }
+}
+
+
 void OpenGLSampler::Bake(SamplerInfoT &info)
 {
   mInformation = info;
@@ -40,7 +62,7 @@ void OpenGLSampler::Bake(SamplerInfoT &info)
   glGenSamplers(1, &mHandle);
 
   glSamplerParameteri(mHandle, GL_TEXTURE_MAG_FILTER, GetNativeFilterMode(mInformation.MagFilter));
-  glSamplerParameteri(mHandle, GL_TEXTURE_MIN_FILTER, GetNativeFilterMode(mInformation.MinFilter));
+  glSamplerParameteri(mHandle, GL_TEXTURE_MIN_FILTER, GetNativeFilterModeMin(mInformation.MinFilter, info.MipMapMode));
   glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_S, GetNativeWrapMode(mInformation.WrapS));
   glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_T, GetNativeWrapMode(mInformation.WrapT));
   glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_R, GetNativeWrapMode(mInformation.WrapR));

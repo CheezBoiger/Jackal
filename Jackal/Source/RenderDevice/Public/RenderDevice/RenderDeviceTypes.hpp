@@ -115,6 +115,7 @@ typedef enum {
 
 // Texel Filtering modes for mipmaps.
 typedef enum {
+  SAMPLER_MIPMAP_MODE_NONE,
   SAMPLER_MIPMAP_MODE_NEAREST,
   SAMPLER_MIPMAP_MODE_LINEAR
 } SamplerMipMapMode;

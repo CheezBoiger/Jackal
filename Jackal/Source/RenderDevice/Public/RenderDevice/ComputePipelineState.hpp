@@ -13,7 +13,8 @@ namespace jackal {
 
 
 struct ComputePipelineInfoT {
-  Shader *ComputeShader;  
+  Shader*                     ComputeShader;  
+  ComputePipelineState*       BasePipelineHandle;
 };
 
 
