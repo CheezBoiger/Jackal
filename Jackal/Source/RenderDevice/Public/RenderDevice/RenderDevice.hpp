@@ -12,7 +12,6 @@ namespace jackal {
 class Shader;
 class RenderPass;
 class RenderTarget;
-class FrameBuffer;
 class VertexBuffer;
 class Texture;
 class Texture2D;
@@ -49,7 +48,6 @@ public:
   virtual void                    Initialize() = 0;
 
   virtual Shader*                 CreateShader() = 0;
-  virtual FrameBuffer*            CreateFrameBuffer() = 0;
   virtual RenderPass*             CreateRenderPass() = 0;
   virtual Texture*                CreateTexture() = 0;
   virtual Texture2D*              CreateTexture2D() = 0;
@@ -65,7 +63,6 @@ public:
   virtual MaterialLayout*         CreateMaterialLayout() = 0;
 
   virtual void                    DestroyShader(Shader *shader) = 0;
-  virtual void                    DestroyFrameBuffer(FrameBuffer *framebuffer) = 0;
   virtual void                    DestroyRenderPass(RenderPass *pass) = 0;
   virtual void                    DestroyRenderTarget(RenderTarget *target) = 0;
   virtual void                    DestroyVertexBuffer(VertexBuffer *vb) = 0;

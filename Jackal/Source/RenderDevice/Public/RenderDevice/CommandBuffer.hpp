@@ -5,7 +5,9 @@
 
 #include "RenderDeviceTypes.hpp"
 #include "RenderObject.hpp"
+
 #include "Core/Math/Vector4.hpp"
+#include "Core/Math/Color4.hpp"
 
 
 namespace jackal {
@@ -36,7 +38,7 @@ public:
   virtual void ClearRecord() = 0;
 
   virtual void Clear() = 0;
-  virtual void ClearColor(Colorf color) = 0;
+  virtual void ClearColor(Color color) = 0;
   virtual void DrawElements(uint32 count) = 0;
   virtual void Draw(uint32 count) = 0;
   virtual void DrawInstanced(uint32 count, uint32 instances) = 0;

@@ -5,21 +5,21 @@
 #include "Core/Platform/JTypes.hpp"
 #include "Core/Platform/Api.hpp"
 
-#include "RenderDevice/FrameBuffer.hpp"
-
 #include "OpenGLConfigs.hpp"
 
 
 namespace jackal {
 
 
-class OpenGLFrameBuffer : public FrameBuffer {
+class OpenGLFrameBuffer {
 public:
   OpenGLFrameBuffer()
     : mHandle(0) { }
 
-  void Bake(const FrameBufferCreateInfoT& info) override;
-  void CleanUp() override;
+  void Create();
+  void Bind();
+  void CleanUp();
+  bool Complete();
 
   GLint Handle() const { return mHandle; }
 

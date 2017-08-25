@@ -152,15 +152,6 @@ void OpenGLDevice::DestroyCommandBuffer(CommandBuffer *buffer)
 }
 
 
-FrameBuffer *OpenGLDevice::CreateFrameBuffer()
-{
-  OpenGLFrameBuffer* framebuffer = new OpenGLFrameBuffer();
-  framebuffer->SetOwner(this);
-  OGLFrameBuffers += 1;
-  return framebuffer;
-}
-
-
 RenderPass *OpenGLDevice::CreateRenderPass()
 {
   OpenGLRenderPass* renderpass = new OpenGLRenderPass();
@@ -253,11 +244,6 @@ CubeMap *OpenGLDevice::CreateCubeMap()
 
 
 void OpenGLDevice::SetResourceHandler(Resources *resources)
-{
-}
-
-
-void OpenGLDevice::DestroyFrameBuffer(FrameBuffer *framebuffer)
 {
 }
 

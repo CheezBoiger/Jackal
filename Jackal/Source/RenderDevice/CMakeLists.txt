@@ -14,7 +14,6 @@ include_directories(
 
 set(RENDEV_FILES
   ${RENDEV_PUBLIC_DIR}/CommandBuffer.hpp
-  ${RENDEV_PUBLIC_DIR}/FrameBuffer.hpp
   ${RENDEV_PUBLIC_DIR}/GPUQuery.hpp
   ${RENDEV_PUBLIC_DIR}/RenderDevice.hpp
   ${RENDEV_PUBLIC_DIR}/RenderPass.hpp

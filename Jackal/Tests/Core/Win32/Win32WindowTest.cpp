@@ -11,6 +11,7 @@
 #include "OpenGLDevice/OpenGLShader.hpp"
 #include "OpenGLDevice/OpenGLCommandBuffer.hpp"
 #include "OpenGLDevice/OpenGLSampler.hpp"
+#include "OpenGLDevice/OpenGLRenderPass.hpp"
 #include "OpenGLDevice/OpenGLRenderTarget.hpp"
 #include <gtest/gtest.h>
 #include "Core/Platform/Time.hpp"
@@ -26,7 +27,7 @@ TEST(Win32, Win32WindowTest)
  
   jackal::PrintToConsole(JTEXT("Creating window.\n"));
   jackal::Win32Window *window = jackal::Win32Window::Create(width, height,
-    JTEXT("これは簡単なテストです。"), NULL);
+    JTEXT("これは簡単なテストです。"), false);
   jackal::Win32Window *window2 = jackal::Win32Window::Create(width, height,
     JTEXT("Nope"), NULL, true);
   window->SetToCenter();
@@ -130,7 +131,7 @@ TEST(Win32, Win32WindowTest)
   jackal::CommandBuffer *cmd = device.CreateCommandBuffer();
   // Record buffer.
   cmd->Record();
-    cmd->BeginRenderPass(nullptr);
+    //cmd->BeginRenderPass(nullptr);
     cmd->BindGraphicsPipelineState(BlinnPhongPipe);
 #if 0
     // NOTE(): Once we get out material layout set up, we will enable this.
@@ -143,9 +144,20 @@ TEST(Win32, Win32WindowTest)
     cmd->DrawElements(0);
 #endif
     cmd->Clear();
-    cmd->ClearColor(jackal::Colorf(0.1f, 0.1f, 0.1f, 1.0f));
+    cmd->ClearColor(jackal::Color(50, 50, 50, 255));
   cmd->EndRecord();
 
+  jackal::CommandBuffer* cmd2 = device.CreateCommandBuffer();
+  cmd2->Record();
+    //cmd2->BeginRenderPass(nullptr);
+    cmd2->BindGraphicsPipelineState(BlinnPhongPipe);
+    cmd2->Clear();
+    cmd2->ClearColor(jackal::Color(255, 255, 255, 255));
+  cmd2->EndRecord();
+
+
+  // TODO(): The Design of rendertargets to renderpasses info is a bit
+  // too much... need to make it a little more convenient...
   jackal::RenderTargetCreateInfoT ri;
   ri.Format = jackal::FORMAT_R32G32B32A32_SFLOAT;
   ri.HardwareMSAA = false;
@@ -154,11 +166,42 @@ TEST(Win32, Win32WindowTest)
   ri.Height = 1080;
   jackal::OpenGLRenderTarget renderTarget;
   renderTarget.Bake(ri);
+
+  jackal::RenderPassAttachment attachment;
+  attachment.PRenderTarget = &renderTarget;
+  attachment.Samples = jackal::SAMPLE_COUNT_1_BIT;
+  attachment.Format = jackal::FORMAT_R16G16B16A16_SFLOAT;
+  attachment.LoadOp = jackal::ATTACHMENT_LOAD_OP_DONT_CARE;
+  attachment.StoreOp = jackal::ATTACHMENT_STORE_OP_DONT_CARE;
+
+  jackal::RenderPassAttachmentReference colorref;
+  colorref.Attachment = 0;
+  colorref.Layout = jackal::IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+
+  jackal::RenderPassAttachmentReference depthref;
+  depthref.Attachment = 1;
+  depthref.Layout = jackal::IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+
+  jackal::SubPass subpass;
+  subpass.BindPoint = jackal::BIND_POINT_GRAPHICS;
+  subpass.ColorAttachmentCount = 1;
+  subpass.PColorAttachments = &colorref;
+  subpass.PDepthStencilAttachment = &depthref;
+
+  // TODO(): RenderPass is the more important component here. Figure out a way
+  // to store rendertargets into a render pass, and use them to create a framebuffer
+  // from within, inside opengl and vulkan. Instead of having to create an explicit 
+  // framebuffer.
+  jackal::RenderPassCreateInfoT passinfo;
+  passinfo.AttachmentCount = 1;
+  passinfo.Attachments = &attachment;
+  passinfo.SubPassCount = 1;
+  passinfo.SubPasses = &subpass;
+  //jackal::RenderPass* renderpass = device.CreateRenderPass();
+  //renderpass->Initialize(passinfo);
+
   ASSERT_EQ(window->width, width);
   //ASSERT_EQ(window->height, height);
-
-  jackal::PrintToConsole(JTEXT("Press close to continue through.\n"));
-
   // Game loop.
   while (!window->ShouldClose()) {
     jackal::Time::UpdateDelta();
@@ -171,13 +214,14 @@ TEST(Win32, Win32WindowTest)
     jackal::Win32OpenGL::SwapBuffers(window);
 
     jackal::Win32OpenGL::MakeContextCurrent(window2);    
-    device.SubmitCommandBuffers(cmd, 1);
+    device.SubmitCommandBuffers(cmd2, 1);
     jackal::Win32OpenGL::SwapBuffers(window2);
     jackal::Win32Window::PollEvents();
     std::cout << "Time: " << jackal::Time::Current() << " ms\r";
   }
 
   device.DestroyCommandBuffer(cmd);
+  device.DestroyCommandBuffer(cmd2);
   device.DestroyGraphicsPipelineState(BlinnPhongPipe);
   device.DestroyUniformBuffer(buffer);
 
@@ -188,6 +232,9 @@ TEST(Win32, Win32WindowTest)
   delete window2;
   jackal::Win32OpenGL::CleanUp();
   jackal::Win32CleanUpWindowLibs();
+
+  jackal::PrintToConsole(JTEXT("Press close to continue through.\n"));
+
 #endif
 }
 

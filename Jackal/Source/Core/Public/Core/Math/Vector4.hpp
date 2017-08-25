@@ -127,5 +127,4 @@ struct Vector4 {
 typedef Vector4 Vec4;
 typedef Vector4 Vec4f;
 typedef Vector4 Vector4f;
-typedef Vector4 Colorf;
 } // jackal

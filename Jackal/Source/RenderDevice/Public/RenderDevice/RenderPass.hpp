@@ -4,6 +4,7 @@
 
 #include "Core/Platform/JTypes.hpp"
 #include "RenderObject.hpp"
+#include "RenderTarget.hpp"
 #include "RenderDeviceTypes.hpp"
 
 namespace jackal {
@@ -13,6 +14,7 @@ class FrameBuffer;
 
 // RenderPass attachment information.
 struct RenderPassAttachment {
+  RenderTarget*     PRenderTarget;
   FormatT           Format;
   SampleCount       Samples;
   AttachmentLoadOp  LoadOp;
@@ -28,8 +30,8 @@ struct RenderPassAttachment {
 // can then transition to how data is being passed from one framebuffer to the
 // next.
 struct RenderPassAttachmentReference {
-  uint32            Attachment;
-  ImageLayout       Layout;
+  uint32                    Attachment;
+  ImageLayout               Layout;
 };
 
 
@@ -39,8 +41,7 @@ struct SubPass {
   PipelineBindPoint               BindPoint;
   uint32                          ColorAttachmentCount;
   RenderPassAttachmentReference*  PColorAttachments;
-  uint32                          DepthStencilAttachmentCount;
-  RenderPassAttachmentReference*  PDepthStencilAttachments;
+  RenderPassAttachmentReference*  PDepthStencilAttachment;
   uint32                          InputAttachmentCount;
   RenderPassAttachmentReference*  PInputAttachments;
   uint32                          ResolveAttachmentCount;
@@ -70,16 +71,13 @@ public:
 
   virtual ~RenderPass() { }
 
-  
-  // Get the frame buffer reference.
-  FrameBuffer *GetFrameBufferReference() { return mFrameBufferReference; }
+ 
   RenderPassInfoT& Information() { return mRenderPassInformation; }
 
   virtual void Initialize(RenderPassCreateInfoT& info) = 0;
   virtual void CleanUp() = 0;
 
 protected:
-  FrameBuffer*    mFrameBufferReference;
   RenderPassInfoT mRenderPassInformation;
 };
 } // jackal

@@ -18,7 +18,6 @@ set(OPENGL_FILES
   ${OPENGL_PUBLIC_DIR}/OpenGLComputePipelineState.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLGraphicsPipelineState.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLTextureCubeMap.hpp
-  ${OPENGL_PUBLIC_DIR}/OpenGLFrameBuffer.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLGPUQuery.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLMaterialLayout.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLRenderPass.hpp
@@ -35,6 +34,7 @@ set(OPENGL_FILES
   ${OPENGL_PRIVATE_DIR}/OpenGLComputePipelineState.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLGraphicsPipelineState.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLFrameBuffer.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLFrameBuffer.hpp
   ${OPENGL_PRIVATE_DIR}/OpenGLGPUQuery.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLMaterialLayout.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLRenderPass.cpp

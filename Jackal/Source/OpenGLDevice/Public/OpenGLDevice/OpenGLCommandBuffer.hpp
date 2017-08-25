@@ -28,7 +28,7 @@ public:
 
   void ClearRecord() override;
   void Clear() override;
-  void ClearColor(Colorf color) override;
+  void ClearColor(Color color) override;
   void DrawElements(uint32 count) override;
   void Draw(uint32 count) override;
   void DrawInstanced(uint32 count, uint32 instances) override;

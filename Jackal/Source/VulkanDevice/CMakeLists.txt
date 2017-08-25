@@ -21,7 +21,6 @@ set(VULKAN_FILES
   ${VULKAN_PUBLIC_DIR}/VulkanCommandBuffer.hpp
   ${VULKAN_PUBLIC_DIR}/VulkanComputePipelineState.hpp
   ${VULKAN_PUBLIC_DIR}/VulkanCubemap.hpp
-  ${VULKAN_PUBLIC_DIR}/VulkanFrameBuffer.hpp
   ${VULKAN_PUBLIC_DIR}/VulkanGraphicsPipelineState.hpp
   ${VULKAN_PUBLIC_DIR}/VulkanMaterialLayout.hpp
   ${VULKAN_PUBLIC_DIR}/VulkanPhysicalDevice.hpp
@@ -42,6 +41,7 @@ set(VULKAN_FILES
   ${VULKAN_PRIVATE_DIR}/VulkanComputePipelineState.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanCubemap.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanFrameBuffer.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanFrameBuffer.hpp
   ${VULKAN_PRIVATE_DIR}/VulkanGraphicsPipelineState.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanMaterialLayout.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanSwapChain.cpp

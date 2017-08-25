@@ -5,6 +5,7 @@
 #include "RenderDevice/RenderDevice.hpp"
 #include "OpenGLConfigs.hpp"
 #include "Core/Math/Vector4.hpp"
+#include "Core/Math/Color4.hpp"
 
 namespace jackal {
 
@@ -19,7 +20,6 @@ class OpenGLGraphicsPipelineState;
 class OpenGLComputePipelineState;
 class OpenGLRenderTarget;
 class OpenGLRenderPass;
-class OpenGLFrameBuffer;
 class OpenGLVertexBuffer;
 class OpenGLUniformBuffer;
 class OpenGLResources;
@@ -60,14 +60,14 @@ public:
     , mCurrentGraphicsPipelineState(nullptr)
     , mCurrentVertexBuffer(nullptr)
     , mCurrentUniformBuffer(nullptr)
-    , mClearColor(Colorf(0.0f, 0.0f, 0.0f, 1.0f)) { }
+    , mCurrentRenderPass(nullptr)
+    , mClearColor(Color(0, 0, 0, 255)) { }
 
   void                            Initialize() override;
   void                            CleanUp() override;
 
   Resources*                      GetResources() override;
   Shader*                         CreateShader() override;
-  FrameBuffer*                    CreateFrameBuffer() override;
   RenderPass*                     CreateRenderPass() override;
   Texture*                        CreateTexture() override;
   UniformBuffer*                  CreateUniformBuffer() override;
@@ -84,7 +84,6 @@ public:
 
   void                            SetResourceHandler(Resources *resources) override;
   void                            DestroyShader(Shader *shader) override;
-  void                            DestroyFrameBuffer(FrameBuffer *framebuffer) override;
   void                            DestroyRenderPass(RenderPass *pass) override;
   void                            DestroyTexture(Texture *texture) override;
   void                            DestroyUniformBuffer(UniformBuffer *uniformbuffer) override;
@@ -110,21 +109,24 @@ public:
 
   // OpenGL Graphics Pipeline State object currently being used by this rendering 
   // device.
-  OpenGLGraphicsPipelineState   *mCurrentGraphicsPipelineState;
+  OpenGLGraphicsPipelineState*  mCurrentGraphicsPipelineState;
 
   // OpenGL Compute Pipeline State object currently being used by this rendering
   // device.
-  OpenGLComputePipelineState    *mCurrentComputePipelineState;
+  OpenGLComputePipelineState*   mCurrentComputePipelineState;
 
   // OpenGL Vertex Buffer object currently being used by this rendering device.
-  OpenGLVertexBuffer            *mCurrentVertexBuffer;
+  OpenGLVertexBuffer*           mCurrentVertexBuffer;
 
   // OpenGL Uniform Buffer object currently being used by this rendering device.
-  OpenGLUniformBuffer           *mCurrentUniformBuffer;
+  OpenGLUniformBuffer*          mCurrentUniformBuffer;
   
   // OpenGL Material object currently being use by this rendering device.
-  OpenGLMaterialLayout          *mCurrentMaterialLayout;
+  OpenGLMaterialLayout*         mCurrentMaterialLayout;
 
-  Colorf                        mClearColor;
+  // Current OpenGL RenderPass bound.
+  OpenGLRenderPass*             mCurrentRenderPass;
+
+  Color                         mClearColor;
 };
 } // jackal

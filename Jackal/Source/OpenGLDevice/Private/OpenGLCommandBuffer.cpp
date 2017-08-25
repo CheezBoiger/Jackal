@@ -1,15 +1,21 @@
 // Copyright (c) 2017 Jackal Engine, MIT License.
 
-#include "OpenGLDevice/OpenGLCommandBuffer.hpp"
-#include "OpenGLDevice/OpenGLComputePipelineState.hpp"
-#include "OpenGLDevice/OpenGLTextureCubeMap.hpp"
-#include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
-#include "OpenGLDevice/OpenGLFrameBuffer.hpp"
-#include "OpenGLDevice/OpenGLRenderTarget.hpp"
-#include "OpenGLDevice/OpenGLTexture.hpp"
-#include "OpenGLDevice/OpenGLVertexBuffer.hpp"
-#include "OpenGLDevice/OpenGLUniformBuffer.hpp"
+#include "OpenGLCommandBuffer.hpp"
+#include "OpenGLComputePipelineState.hpp"
+#include "OpenGLTextureCubeMap.hpp"
+#include "OpenGLGraphicsPipelineState.hpp"
+#include "OpenGLRenderPass.hpp"
+#include "OpenGLFrameBuffer.hpp"
+#include "OpenGLRenderTarget.hpp"
+#include "OpenGLTexture.hpp"
+#include "OpenGLTexture2D.hpp"
+#include "OpenGLTexture3D.hpp"
+#include "OpenGLTextureCubeMap.hpp"
+#include "OpenGLMaterialLayout.hpp"
+#include "OpenGLVertexBuffer.hpp"
+#include "OpenGLUniformBuffer.hpp"
 
+#define CHECK_RECORDING() if (!mRecording) return
 
 namespace jackal {
 
@@ -32,10 +38,17 @@ void OpenGLCommandBuffer::ClearRecord()
   mRecording = false;
 }
 
-void OpenGLCommandBuffer::ClearColor(Colorf color)
+void OpenGLCommandBuffer::ClearColor(Color color)
 {
-  auto execute = [=] (Colorf colorf) -> void {
-    glClearColor(colorf.r, colorf.g, color.b, colorf.a);
+  CHECK_RECORDING();
+
+  auto execute = [=] (Color colorf) -> void {
+    glClearColor(
+      float(colorf.r) / 255.0f, 
+      float(colorf.g) / 255.0f, 
+      float(colorf.b) / 255.0f, 
+      float(colorf.a) / 255.0f
+    );
   };
   ++mNumRenderCalls;
   mCommandList.push_back([=] () -> void { execute(color); });
@@ -44,6 +57,8 @@ void OpenGLCommandBuffer::ClearColor(Colorf color)
 
 void OpenGLCommandBuffer::Clear()
 {
+  CHECK_RECORDING();
+
   auto execute = [=] () -> void {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
   };
@@ -53,7 +68,9 @@ void OpenGLCommandBuffer::Clear()
 
 
 void OpenGLCommandBuffer::BindGraphicsPipelineState(GraphicsPipelineState *pipeline)
-{ 
+{
+  CHECK_RECORDING();
+ 
   auto execute = [=] (GraphicsPipelineState *pipe) -> void {
     OpenGLGraphicsPipelineState *oglPipe = 
       static_cast<OpenGLGraphicsPipelineState *>(pipe);  
@@ -73,6 +90,8 @@ void OpenGLCommandBuffer::BindGraphicsPipelineState(GraphicsPipelineState *pipel
 
 void OpenGLCommandBuffer::BindVertexBuffer(VertexBuffer *vb)
 {
+  CHECK_RECORDING();
+
   auto execute = [=] (VertexBuffer *vertexbuffer) -> void {
     OpenGLDevice* renderDevice =
       static_cast<OpenGLDevice* >(mOwner);
@@ -101,6 +120,8 @@ void OpenGLCommandBuffer::BindVertexBuffer(VertexBuffer *vb)
 
 void OpenGLCommandBuffer::DrawElements(uint32 count)
 {
+  CHECK_RECORDING();
+
   auto execute = [=] (uint32 c) -> void {
     OpenGLDevice* renderDevice =
       static_cast<OpenGLDevice* >(mOwner);
@@ -120,6 +141,8 @@ void OpenGLCommandBuffer::DrawElements(uint32 count)
 
 void OpenGLCommandBuffer::Draw(uint32 count)
 {
+  CHECK_RECORDING();
+
   auto execute = [=] (uint32 c) -> void {
     OpenGLDevice* renderDevice =
       static_cast<OpenGLDevice* >(mOwner);
@@ -138,6 +161,8 @@ void OpenGLCommandBuffer::Draw(uint32 count)
 
 void OpenGLCommandBuffer::SetViewPort(ViewPort *viewport)
 {
+  CHECK_RECORDING();
+
   auto execute = [=] (ViewPort *vp) -> void {
     OpenGLDevice* renderDevice =
       static_cast<OpenGLDevice* >(mOwner);
@@ -160,6 +185,8 @@ void OpenGLCommandBuffer::SetViewPort(ViewPort *viewport)
 
 void OpenGLCommandBuffer::SetScissor(ScissorRect *scissor)
 {
+  CHECK_RECORDING();
+
   auto execute = [=] (ScissorRect *sr) -> void {
     OpenGLDevice* renderDevice =
       static_cast<OpenGLDevice* >(mOwner);
@@ -181,6 +208,8 @@ void OpenGLCommandBuffer::SetScissor(ScissorRect *scissor)
 
 void OpenGLCommandBuffer::DrawInstanced(uint32 count, uint32 instances)
 {
+  CHECK_RECORDING();
+
   auto execute = [=] (uint32 c, uint32 i) -> void {
     OpenGLDevice* renderDevice =
       static_cast<OpenGLDevice* >(mOwner);
@@ -200,17 +229,41 @@ void OpenGLCommandBuffer::DrawInstanced(uint32 count, uint32 instances)
 
 void OpenGLCommandBuffer::BeginRenderPass(RenderPass *pass)
 {
+  CHECK_RECORDING();
+  
+  auto execute = [=] (RenderPass* renderpass) -> void {
+    OpenGLRenderPass* oglPass = static_cast<OpenGLRenderPass*>(renderpass);
+    OpenGLDevice* device = static_cast<OpenGLDevice*>(mOwner);
+    if (!renderpass) {
+      device->SubmitLastError(RENDER_ERROR_BAD_RENDER_PASS_ALLOC);
+      return;
+    }
+
+    OpenGLFrameBuffer* framebuffer = static_cast<OpenGLFrameBuffer*>(oglPass->FrameBufferReference());
+    
+
+
+    device->mCurrentRenderPass = oglPass;
+
+    framebuffer->Bind();
+    
+  };  
+
+  mCommandList.push_back([=] () -> void { execute(pass); });
 }
 
 
 void OpenGLCommandBuffer::BindComputePipelineState(ComputePipelineState *compute)
 {
+  CHECK_RECORDING();
 }
 
 
 void OpenGLCommandBuffer::BindMaterialLayout(MaterialLayout *layout,
   uint32 dynamicOffsetCount, const uint32 *dynamicOffsets)
 {
+  CHECK_RECORDING();
+
   auto execute = [=] (MaterialLayout *ml, uint32 dyOffCnt, const uint32 *dynOff) -> void {
     // TODO(): We have our dynamic offsets and our material layout, we need to bind them 
     // to the pipeline now.
@@ -222,10 +275,16 @@ void OpenGLCommandBuffer::BindMaterialLayout(MaterialLayout *layout,
 
 void OpenGLCommandBuffer::SetDispatchCompute(uint32 x, uint32 y, uint32 z)
 {
+  CHECK_RECORDING();
+
+
 }
 
 
 void OpenGLCommandBuffer::SetDispatchIndirect(uint32 x, uint32 y, uint32 z)
 {
+  CHECK_RECORDING();
+
+
 }
 } // jackal

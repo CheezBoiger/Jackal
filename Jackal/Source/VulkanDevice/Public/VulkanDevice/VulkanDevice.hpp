@@ -17,7 +17,6 @@ public:
 
   Resources*                        GetResources() override;
   Shader*                           CreateShader() override;
-  FrameBuffer*                      CreateFrameBuffer() override;
   RenderPass*                       CreateRenderPass() override;
   Texture*                          CreateTexture() override;
   Texture2D*                        CreateTexture2D() override;
@@ -36,7 +35,6 @@ public:
   void                              DestroyShader(Shader *shader) override;
   void                              DestroySampler(Sampler* sampler) override;
   void                              DestroyMaterialLayout(MaterialLayout* layout) override;
-  void                              DestroyFrameBuffer(FrameBuffer *framebuffer) override;
   void                              DestroyRenderPass(RenderPass *pass) override;
   void                              DestroyTexture(Texture *texture) override;
   void                              DestroyTexture2D(Texture2D* texture) override;

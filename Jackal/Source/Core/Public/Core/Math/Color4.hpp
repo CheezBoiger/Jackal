@@ -10,18 +10,19 @@
 namespace jackal {
 
 
-// Standard color values.
-static Colorf RED =             Colorf(1.0f, 0.0f, 0.0f, 1.0f);
-static Colorf GREEN =           Colorf(0.0f, 1.0f, 0.0f, 1.0f);
-static Colorf BLUE =            Colorf(0.0f, 0.0f, 1.0f, 1.0f);
-static Colorf BLACK =           Colorf(0.0f, 0.0f, 0.0f, 1.0f);
-static Colorf WHITE =           Colorf(1.0f, 1.0f, 1.0f, 1.0f);
-
 // Color values marked with normalized values from [0.0f, 1.0f].
 // These values are used to determine the color of some mesh object.
-struct Color4f {
-  struct { real32 r, g, b, a; };
+struct Color {
+  Color(uint8 r = 0, uint8 g = 0, uint8 b = 0, uint8 a = 0)
+    : r(r), g(g), b(b), a(a) { }
+
+  struct { uint8 r, g, b, a; };
 };
 
-typedef Color4f Color4;
+// Standard color values.
+static Color RED =             Color(255, 0,    0,    255);
+static Color GREEN =           Color(0,   255,  0,    255);
+static Color BLUE =            Color(0,   0,    255,  255);
+static Color BLACK =           Color(0,   0,    0,    255);
+static Color WHITE =           Color(255, 255,  255,  255);
 } // jackal

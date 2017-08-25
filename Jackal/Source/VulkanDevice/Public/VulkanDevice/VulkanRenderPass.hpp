@@ -13,5 +13,6 @@ public:
 
 private:
   VkRenderPass mNativeRenderPass;
+  VkFramebuffer mNativeFrameBuffer;
 };
 } // jackal
