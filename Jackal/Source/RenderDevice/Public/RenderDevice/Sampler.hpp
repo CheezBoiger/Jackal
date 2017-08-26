@@ -41,6 +41,6 @@ public:
 
   virtual void CleanUp() = 0;
 
-  SamplerInfoT *GetInformation() { return &mInformation; }
+  SamplerInfoT* GetInformation() { return &mInformation; }
 };
 } // jackal

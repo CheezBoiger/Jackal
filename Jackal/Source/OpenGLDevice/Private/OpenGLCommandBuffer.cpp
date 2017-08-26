@@ -230,23 +230,22 @@ void OpenGLCommandBuffer::DrawInstanced(uint32 count, uint32 instances)
 void OpenGLCommandBuffer::BeginRenderPass(RenderPass *pass)
 {
   CHECK_RECORDING();
-  
+
   auto execute = [=] (RenderPass* renderpass) -> void {
     OpenGLRenderPass* oglPass = static_cast<OpenGLRenderPass*>(renderpass);
     OpenGLDevice* device = static_cast<OpenGLDevice*>(mOwner);
-    if (!renderpass) {
-      device->SubmitLastError(RENDER_ERROR_BAD_RENDER_PASS_ALLOC);
+
+    // Set to the default onscreen buffer.
+    if (!renderpass && device->mCurrentRenderPass) { 
+      device->mCurrentRenderPass = nullptr;
+      glBindFramebuffer(GL_FRAMEBUFFER, 0); 
+      return; 
+    } else if (!renderpass) {
       return;
     }
-
-    OpenGLFrameBuffer* framebuffer = static_cast<OpenGLFrameBuffer*>(oglPass->FrameBufferReference());
-    
-
-
     device->mCurrentRenderPass = oglPass;
-
-    framebuffer->Bind();
     
+    glBindFramebuffer(GL_FRAMEBUFFER, oglPass->FrameBufferHandle());
   };  
 
   mCommandList.push_back([=] () -> void { execute(pass); });

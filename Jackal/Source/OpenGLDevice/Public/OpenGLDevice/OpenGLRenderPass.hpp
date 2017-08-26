@@ -9,19 +9,20 @@ namespace jackal {
 
 class OpenGLFrameBuffer;
 
-
-
 class OpenGLRenderPass : public RenderPass {
 public:
-  OpenGLRenderPass()
-    : mFrameBuffer(nullptr) { }
+  OpenGLRenderPass() 
+    : mFrameBuffer(0) { }
 
   void Initialize(RenderPassCreateInfoT& info) override;
   void CleanUp() override;
 
-  OpenGLFrameBuffer* FrameBufferReference() const { return mFrameBuffer; }
+  GLuint FrameBufferHandle() const { return mFrameBuffer; }
 
 private:
-  OpenGLFrameBuffer* mFrameBuffer;
+
+  void BakeFrameBuffer(RenderPassCreateInfoT& info);
+
+  GLuint mFrameBuffer;
 }; 
 } // jackal

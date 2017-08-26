@@ -48,6 +48,11 @@ public:
   // Submit command buffers to the Vulkan Rendering API.
   void SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 numBuffers) override;
 
+  VkInstance Instance() { return mInstance; }
+  VkDevice LogicalDevice() { return mLogicalDevice; }
+  VkPhysicalDevice PhysicalDevice() { return mPhysicalDevice; }
+  
+
 protected:
   // Check for support for extensions in the instance.
   void CheckExtensionSupport();
@@ -55,10 +60,11 @@ protected:
 private:
   VkInstance        mInstance;
   VkDevice          mLogicalDevice;
-  VkPhysicalDevice  mPhyicalDevice;
+  VkPhysicalDevice  mPhysicalDevice;
 
   // Window surface for vulkan to render onto.
   VkSurfaceKHR      mSurface;
+  
   VkCommandPool     mCommandPool;
 };
 } // jackal
