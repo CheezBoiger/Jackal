@@ -166,18 +166,44 @@ void OpenGLGraphicsPipelineState::UpdateOGLPipeline()
   for (uint32 i = 0; i < vinfo.VertexAttributesCount; ++i) {
     VertexAttributeT& attribute = vinfo.VertexAttribute[i];
     uint32 size = 0;
+    GLenum type = GL_FLOAT;
+
     switch (attribute.Format) {
       case FORMAT_R8G8B8A8_SINT:
+      {
+        size = 4;
+        type = GL_INT;
+      } break;
       case FORMAT_R16G16B16A16_SFLOAT:
-      case FORMAT_R32G32B32A32_SFLOAT: size = 4; break;
-      case FORMAT_R32G32B32_SFLOAT: size = 3; break;
-      case FORMAT_R32G32_SFLOAT:   size = 2; break;
-      case FORMAT_R32_SFLOAT: size = 1; break;
-      default: size = 3; break;
+      case FORMAT_R32G32B32A32_SFLOAT: 
+      {
+        size = 4;
+        type = GL_FLOAT; 
+      } break;
+      case FORMAT_R32G32B32_SFLOAT: 
+      {
+        size = 3;
+        type = GL_FLOAT; 
+      } break;
+      case FORMAT_R32G32_SFLOAT:   
+      {
+        size = 2;
+        type = GL_FLOAT; 
+      } break;
+      case FORMAT_R32_SFLOAT: 
+      {
+        size = 1;
+        type = GL_FLOAT; 
+      } break;
+      default: 
+      {
+        size = 3;
+        type = GL_FLOAT; 
+      } break;
     }
 
     glEnableVertexAttribArray(attribute.Location);
-    glVertexAttribPointer(attribute.Location, size, GL_FLOAT, GL_FALSE, vinfo.Stride,
+    glVertexAttribPointer(attribute.Location, size, type, GL_FALSE, vinfo.Stride,
       (GLvoid*)&attribute.Offset);
   }
  

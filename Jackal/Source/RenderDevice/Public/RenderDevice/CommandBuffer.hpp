@@ -22,6 +22,12 @@ class RenderDevice;
 class MaterialLayout;
 
 
+struct RenderPassBeginInfoT {
+  RenderPass*     pRenderPass;
+  
+};
+
+
 // CommandBuffer is an object that records all commands for use in rendering.
 // Once done recording, it will be sent over to the GPU for rendering.
 class CommandBuffer : public RenderObject {
@@ -46,6 +52,7 @@ public:
   virtual void BeginRenderPass(RenderPass *pass) = 0;
   virtual void BindGraphicsPipelineState(GraphicsPipelineState *pipeline) = 0;
   virtual void BindComputePipelineState(ComputePipelineState *pipeline) = 0;
+  virtual void EndRenderPass() = 0;
 
   // Even if we already bound the graphics pipeline state to this material layout,
   // We still call this function in order to bind and update the current state of the

@@ -61,7 +61,9 @@ public:
     , mCurrentVertexBuffer(nullptr)
     , mCurrentUniformBuffer(nullptr)
     , mCurrentRenderPass(nullptr)
-    , mClearColor(Color(0, 0, 0, 255)) { }
+    , mClearColor(Color(0, 0, 0, 255))
+    , mCommandBuffers(nullptr)
+    , mCommandBuffersCount(0) { }
 
   void                            Initialize() override;
   void                            CleanUp() override;
@@ -100,6 +102,8 @@ public:
 
   const char *API() const override { return renderAPI; }
 
+  CommandBuffer**                SwapChainCommandBuffers(uint16* count) override;
+
   // Still Ongoing work.
   // TODO(): Setters for setting up the pipeline and rendering core.
 
@@ -128,5 +132,9 @@ public:
   OpenGLRenderPass*             mCurrentRenderPass;
 
   Color                         mClearColor;
+
+private:
+  CommandBuffer**               mCommandBuffers;
+  uint16                        mCommandBuffersCount;
 };
 } // jackal

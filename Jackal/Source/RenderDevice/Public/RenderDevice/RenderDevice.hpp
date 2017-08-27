@@ -80,6 +80,12 @@ public:
   virtual const char*             API() const = 0;
   bool8                           Initialized() const { return mInitialized; }
 
+  // Get the swapchain buffers for presentation use. These buffers are allocated to 
+  // our swapchain images. Depending on the render device, swapchainBuffers will hold
+  // the commandbuffers for each screen image, while count is the number of commandbuffers
+  // returned.
+  virtual CommandBuffer** SwapChainCommandBuffers(uint16* count) = 0;
+
   // Retrieve the last error that was dispatched from this render device.
   RenderErrorT GetLastError() {
     RenderErrorT error = mLastError;
@@ -99,6 +105,7 @@ public:
   // Submit command buffers to the GPU for rendering. If OpenGL is being used, 
   // we go with CPU based rendering calls.
   // 
+  // TODO(): Need to replace with using semaphores for signalling.
   // @param commandbuffers Pointer to the list of commandbuffers.
   // @param numBuffers Number of commandbuffers to submit.
   virtual void SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 numBuffers) = 0;

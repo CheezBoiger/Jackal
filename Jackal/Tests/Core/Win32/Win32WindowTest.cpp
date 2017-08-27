@@ -128,7 +128,10 @@ TEST(Win32, Win32WindowTest)
   jackal::OpenGLSampler sampler;
   sampler.Bake(sinfo);
 
-  jackal::CommandBuffer *cmd = device.CreateCommandBuffer();
+  jackal::CommandBuffer** swapBuffers = nullptr; 
+  jackal::uint16 swapCount = 0;
+  swapBuffers = device.SwapChainCommandBuffers(&swapCount);
+  jackal::CommandBuffer *cmd = swapBuffers[0];
   // Record buffer.
   cmd->Record();
     //cmd->BeginRenderPass(nullptr);
@@ -147,7 +150,7 @@ TEST(Win32, Win32WindowTest)
     cmd->ClearColor(jackal::Color(50, 50, 50, 255));
   cmd->EndRecord();
 
-  jackal::CommandBuffer* cmd2 = device.CreateCommandBuffer();
+  jackal::CommandBuffer* cmd2 = swapBuffers[1];
   cmd2->Record();
     //cmd2->BeginRenderPass(nullptr);
     cmd2->BindGraphicsPipelineState(BlinnPhongPipe);
@@ -186,7 +189,7 @@ TEST(Win32, Win32WindowTest)
   subpass.BindPoint = jackal::BIND_POINT_GRAPHICS;
   subpass.ColorAttachmentCount = 1;
   subpass.PColorAttachments = &colorref;
-  subpass.PDepthStencilAttachment = &depthref;
+  subpass.PDepthStencilAttachment = nullptr;
 
   // TODO(): RenderPass is the more important component here. Figure out a way
   // to store rendertargets into a render pass, and use them to create a framebuffer
@@ -197,8 +200,8 @@ TEST(Win32, Win32WindowTest)
   passinfo.Attachments = &attachment;
   passinfo.SubPassCount = 1;
   passinfo.SubPasses = &subpass;
-  //jackal::RenderPass* renderpass = device.CreateRenderPass();
-  //renderpass->Initialize(passinfo);
+  jackal::RenderPass* renderpass = device.CreateRenderPass();
+  renderpass->Initialize(passinfo);
 
   ASSERT_EQ(window->width, width);
   //ASSERT_EQ(window->height, height);
@@ -218,6 +221,8 @@ TEST(Win32, Win32WindowTest)
     jackal::Win32OpenGL::SwapBuffers(window2);
     jackal::Win32Window::PollEvents();
     std::cout << "Time: " << jackal::Time::Current() << " ms\r";
+
+    if (device.GetLastError() != jackal::RENDER_ERROR_NONE) std::cout << "Error!\n";
   }
 
   device.DestroyCommandBuffer(cmd);

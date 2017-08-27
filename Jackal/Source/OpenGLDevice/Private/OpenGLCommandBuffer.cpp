@@ -235,14 +235,10 @@ void OpenGLCommandBuffer::BeginRenderPass(RenderPass *pass)
     OpenGLRenderPass* oglPass = static_cast<OpenGLRenderPass*>(renderpass);
     OpenGLDevice* device = static_cast<OpenGLDevice*>(mOwner);
 
-    // Set to the default onscreen buffer.
-    if (!renderpass && device->mCurrentRenderPass) { 
-      device->mCurrentRenderPass = nullptr;
-      glBindFramebuffer(GL_FRAMEBUFFER, 0); 
-      return; 
-    } else if (!renderpass) {
+    if (!renderpass) {
       return;
     }
+
     device->mCurrentRenderPass = oglPass;
     
     glBindFramebuffer(GL_FRAMEBUFFER, oglPass->FrameBufferHandle());
@@ -285,5 +281,19 @@ void OpenGLCommandBuffer::SetDispatchIndirect(uint32 x, uint32 y, uint32 z)
   CHECK_RECORDING();
 
 
+}
+
+
+void OpenGLCommandBuffer::EndRenderPass()
+{
+  CHECK_RECORDING();
+  auto execute = [=] () -> void {
+    OpenGLDevice* device = static_cast<OpenGLDevice*>(mOwner);
+
+    device->mCurrentRenderPass = nullptr;
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+  };
+  ++mNumRenderCalls;
+  mCommandList.push_back([=] () -> void { execute(); });
 }
 } // jackal

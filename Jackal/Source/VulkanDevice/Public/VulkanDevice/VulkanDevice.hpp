@@ -45,6 +45,7 @@ public:
   void                              DestroyComputePipelineState(ComputePipelineState *pipeline) override;
   void                              DestroyCommandBuffer(CommandBuffer *buffer) override;
 
+  CommandBuffer**                   SwapChainCommandBuffers(uint16* count) override;
   // Submit command buffers to the Vulkan Rendering API.
   void SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 numBuffers) override;
 
@@ -66,5 +67,7 @@ private:
   VkSurfaceKHR      mSurface;
   
   VkCommandPool     mCommandPool;
+  VkCommandBuffer*  mDrawCmdBuffers;
+  uint32            mDrawCmdBuffersCount;
 };
 } // jackal

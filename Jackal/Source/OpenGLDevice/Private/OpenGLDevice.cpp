@@ -123,12 +123,27 @@ void OpenGLDevice::Initialize()
   if (err != GL_NO_ERROR) {
     return;
   }
-  mInitialized = true;
+  mCommandBuffersCount = 2;
+  mCommandBuffers = new CommandBuffer*[mCommandBuffersCount];
+
+  for (uint16 i = 0; i < mCommandBuffersCount; ++i) {
+    mCommandBuffers[i] = CreateCommandBuffer();
+  }
+
+  mInitialized = true;  
 }
 
 
 void OpenGLDevice::CleanUp()
 {
+  if (mCommandBuffers) {
+    for (uint16 i = 0; i < mCommandBuffersCount; ++i) {
+      delete mCommandBuffers[i];
+    }
+    delete[] mCommandBuffers;
+  }
+
+  mInitialized = false;
 }
 
 
@@ -295,6 +310,13 @@ void OpenGLDevice::DestroyTexture3D(Texture3D *texture)
 
 void OpenGLDevice::DestroyCubeMap(CubeMap *cube)
 {
+}
+
+
+CommandBuffer** OpenGLDevice::SwapChainCommandBuffers(uint16* count)
+{
+  *count = mCommandBuffersCount;
+  return mCommandBuffers;
 }
 
 
