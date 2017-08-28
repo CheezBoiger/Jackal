@@ -48,20 +48,27 @@ public:
   virtual void DrawElements(uint32 count) = 0;
   virtual void Draw(uint32 count) = 0;
   virtual void DrawInstanced(uint32 count, uint32 instances) = 0;
-  virtual void BindVertexBuffer(VertexBuffer *vb) = 0;
-  virtual void BeginRenderPass(RenderPass *pass) = 0;
-  virtual void BindGraphicsPipelineState(GraphicsPipelineState *pipeline) = 0;
-  virtual void BindComputePipelineState(ComputePipelineState *pipeline) = 0;
+  virtual void BindVertexBuffer(VertexBuffer* vb) = 0;
+
+  // Begin a render pass. Pass nullptr to set to the default render pass.
+  virtual void BeginRenderPass(RenderPass* pass) = 0;
+
+  // Be sure to bind the graphics pipeline state, in order to properly bind
+  // your rendering pipeline.
+  virtual void BindGraphicsPipelineState(GraphicsPipelineState* pipeline) = 0;
+
+  // The compute pipeline state.
+  virtual void BindComputePipelineState(ComputePipelineState* pipeline) = 0;
   virtual void EndRenderPass() = 0;
 
   // Even if we already bound the graphics pipeline state to this material layout,
   // We still call this function in order to bind and update the current state of the
   // Material data inside. If not, we stick with the same data as previous, so be sure
   // to call the material layout for each mesh call.
-  virtual void BindMaterialLayout(MaterialLayout *layout, 
-    uint32 dynamicOffsetCount = 0, const uint32 *dynamicOffsets = nullptr) = 0;
-  virtual void SetViewPort(ViewPort *viewport) = 0;
-  virtual void SetScissor(ScissorRect *scissor) = 0;
+  virtual void BindMaterialLayout(MaterialLayout* layout, 
+    uint32 dynamicOffsetCount = 0, const uint32* dynamicOffsets = nullptr) = 0;
+  virtual void SetViewPort(ViewPort* viewport) = 0;
+  virtual void SetScissor(ScissorRect* scissor) = 0;
 
   // For Compute Pipeline binding. Used to dispatch our threading in the compute
   // shader.

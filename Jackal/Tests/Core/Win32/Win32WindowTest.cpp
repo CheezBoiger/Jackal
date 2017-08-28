@@ -3,6 +3,7 @@
 #include "Core/Win32/Win32Window.hpp"
 #include "Core/Win32/Win32Filesystem.hpp"
 #include "Core/Utility/JStringUtils.hpp"
+#include "Core/Math/MatrixMath.hpp"
 // OpenGL Testing as well.
 #include "OpenGLDevice/OpenGLDevice.hpp"
 #include "OpenGLDevice/Win32/Win32OpenGL.hpp"
@@ -10,11 +11,19 @@
 #include "OpenGLDevice/OpenGLGraphicsPipelineState.hpp"
 #include "OpenGLDevice/OpenGLShader.hpp"
 #include "OpenGLDevice/OpenGLCommandBuffer.hpp"
+#include "OpenGLDevice/OpenGLMaterialLayout.hpp"
 #include "OpenGLDevice/OpenGLSampler.hpp"
 #include "OpenGLDevice/OpenGLRenderPass.hpp"
 #include "OpenGLDevice/OpenGLRenderTarget.hpp"
 #include <gtest/gtest.h>
 #include "Core/Platform/Time.hpp"
+
+
+struct UBO {
+  jackal::Matrix4f model[5];
+  jackal::Matrix4f view;
+  jackal::Matrix4f projection;
+};
 
 
 TEST(Win32, Win32WindowTest)
@@ -44,21 +53,31 @@ TEST(Win32, Win32WindowTest)
   device.Initialize();
 
   jackal::UniformBuffer *buffer = device.CreateUniformBuffer();
-  jackal::Matrix4 model[5];
-  model[4][0][0] = 4.0f;
-  jackal::Matrix4 view;
-  jackal::Matrix4 projection;
-  jackal::Vector3 camPosition;
-
-  // Needs to be initialized in the same order as our ubo layout in glsl.
-  buffer->SetDataType(jackal::DATA_DYNAMIC);
-  buffer->SetMat4("model", model, 5);
-  buffer->SetMat4("view", &view);
-  buffer->SetMat4("projection", &projection);
-  buffer->SetVec3("camPosition", &camPosition);
-
+  UBO ubo;
+  ubo.view = jackal::LookAtRH(jackal::Vector3(1.0, 1.0, 1.0), jackal::Vector3(), jackal::Vector3(0.0, 1.0, 0.0));
+  jackal::UniformBufferCreateInfoT uboInfo;
+  uboInfo.Bind = 0;
+  uboInfo.Data = &ubo;
+  uboInfo.Size = sizeof(ubo);
+  uboInfo.Type = jackal::DATA_DYNAMIC;
   // initialize ubo here.
-  buffer->Initialize(0, "UBO");
+  buffer->Initialize(uboInfo);
+
+  // Testing if uniform buffer data. was successfully stored.
+  void* mem = buffer->Map();
+    jackal::Matrix4f view_example = *((jackal::Matrix4f *)(mem) + 5);    
+  buffer->UnMap();
+
+  jackal::MaterialLayout* layout = device.CreateMaterialLayout();
+  jackal::MaterialLayoutCreateInfoT matInfo;
+  jackal::UniformBufferBind uboBind;
+  uboBind.Binding = 1;
+  uboBind.Ubo = buffer;
+
+  matInfo.UniformBufferCount = 1;
+  matInfo.UniformBuffers = &uboBind;
+
+  layout->Initialize(matInfo);
 
   jackal::NativeString fSource = jackal::Shader::ParseFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.frag");
   jackal::NativeString vSource = jackal::Shader::ParseFile("D:/Users/Magarcia/Github/Jackal/Jackal/Shaders/Test/GLSL/blinn-phong.vert");
@@ -107,9 +126,6 @@ TEST(Win32, Win32WindowTest)
   information.VertexBindingInfo.Stride = sizeof(jackal::real32) * 6;
 
   BlinnPhongPipe->Bake(information);
-
-  jackal::uint32 offset = sizeof(jackal::Matrix4) * 4;
-  buffer->Update(&offset);
 
   vShader.CleanUp();
   pShader.CleanUp();
@@ -215,10 +231,6 @@ TEST(Win32, Win32WindowTest)
     jackal::Win32OpenGL::MakeContextCurrent(window);
     device.SubmitCommandBuffers(cmd, 1);
     jackal::Win32OpenGL::SwapBuffers(window);
-
-    jackal::Win32OpenGL::MakeContextCurrent(window2);    
-    device.SubmitCommandBuffers(cmd2, 1);
-    jackal::Win32OpenGL::SwapBuffers(window2);
     jackal::Win32Window::PollEvents();
     std::cout << "Time: " << jackal::Time::Current() << " ms\r";
 

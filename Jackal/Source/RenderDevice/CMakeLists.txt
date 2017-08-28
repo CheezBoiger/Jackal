@@ -18,6 +18,7 @@ set(RENDEV_FILES
   ${RENDEV_PUBLIC_DIR}/RenderDevice.hpp
   ${RENDEV_PUBLIC_DIR}/RenderPass.hpp
   ${RENDEV_PUBLIC_DIR}/RenderTarget.hpp
+  ${RENDEV_PUBLIC_DIR}/Buffer.hpp
   ${RENDEV_PUBLIC_DIR}/Shader.hpp
   ${RENDEV_PRIVATE_DIR}/Shader.cpp
   ${RENDEV_PUBLIC_DIR}/Texture.hpp

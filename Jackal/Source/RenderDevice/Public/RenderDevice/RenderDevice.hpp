@@ -18,6 +18,7 @@ class Texture2D;
 class Texture3D;
 class CubeMap;
 class UniformBuffer;
+class StorageBuffer;
 class GraphicsPipelineState;
 class ComputePipelineState;
 class CommandBuffer;
@@ -61,6 +62,7 @@ public:
   virtual CommandBuffer*          CreateCommandBuffer() = 0;
   virtual Sampler*                CreateSampler() = 0;
   virtual MaterialLayout*         CreateMaterialLayout() = 0;
+  virtual StorageBuffer*          CreateStorageBuffer() = 0;
 
   virtual void                    DestroyShader(Shader *shader) = 0;
   virtual void                    DestroyRenderPass(RenderPass *pass) = 0;
@@ -76,6 +78,7 @@ public:
   virtual void                    DestroyTexture2D(Texture2D *texture) = 0;
   virtual void                    DestroyTexture3D(Texture3D *texture) = 0;
   virtual void                    DestroyCubeMap(CubeMap *cube) = 0;
+  virtual void                    DestroyStorageBuffer(StorageBuffer* buffer) = 0;
 
   virtual const char*             API() const = 0;
   bool8                           Initialized() const { return mInitialized; }

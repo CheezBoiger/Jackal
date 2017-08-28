@@ -20,10 +20,9 @@ public:
   VkDescriptorSetLayout* DescriptorSetLayout() { return &mDescripterLayout; }
 
   void CleanUp() override;
-  void Initialize() override;
-  void Update() override;
-private:
-  
+  void Initialize(MaterialLayoutCreateInfoT& info) override;
+
+private:  
   VkDescriptorPool      mDescriptorPool;
   VkDescriptorSetLayout mDescripterLayout;
   VkDescriptorSet       mDescriptorSet;

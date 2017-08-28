@@ -17,6 +17,7 @@ public:
   void Load(TextureInfoT &info, TextureHandle *texture) override;
   void CleanUp() override;
 
+  GLuint Handle() { return handle; }
 
 private:
 

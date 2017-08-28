@@ -285,6 +285,9 @@ void OpenGLDevice::DestroyRenderTarget(RenderTarget *target)
 
 void OpenGLDevice::DestroyMaterialLayout(MaterialLayout *layout)
 {
+  OpenGLMaterialLayout* material = static_cast<OpenGLMaterialLayout*>(layout);
+  delete material;
+  OGLMaterialLayouts -= 1;
 }
 
 

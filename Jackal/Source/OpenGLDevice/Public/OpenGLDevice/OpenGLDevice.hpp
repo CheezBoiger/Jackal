@@ -83,6 +83,7 @@ public:
   Texture2D*                      CreateTexture2D() override;
   Texture3D*                      CreateTexture3D() override;
   CubeMap*                        CreateCubeMap() override;
+  StorageBuffer*                  CreateStorageBuffer() override { return nullptr; }
 
   void                            SetResourceHandler(Resources *resources) override;
   void                            DestroyShader(Shader *shader) override;
@@ -99,6 +100,7 @@ public:
   void                            DestroyTexture2D(Texture2D *texture) override;
   void                            DestroyTexture3D(Texture3D *texture) override;
   void                            DestroyCubeMap(CubeMap *cube) override;
+  void                            DestroyStorageBuffer(StorageBuffer* buffer) override { }
 
   const char *API() const override { return renderAPI; }
 

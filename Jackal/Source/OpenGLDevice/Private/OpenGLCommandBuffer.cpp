@@ -7,6 +7,7 @@
 #include "OpenGLRenderPass.hpp"
 #include "OpenGLFrameBuffer.hpp"
 #include "OpenGLRenderTarget.hpp"
+#include "OpenGLSampler.hpp"
 #include "OpenGLTexture.hpp"
 #include "OpenGLTexture2D.hpp"
 #include "OpenGLTexture3D.hpp"
@@ -262,6 +263,51 @@ void OpenGLCommandBuffer::BindMaterialLayout(MaterialLayout *layout,
   auto execute = [=] (MaterialLayout *ml, uint32 dyOffCnt, const uint32 *dynOff) -> void {
     // TODO(): We have our dynamic offsets and our material layout, we need to bind them 
     // to the pipeline now.
+    OpenGLMaterialLayout* material = static_cast<OpenGLMaterialLayout*>(ml);
+    MaterialLayoutCreateInfoT& info = material->Information();
+    for (uint32 i = 0; i < info.TextureCount; ++i) {
+      TextureBind& bind = info.TextureBinds[i];
+      OpenGLTexture* texture = static_cast<OpenGLTexture*>(bind.pTexture);
+      OpenGLSampler* sampler = static_cast<OpenGLSampler*>(bind.pSampler);
+      glActiveTexture(GL_TEXTURE0 + bind.Binding);
+      glBindTexture(GL_TEXTURE, texture->Handle());
+      glBindSampler(bind.Binding, sampler->Handle());
+    }
+
+    for (uint32 i = 0; i < info.Texture2DCount; ++i) {
+      Texture2DBind& bind = info.Texture2DBinds[i];
+      OpenGLTexture2D* texture = static_cast<OpenGLTexture2D*>(bind.pTexture);
+      OpenGLSampler* sampler = static_cast<OpenGLSampler*>(bind.pSampler);
+      glActiveTexture(GL_TEXTURE0 + bind.Binding);
+      glBindTexture(GL_TEXTURE_2D, texture->Handle());
+      glBindSampler(bind.Binding, sampler->Handle());
+    }
+
+    for (uint32 i = 0; i < info.Texture3DCount; ++i) {
+      Texture3DBind& bind = info.Texture3DBinds[i];
+      OpenGLTexture3D* texture = static_cast<OpenGLTexture3D*>(bind.pTexture);
+      OpenGLSampler* sampler = static_cast<OpenGLSampler*>(bind.pSampler);
+      glActiveTexture(GL_TEXTURE0 + bind.Binding);
+      glBindTexture(GL_TEXTURE_3D, texture->Handle());
+      glBindSampler(bind.Binding, sampler->Handle());
+    }
+
+    for (uint32 i = 0; i < info.TextureCubeMapCount; ++i) {
+      TextureCubeMapBind& bind = info.TextureCubeMapBinds[i];
+      OpenGLCubeMap* cubemap = static_cast<OpenGLCubeMap*>(bind.pCubMap);
+      OpenGLSampler* sampler = static_cast<OpenGLSampler*>(bind.pSampler);
+      glActiveTexture(GL_TEXTURE0 + bind.Binding);
+      glBindTexture(GL_TEXTURE_CUBE_MAP, cubemap->Handle());
+      glBindSampler(bind.Binding, sampler->Handle());
+    }
+
+    for (uint32 i = 0; i < info.UniformBufferCount; ++i) {
+      UniformBufferBind& bind = info.UniformBuffers[i];
+      OpenGLUniformBuffer* ubo = static_cast<OpenGLUniformBuffer*>(bind.Ubo);
+      glBindBuffer(GL_UNIFORM_BUFFER, ubo->Handle());
+    }
+
+    
   };
   ++mNumRenderCalls;
   mCommandList.push_back([=] () -> void { execute(layout, dynamicOffsetCount, dynamicOffsets); });

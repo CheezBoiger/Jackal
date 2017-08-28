@@ -29,7 +29,6 @@ struct SamplerInfoT {
 // Sampler Object. Required in order to render out texture objects.
 class Sampler : public RenderObject {
 protected:
-  SamplerInfoT mInformation;
 
   Sampler() { }
 
@@ -40,7 +39,5 @@ public:
   virtual void Bake(SamplerInfoT &info) = 0;
 
   virtual void CleanUp() = 0;
-
-  SamplerInfoT* GetInformation() { return &mInformation; }
 };
 } // jackal

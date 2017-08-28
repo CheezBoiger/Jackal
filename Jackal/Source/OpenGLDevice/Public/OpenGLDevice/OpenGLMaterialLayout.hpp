@@ -12,18 +12,23 @@ namespace jackal {
 
 class OpenGLMaterialLayout : public MaterialLayout {
 public:
-  // Add a texture to this material, as well as the sampler that will be
-  // used to sample it. Must also provide the index of which to attach the
-  // texture onto in rendering unit.
-  void BindTexture(Sampler *sampler, Texture *texture, uint32 binding) override;
-  void BindTexture2D(Sampler *sampler, Texture2D *texture, uint32 binding) override;
-  void BindTexture3D(Sampler *sampler, Texture3D *texture, uint32 binding) override;
-  void BindCubeMap(Sampler *sampler, CubeMap *cube, uint32 binding) override;
-  void BindUniformBuffer(UniformBuffer* buffer, uint32 binding) override;
+  OpenGLMaterialLayout()
+  {
+    mInfo.StorageBufferCount = 0;
+    mInfo.Texture2DCount = 0;
+    mInfo.Texture3DCount = 0;
+    mInfo.TextureCount = 0;
+    mInfo.TextureCubeMapCount = 0;
+    mInfo.UniformBufferCount = 0;
+  }
 
   // Inialize our binding points into the pipeline.
-  void Initialize() override;
-  void Update() override;
+  void Initialize(MaterialLayoutCreateInfoT& info) override;
   void CleanUp() override;
+
+  MaterialLayoutCreateInfoT& Information() { return mInfo; }
+
+private:
+  MaterialLayoutCreateInfoT mInfo;
 };
 } // jackal

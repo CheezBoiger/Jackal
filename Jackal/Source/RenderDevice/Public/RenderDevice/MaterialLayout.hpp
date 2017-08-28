@@ -23,6 +23,63 @@ class Texture2D;
 class Texture3D;
 class CubeMap;
 class UniformBuffer;
+class StorageBuffer;
+
+
+struct TextureBind {
+  Texture* pTexture;
+  Sampler* pSampler;
+  uint32    Binding;
+};
+
+
+struct Texture2DBind {
+  Texture2D* pTexture;
+  Sampler* pSampler;
+  uint32    Binding;
+};
+
+
+struct Texture3DBind {
+  Texture3D* pTexture;
+  Sampler* pSampler;
+  uint32    Binding;
+};
+
+
+struct TextureCubeMapBind {
+  CubeMap* pCubMap;
+  Sampler* pSampler;
+  uint32    Binding;
+};
+
+
+struct UniformBufferBind {
+  UniformBuffer* Ubo;
+  uint32 Binding;
+};
+
+
+struct StorageBufferBind {
+  StorageBuffer* pStorageBuffer;
+  uint32 Binding;
+};
+
+
+struct MaterialLayoutCreateInfoT {
+  uint32 TextureCount;
+  TextureBind* TextureBinds;
+  uint32 Texture2DCount;
+  Texture2DBind* Texture2DBinds;
+  uint32 Texture3DCount;
+  Texture3DBind* Texture3DBinds;
+  uint32 TextureCubeMapCount;
+  TextureCubeMapBind* TextureCubeMapBinds;
+  uint32 UniformBufferCount;
+  UniformBufferBind* UniformBuffers;
+  uint32 StorageBufferCount;
+  StorageBufferBind* StorageBuffers;
+};
 
 // Material Object, which specifies descriptor sets for 
 // some given context on the rendering pipeline. We need
@@ -32,18 +89,8 @@ class MaterialLayout : public RenderObject {
 public:
   virtual ~MaterialLayout() { }
 
-  // Add a texture to this material, as well as the sampler that will be
-  // used to sample it. Must also provide the index of which to attach the
-  // texture onto in rendering unit.
-  virtual void BindTexture(Sampler *sampler, Texture *texture, uint32 binding) = 0;
-  virtual void BindTexture2D(Sampler *sampler, Texture2D *texture, uint32 binding) = 0;
-  virtual void BindTexture3D(Sampler *sampler, Texture3D *texture, uint32 binding) = 0;
-  virtual void BindCubeMap(Sampler *sampler, CubeMap *cube, uint32 binding) = 0;
-  virtual void BindUniformBuffer(UniformBuffer* buffer, uint32 binding) = 0;
-
   // Inialize our binding points into the pipeline.
-  virtual void Initialize() = 0;
-  virtual void Update() = 0;
+  virtual void Initialize(MaterialLayoutCreateInfoT& info) = 0;
   virtual void CleanUp() = 0;
 };
 } // jackal

@@ -15,6 +15,7 @@ set(OPENGL_FILES
   ${OPENGL_PRIVATE_DIR}/OpenGLDevice.cpp
   ${OPENGL_PUBLIC_DIR}/OpenGLConfigs.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLCommandBuffer.hpp
+  ${OPENGL_PUBLIC_DIR}/OpenGLBuffer.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLComputePipelineState.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLGraphicsPipelineState.hpp
   ${OPENGL_PUBLIC_DIR}/OpenGLTextureCubeMap.hpp
@@ -40,6 +41,7 @@ set(OPENGL_FILES
   ${OPENGL_PRIVATE_DIR}/OpenGLRenderPass.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLRenderTarget.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLCommandBuffer.cpp
+  ${OPENGL_PRIVATE_DIR}/OpenGLBuffer.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLShader.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLTexture.cpp
   ${OPENGL_PRIVATE_DIR}/OpenGLUniformBuffer.cpp

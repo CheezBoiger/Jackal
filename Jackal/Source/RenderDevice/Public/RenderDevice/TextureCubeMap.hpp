@@ -34,10 +34,5 @@ public:
   //
   virtual void Load(TextureInfoT &info, TextureHandle *textures) = 0;
   virtual void CleanUp() = 0;
-
-  TextureInfoT *GetInfomation() { return &mInformation; }
-
-protected:
-  TextureInfoT mInformation;
 };
 } // jackal

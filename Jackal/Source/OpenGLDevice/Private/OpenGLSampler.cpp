@@ -53,7 +53,6 @@ GLenum GetNativeFilterModeMin(FilterModeT filter, SamplerMipMapMode mode)
 
 void OpenGLSampler::Bake(SamplerInfoT &info)
 {
-  mInformation = info;
 
   if (mHandle) {
     glDeleteSamplers(1, &mHandle);
@@ -61,14 +60,14 @@ void OpenGLSampler::Bake(SamplerInfoT &info)
 
   glGenSamplers(1, &mHandle);
 
-  glSamplerParameteri(mHandle, GL_TEXTURE_MAG_FILTER, GetNativeFilterMode(mInformation.MagFilter));
-  glSamplerParameteri(mHandle, GL_TEXTURE_MIN_FILTER, GetNativeFilterModeMin(mInformation.MinFilter, info.MipMapMode));
-  glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_S, GetNativeWrapMode(mInformation.WrapS));
-  glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_T, GetNativeWrapMode(mInformation.WrapT));
-  glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_R, GetNativeWrapMode(mInformation.WrapR));
+  glSamplerParameteri(mHandle, GL_TEXTURE_MAG_FILTER, GetNativeFilterMode(info.MagFilter));
+  glSamplerParameteri(mHandle, GL_TEXTURE_MIN_FILTER, GetNativeFilterModeMin(info.MinFilter, info.MipMapMode));
+  glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_S, GetNativeWrapMode(info.WrapS));
+  glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_T, GetNativeWrapMode(info.WrapT));
+  glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_R, GetNativeWrapMode(info.WrapR));
 
-  glSamplerParameterf(mHandle, GL_TEXTURE_MIN_LOD, mInformation.MinLod);
-  glSamplerParameterf(mHandle, GL_TEXTURE_MAX_LOD, mInformation.MaxLod);
+  glSamplerParameterf(mHandle, GL_TEXTURE_MIN_LOD, info.MinLod);
+  glSamplerParameterf(mHandle, GL_TEXTURE_MAX_LOD, info.MaxLod);
 
   if (info.AnisotropyEnable) {
     glSamplerParameterf(mHandle, GL_TEXTURE_MAX_ANISOTROPY_EXT, info.MaxAnisotropy);

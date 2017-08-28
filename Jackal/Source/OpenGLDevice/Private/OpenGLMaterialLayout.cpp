@@ -5,42 +5,31 @@
 namespace jackal {
 
 
-void OpenGLMaterialLayout::Initialize()
+void OpenGLMaterialLayout::Initialize(MaterialLayoutCreateInfoT& info)
 {
-}
+  mInfo.StorageBufferCount = info.StorageBufferCount;
+  mInfo.Texture2DCount = info.Texture2DCount;
+  mInfo.TextureCount = info.TextureCount;
+  mInfo.Texture3DCount = info.Texture3DCount;
+  mInfo.UniformBufferCount = info.UniformBufferCount;
 
-
-void OpenGLMaterialLayout::Update()
-{
+  if (mInfo.UniformBufferCount) {
+    mInfo.UniformBuffers = new UniformBufferBind[mInfo.UniformBufferCount];
+    for (uint32 i = 0; i < mInfo.UniformBufferCount; ++i) {
+      UniformBufferBind& bind = mInfo.UniformBuffers[i];
+      UniformBufferBind& cpy = info.UniformBuffers[i];
+      
+      bind.Binding = cpy.Binding;
+      bind.Ubo = cpy.Ubo;
+    }
+  }
 }
 
 
 void OpenGLMaterialLayout::CleanUp()
 {
-}
-
-
-void OpenGLMaterialLayout::BindTexture(Sampler* sampler, Texture* texture, uint32 binding)
-{
-}
-
-
-void OpenGLMaterialLayout::BindTexture2D(Sampler* sampler, Texture2D* texture, uint32 binding)
-{
-}
-
-
-void OpenGLMaterialLayout::BindTexture3D(Sampler* sampler, Texture3D* texture, uint32 binding)
-{
-}
-
-
-void OpenGLMaterialLayout::BindCubeMap(Sampler* sampler, CubeMap* cube, uint32 binding)
-{
-}
-
-
-void OpenGLMaterialLayout::BindUniformBuffer(UniformBuffer* buffer, uint32 binding)
-{
+  if (mInfo.UniformBufferCount) {
+    delete[] mInfo.UniformBuffers;  
+  }
 }
 } // jackal

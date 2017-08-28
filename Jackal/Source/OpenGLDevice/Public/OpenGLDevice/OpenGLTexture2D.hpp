@@ -18,6 +18,8 @@ public:
   void Load(TextureInfoT& info, TextureHandle* texture) override;
   void CleanUp() override;
 
+  GLuint Handle() { return mHandle; }
+
 private:
   GLuint mHandle;
 };
