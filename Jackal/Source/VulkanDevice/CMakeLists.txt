@@ -36,6 +36,7 @@ set(VULKAN_FILES
   ${VULKAN_PUBLIC_DIR}/VulkanTexture3D.hpp
   ${VULKAN_PUBLIC_DIR}/VulkanTextureCubeMap.hpp
   ${VULKAN_PUBLIC_DIR}/VulkanSwapChain.hpp
+  ${VULKAN_PUBLIC_DIR}/VulkanOcclusionQuery.hpp
 
   ${VULKAN_PRIVATE_DIR}/Vulkan.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanCommandBuffer.cpp
@@ -59,6 +60,7 @@ set(VULKAN_FILES
   ${VULKAN_PRIVATE_DIR}/VulkanTexture2D.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanTexture3D.cpp
   ${VULKAN_PRIVATE_DIR}/VulkanTextureCubeMap.cpp
+  ${VULKAN_PRIVATE_DIR}/VulkanOcclusionQuery.cpp
 )
 
 if (WIN32)

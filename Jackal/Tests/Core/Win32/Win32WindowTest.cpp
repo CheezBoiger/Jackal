@@ -63,7 +63,7 @@ TEST(Win32, Win32WindowTest)
   // initialize ubo here.
   buffer->Initialize(uboInfo);
 
-  // Testing if uniform buffer data. was successfully stored.
+  // Testing if uniform buffer data was successfully stored.
   void* mem = buffer->Map();
     jackal::Matrix4f view_example = *((jackal::Matrix4f *)(mem) + 5);    
   buffer->UnMap();
@@ -76,6 +76,9 @@ TEST(Win32, Win32WindowTest)
 
   matInfo.UniformBufferCount = 1;
   matInfo.UniformBuffers = &uboBind;
+
+  matInfo.Texture2DCount = 0;
+  matInfo.Texture3DBinds = nullptr;
 
   layout->Initialize(matInfo);
 
@@ -231,6 +234,7 @@ TEST(Win32, Win32WindowTest)
     jackal::Win32OpenGL::MakeContextCurrent(window);
     device.SubmitCommandBuffers(cmd, 1);
     jackal::Win32OpenGL::SwapBuffers(window);
+    jackal::Win32OpenGL::SwapBuffers(window2);
     jackal::Win32Window::PollEvents();
     std::cout << "Time: " << jackal::Time::Current() << " ms\r";
 

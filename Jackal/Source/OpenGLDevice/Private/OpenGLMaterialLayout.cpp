@@ -23,13 +23,33 @@ void OpenGLMaterialLayout::Initialize(MaterialLayoutCreateInfoT& info)
       bind.Ubo = cpy.Ubo;
     }
   }
+
+  if (mInfo.Texture2DCount) {
+    mInfo.Texture2DBinds = new Texture2DBind[mInfo.Texture2DCount];
+    for (uint32 i = 0; i < mInfo.Texture2DCount; ++i) {
+      Texture2DBind& bind = mInfo.Texture2DBinds[i];
+      Texture2DBind& cpy = info.Texture2DBinds[i];
+    
+      bind.Binding = cpy.Binding;
+      bind.pSampler = cpy.pSampler;
+      bind.pTexture = cpy.pTexture;
+    }
+  }
 }
 
 
 void OpenGLMaterialLayout::CleanUp()
 {
   if (mInfo.UniformBufferCount) {
-    delete[] mInfo.UniformBuffers;  
+    delete[] mInfo.UniformBuffers;
+    mInfo.UniformBuffers = nullptr;
+    mInfo.UniformBufferCount;  
+  }
+
+  if (mInfo.Texture2DCount) {
+    delete[] mInfo.Texture2DBinds;
+    mInfo.Texture2DBinds = nullptr;
+    mInfo.Texture2DCount = 0;
   }
 }
 } // jackal

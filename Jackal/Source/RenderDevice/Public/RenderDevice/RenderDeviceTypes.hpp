@@ -397,4 +397,12 @@ struct TextureInfoT {
   bool8         Multisampled;
   SampleCount   Samples;
 };
+
+
+enum BufferType {
+  BUFFER_TYPE_VERTEX_BUFFER,
+  BUFFER_TYPE_INDEX_BUFFER,
+  BUFFER_TYPE_STORAGE_BUFFER,
+  BUFFER_TYPE_UNIFORM_BUFFER
+};
 } // jackal

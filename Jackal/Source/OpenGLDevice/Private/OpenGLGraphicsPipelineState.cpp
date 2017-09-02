@@ -232,7 +232,7 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline(const GraphicsPipelineInfo
 
   OpenGLShader *shader = static_cast<OpenGLShader *>(info.VertexShader);
   if (shader->Compiled()) {
-    glAttachShader(mProgramId, shader->GetHandle());
+    glAttachShader(mProgramId, shader->Handle());
   } else {
     mLastError = RENDER_ERROR_PIPELINE_UNCOMPILED_SHADER;
     return;
@@ -240,7 +240,7 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline(const GraphicsPipelineInfo
 
   shader = static_cast<OpenGLShader *>(info.PixelShader);
   if (shader->Compiled()) {
-    glAttachShader(mProgramId, shader->GetHandle());
+    glAttachShader(mProgramId, shader->Handle());
   } else {
     mLastError = RENDER_ERROR_PIPELINE_UNCOMPILED_SHADER;
     return;
@@ -249,7 +249,7 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline(const GraphicsPipelineInfo
   if (info.HullShader) {
     shader = static_cast<OpenGLShader *>(info.HullShader);
     if (shader->Compiled()) {
-      glAttachShader(mProgramId, shader->GetHandle());
+      glAttachShader(mProgramId, shader->Handle());
     } else {
       mLastError = RENDER_ERROR_PIPELINE_UNCOMPILED_SHADER;
       return;
@@ -259,7 +259,7 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline(const GraphicsPipelineInfo
   if (info.DomainShader) {
     shader = static_cast<OpenGLShader *>(info.DomainShader);
     if (shader->Compiled()) {
-      glAttachShader(mProgramId, shader->GetHandle());
+      glAttachShader(mProgramId, shader->Handle());
     } else {
       mLastError = RENDER_ERROR_PIPELINE_UNCOMPILED_SHADER;
       return;
@@ -269,7 +269,7 @@ void OpenGLGraphicsPipelineState::SetUpShaderPipeline(const GraphicsPipelineInfo
   if (info.GeometryShader) {
     shader = static_cast<OpenGLShader *>(info.GeometryShader);
     if (shader->Compiled()) {
-      glAttachShader(mProgramId, shader->GetHandle());
+      glAttachShader(mProgramId, shader->Handle());
     } else {
       mLastError = RENDER_ERROR_PIPELINE_UNCOMPILED_SHADER; 
       return;

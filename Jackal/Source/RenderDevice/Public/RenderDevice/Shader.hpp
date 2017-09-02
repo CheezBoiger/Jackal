@@ -42,6 +42,9 @@ public:
     const std::vector<NativeString> includes,
     const std::vector<NativeString> defines) = 0;
 
+  // Ingest binary, as opposed to compiling the shader source code.
+  virtual bool8 IngestBinary(ShaderType type, const char* entryPoint, const NativeString byteCode) = 0;
+
   // Get the shader language type of this shader object.
   virtual const char *ShaderLanguage() const = 0;
 

@@ -21,6 +21,7 @@ set(RENDEV_FILES
   ${RENDEV_PUBLIC_DIR}/Buffer.hpp
   ${RENDEV_PUBLIC_DIR}/Shader.hpp
   ${RENDEV_PRIVATE_DIR}/Shader.cpp
+  ${RENDEV_PUBLIC_DIR}/OcclusionQuery.hpp
   ${RENDEV_PUBLIC_DIR}/Texture.hpp
   ${RENDEV_PUBLIC_DIR}/TextureConfig.hpp
   ${RENDEV_PUBLIC_DIR}/UniformBuffer.hpp

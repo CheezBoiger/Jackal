@@ -34,12 +34,11 @@ bool8 OpenGLShader::Compile(ShaderType type,
   std::vector<NativeString> defines)
 {
   mShaderType = type;
-  mNativeShaderType = GetNativeShaderType(type);
 
   // Clean up the shader if is already compiled.
   CleanUp();
 
-  handle = glCreateShader(mNativeShaderType);
+  handle = glCreateShader(GetNativeShaderType(type));
   
   GLint length = 0;
   NativeString Source = ParseSource(sourceCode, includes, defines);
@@ -78,6 +77,26 @@ void OpenGLShader::CleanUp()
     glDeleteShader(handle);
     handle = 0;
   }
+}
+
+
+bool8 OpenGLShader::IngestBinary(ShaderType type, const char* entryPoint, const NativeString byteCode)
+{
+  mShaderType = type;
+  CleanUp();
+  
+  GLint status;
+  handle =  glCreateShader(GetNativeShaderType(type));
+  glShaderBinary(1, &handle, GL_SHADER_BINARY_FORMAT_SPIR_V_ARB, (void *)byteCode.c_str(), (GLsizei)byteCode.size());
+  glSpecializeShaderARB(handle, entryPoint, 0, nullptr, nullptr);
+  glGetShaderiv(handle, GL_COMPILE_STATUS, &status);
+
+  if (!status) {
+    CleanUp();
+    return false;  
+  }
+
+  return true;
 }
 
 

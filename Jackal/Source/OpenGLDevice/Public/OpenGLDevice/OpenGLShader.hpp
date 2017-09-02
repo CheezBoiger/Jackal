@@ -15,13 +15,10 @@ public:
   static GLenum GetNativeShaderType(ShaderType type);
 
   OpenGLShader()
-    : mNativeShaderType(GL_NONE)
-    , handle(0) { }
+    : handle(0) { }
   
   // Get the UID of this opengl object.
-  GLuint GetHandle() const { return handle; }
-
-  GLenum GetNativeType() const { return mNativeShaderType; }
+  GLuint Handle() const { return handle; }
 
   // Shader language type of this object.
   const char *ShaderLanguage() const override { return shaderLanguage; }
@@ -32,14 +29,14 @@ public:
     const std::vector<NativeString> defines = std::vector<NativeString>()
   ) override;
 
+  bool8 IngestBinary(ShaderType type, const char* entryPoint, const NativeString byteCode) override;
+
   void CleanUp() override;
 
 private:
   // Parse the source code from the filepath.
   NativeString ParseSource(NativeString source, std::vector<NativeString> includes,
     std::vector<NativeString> defines);
-
-  GLenum mNativeShaderType;
   GLuint handle;
 };
 } // jackal

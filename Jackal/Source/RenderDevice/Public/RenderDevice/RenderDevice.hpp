@@ -64,20 +64,20 @@ public:
   virtual MaterialLayout*         CreateMaterialLayout() = 0;
   virtual StorageBuffer*          CreateStorageBuffer() = 0;
 
-  virtual void                    DestroyShader(Shader *shader) = 0;
-  virtual void                    DestroyRenderPass(RenderPass *pass) = 0;
-  virtual void                    DestroyRenderTarget(RenderTarget *target) = 0;
-  virtual void                    DestroyVertexBuffer(VertexBuffer *vb) = 0;
-  virtual void                    DestroyTexture(Texture *texture) = 0;
-  virtual void                    DestroyUniformBuffer(UniformBuffer *uniformbuffer) = 0;
-  virtual void                    DestroyGraphicsPipelineState(GraphicsPipelineState *pipeline) = 0;
-  virtual void                    DestroyComputePipelineState(ComputePipelineState *pipeline) = 0;
-  virtual void                    DestroyCommandBuffer(CommandBuffer *buffer) = 0;
-  virtual void                    DestroySampler(Sampler *sampler) = 0;
-  virtual void                    DestroyMaterialLayout(MaterialLayout *mlayout) = 0;
-  virtual void                    DestroyTexture2D(Texture2D *texture) = 0;
-  virtual void                    DestroyTexture3D(Texture3D *texture) = 0;
-  virtual void                    DestroyCubeMap(CubeMap *cube) = 0;
+  virtual void                    DestroyShader(Shader* shader) = 0;
+  virtual void                    DestroyRenderPass(RenderPass* pass) = 0;
+  virtual void                    DestroyRenderTarget(RenderTarget* target) = 0;
+  virtual void                    DestroyVertexBuffer(VertexBuffer* vb) = 0;
+  virtual void                    DestroyTexture(Texture* texture) = 0;
+  virtual void                    DestroyUniformBuffer(UniformBuffer* uniformbuffer) = 0;
+  virtual void                    DestroyGraphicsPipelineState(GraphicsPipelineState* pipeline) = 0;
+  virtual void                    DestroyComputePipelineState(ComputePipelineState* pipeline) = 0;
+  virtual void                    DestroyCommandBuffer(CommandBuffer* buffer) = 0;
+  virtual void                    DestroySampler(Sampler* sampler) = 0;
+  virtual void                    DestroyMaterialLayout(MaterialLayout* mlayout) = 0;
+  virtual void                    DestroyTexture2D(Texture2D* texture) = 0;
+  virtual void                    DestroyTexture3D(Texture3D* texture) = 0;
+  virtual void                    DestroyCubeMap(CubeMap* cube) = 0;
   virtual void                    DestroyStorageBuffer(StorageBuffer* buffer) = 0;
 
   virtual const char*             API() const = 0;
@@ -111,7 +111,7 @@ public:
   // TODO(): Need to replace with using semaphores for signalling.
   // @param commandbuffers Pointer to the list of commandbuffers.
   // @param numBuffers Number of commandbuffers to submit.
-  virtual void SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 numBuffers) = 0;
+  virtual void SubmitCommandBuffers(CommandBuffer *commandbuffers, uint32 numBuffers) { }
 
 protected:
   // Last error that was conducted in this render device.
